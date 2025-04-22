@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/nav/Nav";
 import Footer from "@/components/footer/Footer";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"]
 });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,17 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme='light'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.variable} ${inter.variable} antialiased`}
       >
-
-        <div className="">
-          <Nav />
-        </div>
-        <div className="">{children}</div>
-        <div className="">
-          <Footer />
-        </div>
-
+        {/* nNabvar component  */}
+        <Nav />
+        {/* Main Component  */}
+        <main className="min-h-[calc(100vh-326px)]">{children}</main>
+        {/* Footer component  */}
+        <Footer />
       </body>
     </html>
   );
