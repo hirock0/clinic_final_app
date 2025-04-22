@@ -1,8 +1,41 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
 :root {
     --primary: #5D3FD3;     
     --background: #FFFFFF;  
     --text: #000000;       
 }
 
+.bg-primary-color {
+    background-color: var(--background);
+}
+.bg-secondary-color {
+    background-color: var(--primary);
+}
+
+.text-primary-color {
+    color: var(--primary);
+}
+.text-secondary-color {
+    color: var(--text);
+}
+.text-third-color {
+    color: var(--background);
+}
+
+
+html, body{
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
