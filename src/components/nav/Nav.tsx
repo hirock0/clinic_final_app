@@ -162,9 +162,11 @@ const Nav = () => {
           </div>
         </div>
         <div className="">
-          <button className=" border px-5 py-2 rounded shadow">
-            get started
-          </button>
+          <Link href={"#"}>
+            <button className="  px-5 py-2 rounded bg-secondary-color text-white shadow-lg hover:scale-105">
+              get started
+            </button>
+          </Link>
         </div>
       </div>
     </nav>
