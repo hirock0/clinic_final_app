@@ -2,12 +2,12 @@
 @plugin "daisyui";
 
 :root {
-  --primary: #5d3fd3;
+  --primary: #00b9b3;
   --background: #fafafa;
   --text: #0a0a0a;
-  --sort-purple: #EDE9FE;
+  --sort-purple: #f5ffff;
   --gray: #B0B0C0;
-  --accent:#fdd25f;
+  --accent:#5D3FD3;
 }
 
 @layer components{
@@ -53,6 +53,13 @@
     background-color: var(--sort-purple);
     backdrop-filter: blur(10px);
   }
+  .purple-color-btn {
+    background-color: var(--accent);
+  }
+  .purple-color-border {
+    border-color: var(--accent);
+  }
+  
   
   .scrollbar-removed {
     scrollbar-width: none;
@@ -61,7 +68,6 @@
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
   }
-  
 }
 
 html,

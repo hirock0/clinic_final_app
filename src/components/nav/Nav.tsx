@@ -26,7 +26,7 @@ const Nav = () => {
       href: "/",
     },
     {
-      title: "Jobs",
+      title: "Training",
       href: "/",
     },
     {
@@ -57,7 +57,7 @@ const Nav = () => {
           href: "/",
         },
         {
-          title: "Why ‘United Care Links’",
+          title: "Why United Care Links",
           href: "/",
         },
         {
@@ -65,7 +65,7 @@ const Nav = () => {
           href: "/",
         },
         {
-          title: " View Job Board",
+          title: " View Job Board",
           href: "/",
         },
       ],
@@ -158,7 +158,7 @@ const Nav = () => {
         </div>
         <div className="">
           <Link href={"#"}>
-            <button className="  px-5 py-2 rounded second-bg-color text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
+            <button className="px-5 py-2 rounded purple-color-btn text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
               get started
             </button>
           </Link>
