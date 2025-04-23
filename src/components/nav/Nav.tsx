@@ -29,10 +29,6 @@ const Nav = () => {
       title: "Jobs",
       href: "/",
     },
-    {
-      title: "Training",
-      href: "/",
-    },
 
     {
       title: "FOR ORGANIZATIONS",
@@ -108,7 +104,7 @@ const Nav = () => {
             onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag ? " max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            }  h-full scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            }  h-full text-primary-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navInfo?.map((item, index) => (
               <ul
@@ -139,7 +135,7 @@ const Nav = () => {
                         activeSubMenu === item.title ? "block" : "hidden"
                       } lg:group-hover:block  lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
                     >
-                      <ul className="list-disc list-inside text-nowrap">
+                      <ul className=" text-nowrap">
                         {item?.subLinks?.map((item, index) => (
                           <Link key={index} href={item?.href}>
                             <li className="hover:underline hover:underline-offset-4 underline-color decoration-2 py-4">
