@@ -137,7 +137,7 @@ const Nav = () => {
                     <div
                       className={`${
                         activeSubMenu === item.title ? "block" : "hidden"
-                      }  lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
+                      } lg:group-hover:block  lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
                     >
                       <ul className="list-disc list-inside text-nowrap">
                         {item?.subLinks?.map((item, index) => (
