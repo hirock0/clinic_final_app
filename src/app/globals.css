@@ -9,52 +9,58 @@
   --gray: #B0B0C0;
   --accent:#fdd25f;
 }
-.underline-color {
-  @apply divide-[#5D3FD3];
-}
-.main-bg-color {
-  background-color: var(--background);
-}
-.second-bg-color {
-  background-color: var(--primary);
-}
-.accent-text-color {
-  color: var(--accent);
-}
-.accent-bg-color {
-  background-color: var(--accent);
-}
-.accent-border-color {
-  border-color: var(--accent);
+
+@layer components{
+  .main-bg-color {
+    background-color: var(--background);
+  }
+  .underline-color {
+    @apply divide-[#5D3FD3];
+  }
+  .second-bg-color {
+    background-color: var(--primary);
+  }
+  .accent-text-color {
+    color: var(--accent);
+  }
+  .accent-bg-color {
+    background-color: var(--accent);
+  }
+  .accent-border-color {
+    border-color: var(--accent);
+  }
+  
+  .main-text-color {
+    color: var(--primary);
+  }
+  .second-text-color {
+    color: var(--text);
+  }
+  .third-text-color {
+    color: var(--background);
+  }
+  .gray-text-color{
+    color: var(--gray);
+  }
+  
+  .main-border-color{
+    border-color: var(--primary);
+  }
+  .second-border-color {
+    border-color: var(--background);
+  }
+  
+  .scrollbar-removed {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-removed::-webkit-scrollbar {
+    display: none;
+  }
+  
+  
 }
 
-.main-text-color {
-  color: var(--primary);
-}
-.second-text-color {
-  color: var(--text);
-}
-.third-text-color {
-  color: var(--background);
-}
-.gray-text-color{
-  color: var(--gray);
-}
-
-.main-border-color{
-  border-color: var(--primary);
-}
-.second-border-color {
-  border-color: var(--background);
-}
-
-.scrollbar-removed {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.scrollbar-removed::-webkit-scrollbar {
-  display: none;
-}
 
 html,
 body {

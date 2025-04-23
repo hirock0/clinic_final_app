@@ -29,7 +29,9 @@ const Banner = () => {
                         We match meaningful work with world-class talent.Simple as that.
                     </p>
                     <div className="flex justify-center lg:justify-start gap-4">
-                        <button className="text-secondary-color bg-secondary-color border-2 border-secondary-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer ">
+                        <button className=" second-text-color bg-secondary-color border-2 border-secondary-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer
+                        main-bg-color 
+                        ">
                             HIRE TALENT
                         </button>
                         <Link

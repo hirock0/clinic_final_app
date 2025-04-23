@@ -137,7 +137,7 @@ const Nav = () => {
                       <ul className=" text-nowrap">
                         {item?.subLinks?.map((item, index) => (
                           <Link key={index} href={item?.href}>
-                            <li className="hover:underline hover:underline-offset-4 underline-color decoration-2 py-4">
+                            <li className="hover:underline hover:underline-offset-4 underline-color decoration-2 decoration-[#fdd25f] py-4">
                               {item?.title}
                             </li>
                           </Link>
@@ -147,7 +147,7 @@ const Nav = () => {
                   </li>
                 ) : (
                   <Link href={item?.href}>
-                    <li className="max-lg:w-full max-lg:text-white hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5">
+                    <li className="max-lg:w-full max-lg:text-white hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f] max-lg:border-b-indigo-600 max-lg:p-5">
                       {item?.title}
                     </li>
                   </Link>
