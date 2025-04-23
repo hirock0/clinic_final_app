@@ -49,6 +49,10 @@
   .second-border-color {
     border-color: var(--background);
   }
+  .soft-bg-purple {
+    background-color: var(--sort-purple);
+    backdrop-filter: blur(10px);
+  }
   
   .scrollbar-removed {
     scrollbar-width: none;
@@ -78,7 +82,3 @@ body {
   height: 100%;
 }
 
-.soft-bg-purple {
-  background-color: var(--sort-purple);
-  backdrop-filter: blur(10px);
-}
