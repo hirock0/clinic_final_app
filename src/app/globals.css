@@ -1,1 +1,82 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --primary: #5d3fd3;
+  --background: #fafafa;
+  --text: #0a0a0a;
+  --sort-purple: #EDE9FE;
+  --gray: #B0B0C0;
+  --accent:#fdd25f;
+}
+
+@layer components{
+  .main-bg-color {
+    background-color: var(--background);
+  }
+  .underline-color {
+    @apply divide-[#5D3FD3];
+  }
+  .second-bg-color {
+    background-color: var(--primary);
+  }
+  .accent-text-color {
+    color: var(--accent);
+  }
+  .accent-bg-color {
+    background-color: var(--accent);
+  }
+  .accent-border-color {
+    border-color: var(--accent);
+  }
+  
+  .main-text-color {
+    color: var(--primary);
+  }
+  .second-text-color {
+    color: var(--text);
+  }
+  .third-text-color {
+    color: var(--background);
+  }
+  .gray-text-color{
+    color: var(--gray);
+  }
+  
+  .main-border-color{
+    border-color: var(--primary);
+  }
+  .second-border-color {
+    border-color: var(--background);
+  }
+  .soft-bg-purple {
+    background-color: var(--sort-purple);
+    backdrop-filter: blur(10px);
+  }
+  
+  .scrollbar-removed {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-removed::-webkit-scrollbar {
+    display: none;
+  }
+  
+}
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+}
+
