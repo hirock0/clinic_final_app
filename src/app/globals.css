@@ -7,34 +7,44 @@
   --text: #0a0a0a;
   --sort-purple: #EDE9FE;
   --gray: #B0B0C0;
+  --accent:#fdd25f;
 }
 .underline-color {
   @apply divide-[#5D3FD3];
 }
-.bg-primary-color {
+.main-bg-color {
   background-color: var(--background);
 }
-.bg-secondary-color {
+.second-bg-color {
   background-color: var(--primary);
 }
+.accent-text-color {
+  color: var(--accent);
+}
+.accent-bg-color {
+  background-color: var(--accent);
+}
+.accent-border-color {
+  border-color: var(--accent);
+}
 
-.text-primary-color {
+.main-text-color {
   color: var(--primary);
 }
-.text-secondary-color {
+.second-text-color {
   color: var(--text);
 }
-.text-third-color {
+.third-text-color {
   color: var(--background);
 }
-.text-gray-color{
+.gray-text-color{
   color: var(--gray);
 }
 
-.border-primary-color{
+.main-border-color{
   border-color: var(--primary);
 }
-.border-secondary-color {
+.second-border-color {
   border-color: var(--background);
 }
 

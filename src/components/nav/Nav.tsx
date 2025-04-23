@@ -29,7 +29,6 @@ const Nav = () => {
       title: "Jobs",
       href: "/",
     },
-
     {
       title: "FOR ORGANIZATIONS",
       href: "/",
@@ -78,7 +77,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-primary-color shadow-lg">
+    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
       <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">
         <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
@@ -94,7 +93,7 @@ const Nav = () => {
             className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black text-primary-color `}
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            UNITED <span className="text-yellow-400">CARE</span>{" "}
+            UNITED <span className="accent-text-color">CARE</span>{" "}
             <br className=" sm:hidden" />
             LINKS
           </h1>
@@ -159,7 +158,7 @@ const Nav = () => {
         </div>
         <div className="">
           <Link href={"#"}>
-            <button className="  px-5 py-2 rounded bg-secondary-color text-white shadow-lg hover:scale-105">
+            <button className="  px-5 py-2 rounded second-bg-color text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
               get started
             </button>
           </Link>
