@@ -43,7 +43,7 @@ From 24/7 nurses to niche therapists and group facilitators, we&apos;ve got your
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features?.map((feature, idx) => (
-            <div key={idx} className="card soft-bg-purple p-6 transition-transform hover:scale-105 duration-300 ease-in-out">
+            <div key={idx} className="card soft-bg-purple p-6 transition-transform hover:scale-105 duration-300 ease-in-out border-2 main-border-color">
               <div className="flex justify-start mb-4">
                 <div className=" main-bg-color shadow main-text-color text-4xl p-4 rounded-full">
                   {feature?.icon}
