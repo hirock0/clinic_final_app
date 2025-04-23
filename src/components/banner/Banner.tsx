@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Banner = () => {
     return (
-        <section className="bg-secondary-color py-12 lg:py-20 ">
+        <section className="second-bg-color py-12 lg:py-20 ">
             {/* Background Image - Bottom Right */}
             {/* <div className="absolute bottom-0 right-0 h-full w-full">
                 <Image
@@ -29,12 +29,12 @@ const Banner = () => {
                         We match meaningful work with world-class talent.Simple as that.
                     </p>
                     <div className="flex justify-center lg:justify-start gap-4">
-                        <button className="bg-primary-color hover:border-secondary-color hover:bg-transparent text-primary-color font-semibold px-8 py-3 rounded transition-colors duration-300 text-lg lg:text-2xl cursor-pointer">
+                        <button className="text-secondary-color bg-secondary-color border-2 border-secondary-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer ">
                             HIRE TALENT
                         </button>
                         <Link
                             href="#"
-                            className="border-2 border-white hover:border-[#63e6b8] px-8 py-3 rounded hover:bg-[#63e6b8] hover:text-[#002454] font-semibold transition-colors duration-300 flex items-center text-lg lg:text-2xl cursor-pointer"
+                            className="text-secondary-color hover:text-third-color border-2 border-secondary-color rounded-md px-6 py-2 text-xl font-semibold cursor-pointer flex items-center gap-1"
                         >
                             SEARCH JOBS <span className="ml-1 text-sm"><FaExternalLinkAlt /></span>
                         </Link>
