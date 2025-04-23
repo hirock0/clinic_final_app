@@ -1,9 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-
 import CtaBtn from "../ui/ctaBtn/CtaBtn";
-import Title from "../title/Title";
+
 
 const Opportunity = () => {
   return (

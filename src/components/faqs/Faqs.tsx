@@ -1,19 +1,18 @@
-import faqImage from "../assets/faqImg.jpg";
+
 import Image from "next/image";
 const Faqs = () => {
   return (
     <div className=" my-14 max-w-[1440px] mx-auto w-11/12 gap-6 flex items-center lg:flex-row flex-col-reverse">
-      <div className="w-full ">
-        <Image src={"https://cdn.pixabay.com/photo/2024/10/07/13/00/unknown-9102980_960_720.jpg"} alt="poster" width={500} height={500} />
+      <div className="w-full h-full">
+        <Image src={"https://cdn.pixabay.com/photo/2024/10/07/13/00/unknown-9102980_960_720.jpg"} alt="poster" width={500} height={500}
+        className="w-full h-full object-cover rounded-lg"
+        />
       </div>
 
-      <div className="space-y-4 w-full">
-        <h1 className=" text-xl text-black text-center lg:text-start mb-8 font-bold">
-          FAQs
-        </h1>
-        <div className="collapse collapse-plus bg-base-200">
-          <input type="radio" name="my-accordion-3" defaultChecked />
-          <div className="collapse-title text-xl font-medium">
+      <div className="space-y-4 w-full second-text-color">
+        <div className="collapse collapse-plus bg-base-300">
+          <input type="radio" name="my-accordion-3" />
+          <div className="collapse-title text-xl font-semibold uppercase">
             How can I place an order?
           </div>
           <div className="collapse-content">
@@ -26,9 +25,9 @@ const Faqs = () => {
             </p>
           </div>
         </div>
-        <div className="collapse collapse-plus bg-base-200">
+        <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title text-xl font-semibold uppercase">
             Are your medicines authentic and safe?
           </div>
           <div className="collapse-content">
@@ -40,9 +39,9 @@ const Faqs = () => {
             </p>
           </div>
         </div>
-        <div className="collapse collapse-plus bg-base-200">
+        <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title text-xl font-semibold uppercase">
             What are the available payment methods?
           </div>
           <div className="collapse-content">
@@ -53,9 +52,9 @@ const Faqs = () => {
             </p>
           </div>
         </div>
-        <div className="collapse collapse-plus bg-base-200">
+        <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title text-xl font-semibold uppercase">
             How long does delivery take?
           </div>
           <div className="collapse-content">
@@ -67,9 +66,9 @@ const Faqs = () => {
             </p>
           </div>
         </div>
-        <div className="collapse collapse-plus bg-base-200">
+        <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title text-xl font-semibold uppercase">
             Can I return or exchange a product?
           </div>
           <div className="collapse-content">
