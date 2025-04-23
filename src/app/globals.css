@@ -6,7 +6,9 @@
     --background: #FFFFFF;  
     --text: #000000;       
 }
-
+.underline-color{
+    @apply divide-[#5D3FD3]
+}
 .bg-primary-color {
     background-color: var(--background);
 }
