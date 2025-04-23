@@ -24,12 +24,12 @@ const Banner = () => {
                     <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-wider leading-14" style={{fontFamily: 'var(--font-inter)'}}>
                         Your Reliable Partner in Healthcare Staffing and Workforce Development.
                     </h1>
-                    <p className=" text-base lg:text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+                    <p className=" text-base lg:text-lg mb-8 max-w-xl mx-auto lg:mx-0 leading-7">
                         Helping your mission thrive—by putting the right people in the right places.
                         We match meaningful work with world-class talent.Simple as that.
                     </p>
                     <div className="flex justify-center lg:justify-start gap-4">
-                        <button className="bg-[#63e6b8] hover:bg-white text-[#002454] font-semibold px-8 py-3 rounded transition-colors duration-300 text-lg lg:text-2xl cursor-pointer">
+                        <button className="bg-primary-color hover:border-secondary-color hover:bg-transparent text-primary-color font-semibold px-8 py-3 rounded transition-colors duration-300 text-lg lg:text-2xl cursor-pointer">
                             HIRE TALENT
                         </button>
                         <Link

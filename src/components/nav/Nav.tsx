@@ -82,7 +82,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className=" sticky top-0 z-50 bg-primary-color">
+    <nav className="sticky top-0 z-50 bg-primary-color shadow-lg">
       <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">
         <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
@@ -98,7 +98,7 @@ const Nav = () => {
             className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black text-primary-color `}
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            UNITED <span className=" text-yellow-400">CARE</span>{" "}
+            UNITED <span className="text-yellow-400">CARE</span>{" "}
             <br className=" sm:hidden" />
             LINKS
           </h1>
