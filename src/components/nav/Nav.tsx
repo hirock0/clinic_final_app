@@ -7,10 +7,12 @@ import { IoClose } from "react-icons/io5";
 
 const Nav = () => {
   const [menuFlag, setMenuflag] = useState(false);
+  const [activeSubMenu, setActiveSubMenu] = useState<any>(null);
 
   useEffect(() => {
     const hander = () => {
       setMenuflag(false);
+      setActiveSubMenu(null);
     };
     window.addEventListener("click", hander);
     return () => {
@@ -102,32 +104,45 @@ const Nav = () => {
           </h1>
         </div>
         <div className="uppercase max-[1400px]:text-sm max-lg:text-base">
-          <ul
+          <div
             onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag ? " max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
             }  h-full scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navInfo?.map((item, index) => (
-              <div
+              <ul
                 key={index}
                 className=" max-lg:w-full  max-lg:hover:bg-blue-200/20 "
               >
                 {item?.title === "FOR ORGANIZATIONS" ||
                 item?.title === "FOR JOB SEEKERS" ? (
-                  <li className=" cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full  max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5 flex items-center gap-2  ">
-                    <div className="">
-                      <span className=" max-lg:text-white">{item?.title}</span>
-
-                      <button className=" cursor-pointer">
+                  <li
+                    className="cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5 flex items-center gap-2"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSubMenu(
+                        activeSubMenu === item?.title ? null : item?.title
+                      );
+                    }}
+                  >
+                    <div className="flex justify-between w-full items-center">
+                      <span className="max-lg:text-white">{item?.title}</span>
+                      <button className="cursor-pointer">
                         <FaSortDown />
                       </button>
                     </div>
-                    <div className=" hidden group-hover:block lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5">
-                      <ul className=" list-disc list-inside text-nowrap">
+
+                    {/* Submenu */}
+                    <div
+                      className={`${
+                        activeSubMenu === item.title ? "block" : "hidden"
+                      }  lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
+                    >
+                      <ul className="list-disc list-inside text-nowrap">
                         {item?.subLinks?.map((item, index) => (
                           <Link key={index} href={item?.href}>
-                            <li className=" hover:underline hover:underline-offset-4 underline-color decoration-2 py-4">
+                            <li className="hover:underline hover:underline-offset-4 underline-color decoration-2 py-4">
                               {item?.title}
                             </li>
                           </Link>
@@ -137,14 +152,14 @@ const Nav = () => {
                   </li>
                 ) : (
                   <Link href={item?.href}>
-                    <li className=" max-lg:w-full max-lg:text-white hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5  ">
+                    <li className="max-lg:w-full max-lg:text-white hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5">
                       {item?.title}
                     </li>
                   </Link>
                 )}
-              </div>
+              </ul>
             ))}
-          </ul>
+          </div>
         </div>
         <div className="">
           <button className=" border px-5 py-2 rounded shadow">
