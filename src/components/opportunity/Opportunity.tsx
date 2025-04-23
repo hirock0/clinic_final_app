@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import CtaBtn from "../ui/ctaBtn/CtaBtn";
+import Title from "../title/Title";
 
 const Opportunity = () => {
   return (
@@ -23,7 +24,7 @@ const Opportunity = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6 sm:px-8">
         <div className=" text-center third-text-color">
-          <h2 className="text-3xl sm:text-4xl font-black mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl font-black mb-4 uppercase" style={{fontFamily: 'var(--font-inter'}}>
             Looking for Your Next Job Opportunity?
           </h2>
           <p className="text-lg mb-8 max-w-3xl " style={{ fontFamily: 'var(--font-inter' }}>
@@ -31,7 +32,6 @@ const Opportunity = () => {
             organizations — and positively impact your life — by working with a
             trusted career partner.
           </p>
-
           <div className="inline-flex flex-col justify-center">
             <CtaBtn />
           </div>

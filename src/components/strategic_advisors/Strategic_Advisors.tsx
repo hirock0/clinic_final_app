@@ -1,18 +1,13 @@
 import { FaUserMd, FaUserTie } from "react-icons/fa";
 import CtaBtn from "../ui/ctaBtn/CtaBtn";
+import Title from "../title/Title";
 const Strategic_Advisors = () => {
   return (
 
     <section className="py-16 px-4 sm:px-6 lg:px-8">
       <div className=" max-w-[1440px] mx-auto w-11/12 flex flex-col items-center text-center ">
-        <h2 className="text-4xl font-black mb-4 second-text-color" style={{ fontFamily: 'var(--font-inter' }}>
-          Strategic Advisors
-        </h2>
-        <p className="text-lg mb-8 max-w-2xl " style={{ fontFamily: 'var(--font-inter' }}>
-          We&apos;re proud to be guided by trusted advisors whose decades of
-          expertise shape our strategy and vision.
-        </p>
-
+      <Title heading="Strategic Advisors" paragraph="We&apos;re proud to be guided by trusted advisors whose decades of
+          expertise shape our strategy and vision."/>
         <div className="grid gap-8 md:grid-cols-2">
           {/* Advisor 1 */}
           <div className="p-6 lg:p-10 rounded-xl soft-bg-purple">
