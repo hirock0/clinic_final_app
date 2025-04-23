@@ -17,7 +17,7 @@ const features = [
   {
     icon: <FaHandsHelping />,
     title: "Urgency Met with Expertise",
-    description:"Connect directly with a dedicated staffing professional who understands the urgency of your needs. Most roles are filled within 24–48 hours, and we ensure consistent communication every step of the way—so you're never left in the dark.",
+    description: "Connect directly with a dedicated staffing professional who understands the urgency of your needs. Most roles are filled within 24–48 hours, and we ensure consistent communication every step of the way—so you're never left in the dark.",
   },
   {
     icon: <FaCheckCircle />,
@@ -40,7 +40,6 @@ export default function WhyChooseUs() {
         <Title heading="WHY CHOOSE UNITED CARE LINKS" paragraph="United Care Links is a California-based healthcare staffing squad that&apos;s all about one thing: making sure your care team is stacked with reliable, compassionate pros.
 From 24/7 nurses to niche therapists and group facilitators, we&apos;ve got your back—filling in every gap so you can keep your eyes on what matters most: your patients.
 "/>
-
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features?.map((feature, idx) => (
