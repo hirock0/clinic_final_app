@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+
 import CtaBtn from "../ui/ctaBtn/CtaBtn";
 
 const Opportunity = () => {
   return (
-    <section className="relative py-12 lg:py-20 max-w-[1440px] mx-auto w-11/12 bg-[#002454] rounded-2xl my-10 lg:my-20">
+    <section className="relative py-12 lg:py-20 max-w-[1440px] mx-auto w-11/12 bg-secondary-color rounded-2xl mb-12 md:mb-20">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image

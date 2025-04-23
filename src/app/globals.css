@@ -3,8 +3,10 @@
 
 :root {
   --primary: #5d3fd3;
-  --background: #ffffff;
-  --text: #000000;
+  --background: #fafafa;
+  --text: #0a0a0a;
+  --sort-purple: #EDE9FE;
+  --gray: #B0B0C0;
 }
 .underline-color {
   @apply divide-[#5D3FD3];
@@ -25,6 +27,17 @@
 .text-third-color {
   color: var(--background);
 }
+.text-gray-color{
+  color: var(--gray);
+}
+
+.border-primary-color{
+  border-color: var(--primary);
+}
+.border-secondary-color {
+  border-color: var(--background);
+}
+
 .scrollbar-removed {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -47,4 +60,9 @@ body {
   scroll-behavior: smooth;
   width: 100%;
   height: 100%;
+}
+
+.bg-soft-purple {
+  background-color: var(--sort-purple);
+  backdrop-filter: blur(10px);
 }
