@@ -78,7 +78,7 @@ body {
   height: 100%;
 }
 
-.bg-soft-purple {
+.soft-bg-purple {
   background-color: var(--sort-purple);
   backdrop-filter: blur(10px);
 }

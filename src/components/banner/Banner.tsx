@@ -20,7 +20,7 @@ const Banner = () => {
             {/* Content Container */}
             <div className="max-w-[1440px] mx-auto w-11/12 flex flex-col lg:flex-row items-center justify-between gap-8">
                 {/* Text Content */}
-                <div className="text-center lg:text-left max-w-3xl text-third-color">
+                <div className="text-center lg:text-left max-w-3xl third-text-color">
                     <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-wider leading-14" style={{fontFamily: 'var(--font-inter)'}}>
                         Your Reliable Partner in Healthcare Staffing and Workforce Development.
                     </h1>
@@ -29,14 +29,14 @@ const Banner = () => {
                         We match meaningful work with world-class talent.Simple as that.
                     </p>
                     <div className="flex justify-center lg:justify-start gap-4">
-                        <button className=" second-text-color bg-secondary-color border-2 border-secondary-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer
-                        main-bg-color 
-                        ">
+
+                        <button className="second-text-color main-bg-color border-2 second-border-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer hover:bg-transparent hover:third-text-color ">
+
                             HIRE TALENT
                         </button>
                         <Link
                             href="#"
-                            className="text-secondary-color hover:text-third-color border-2 border-secondary-color rounded-md px-6 py-2 text-xl font-semibold cursor-pointer flex items-center gap-1"
+                            className="third-text-color border-2 white-border-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer flex items-center gap-1"
                         >
                             SEARCH JOBS <span className="ml-1 text-sm"><FaExternalLinkAlt /></span>
                         </Link>

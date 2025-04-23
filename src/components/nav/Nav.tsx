@@ -90,10 +90,10 @@ const Nav = () => {
             <IoClose size={35} className={`${!menuFlag && "hidden"}`} />
           </button>
           <h1
-            className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black text-primary-color `}
+            className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black main-text-color `}
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            UNITED <span className="accent-text-color">CARE</span>{" "}
+            UNITED <span className="second-text-color">CARE</span>{" "}
             <br className=" sm:hidden" />
             LINKS
           </h1>
@@ -103,7 +103,7 @@ const Nav = () => {
             onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag ? " max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            }  h-full text-primary-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            }  h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navInfo?.map((item, index) => (
               <ul
