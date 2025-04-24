@@ -21,12 +21,12 @@ const ContactUs = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6 sm:px-8">
-        <div className="max-w-4xl mx-auto text-white">
+        <div className="max-w-5xl mx-auto text-white">
           <h2 className="text-3xl sm:text-4xl font-black mb-4 uppercase" style={{fontFamily: 'var(--font-inter'}}>
-            Work with a Trusted Healthcare and Life Sciences Staffing Partner
+          Work with a staffing partner focused on healthcare and clinical support excellence
           </h2>
           <p className="text-lg mb-8 text-center" style={{ fontFamily: 'var(--font-inter' }}>
-            Connect with Medix to get the expertise and resources you need to succeed.
+            Connect with UCL to get the expertise and resources you need to succeed.
           </p>
 
           <div className="inline-flex flex-col justify-center">

@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 const Faqs = () => {
   return (
@@ -13,70 +12,57 @@ const Faqs = () => {
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
           <div className="collapse-title text-xl font-semibold uppercase">
-            How can I place an order?
+          1. What types of healthcare professionals do you staff?
           </div>
           <div className="collapse-content">
             <p>
-              {" "}
-              Placing an order is simple! Browse through our wide range of
-              medicines, add your desired products to the cart, and proceed to
-              checkout. Fill in your shipping details, select your preferred
-              payment method, and confirm your purchase.
+            We staff a wide range of roles including RNs, LVNs, CNAs, medical assistants, therapists, phlebotomists, lab techs, and admin support. Basically, if it keeps a clinic or hospital running, we got you.
             </p>
           </div>
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
           <div className="collapse-title text-xl font-semibold uppercase">
-            Are your medicines authentic and safe?
+          2. How fast can you fill an open position?
           </div>
           <div className="collapse-content">
             <p>
-              {" "}
-              Yes, all our medicines are 100% authentic and sourced from
-              licensed manufacturers and distributors. We prioritize your safety
-              and ensure proper storage and handling of all products.
+            Most roles are matched within 24–48 hours. Our insider knowledge of local talent pools and licensing rules helps us move fast without cutting corners.
             </p>
           </div>
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
           <div className="collapse-title text-xl font-semibold uppercase">
-            What are the available payment methods?
+          3. Are your candidates vetted and licensed?
+
           </div>
           <div className="collapse-content">
             <p>
-              We offer multiple payment options for your convenience, including
-              credit/debit cards, mobile banking, and cash on delivery (where
-              available). Your payment details are always secure with us.
+            Absolutely. Every professional goes through a full background check, license verification, and skills screening before we even consider sending them your way.
             </p>
           </div>
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
           <div className="collapse-title text-xl font-semibold uppercase">
-            How long does delivery take?
+          4. Do you offer temp, temp-to-hire, or permanent placements?
           </div>
           <div className="collapse-content">
             <p>
-              {" "}
-              Delivery times vary based on your location. Typically, orders are
-              delivered within 2–5 business days. For urgent requirements, we
-              also offer express delivery options in select areas.
+            Yes to all three. We&apos;re flexible - whether you need short-term coverage or you&apos;re building out a dream team, we&apos;ll tailor it to your needs.
             </p>
           </div>
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
           <div className="collapse-title text-xl font-semibold uppercase">
-            Can I return or exchange a product?
+          5. What makes your agency different from others?
+
           </div>
           <div className="collapse-content">
             <p>
-              We accept returns or exchanges for damaged or incorrect items
-              within 7 days of delivery. Please ensure the product is unused and
-              in its original packaging. For assistance, contact our support
-              team.
+            We&apos;re local experts with a statewide reach. We blend speed, personal service, and a quality-over-quantity approach so you&apos;re not drowning in résumés — just getting the right ones.
             </p>
           </div>
         </div>
