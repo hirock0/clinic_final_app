@@ -72,7 +72,7 @@ const Nav = () => {
     },
     {
       title: "Contact",
-      href: "/",
+      href: "/contact",
     },
   ];
 
