@@ -1,5 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 const uri = process.env.DB_URI!;
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -7,6 +8,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
+
 
 export const DBConnection = async () => {
   try {
@@ -20,3 +22,4 @@ export const DBConnection = async () => {
     throw new Error(String(error));
   }
 };
+
