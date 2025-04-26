@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Banner = () => {
     return (
-        <section className="second-bg-color py-12 lg:py-20 ">
+        <section className="second-bg-color py-12 lg:py-20">
             {/* Background Image - Bottom Right */}
             {/* <div className="absolute bottom-0 right-0 h-full w-full">
                 <Image
