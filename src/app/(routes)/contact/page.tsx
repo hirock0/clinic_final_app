@@ -3,7 +3,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 export default function ContactPage() {
   return (
-    <div className="py-12 md:py-20">
+    <section className="py-12 md:py-20 flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto w-11/12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Side - Contact Information */}
@@ -144,6 +144,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
