@@ -36,7 +36,7 @@ export default function RootLayout({
         {/* nNabvar component  */}
         <Nav />
         {/* Main Component  */}
-        <main className="min-h-[calc(100vh-326px)]">{children}</main>
+        <main className="min-h-[calc(100vh-397px)]">{children}</main>
         {/* Footer component  */}
         <Footer />
       </body>
