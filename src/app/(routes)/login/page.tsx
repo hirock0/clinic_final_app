@@ -8,6 +8,7 @@ import { useState } from "react";
 import swal from "sweetalert";
 import useUserStore from "@/utils/zustand/store/useUserStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -119,9 +120,11 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
           Don't have an account?{" "}
-          <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
-            Sign up
-          </span>
+          <Link href={"/signup"}>
+            <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
+              Sign up
+            </span>
+          </Link>
         </p>
       </form>
     </div>
