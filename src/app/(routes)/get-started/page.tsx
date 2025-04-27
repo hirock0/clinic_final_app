@@ -30,7 +30,7 @@ const GetStartedPage = () => {
                     <p className='text-base font-normal mb-6'>
                     Considering your next opportunity? Find it now with UCL.
                     </p> 
-                    <Link href='/' className="second-bg-color third-text-color border-2 main-border-color rounded-md px-6 py-2 text-lg font-semibold cursor-pointer ">
+                    <Link href='/search-jobs' className="second-bg-color third-text-color border-2 main-border-color rounded-md px-6 py-2 text-lg font-semibold cursor-pointer ">
                        SEARCH JOBS
                     </Link>
                 </div>
