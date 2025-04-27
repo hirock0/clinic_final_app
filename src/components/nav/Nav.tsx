@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { FaSortDown } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-
+import { usePathname } from "next/navigation";
 const Nav = () => {
+  const pathname = usePathname();
   const [menuFlag, setMenuflag] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<any>(null);
 
@@ -77,7 +78,11 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
+    <nav
+      className={`
+      ${pathname === "/dashboard" && "hidden"}
+    sticky top-0 z-50 main-bg-color shadow-lg`}
+    >
       <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">
         <div className="  max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
@@ -157,9 +162,12 @@ const Nav = () => {
           </div>
         </div>
         <div>
-            <Link href='/get-started' className="px-5 py-2 rounded purple-color-btn text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
-              get started
-            </Link>
+          <Link
+            href="/get-started"
+            className="px-5 py-2 rounded purple-color-btn text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+          >
+            get started
+          </Link>
         </div>
       </div>
     </nav>
