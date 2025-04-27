@@ -20,7 +20,7 @@ const Strategic_Advisors = () => {
 
             <p className="second-text-color text-left ">
               A respected name in healthcare education and clinical training,
-              Dr. Naser brings over 30 years of experience in clinical
+              Dr. Nasar brings over 30 years of experience in clinical
               operations, academic leadership, and workforce development. His
               mentorship helps ensure our staffs are not just placed—they&apos;re
               prepared to thrive.

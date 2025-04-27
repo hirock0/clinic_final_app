@@ -14,7 +14,7 @@ const GetStartedPage = () => {
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 ">
 
                 {/* Hire talent card  */}
-                <div className=" p-10  rounded-md shadow  flex flex-col items-center justify-center">
+                <div className=" p-10  rounded-md shadow  flex flex-col items-center justify-center text-center">
                     <h3 className='text-2xl font-black main-text-color mb-2'>For Organizations</h3>
                     <p className='text-base font-normal mb-6'>
                         Hire highly skilled healthcare and life sciences talent with UCL.
@@ -25,7 +25,7 @@ const GetStartedPage = () => {
                     </Link>
                 </div>
                 {/* search jobs card  */}
-                <div className=" p-10  rounded-md shadow  flex flex-col items-center justify-center">
+                <div className=" p-10  rounded-md shadow  flex flex-col items-center justify-center text-center">
                     <h3 className='text-2xl font-black main-text-color mb-2'>For Job Seekers</h3>
                     <p className='text-base font-normal mb-6'>
                     Considering your next opportunity? Find it now with UCL.
