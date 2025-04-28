@@ -80,7 +80,7 @@ const Nav = () => {
   return (
     <nav
       className={`
-      ${pathname === "/dashboard" && "hidden"}
+      ${pathname.startsWith("/dashboard") && "hidden"}
     sticky top-0 z-50 main-bg-color shadow-lg`}
     >
       <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">

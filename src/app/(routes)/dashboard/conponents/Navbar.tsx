@@ -61,7 +61,7 @@ const Navbar = () => {
 
   return (
     <nav className=" bg-slate-200">
-      <div className=" 0 h-20 max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
+      <div className="  h-20 max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
         <div className=" flex items-center gap-5">
           <div className=" flex max-lg:gap-5 items-center">
             <button
