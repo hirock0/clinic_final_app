@@ -7,7 +7,12 @@ const Footer = () => {
   return (
     <footer
       className={`
-             ${pathname === "/dashboard" && "hidden"}
+             ${
+               (pathname === "/dashboard" ||
+                 pathname === "/signup" ||
+                 pathname === "/login") &&
+               "hidden"
+             }
         bg-primary-color border-t-1 border-gray-500`}
     >
       <div className="footer md:footer-horizontal max-w-[1400px] w-11/12 mx-auto py-12 md:py-20">

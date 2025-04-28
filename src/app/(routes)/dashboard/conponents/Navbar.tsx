@@ -7,10 +7,12 @@ import axios from "axios";
 import useUserStore from "@/utils/zustand/store/useUserStore";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 const Navbar = () => {
   const router = useRouter();
-  const { user, clearUser } = useUserStore();
+  const { user, clearUser, setDecodedUser, decodedUser } = useUserStore();
   const [menuFlag, setMenuFlag] = useState(false);
+  const [profileMenu, setProfileMenu] = useState(false);
   const logoutHandler = async () => {
     try {
       const response = await axios.get("/pages/api/authentication/logout");
@@ -31,6 +33,21 @@ const Navbar = () => {
       throw new Error(String(error.message));
     }
   };
+
+  useEffect(() => {
+    const userHandler = async () => {
+      try {
+        const response = await axios.get(
+          "/pages/api/authentication/decodedToken"
+        );
+        const user = response?.data?.user;
+        setDecodedUser(user);
+      } catch (error: any) {
+        throw new Error(error?.message);
+      }
+    };
+    userHandler();
+  }, []);
 
   useEffect(() => {
     const handler = () => {
@@ -55,14 +72,16 @@ const Navbar = () => {
             >
               <LuMenu size={30} />
             </button>
-            <h1
-              className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black main-text-color `}
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              UNITED <span className="second-text-color">CARE</span>{" "}
-              <br className=" sm:hidden" />
-              LINKS
-            </h1>
+            <Link href={"/"}>
+              <h1
+                className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black main-text-color `}
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                UNITED <span className="second-text-color">CARE</span>
+                <br className=" sm:hidden" />
+                LINKS
+              </h1>
+            </Link>
           </div>
           <ul
             onClick={(e) => e.stopPropagation()}
@@ -95,13 +114,35 @@ const Navbar = () => {
                 <button>Login</button>
               </Link>
             ) : (
-              <button onClick={logoutHandler} className=" cursor-pointer">
-                Log Out
-              </button>
+              <div
+                onClick={(e) => {
+                  e.stopPropagation(), setProfileMenu(!profileMenu);
+                }}
+                className=" w-10 h-10 cursor-pointer rounded-full overflow-hidden"
+              >
+                <Image
+                  src={decodedUser?.image?.secure_url}
+                  alt="user"
+                  width={500}
+                  height={500}
+                  className=" object-cover w-full h-full"
+                />
+              </div>
             )}
           </div>
         </div>
       </div>
+      {/* profile_popup */}
+      <div
+        className={`${
+          !profileMenu ? " hidden" : "block"
+        } fixed right-0 top-20 bg-red-300`}
+      >
+        <button onClick={logoutHandler} className=" cursor-pointer">
+          Log Out
+        </button>
+      </div>
+      {/* profile_popup_end */}
     </nav>
   );
 };
