@@ -8,7 +8,7 @@ const Footer = () => {
     <footer
       className={`
              ${
-               (pathname === "/dashboard" ||
+               (pathname.startsWith("/dashboard") ||
                  pathname === "/signup" ||
                  pathname === "/login") &&
                "hidden"
