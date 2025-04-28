@@ -1,13 +1,15 @@
-// app/login/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
 import swal from "sweetalert";
 import useUserStore from "@/utils/zustand/store/useUserStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -23,10 +25,10 @@ export default function LoginPage() {
   } = useForm<LoginFormInputs>();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 👈 for password toggle
 
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
-
     try {
       const response = await axios.post(
         "/pages/api/authentication/login",
@@ -42,7 +44,7 @@ export default function LoginPage() {
       } else {
         swal({
           title: response?.data?.message,
-          icon: "success",
+          icon: "warning",
         });
       }
     } catch (error: any) {
@@ -86,19 +88,29 @@ export default function LoginPage() {
         </div>
 
         {/* Password Field */}
-        <div className="flex flex-col space-y-1">
+        <div className="flex flex-col space-y-1 relative">
           <label htmlFor="password" className="text-gray-600 font-semibold">
             Password
           </label>
-          <div className="flex items-center border rounded-lg px-4 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-400">
+          <div className="flex items-center border rounded-lg px-4 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-400 relative">
             <FaLock className="text-gray-400 mr-3" />
             <input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               {...register("password", { required: "Password is required" })}
               className="flex-1 bg-transparent focus:outline-none"
             />
+            <div
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 cursor-pointer text-gray-400"
+            >
+              {showPassword ? (
+                <AiOutlineEye size={20} />
+              ) : (
+                <AiOutlineEyeInvisible size={20} />
+              )}
+            </div>
           </div>
           {errors.password && (
             <span className="text-red-500 text-sm">
@@ -111,17 +123,23 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center"
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {loading ? (
+            <span className="loading loading-spinner loading-sm"></span> // 👈 DaisyUI loader
+          ) : (
+            "Sign In"
+          )}
         </button>
 
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
           Don't have an account?{" "}
-          <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
-            Sign up
-          </span>
+          <Link href={"/signup"}>
+            <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
+              Sign up
+            </span>
+          </Link>
         </p>
       </form>
     </div>

@@ -1,12 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
-import { json } from "stream/consumers";
 import jwt from "jsonwebtoken";
+import { DBConnection } from "@/lib/dbConnection/DBConnection";
+import bcrypt from "bcryptjs";
 export async function POST(request: NextRequest) {
   try {
-    const reqBody = await request.json();
+    const client = await DBConnection();
+    const userDB = client.db("AdminDB").collection("loggedUsers");
+    const { email, password } = await request.json();
+
+    const existingUser = await userDB.findOne({ email: email });
+
+    if (!existingUser) {
+      return NextResponse.json({
+        message: "Email is not correct",
+        success: false,
+      });
+    }
+
+    const verifyPassword = await bcrypt.compare(
+      password,
+      existingUser?.password
+    );
+
+    if (!verifyPassword) {
+      return NextResponse.json({
+        message: "Password is not correct",
+        success: false,
+      });
+    }
+
     const tokenData = {
-      name: "Hirock",
+      name: existingUser?.name,
+      email: existingUser?.email,
+      image: existingUser?.image,
     };
+
     const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
@@ -22,7 +50,7 @@ export async function POST(request: NextRequest) {
       sameSite: "lax",
       secure: false,
       path: "/",
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      maxAge: 7 * 24 * 60 * 60, 
     });
 
     return response;
