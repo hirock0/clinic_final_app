@@ -1,4 +1,5 @@
 'use client'
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const HireTalentPage = () => {
@@ -20,7 +21,7 @@ const HireTalentPage = () => {
         startDate: string;
         assignmentDuration: string;
         additionalNotes: string;
-      }>({
+    }>({
         facilityName: '',
         facilityType: '',
         address: '',
@@ -37,18 +38,18 @@ const HireTalentPage = () => {
         startDate: '',
         assignmentDuration: '',
         additionalNotes: ''
-      });
-    
-      const facilityTypes = [
+    });
+
+    const facilityTypes = [
         'Hospital',
         'Clinic',
         'Long-Term Care Facility',
         'Rehabilitation Center',
         'Urgent Care',
         'Other'
-      ];
-    
-      const staffTypes = [
+    ];
+
+    const staffTypes = [
         'Registered Nurse (RN)',
         'Licensed Practical Nurse (LPN)',
         'Certified Nursing Assistant (CNA)',
@@ -56,44 +57,54 @@ const HireTalentPage = () => {
         'Physician',
         'Therapist',
         'Other'
-      ];
-    
-      const shiftOptions = [
+    ];
+
+    const shiftOptions = [
         'Day',
         'Evening',
         'Night',
         'Weekends',
         'Flexible'
-      ];
-    
-      const durationOptions = [
+    ];
+
+    const durationOptions = [
         'Per Diem',
         'Temporary (1-12 weeks)',
         'Temporary (13-26 weeks)',
         'Permanent',
         'Other'
-      ];
-    
-      const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    ];
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target as HTMLInputElement;
         const checked = (e.target as HTMLInputElement).checked;
-        
+
         if (type === 'checkbox' && name in formData) {
-          const updatedArray = checked
-            ? [...(formData[name as keyof typeof formData] as string[]), value]
-            : (formData[name as keyof typeof formData] as string[]).filter(item => item !== value);
-          
-          setFormData(prev => ({ ...prev, [name]: updatedArray }));
+            const updatedArray = checked
+                ? [...(formData[name as keyof typeof formData] as string[]), value]
+                : (formData[name as keyof typeof formData] as string[]).filter(item => item !== value);
+
+            setFormData(prev => ({ ...prev, [name]: updatedArray }));
         } else if (name in formData) {
-          setFormData(prev => ({ ...prev, [name]: value }));
+            setFormData(prev => ({ ...prev, [name]: value }));
         }
-      };
-    
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
-        // Add your form submission logic here
-      };
+        
+        try {
+            const response = await axios.post('/pages/api/jobs', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
 
 
     return (
