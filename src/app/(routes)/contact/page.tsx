@@ -20,7 +20,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-gray-500 text-sm font-medium">Phone</h3>
-                  <p className="second-text-color text-lg">+1 000-111-2222</p>
+                  <p className="second-text-color text-lg">(510) 402 9388</p>
                 </div>
               </div>
 
@@ -31,7 +31,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-gray-500 text-sm font-medium">Email</h3>
-                  <p className="second-text-color text-lg">unitedcare@.com</p>
+                  <p className="second-text-color text-lg">info@unitedcarelinks.com</p>
                 </div>
               </div>
 
@@ -43,7 +43,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-gray-500 text-sm font-medium">Our Address</h3>
                   <p className="second-text-color text-lg">
-                    1234 Main Street, 205, New York City
+                  13715 Rosecroft Way, San Diego, CA 92130, USA
                   </p>
                 </div>
               </div>
