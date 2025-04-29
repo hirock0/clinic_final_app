@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { FaSortDown } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+
+
 
 const Nav = () => {
+  const pathname = usePathname();
   const [menuFlag, setMenuflag] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<any>(null);
 
@@ -26,7 +31,7 @@ const Nav = () => {
       href: "/",
     },
     {
-      title: "Jobs",
+      title: "Training",
       href: "/",
     },
     {
@@ -42,7 +47,7 @@ const Nav = () => {
           href: "/",
         },
         {
-          title: " Book an appointment.r",
+          title: " Book an appointment",
           href: "/",
         },
       ],
@@ -57,7 +62,7 @@ const Nav = () => {
           href: "/",
         },
         {
-          title: "Why ‘United Care Links’",
+          title: "Why United Care Links",
           href: "/",
         },
         {
@@ -65,21 +70,25 @@ const Nav = () => {
           href: "/",
         },
         {
-          title: " View Job Board",
+          title: " View Job Board",
           href: "/",
         },
       ],
     },
     {
       title: "Contact",
-      href: "/",
+      href: "/contact",
     },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
-      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">
-        <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
+    <nav
+      className={`
+      ${pathname.startsWith("/dashboard") && "hidden"}
+    sticky top-0 z-50 main-bg-color shadow-lg`}
+    >
+      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between">
+        <div className="  max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
             onClick={(e) => {
               e.stopPropagation(), setMenuflag(!menuFlag);
@@ -89,14 +98,15 @@ const Nav = () => {
             <MdMenu size={35} className={`${menuFlag && "hidden"}`} />
             <IoClose size={35} className={`${!menuFlag && "hidden"}`} />
           </button>
-          <h1
+          {/* <h1
             className={` -tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black main-text-color `}
             style={{ fontFamily: "var(--font-inter)" }}
           >
             UNITED <span className="second-text-color">CARE</span>{" "}
             <br className=" sm:hidden" />
             LINKS
-          </h1>
+          </h1> */}
+          <Image src='/UCL logo.png' alt="logo" width={100} height={50} />
         </div>
         <div className="uppercase max-[1400px]:text-sm max-lg:text-base">
           <div
@@ -156,11 +166,12 @@ const Nav = () => {
             ))}
           </div>
         </div>
-        <div className="">
-          <Link href={"#"}>
-            <button className="  px-5 py-2 rounded second-bg-color text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
-              get started
-            </button>
+        <div>
+          <Link
+            href="/get-started"
+            className="px-5 py-2 rounded purple-color-btn text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+          >
+            get started
           </Link>
         </div>
       </div>

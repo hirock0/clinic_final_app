@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Banner = () => {
     return (
-        <section className="second-bg-color py-12 lg:py-20 ">
+        <section className="second-bg-color py-12 lg:py-20">
             {/* Background Image - Bottom Right */}
             {/* <div className="absolute bottom-0 right-0 h-full w-full">
                 <Image
@@ -30,7 +30,7 @@ const Banner = () => {
                     </p>
                     <div className="flex justify-center lg:justify-start gap-4">
 
-                        <button className="second-text-color main-bg-color border-2 second-border-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer hover:bg-transparent hover:third-text-color ">
+                        <button className="purple-color-btn main-bg-color border-2 purple-color-border  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer hover:bg-transparent hover:third-text-color ">
 
                             HIRE TALENT
                         </button>

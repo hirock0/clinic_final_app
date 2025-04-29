@@ -10,17 +10,17 @@ const Strategic_Advisors = () => {
           expertise shape our strategy and vision."/>
         <div className="grid gap-8 md:grid-cols-2">
           {/* Advisor 1 */}
-          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple">
+          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple border-2 main-border-color transition-transform duration-300 ease-in-out hover:scale-105">
             <div className="mb-4">
               <FaUserMd className="main-text-color text-5xl" />
             </div>
             <h3 className="text-2xl font-bold text-secondary-color text-left mb-4">
-              Dr. Aboo Naser
+            Dr Aboo Nasar
             </h3>
 
             <p className="second-text-color text-left ">
               A respected name in healthcare education and clinical training,
-              Dr. Naser brings over 30 years of experience in clinical
+              Dr. Nasar brings over 30 years of experience in clinical
               operations, academic leadership, and workforce development. His
               mentorship helps ensure our staffs are not just placed—they&apos;re
               prepared to thrive.
@@ -28,8 +28,7 @@ const Strategic_Advisors = () => {
           </div>
 
           {/* Advisor 2 */}
-
-          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple">
+          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple border-2 main-border-color transition-transform duration-300 ease-in-out hover:scale-105">
             <div className="mb-4">
               <FaUserTie className="main-text-color text-5xl" />
             </div>
