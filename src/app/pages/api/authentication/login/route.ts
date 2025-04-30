@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       name: existingUser?.name,
       email: existingUser?.email,
       image: existingUser?.image,
+      role: existingUser?.role,
     };
 
     const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
       message: "Login successfully",
       success: true,
       token: token,
+      role: existingUser?.role,
     });
 
     response.cookies.set("token", token, {
@@ -50,7 +52,7 @@ export async function POST(request: NextRequest) {
       sameSite: "lax",
       secure: false,
       path: "/",
-      maxAge: 7 * 24 * 60 * 60, 
+      maxAge: 7 * 24 * 60 * 60,
     });
 
     return response;

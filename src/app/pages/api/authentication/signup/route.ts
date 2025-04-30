@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       password: hashedPassword,
-      role: "user",
+      role: "employee",
       image: {
         secure_url: uploadResult.secure_url,
         public_id: uploadResult.public_id,
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       image: uploadResult.secure_url,
-      role: "user",
+      role: "employee",
     };
     const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
