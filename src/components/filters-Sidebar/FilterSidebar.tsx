@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiSearch, FiMapPin, FiClock, FiBookmark, FiFilter } from 'react-icons/fi';
 const FilterSidebar = () => {
     
     return (
-          <div className="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-sm">
+          <div className="w-full bg-white p-6 rounded-lg shadow-sm">
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-4 flex items-center">
                 <FiFilter className="mr-2" /> Filters
