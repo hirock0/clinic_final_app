@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 
-
 const Nav = () => {
   const pathname = usePathname();
   const [menuFlag, setMenuflag] = useState(false);
