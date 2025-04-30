@@ -120,13 +120,15 @@ const Navbar = () => {
                 }}
                 className=" w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
-                <Image
-                  src={decodedUser?.image?.secure_url}
-                  alt="user"
-                  width={500}
-                  height={500}
-                  className=" object-cover w-full h-full"
-                />
+                {decodedUser?.image?.secure_url && (
+                  <Image
+                    src={decodedUser?.image?.secure_url}
+                    alt="user"
+                    width={500}
+                    height={500}
+                    className=" object-cover w-full h-full"
+                  />
+                )}
               </div>
             )}
           </div>
