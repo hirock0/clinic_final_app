@@ -34,6 +34,7 @@ export default function LoginPage() {
         "/pages/api/authentication/login",
         data
       );
+   
       if (response?.data?.success) {
         setUser(response?.data?.token);
         swal({

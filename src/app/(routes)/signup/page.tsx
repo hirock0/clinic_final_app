@@ -5,6 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useState } from "react";
 import useUserStore from "@/utils/zustand/store/useUserStore";
+import { useRouter } from "next/navigation";
 import {
   FaUser,
   FaEnvelope,
@@ -24,6 +25,7 @@ type FormData = {
 
 export default function SignupPage() {
   const { user, setUser, clearUser } = useUserStore();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -80,6 +82,7 @@ export default function SignupPage() {
         reset();
         setPreviewImage(null);
         setUser(response?.data?.token);
+        router.push("/dashboard");
       } else {
         swal({
           title: response?.data?.message,
