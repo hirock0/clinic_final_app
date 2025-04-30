@@ -8,9 +8,12 @@ import useUserStore from "@/utils/zustand/store/useUserStore";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
+  const pathname = usePathname();
   const router = useRouter();
-  const { user, clearUser, setDecodedUser, decodedUser } = useUserStore();
+  const { clearUser, setDecodedUser, decodedUser, employee, user } =
+    useUserStore();
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const logoutHandler = async () => {
@@ -22,7 +25,11 @@ const Navbar = () => {
           title: response?.data?.message,
           icon: "warning",
         });
-        router.push("/login");
+        if (pathname === "/user/dashboard") {
+          router.push("/user/login");
+        } else {
+          router.push("/login");
+        }
       } else {
         swal({
           title: "Something goes wrong!",
@@ -109,10 +116,29 @@ const Navbar = () => {
             <IoMdNotifications size={25} />
           </button>
           <div className="">
-            {!user ? (
-              <Link href={"/login"}>
-                <button>Login</button>
-              </Link>
+            {!employee ? (
+              user ? (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation(), setProfileMenu(!profileMenu);
+                  }}
+                  className=" w-10 h-10 cursor-pointer rounded-full overflow-hidden"
+                >
+                  {decodedUser?.image?.secure_url && (
+                    <Image
+                      src={decodedUser?.image?.secure_url}
+                      alt="user"
+                      width={500}
+                      height={500}
+                      className=" object-cover w-full h-full"
+                    />
+                  )}
+                </div>
+              ) : (
+                <Link href={"/login"}>
+                  <button>Login</button>
+                </Link>
+              )
             ) : (
               <div
                 onClick={(e) => {

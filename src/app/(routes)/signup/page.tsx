@@ -24,7 +24,7 @@ type FormData = {
 };
 
 export default function SignupPage() {
-  const { user, setUser, clearUser } = useUserStore();
+  const { setEmployee } = useUserStore();
   const router = useRouter();
   const {
     register,
@@ -81,7 +81,7 @@ export default function SignupPage() {
         });
         reset();
         setPreviewImage(null);
-        setUser(response?.data?.token);
+        setEmployee(response?.data?.token);
         router.push("/dashboard");
       } else {
         swal({
