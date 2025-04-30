@@ -3,12 +3,11 @@ import { DBConnection } from "@/lib/dbConnection/DBConnection";
 import { UploadToCloudinary } from "@/lib/cloudinary/Cloudinary";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
 export async function POST(request: NextRequest) {
   try {
+    const { name, email, password, image, terms } = await request.json();
     const client = await DBConnection();
     const userDB = client.db("AdminDB").collection("loggedUsers");
-    const { name, email, password, image } = await request.json();
     const existingUser = await userDB.findOne({ email: email });
     if (existingUser) {
       return NextResponse.json({
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     const uploadResult = await UploadToCloudinary(
       image,
-      "UnitatedCareLinks/AuthUser/images"
+      "UnitatedCareLinks/Users/images"
     );
 
     if (!uploadResult?.secure_url || !uploadResult?.public_id) {
@@ -34,11 +33,12 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       password: hashedPassword,
-      role: "employee",
+      role: "user",
       image: {
         secure_url: uploadResult.secure_url,
         public_id: uploadResult.public_id,
       },
+      terms,
       createdAt: new Date(),
     };
 
@@ -47,19 +47,19 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       image: uploadResult.secure_url,
-      role: "employee",
+      role: "user",
     };
-    const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
+    const userToken = jwt.sign(tokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
     const response = NextResponse.json({
       message: "Signup successfully",
       success: true,
-      token: token,
+      token: userToken,
     });
 
-    response.cookies.set("token", token, {
+    response.cookies.set("userToken", userToken, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,

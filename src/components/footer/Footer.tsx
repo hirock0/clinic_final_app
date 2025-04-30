@@ -9,8 +9,11 @@ const Footer = () => {
       className={`
              ${
                (pathname.startsWith("/dashboard") ||
+                 pathname.startsWith("/admin") ||
                  pathname === "/signup" ||
-                 pathname === "/login") &&
+                 pathname === "/login" ||
+                 pathname.startsWith("/user") ||
+                 pathname.startsWith("/awaiting")) &&
                "hidden"
              }
         bg-primary-color border-t-1 border-gray-500`}

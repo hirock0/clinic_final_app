@@ -12,6 +12,8 @@ interface User {
 interface UserState {
   user: User | null;
   decodedUser: any;
+  employee: any;
+  setEmployee: (employeeData: any) => void;
   setDecodedUser: (userData: User) => void;
   setUser: (userData: User) => void;
   clearUser: () => void;
@@ -22,9 +24,11 @@ const useUserStore = create<UserState>()(
     (set) => ({
       decodedUser: null,
       setDecodedUser: (userData) => set({ decodedUser: userData }),
+      employee: null,
+      setEmployee: (employeeData) => set({ employee: employeeData }),
       user: null,
       setUser: (userData) => set({ user: userData }),
-      clearUser: () => set({ user: null, decodedUser: null }),
+      clearUser: () => set({ user: null, decodedUser: null, employee: null }),
     }),
     {
       name: "token",
