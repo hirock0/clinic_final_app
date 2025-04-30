@@ -7,7 +7,7 @@ import { FaSpinner } from "react-icons/fa";
 
 const ReqEmployees = ({ item }: { item: string | object | any }) => {
   const [loading, setLoading] = useState(false);
-
+  const [isApproved, setIsApproved] = useState(item?.role);
   const approveUser = async () => {
     setLoading(true);
     try {
@@ -24,6 +24,7 @@ const ReqEmployees = ({ item }: { item: string | object | any }) => {
           title: response?.data?.message,
           icon: "success",
         });
+        setIsApproved("approvedEmployee");
       } else {
         swal({
           title: response?.data?.message,
@@ -45,26 +46,19 @@ const ReqEmployees = ({ item }: { item: string | object | any }) => {
       <td className="p-2 border">{item?.name}</td>
       <td className="p-2 border">{item?.email}</td>
       <td className="p-2 border">
-        {item?.role === "employee" ? "Pending" : "Approved"}
+        {isApproved === "employee" ? "Pending" : "Approved"}
       </td>
+
       <td className="p-2 border">
-        {!item.isApproved ? (
+        {
           <button
             onClick={approveUser}
-            className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 flex items-center gap-2"
+            className="bg-green-500 text-white w-32 justify-center h-12 px-3 py-1 rounded hover:bg-green-600 flex items-center gap-2"
             disabled={loading}
           >
-            {loading ? (
-              <>
-                <FaSpinner className="animate-spin" /> Approving...
-              </>
-            ) : (
-              "Approve"
-            )}
+            {loading ? <FaSpinner className="animate-spin" /> : "Approved"}
           </button>
-        ) : (
-          <span className="text-gray-500">—</span>
-        )}
+        }
       </td>
     </tr>
   );
