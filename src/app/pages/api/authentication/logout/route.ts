@@ -7,6 +7,7 @@ export async function GET() {
       success: true,
     });
     response.cookies.delete("token");
+    response.cookies.delete("userToken");
     return response;
   } catch (error: any) {
     return NextResponse.json({
