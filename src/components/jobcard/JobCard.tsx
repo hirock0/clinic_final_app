@@ -1,6 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { FiCalendar, FiClock, FiUsers } from 'react-icons/fi';
+import ApplyForm from '../applyform/ApplyForm';
 
 
 
@@ -14,11 +15,15 @@ interface HealthcareJob {
     shiftsNeeded: string[];
     numberOfPositions: string;
     startDate: string;
+    position: string; // Added position property
     otherStaff?: string;
   }
   
 
 const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
+
+
+    const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
 
     // const [savedJobs, setSavedJobs] = useState<number[]>([]);
     // const [searchQuery, setSearchQuery] = useState('');
@@ -109,12 +114,23 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
               <button className="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
                 View Details
               </button>
-              <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+              <button 
+              onClick={() => setSelectedJob(job)}
+
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
                 Apply Now
               </button>
             </div>
           </div>
         ))}
+
+        {/* Render ApplyForm when a job is selected */}
+      {selectedJob && (
+        <ApplyForm 
+          job={selectedJob} 
+          onClose={() => setSelectedJob(null)} 
+        />
+      )}
       </div>
     );
 };
