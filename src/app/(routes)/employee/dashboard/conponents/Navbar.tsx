@@ -6,30 +6,22 @@ import { LuMenu } from "react-icons/lu";
 import axios from "axios";
 import useUserStore from "@/utils/zustand/store/useUserStore";
 import swal from "sweetalert";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchData } from "@/utils/redux/slices/slice";
 const Navbar = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { clearUser, setDecodedUser, decodedUser, employee, user } =
-    useUserStore();
+  const dispatch = useDispatch();
+  const employeeData = useSelector((state: any) => state?.slices?.employee);
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const logoutHandler = async () => {
     try {
-      const response = await axios.get("/pages/api/authentication/logout");
+      const response = await axios.get("/pages/api/employee/logout");
       if (response?.data?.success) {
-        clearUser();
         swal({
           title: response?.data?.message,
-          icon: "warning",
+          icon: "success",
         });
-        if (pathname === "/user/dashboard") {
-          router.push("/user/login");
-        } else {
-          router.push("/login");
-        }
       } else {
         swal({
           title: "Something goes wrong!",
@@ -42,21 +34,6 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const userHandler = async () => {
-      try {
-        const response = await axios.get(
-          "/pages/api/authentication/decodedToken"
-        );
-        const user = response?.data?.user;
-        setDecodedUser(user);
-      } catch (error: any) {
-        throw new Error(error?.message);
-      }
-    };
-    userHandler();
-  }, []);
-
-  useEffect(() => {
     const handler = () => {
       setMenuFlag(false);
     };
@@ -64,6 +41,10 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("click", handler);
     };
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchData());
   }, []);
 
   return (
@@ -116,46 +97,27 @@ const Navbar = () => {
             <IoMdNotifications size={25} />
           </button>
           <div className="">
-            {!employee ? (
-              user ? (
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation(), setProfileMenu(!profileMenu);
-                  }}
-                  className=" w-10 h-10 cursor-pointer rounded-full overflow-hidden"
-                >
-                  {decodedUser?.image?.secure_url && (
-                    <Image
-                      src={decodedUser?.image?.secure_url}
-                      alt="user"
-                      width={500}
-                      height={500}
-                      className=" object-cover w-full h-full"
-                    />
-                  )}
-                </div>
-              ) : (
-                <Link href={"/login"}>
-                  <button>Login</button>
-                </Link>
-              )
+            {!employeeData ? (
+              <Link href={"/login"}>
+                <button>Login</button>
+              </Link>
             ) : (
-              <div
+              <button
                 onClick={(e) => {
                   e.stopPropagation(), setProfileMenu(!profileMenu);
                 }}
                 className=" w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
-                {decodedUser?.image?.secure_url && (
+                {employeeData?.image?.secure_url && (
                   <Image
-                    src={decodedUser?.image?.secure_url}
+                    src={employeeData?.image?.secure_url}
                     alt="user"
                     width={500}
                     height={500}
                     className=" object-cover w-full h-full"
                   />
                 )}
-              </div>
+              </button>
             )}
           </div>
         </div>
