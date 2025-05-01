@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   try {
     const { name, email, password, image, terms } = await request.json();
     const client = await DBConnection();
-    const userDB = client.db("AdminDB").collection("loggedUsers");
+    const userDB = client.db("Users").collection("loggedUsers");
     const existingUser = await userDB.findOne({ email: email });
     if (existingUser) {
       return NextResponse.json({
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     const uploadResult = await UploadToCloudinary(
       image,
-      "UnitatedCareLinks/Users/images"
+      "UnitatedCareLinks/User/images"
     );
 
     if (!uploadResult?.secure_url || !uploadResult?.public_id) {
@@ -46,7 +46,10 @@ export async function POST(request: NextRequest) {
     const tokenData = {
       name: name,
       email: email,
-      image: uploadResult.secure_url,
+      image: {
+        secure_url: uploadResult.secure_url,
+        public_id: uploadResult.public_id,
+      },
       role: "user",
     };
     const userToken = jwt.sign(tokenData, process.env.JWT_SECRET!, {

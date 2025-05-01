@@ -4,33 +4,35 @@ import jwt from "jsonwebtoken";
 
 // Define JWT secret & cookie options
 const JWT_SECRET = process.env.JWT_SECRET!;
-const COOKIE_OPTIONS = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  path: "/",
-  sameSite: "lax",
-};
 
 export async function GET(req: NextRequest) {
   try {
-    const ReqToken = req.cookies.get("token")?.value;
+    const ReqToken = req.cookies.get("employeeToken")?.value;
     if (!ReqToken) {
-      throw new Error("Token not found");
+      return NextResponse.json({
+        message: "Token not found",
+        success: false,
+      });
     }
 
     const decoded: any = jwt.verify(ReqToken, JWT_SECRET);
     const email = decoded?.email;
     if (!email) {
-      throw new Error("Invalid token");
+      return NextResponse.json({
+        message: "Invalid token",
+        success: false,
+      });
     }
 
     // Connect to DB and find user
     const client = await DBConnection();
-    const DB = client.db("AdminDB").collection("loggedUsers");
-    const user = await DB.findOne({ email });
-
+    const DB = client.db("Employee").collection("users");
+    const user = await DB.findOne({ email: email });
     if (!user) {
-      throw new Error("User not found");
+      return NextResponse.json({
+        message: "user not found",
+        success: false,
+      });
     }
     const tokenData = {
       name: user?.name,
@@ -39,15 +41,15 @@ export async function GET(req: NextRequest) {
       role: user?.role,
     };
 
-    const token = jwt.sign(tokenData, JWT_SECRET!, { expiresIn: "7d" });
+    const employeeToken = jwt.sign(tokenData, JWT_SECRET!, { expiresIn: "7d" });
     const response = NextResponse.json({
       message: "Token Generated",
       success: true,
-      token: token,
+      employeeToken: employeeToken,
       role: user?.role,
     });
 
-    response.cookies.set("token", token, {
+    response.cookies.set("employeeToken", employeeToken, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,

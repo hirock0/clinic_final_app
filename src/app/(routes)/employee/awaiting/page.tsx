@@ -3,16 +3,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import useUserStore from "@/utils/zustand/store/useUserStore";
 export default function AwaitingApproval() {
   const router = useRouter();
-  const { user, setUser, clearUser } = useUserStore();
+
   useEffect(() => {
     const handler = async () => {
       try {
         const response =  await axios.get("/pages/api/admin/token_change");
-        setUser(response?.data?.token)
-        
+
+      
       } catch (error: any) {
         throw new Error(error?.message);
       }
