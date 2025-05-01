@@ -42,7 +42,7 @@ const JobsPage = () => {
       </div>
 
       {/* Job Cards */}
-      <div className="max-w-[1440px] mx-auto gap-6 py-12 md:py-20">
+      <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20">
       <JobCard jobs={jobs}/>
       </div>
     </section>

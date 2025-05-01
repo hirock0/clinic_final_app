@@ -4,7 +4,7 @@ import { FiFilter, FiX } from 'react-icons/fi';
 const FilterSidebar = () => {
 
     return (
-      <section className="max-w-[1440px] mx-auto gap-6 mt-8">
+      <section className="max-w-[1440px] w-11/12 mx-auto gap-6 mt-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 ">
         <h3 className="text-lg font-semibold flex items-center third-text-color">
           <FiFilter className="mr-2" /> Filter Jobs
