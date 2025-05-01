@@ -3,35 +3,38 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get("token")?.value;
+  const employeeToken = request.cookies.get("employeeToken")?.value;
   const userToken = request.cookies.get("userToken")?.value;
   const pathname = request.nextUrl.pathname;
   const publicPath = pathname === "/login" || pathname === "/signup";
   const userPublicPath =
     pathname === "/user/login" || pathname === "/user/register";
-  if (!token && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (!employeeToken && pathname.startsWith("/employee/dashboard")) {
+    return NextResponse.redirect(new URL("/employee/login", request.url));
   }
-  if (token) {
+  if (employeeToken) {
     const { payload } = await jwtVerify(
-      token,
+      employeeToken,
       new TextEncoder().encode(process.env.JWT_SECRET!)
     );
     const role = payload.role as string | undefined;
-    if (pathname.startsWith("/dashboard") && role === "employee") {
-      return NextResponse.redirect(new URL("/awaiting", request.url));
+    if (pathname.startsWith("/employee/dashboard") && role === "employee") {
+      return NextResponse.redirect(new URL("/employee/awaiting", request.url));
     }
 
-    if (pathname.startsWith("/awaiting") && role === "approvedEmployee") {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+    if (
+      pathname.startsWith("/employee/awaiting") &&
+      role === "approvedEmployee"
+    ) {
+      return NextResponse.redirect(new URL("/employee/dashboard", request.url));
     }
 
     if (publicPath && payload) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+      return NextResponse.redirect(new URL("/employee/dashboard", request.url));
     }
   }
-  if (!token && pathname === "/dashboard") {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (!employeeToken && pathname === "/employee/dashboard") {
+    return NextResponse.redirect(new URL("/employee/login", request.url));
   }
 
   if (userToken) {
@@ -52,7 +55,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard/:path*",
+    "/employee/:path*",
     "/awaiting",
     "/login",
     "/signup",

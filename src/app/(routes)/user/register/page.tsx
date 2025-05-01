@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 import useUserStore from "@/utils/zustand/store/useUserStore";
+
 type FormData = {
   name: string;
   email: string;
@@ -23,7 +24,6 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -31,6 +31,7 @@ export default function RegisterPage() {
   const [showRetypePassword, setShowRetypePassword] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     if (data.password !== data.retypePassword) {
@@ -43,6 +44,8 @@ export default function RegisterPage() {
       return;
     }
 
+    setIsLoading(true);
+
     const payload = {
       name: data.name,
       email: data.email,
@@ -52,22 +55,19 @@ export default function RegisterPage() {
     };
 
     try {
-      const response = await axios.post("/pages/api/user/register", payload); // ✅ Update the API path if needed
+      const response = await axios.post("/pages/api/user/register", payload);
       if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
+        swal({ title: response?.data?.message, icon: "success" });
         setUser(response?.data?.token);
         router.push("/user/dashboard");
       } else {
-        swal({
-          title: response?.data?.message,
-          icon: "warning",
-        });
+        swal({ title: response?.data?.message, icon: "warning" });
       }
     } catch (error: any) {
-      throw new Error(error?.message);
+      console.error(error);
+      swal({ title: "Something went wrong", icon: "error" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,14 +105,15 @@ export default function RegisterPage() {
           <input
             {...register("email", {
               required: "Email is required",
-              pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Invalid email",
+              },
             })}
             type="email"
             className="w-full p-2 border rounded"
           />
-          {errors.email && (
-            <p className="text-red-500">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
@@ -135,9 +136,7 @@ export default function RegisterPage() {
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
         </div>
 
         {/* Retype Password */}
@@ -180,9 +179,7 @@ export default function RegisterPage() {
               className="mt-2 w-24 h-24 rounded object-cover"
             />
           )}
-          {errors.image && (
-            <p className="text-red-500">{errors.image.message}</p>
-          )}
+          {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         </div>
 
         {/* Terms & Conditions */}
@@ -199,9 +196,10 @@ export default function RegisterPage() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          disabled={isLoading}
+          className={`w-full p-2 rounded text-white flex items-center justify-center gap-2 bg-primary`}
         >
-          Register
+          {isLoading ? <div className="loading loading-spinner"></div> : "Register"}
         </button>
       </form>
     </div>

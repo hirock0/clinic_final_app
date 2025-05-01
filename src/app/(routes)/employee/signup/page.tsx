@@ -24,7 +24,6 @@ type FormData = {
 };
 
 export default function SignupPage() {
-  const { setEmployee } = useUserStore();
   const router = useRouter();
   const {
     register,
@@ -34,14 +33,10 @@ export default function SignupPage() {
     watch,
     formState: { errors },
   } = useForm<FormData>();
-
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showReTypePassword, setShowReTypePassword] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-
-  const password = watch("password");
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -71,7 +66,7 @@ export default function SignupPage() {
     try {
       const { reTypePassword, ...submitData } = data; // Remove reTypePassword before sending
       const response = await axios.post(
-        "/pages/api/authentication/signup",
+        "/pages/api/employee/signup",
         submitData
       );
       if (response?.data?.success) {
@@ -81,8 +76,7 @@ export default function SignupPage() {
         });
         reset();
         setPreviewImage(null);
-        setEmployee(response?.data?.token);
-        router.push("/dashboard");
+        router.push("/employee/dashboard");
       } else {
         swal({
           title: response?.data?.message,

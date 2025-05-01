@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
-import {Poppins, Inter } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/nav/Nav";
 import Footer from "@/components/footer/Footer";
-
+import { ReduxProvider } from "@/utils/redux/reduxProvider";
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "United Care Links",
@@ -29,16 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme='light'>
-      <body
-        className={`${poppins.variable} ${inter.variable} antialiased`}
-      >
-        {/* nNabvar component  */}
-        <Nav />
-        {/* Main Component  */}
-        <main className="min-h-[calc(100vh-397px)]">{children}</main>
-        {/* Footer component  */}
-        <Footer />
+    <html lang="en" data-theme="light">
+      <body className={`${poppins.variable} ${inter.variable} antialiased`}>
+        <ReduxProvider>
+          {/* nNabvar component  */}
+          <Nav />
+          {/* Main Component  */}
+          <main className="min-h-[calc(100vh-397px)]">{children}</main>
+          {/* Footer component  */}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

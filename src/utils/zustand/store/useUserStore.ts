@@ -13,10 +13,12 @@ interface UserState {
   user: User | null;
   decodedUser: any;
   employee: any;
+  decodedEmployee: any;
   setEmployee: (employeeData: any) => void;
   setDecodedUser: (userData: User) => void;
   setUser: (userData: User) => void;
   clearUser: () => void;
+  clearEmployee: () => void;
 }
 
 const useUserStore = create<UserState>()(
@@ -28,7 +30,10 @@ const useUserStore = create<UserState>()(
       setEmployee: (employeeData) => set({ employee: employeeData }),
       user: null,
       setUser: (userData) => set({ user: userData }),
-      clearUser: () => set({ user: null, decodedUser: null, employee: null }),
+
+      clearUser: () => set({ user: null, decodedUser: null }),
+      decodedEmployee: null,
+      clearEmployee: () => set({ employee: null, decodedEmployee: null }),
     }),
     {
       name: "token",

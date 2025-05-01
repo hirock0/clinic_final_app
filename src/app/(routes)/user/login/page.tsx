@@ -9,7 +9,9 @@ import swal from "sweetalert";
 import useUserStore from "@/utils/zustand/store/useUserStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
+import { FaGoogle } from "react-icons/fa";
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -18,6 +20,7 @@ type LoginFormInputs = {
 export default function LoginPage() {
   const { setEmployee, setUser } = useUserStore();
   const router = useRouter();
+  const [gooleLoading, setGooleLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -57,12 +60,27 @@ export default function LoginPage() {
     }
   };
 
+  const googleLoginHandler = async () => {
+    setGooleLoading(true);
+    try {
+      await signIn("google", { callbackUrl: "/user/dashboard" });
+      setTimeout(() => {
+        setGooleLoading(false);
+      }, 1000);
+    } catch (error) {
+      setGooleLoading(false);
+      throw new Error(String(error));
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4">
+        
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md space-y-6"
+        className=" relative bg-white p-8 rounded-t-2xl shadow-lg w-full max-w-md space-y-6"
       >
+        <Link href={"/"} className=" absolute">Home</Link>
         <h1 className="text-3xl font-bold text-center text-blue-600">Login</h1>
 
         {/* Email Field */}
@@ -129,7 +147,8 @@ export default function LoginPage() {
             "Sign In"
           )}
         </button>
-
+      </form>
+      <div className=" bg-white p-8 rounded-b-2xl shadow-lg w-full max-w-md space-y-6">
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
           Don't have an account?{" "}
@@ -139,7 +158,13 @@ export default function LoginPage() {
             </span>
           </Link>
         </p>
-      </form>
+        <button
+          onClick={googleLoginHandler}
+          className="btn btn-outline btn-accent w-full flex items-center justify-center gap-2 mt-4"
+        >
+          <FaGoogle /> Sign in with Google
+        </button>
+      </div>
     </div>
   );
 }

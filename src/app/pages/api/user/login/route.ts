@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 export async function POST(request: NextRequest) {
   try {
     const client = await DBConnection();
-    const userDB = client.db("AdminDB").collection("loggedUsers");
+    const userDB = client.db("Users").collection("loggedUsers");
     const { email, password } = await request.json();
 
     const existingUser = await userDB.findOne({ email: email });

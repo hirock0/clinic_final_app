@@ -4,8 +4,8 @@ export async function GET() {
   try {
     const client = await DBConnection();
     const users = await client
-      .db("AdminDB")
-      .collection("loggedUsers")
+      .db("Employee")
+      .collection("users")
       .find()
       .sort({ createdAt: -1 })
       .toArray();

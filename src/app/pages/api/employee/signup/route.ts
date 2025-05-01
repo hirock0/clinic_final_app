@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export async function POST(request: NextRequest) {
   try {
     const client = await DBConnection();
-    const userDB = client.db("AdminDB").collection("loggedUsers");
+    const userDB = client.db("Employee").collection("users");
     const { name, email, password, image } = await request.json();
     const existingUser = await userDB.findOne({ email: email });
     if (existingUser) {
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const uploadResult = await UploadToCloudinary(
       image,
-      "UnitatedCareLinks/AuthUser/images"
+      "UnitatedCareLinks/Employee/images"
     );
 
     if (!uploadResult?.secure_url || !uploadResult?.public_id) {
@@ -43,23 +43,23 @@ export async function POST(request: NextRequest) {
     };
 
     await userDB.insertOne(newUser);
-    const tokenData = {
+    const employeeTokenData = {
       name: name,
       email: email,
       image: uploadResult.secure_url,
       role: "employee",
     };
-    const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
+    const employeeToken = jwt.sign(employeeTokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
     const response = NextResponse.json({
       message: "Signup successfully",
       success: true,
-      token: token,
+      employeeToken: employeeToken,
     });
 
-    response.cookies.set("token", token, {
+    response.cookies.set("employeeToken", employeeToken, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,

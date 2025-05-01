@@ -6,17 +6,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
 import swal from "sweetalert";
-import useUserStore from "@/utils/zustand/store/useUserStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
 type LoginFormInputs = {
   email: string;
   password: string;
 };
 
 export default function LoginPage() {
-  const { setEmployee } = useUserStore();
   const router = useRouter();
   const {
     register,
@@ -30,18 +27,13 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
     try {
-      const response = await axios.post(
-        "/pages/api/authentication/login",
-        data
-      );
-   
+      const response = await axios.post("/pages/api/employee/login", data);
       if (response?.data?.success) {
-        setEmployee(response?.data?.token);
         swal({
           title: response?.data?.message,
           icon: "success",
         });
-        router.push("/dashboard");
+        router.push("/employee/dashboard");
       } else {
         swal({
           title: response?.data?.message,
@@ -49,7 +41,6 @@ export default function LoginPage() {
         });
       }
     } catch (error: any) {
-      console.error("Login Error:", error);
       swal(
         "Error!",
         error.response?.data?.message || "Login failed. Please try again.",
@@ -136,7 +127,7 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
           Don't have an account?{" "}
-          <Link href={"/signup"}>
+          <Link href={"/employee/signup"}>
             <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
               Sign up
             </span>
