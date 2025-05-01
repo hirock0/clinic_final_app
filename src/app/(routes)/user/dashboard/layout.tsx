@@ -1,10 +1,28 @@
 import Link from "next/link";
-import Navbar from "../../employee/dashboard/conponents/Navbar";
-
+import DashboardNav from "../../../../components/dashboardNav/DashboardNav";
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const navInfo = [
+    {
+      title: "Find Job",
+      href: "/find_job",
+      icon: "",
+    },
+    {
+      title: "Company Application",
+      href: "/company_application",
+      icon: "",
+    },
+    {
+      title: "Company Reviews",
+      href: "/company_reviews",
+      icon: "",
+    },
+
+  ];
+
   return (
     <div>
-      <Navbar />
+      <DashboardNav navInfo={navInfo} flag={"user"} />
       <div className="  h-[calc(100vh-80px)] ">
         <div className=" h-full flex gap-5 max-w-[1440px]  mx-auto">
           <div className=" bg-white  shadow-lg px-10 ">
