@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import JobCard from "@/components/jobcard/JobCard";
 import axios from "axios";
+import FilterSidebar from "@/components/filters-Sidebar/FilterSidebar";
 
 interface HealthcareJob {
   id: number;
@@ -21,7 +22,6 @@ interface HealthcareJob {
 }
 
 const JobsPage = () => {
-
   const [jobs, setJobs] = useState<HealthcareJob[]>([]);
 
   // get all jobs
@@ -35,9 +35,16 @@ const JobsPage = () => {
 
 
   return (
-    <section>
+    <section className="">
+      {/* filter sidebar */}
+      <div className="second-bg-color py-4 md:py-8 ">
+      <FilterSidebar />
+      </div>
+
       {/* Job Cards */}
+      <div className="max-w-[1440px] mx-auto gap-6 py-12 md:py-20">
       <JobCard jobs={jobs}/>
+      </div>
     </section>
   );
 };
