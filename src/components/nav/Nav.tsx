@@ -168,7 +168,7 @@ const Nav = () => {
         {/* Action Buttons */}
         <div className="flex items-center gap-5">
           <Link href="/get-started">
-            <button className="uppercase px-5 py-2 rounded purple-color-btn text-white shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
+            <button className="uppercase px-5 py-2 rounded purple-color-btn second-text-color font-medium shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer ">
               Get Started
             </button>
           </Link>
