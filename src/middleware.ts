@@ -1,16 +1,84 @@
+// middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-export function middleware(request: NextRequest) {
-  const token = request.cookies.get("token")?.value;
-  const pathname = request.nextUrl.pathname;
-  if (pathname.startsWith("/dashboard") && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+import { jwtVerify } from "jose";
+
+export async function middleware(request: NextRequest) {
+  const employeeToken = request.cookies.get("employeeToken")?.value;
+  const userToken = request.cookies.get("userToken")?.value;
+  const { pathname, search } = request.nextUrl;
+
+  const employeePublicPath =
+    pathname === "/employee/login" || pathname === "/employee/signup";
+  const userPublicPath =
+    pathname === "/user/login" || pathname === "/user/register";
+
+  // Handle Employee Auth
+  if (pathname.startsWith("/employee")) {
+    if (!employeeToken && !employeePublicPath) {
+      return NextResponse.redirect(new URL("/employee/login", request.url));
+    }
+
+    if (employeeToken) {
+      const { payload } = await jwtVerify(
+        employeeToken,
+        new TextEncoder().encode(process.env.JWT_SECRET!)
+      );
+      const role = payload.role as string | undefined;
+
+      if (pathname.startsWith("/employee/dashboard") && role === "employee") {
+        return NextResponse.redirect(
+          new URL("/employee/awaiting", request.url)
+        );
+      }
+
+      if (
+        pathname.startsWith("/employee/awaiting") &&
+        role === "approvedEmployee"
+      ) {
+        return NextResponse.redirect(
+          new URL("/employee/dashboard", request.url)
+        );
+      }
+
+      if (employeePublicPath) {
+        return NextResponse.redirect(
+          new URL("/employee/dashboard", request.url)
+        );
+      }
+    }
   }
-  if (pathname.startsWith("/login") && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+
+  // Handle User Auth
+  if (pathname.startsWith("/user")) {
+    const loginUrl = new URL("/user/login", request.url);
+    loginUrl.searchParams.set("redirectTo", pathname + search);
+    if (!userToken && !userPublicPath) {
+      return NextResponse.redirect(loginUrl);
+    }
+
+    if (userToken && userPublicPath) {
+      try {
+        const { payload } = await jwtVerify(
+          userToken,
+          new TextEncoder().encode(process.env.JWT_SECRET!)
+        );
+
+        if (payload) {
+          const redirectUrl =
+            request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
+          return NextResponse.redirect(new URL(redirectUrl, request.url));
+        }
+      } catch (error) {
+        // Token verification failed, redirect to login again
+        return NextResponse.redirect(loginUrl);
+      }
+    }
   }
+
   return NextResponse.next();
 }
 
+// Match all routes under /employee and /user
 export const config = {
-  matcher: ["/dashboard", "/login"],
+  matcher: ["/employee/:path*", "/user/:path*"],
 };

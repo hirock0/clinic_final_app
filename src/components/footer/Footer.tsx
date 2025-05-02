@@ -8,16 +8,27 @@ const Footer = () => {
     <footer
       className={`
              ${
+<<<<<<< HEAD
                pathname === "/dashboard" ||
                (pathname === "/search-jobs" && "hidden")
+=======
+               (pathname.startsWith("/dashboard") ||
+                 pathname.startsWith("/admin") ||
+                 pathname.startsWith("/employee") ||
+                 pathname === "/signup" ||
+                 pathname === "/login" ||
+                 pathname.startsWith("/user") ||
+                 pathname.startsWith("/awaiting")) &&
+               "hidden"
+>>>>>>> 7e13dddba52a75c12519b3d2c20d231a164395e4
              }
         bg-primary-color border-t-1 border-gray-500`}
     >
       <div className="footer md:footer-horizontal max-w-[1400px] w-11/12 mx-auto py-12 md:py-20">
         <nav>
           <h6 className="second-text-color font-semibold text-lg">Services</h6>
-          <Link href={"#"} className="link link-hover">
-            Branding
+          <Link href={"/pricing"} className="link link-hover">
+            Pricing
           </Link>
           <Link href={"#"} className="link link-hover">
             Design

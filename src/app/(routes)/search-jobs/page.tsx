@@ -1,24 +1,61 @@
-'use client';
+"use client";
+import React, { useEffect, useState } from "react";
+import JobCard from "@/components/jobcard/JobCard";
+import axios from "axios";
+import FilterSidebar from "@/components/filters-Sidebar/FilterSidebar";
+import Loading from "@/components/loading/Loading";
 
-import React from 'react';
-import FilterSidebar from '@/components/filters-Sidebar/FilterSidebar';
-import JobCard from '@/components/jobcard/JobCard';
+interface HealthcareJob {
+  id: number;
+  title: string;
+  description: string;
+  facilityName: string;
+  facilityType: string;
+  address: string;
+  state: string;
+  zipCode: string;
+  staffNeeded: string[];
+  shiftsNeeded: string[];
+  numberOfPositions: string;
+  startDate: string;
+  otherStaff?: string;
+  position: string; // Added the missing property
+}
 
 const JobsPage = () => {
-  return (
-    <section className=" ">
+  const [jobs, setJobs] = useState<HealthcareJob[]>([]);
+  const [loading, setLoading] = useState(true);
 
-      {/* Main Content */}
-      <main className="max-w-[1440px] mx-auto w-11/12 py-12 lg:py-20">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <FilterSidebar/>
-          <div>
-            {/* Job Cards */}
-            <JobCard/>
-          </div>
-        </div>
-      </main>
+  // get all jobs
+  useEffect(() => {
+      const getAllJobs = async () => {
+          setLoading(true);
+          try {
+            const res = await axios.get('/pages/api/jobs');
+            setJobs(res?.data?.data);
+            setLoading(false);
+          }
+          catch (error) {
+            console.error("Error fetching jobs:", error);
+            setLoading(false);
+          }
+      }
+      getAllJobs();
+  },[])
+
+
+  return (
+    <section className="">
+      {/* filter sidebar */}
+      <div className="second-bg-color py-4 md:py-8 ">
+      <FilterSidebar />
+      </div>
+
+      {/* Job Cards */}
+      <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20 ">
+      {loading ? <Loading style="flex items-center justify-center"/> : <JobCard jobs={jobs}/>}
+      
+      </div>
     </section>
   );
 };

@@ -1,102 +1,103 @@
-import React, { useState } from 'react';
-import { FiSearch, FiMapPin, FiClock, FiBookmark, FiFilter } from 'react-icons/fi';
+import React from 'react';
+import { FiFilter, FiX } from 'react-icons/fi';
+
 const FilterSidebar = () => {
-    
+
     return (
-          <div className="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-sm">
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold mb-4 flex items-center">
-                <FiFilter className="mr-2" /> Filters
-              </h2>
-              
-              {/* Search */}
-              <div className="relative mb-4">
-                <FiSearch className="absolute left-3 top-3 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search jobs..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                //   value={searchQuery}
-                //   onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
+      <section className="max-w-[1440px] w-11/12 mx-auto gap-6 mt-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 ">
+        <h3 className="text-lg font-semibold flex items-center third-text-color">
+          <FiFilter className="mr-2" /> Filter Jobs
+        </h3>
+        <button 
+          className="text-sm text-red-500 hover:text-red-700 flex items-center cursor-pointer main-bg-color px-4 py-2 rounded-full "
+        >
+          <FiX className="mr-1" /> Reset All
+        </button>
+      </div>
 
-              {/* Location Filter */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <FiMapPin className="mr-2" /> Location
-                </label>
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                //   value={filters.location}
-                //   onChange={(e) => setFilters({...filters, location: e.target.value})}
-                >
-                  <option value="">All Locations</option>
-                  <option value="New York">New York</option>
-                  <option value="Remote">Remote</option>
-                  <option value="Manhattan">Manhattan</option>
-                  <option value="Brooklyn">Brooklyn</option>
-                </select>
-              </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        {/* Facility Type Filter */}
+        <div>
+          <label className="block text-sm font-medium third-text-color mb-1">Facility Type</label>
+          <select
 
-              {/* Job Type Filter */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <FiClock className="mr-2" /> Job Type
-                </label>
-                <select
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                //   value={filters.jobType}
-                //   onChange={(e) => setFilters({...filters, jobType: e.target.value})}
-                >
-                  <option value="">All Types</option>
-                  <option value="Full-time">Full-time</option>
-                  <option value="Part-time">Part-time</option>
-                  <option value="Contract">Contract</option>
-                  <option value="Remote">Remote</option>
-                </select>
-              </div>
+            className="w-full px-3 py-2 border border-gray-300 main-bg-color rounded-md"
+          >
+            <option value="">All Types</option>
+          <option key='one1' value='Hospital'>Hospital</option>
+          <option key='one2' value='Hospital'>Hospital</option>
+          <option key='one3' value='Hospital'>Hospital</option>
+      
+          </select>
+        </div>
 
-              {/* Remote Only */}
-              <div className="flex items-center mb-4">
-                <input
-                  type="checkbox"
-                  id="remoteOnly"
-                //   checked={filters.remoteOnly}
-                //   onChange={(e) => setFilters({...filters, remoteOnly: e.target.checked})}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remoteOnly" className="ml-2 block text-sm text-gray-700">
-                  Remote Only
-                </label>
-              </div>
+        {/* Position Filter */}
+        <div>
+          <label className="block text-sm font-medium third-text-color mb-1">Position</label>
+          <select
+ 
+            className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
+          >
+            <option value="">All Positions</option>
+              <option key='one4' value='Nurse'>Nurse</option>
+              <option key='one5' value='Nurse'>Nurse</option>
+              <option key='one6' value='Nurse'>Nurse</option>
 
-              {/* Reset Filters */}
-              <button
-                // onClick={() => {
-                //   setSearchQuery('');
-                //   setFilters({
-                //     location: '',
-                //     jobType: '',
-                //     experienceLevel: '',
-                //     remoteOnly: false,
-                //     salaryRange: ''
-                //   });
-                // }}
-                className="text-sm text-blue-600 hover:text-blue-800"
-              >
-                Reset all filters
-              </button>
-            </div>
+          </select>
+        </div>
 
-            {/* Saved Jobs Section */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4 flex items-center">
-                <FiBookmark className="mr-2" /> Saved Jobs
-              </h2>
-              <p className="text-sm text-gray-500">You haven&apos;t saved any jobs yet.</p>
-            </div>
+        {/* Location Filter */}
+        <div>
+          <label className="block text-sm font-medium third-text-color mb-1 ">Location</label>
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
+          >
+            <option value="">All Locations</option>
+              <option key='one7' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+              <option key='one8' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+              <option key='one9' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+          </select>
+        </div>
+
+        {/* Shift Filter */}
+        <div>
+          <label className="block text-sm font-medium third-text-color mb-1">Shift</label>
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
+          >
+            <option value="">All Shifts</option>
+              <option key='Day1' value='Day'>Day</option>
+              <option key='Day2' value='Day'>Night</option>
+              <option key='Day3' value='Day'>Fexible</option>
+          
+          </select>
+        </div>
+
+        {/* Start Date Filter */}
+        <div>
+          <label className="block text-sm font-medium third-text-color mb-1">Start After</label>
+          <input
+            type="date"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
+          />
+        </div>
+
+        {/* Remote Only Toggle */}
+        {/* <div className="flex items-end">
+          <div className="flex items-center h-[42px]">
+            <input
+              type="checkbox"
+              id="remoteOnly"
+              className="h-4 w-4 border-gray-300 rounded"
+            />
+            <label htmlFor="remoteOnly" className="ml-2 block text-sm third-text-color">
+              Remote Only
+            </label>
           </div>
+        </div> */}
+      </div>
+    </section>
     );
 };
 
