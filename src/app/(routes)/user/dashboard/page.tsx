@@ -22,15 +22,13 @@ const DashboardPage = () => {
   const allAppliedJobs = useSelector(
     (state: any) => state?.slices?.appliedJobs
   );
-  console.log(allAppliedJobs);
-
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
   return (
     <div className=" flex flex-col gap-5">
       <div className=" grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
-        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl hover:scale-105">
+        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105">
           <h1 className=" tracking-tight">Total I have applied</h1>
           <div className="">
             {!allAppliedJobs ? (
@@ -40,7 +38,7 @@ const DashboardPage = () => {
             )}
           </div>
         </div>
-        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl hover:scale-105">
+        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105">
           <h1 className=" tracking-tight">Total I have applied</h1>
           <div className="">
             {!allAppliedJobs ? (
@@ -50,7 +48,7 @@ const DashboardPage = () => {
             )}
           </div>
         </div>
-        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl hover:scale-105">
+        <div className=" text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105">
           <h1 className=" tracking-tight">Total I have applied</h1>
           <div className="">
             {!allAppliedJobs ? (

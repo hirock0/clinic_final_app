@@ -10,6 +10,7 @@ const Footer = () => {
              ${
                (pathname.startsWith("/dashboard") ||
                  pathname.startsWith("/admin") ||
+                 pathname.startsWith("/employee") ||
                  pathname === "/signup" ||
                  pathname === "/login" ||
                  pathname.startsWith("/user") ||
