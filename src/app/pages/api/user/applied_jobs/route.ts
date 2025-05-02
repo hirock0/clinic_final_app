@@ -7,11 +7,13 @@ export async function POST(request: NextRequest) {
     const jobsDB = client.db("Applied").collection("jobs");
     const findJob = await jobsDB.findOne({
       jobId: reqBody?.jobId,
+      userEmail: reqBody?.userEmail,
     });
+  
     if (findJob) {
       return NextResponse.json({
         message: "You have already applied",
-        success: true,
+        success: false,
       });
     } else {
       const savedJod = await jobsDB.insertOne(reqBody);
