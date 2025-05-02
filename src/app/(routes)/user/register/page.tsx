@@ -64,8 +64,7 @@ export default function RegisterPage() {
         swal({ title: response?.data?.message, icon: "warning" });
       }
     } catch (error: any) {
-      console.error(error);
-      swal({ title: "Something went wrong", icon: "error" });
+      throw new Error(error.message)
     } finally {
       setIsLoading(false);
     }

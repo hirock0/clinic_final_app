@@ -1,50 +1,38 @@
 import Link from "next/link";
-import DashboardNav from "../../../../components/dashboardNav/DashboardNav";
+import DashboardNav from "@/components/dashboardNav/DashboardNav";
+import { FaTachometerAlt, FaCog } from "react-icons/fa";
+import { Montserrat } from "next/font/google";
+import { employeeSideNavLink } from "@/components/allNavLinks/AllNavLinks";
+import DashboardSideBar from "@/components/dashboardSideBar/DashboardSideBar";
+const montserrat = Montserrat({
+  weight: ["400", "400"],
+  subsets: ["latin"],
+});
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const navInfo = [
-    {
-      title: "Find Job",
-      href: "/employee/find_job",
-      icon: "",
-    },
-    {
-      title: "Company Application",
-      href: "/employee/company_application",
-      icon: "",
-    },
-    {
-      title: "Employee",
-      href: "/employee/company_reviews",
-      icon: "",
-    },
+  const navLinks = [
+    { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
+    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
+
   return (
-    <div>
-      <DashboardNav navInfo={navInfo} flag={"employee"} />
-      <div className="  h-[calc(100vh-80px)] ">
-        <div className=" h-full flex gap-5 max-w-[1440px]  mx-auto">
-          <div className=" bg-white  shadow-lg px-10 ">
-            <ul className=" text-nowrap flex flex-col gap-10">
-              <Link href={"/employee/dashboard"}>
-                <li>Dashboard</li>
-              </Link>
-              <Link href={"/employee/dashboard/jobs"}>
-                <li>Recent Jobs</li>
-              </Link>
-              <Link href={"/employee/dashboard/jobs"}>
-                <li>All Jobs</li>
-              </Link>
-              <Link href={"/employee/dashboard/jobs"}>
-                <li>Approved Jobs</li>
-              </Link>
-            </ul>
+    <div className={` ${montserrat.className} min-h-screen bg-gray-50`}>
+      {/* Top Nav */}
+      <DashboardNav navLinks={navLinks} flag="employee" />
+
+      {/* Main Layout */}
+      <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">
+        {/* Sidebar */}
+        <aside className="w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400/40 via-yellow-300/30 to-white shadow-md p-6 hidden md:block">
+          <DashboardSideBar navLinks={employeeSideNavLink} />
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 bg-gray-100  ">
+          <div className="bg-white overflow-y-scroll shadow p-5 h-full">
+            {children}
           </div>
-          <div className="bg-slate-100 px-5 pt-5 w-full">
-            <div className=" bg-white h-full p-2 rounded-t-lg shadow-lg overflow-y-scroll ">
-              {children}
-            </div>
-          </div>
-        </div>
+        </main>
       </div>
     </div>
   );
