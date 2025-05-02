@@ -126,12 +126,8 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
-          Don't have an account?{" "}
-<<<<<<< HEAD:src/app/(routes)/login/page.tsx
-          <Link href={"/signup"}>
-=======
+          Don't have an account?
           <Link href={"/employee/signup"}>
->>>>>>> 7e13dddba52a75c12519b3d2c20d231a164395e4:src/app/(routes)/employee/login/page.tsx
             <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
               Sign up
             </span>

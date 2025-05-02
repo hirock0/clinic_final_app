@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
 import ProfileSidebar from "../profileSideBar/ProfileSidebar";
-
 const Nav = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state?.slices?.user);
