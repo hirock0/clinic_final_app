@@ -5,7 +5,7 @@ import { jwtVerify } from "jose";
 export async function middleware(request: NextRequest) {
   const employeeToken = request.cookies.get("employeeToken")?.value;
   const userToken = request.cookies.get("userToken")?.value;
-  const pathname = request.nextUrl.pathname;
+  const { pathname, search } = request.nextUrl;
 
   const employeePublicPath =
     pathname === "/employee/login" || pathname === "/employee/signup";
@@ -50,18 +50,27 @@ export async function middleware(request: NextRequest) {
 
   // Handle User Auth
   if (pathname.startsWith("/user")) {
+    const loginUrl = new URL("/user/login", request.url);
+    loginUrl.searchParams.set("redirectTo", pathname + search);
     if (!userToken && !userPublicPath) {
-      return NextResponse.redirect(new URL("/user/login", request.url));
+      return NextResponse.redirect(loginUrl);
     }
 
-    if (userToken) {
-      const { payload } = await jwtVerify(
-        userToken,
-        new TextEncoder().encode(process.env.JWT_SECRET!)
-      );
+    if (userToken && userPublicPath) {
+      try {
+        const { payload } = await jwtVerify(
+          userToken,
+          new TextEncoder().encode(process.env.JWT_SECRET!)
+        );
 
-      if (userPublicPath && payload) {
-        return NextResponse.redirect(new URL("/user/dashboard", request.url));
+        if (payload) {
+          const redirectUrl =
+            request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
+          return NextResponse.redirect(new URL(redirectUrl, request.url));
+        }
+      } catch (error) {
+        // Token verification failed, redirect to login again
+        return NextResponse.redirect(loginUrl);
       }
     }
   }
@@ -71,8 +80,5 @@ export async function middleware(request: NextRequest) {
 
 // Match all routes under /employee and /user
 export const config = {
-  matcher: [
-    "/employee/:path*",
-    "/user/:path*",
-  ],
+  matcher: ["/employee/:path*", "/user/:path*"],
 };
