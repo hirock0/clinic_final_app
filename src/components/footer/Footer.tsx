@@ -6,7 +6,6 @@ const Footer = () => {
   const pathname = usePathname();
 
   if (
-    pathname === "/search-jobs" ||
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/admin") ||
     pathname.startsWith("/employee") ||
