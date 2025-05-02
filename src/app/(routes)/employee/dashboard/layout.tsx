@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={` ${montserrat.className} min-h-screen bg-gray-50`}>
       {/* Top Nav */}
-      <DashboardNav navLinks={navLinks} flag="user" />
+      <DashboardNav navLinks={navLinks} flag="employee" />
 
       {/* Main Layout */}
       <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">

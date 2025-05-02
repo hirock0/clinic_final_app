@@ -77,8 +77,8 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             <IoMdNotifications size={25} />
           </button>
           <div>
-            {(flag === "user" && userData?.image?.secure_url) ||
-            (flag === "employee" && employeeData?.image?.secure_url) ? (
+            {
+            (flag === "user" && userData?.image?.secure_url) || (flag === "employee" && employeeData?.image?.secure_url) ? (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -88,9 +88,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
               >
                 <Image
                   src={
-                    flag === "user"
-                      ? userData.image.secure_url
-                      : employeeData.image.secure_url
+                    flag === "user" ? userData.image.secure_url: employeeData.image.secure_url
                   }
                   alt="user"
                   width={500}

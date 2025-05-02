@@ -22,25 +22,40 @@ export default function ProfileSidebar({
   const userData = useSelector((state: any) => state?.slices?.user);
   const logoutHandler = async () => {
     try {
-      const endpoint =
-        flag === "user"
-          ? "/pages/api/user/logout"
-          : "/pages/api/employee/logout";
-      const response = await axios.get(endpoint);
-      if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
-        await signOut();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+      if (flag === "user") {
+        const response = await axios.get("/pages/api/user/logout");
+        if (response?.data?.success) {
+          swal({
+            title: response?.data?.message,
+            icon: "success",
+          });
+          await signOut();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          swal({
+            title: "Something went wrong!",
+            icon: "warning",
+          });
+        }
       } else {
-        swal({
-          title: "Something went wrong!",
-          icon: "warning",
-        });
+        const response = await axios.get("/pages/api/employee/logout");
+        if (response?.data?.success) {
+          swal({
+            title: response?.data?.message,
+            icon: "success",
+          });
+          await signOut();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          swal({
+            title: "Something went wrong!",
+            icon: "warning",
+          });
+        }
       }
     } catch (error: any) {
       throw new Error(String(error.message));
