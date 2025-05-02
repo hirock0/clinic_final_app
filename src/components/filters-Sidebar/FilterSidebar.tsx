@@ -25,9 +25,9 @@ const FilterSidebar = () => {
             className="w-full px-3 py-2 border border-gray-300 main-bg-color rounded-md"
           >
             <option value="">All Types</option>
-          <option key='one' value='Hospital'>Hospital</option>
-          <option key='one' value='Hospital'>Hospital</option>
-          <option key='one' value='Hospital'>Hospital</option>
+          <option key='one1' value='Hospital'>Hospital</option>
+          <option key='one2' value='Hospital'>Hospital</option>
+          <option key='one3' value='Hospital'>Hospital</option>
       
           </select>
         </div>
@@ -40,9 +40,9 @@ const FilterSidebar = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
           >
             <option value="">All Positions</option>
-              <option key='one' value='Nurse'>Nurse</option>
-              <option key='one' value='Nurse'>Nurse</option>
-              <option key='one' value='Nurse'>Nurse</option>
+              <option key='one4' value='Nurse'>Nurse</option>
+              <option key='one5' value='Nurse'>Nurse</option>
+              <option key='one6' value='Nurse'>Nurse</option>
 
           </select>
         </div>
@@ -54,9 +54,9 @@ const FilterSidebar = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
           >
             <option value="">All Locations</option>
-              <option key='one' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
-              <option key='one' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
-              <option key='one' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+              <option key='one7' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+              <option key='one8' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
+              <option key='one9' value='Dhaka, Bangladesh'>Dhaka, Bangladesh</option>
           </select>
         </div>
 
@@ -67,9 +67,9 @@ const FilterSidebar = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color"
           >
             <option value="">All Shifts</option>
-              <option key='Day' value='Day'>Day</option>
-              <option key='Day' value='Day'>Night</option>
-              <option key='Day' value='Day'>Fexible</option>
+              <option key='Day1' value='Day'>Day</option>
+              <option key='Day2' value='Day'>Night</option>
+              <option key='Day3' value='Day'>Fexible</option>
           
           </select>
         </div>

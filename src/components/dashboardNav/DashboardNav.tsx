@@ -1,50 +1,19 @@
 // components/Navbar.tsx
 "use client";
-
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoMdNotifications } from "react-icons/io";
 import { LuMenu } from "react-icons/lu";
-import axios from "axios";
-import swal from "sweetalert";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
-import { signOut } from "next-auth/react";
+import ProfileSidebar from "../profileSideBar/ProfileSidebar";
 const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
   const dispatch = useDispatch();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
-
-  const logoutHandler = async () => {
-    try {
-      const endpoint =
-        flag === "user"
-          ? "/pages/api/user/logout"
-          : "/pages/api/employee/logout";
-      const response = await axios.get(endpoint);
-      if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
-        await signOut();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      } else {
-        swal({
-          title: "Something went wrong!",
-          icon: "warning",
-        });
-      }
-    } catch (error: any) {
-      throw new Error(String(error.message));
-    }
-  };
-
   useEffect(() => {
     const handler = () => {
       setMenuFlag(false);
@@ -130,13 +99,8 @@ const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
         </div>
       </div>
       {/* profile_popup */}
-      {profileMenu && (
-        <div className="fixed right-0 top-20 bg-red-300">
-          <button onClick={logoutHandler} className="cursor-pointer">
-            Log Out
-          </button>
-        </div>
-      )}
+
+      {profileMenu && <ProfileSidebar flag={flag} />}
       {/* profile_popup_end */}
     </nav>
   );

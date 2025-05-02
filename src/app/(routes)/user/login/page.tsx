@@ -6,11 +6,10 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
 import swal from "sweetalert";
-import useUserStore from "@/utils/zustand/store/useUserStore";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-
+import { usePathname } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 type LoginFormInputs = {
   email: string;
@@ -18,7 +17,8 @@ type LoginFormInputs = {
 };
 
 export default function LoginPage() {
-  const { setEmployee, setUser } = useUserStore();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/user/dashboard";
   const router = useRouter();
   const [gooleLoading, setGooleLoading] = useState<boolean>(false);
   const {
@@ -26,22 +26,21 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // 👈 for password toggle
-
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
     try {
       const response = await axios.post("/pages/api/user/login", data);
-
       if (response?.data?.success) {
-        setUser(response?.data?.token);
         swal({
           title: response?.data?.message,
           icon: "success",
         });
-        router.push("/user/dashboard");
+        router.push(redirectTo);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         swal({
           title: response?.data?.message,
@@ -59,11 +58,10 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
-
   const googleLoginHandler = async () => {
     setGooleLoading(true);
     try {
-      await signIn("google", { callbackUrl: "/user/dashboard" });
+      await signIn("google", { callbackUrl: redirectTo || "/user/dashboard" });
       setTimeout(() => {
         setGooleLoading(false);
       }, 1000);
@@ -72,15 +70,15 @@ export default function LoginPage() {
       throw new Error(String(error));
     }
   };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4">
-        
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" relative bg-white p-8 rounded-t-2xl shadow-lg w-full max-w-md space-y-6"
       >
-        <Link href={"/"} className=" absolute">Home</Link>
+        <Link href={"/"} className=" absolute">
+          Home
+        </Link>
         <h1 className="text-3xl font-bold text-center text-blue-600">Login</h1>
 
         {/* Email Field */}
