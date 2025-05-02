@@ -7,56 +7,41 @@ import { FaSortDown } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import axios from "axios";
-import { signOut } from "next-auth/react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
-import swal from "sweetalert";
+import { FaTachometerAlt, FaCog } from "react-icons/fa";
+import ProfileSidebar from "../profileSideBar/ProfileSidebar";
+
 const Nav = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state?.slices?.user);
-  const router = useRouter();
   const pathname = usePathname();
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [profileMenu, setProfileMenu] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+    dispatch(fetchData());
+  }, [dispatch]);
 
   useEffect(() => {
     const closeMenu = () => {
       setMenuOpen(false);
       setActiveSubMenu(null);
     };
+    const closeProfileMenu = () => {
+      setProfileMenu(false);
+    };
+
     window.addEventListener("click", closeMenu);
+    window.addEventListener("click", closeProfileMenu);
+
     return () => {
       window.removeEventListener("click", closeMenu);
+      window.removeEventListener("click", closeProfileMenu);
     };
   }, []);
-
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
-
-  const logoutHandler = async () => {
-    try {
-      const response = await axios.get("/pages/api/user/logout");
-
-      if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
-        await signOut();
-      } else {
-        swal({
-          title: "Something goes wrong!",
-          icon: "warning",
-        });
-      }
-    } catch (error: any) {
-      throw new Error(String(error.message));
-    }
-  };
 
   const navItems = [
     { title: "Home", href: "/" },
@@ -83,7 +68,13 @@ const Nav = () => {
     { title: "Contact", href: "/contact" },
   ];
 
-  // ✅ This return should come after all hooks are called
+  const navLinks = [
+    { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
+    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
+  ];
+
+  if (!hasMounted) return null;
+
   if (
     pathname?.startsWith("/employee/dashboard") ||
     pathname?.startsWith("/use")
@@ -93,7 +84,7 @@ const Nav = () => {
 
   return (
     <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
-      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between">
+      <div className="max-w-[1440px] relative w-11/12 mx-auto flex items-center justify-between">
         {/* Logo and Mobile Menu Button */}
         <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
@@ -105,7 +96,6 @@ const Nav = () => {
           >
             {menuOpen ? <IoClose size={35} /> : <MdMenu size={35} />}
           </button>
-
           <Image src="/UCL logo.png" alt="logo" width={100} height={50} />
         </div>
 
@@ -136,7 +126,6 @@ const Nav = () => {
                       <span className="max-lg:text-white">{item.title}</span>
                       <FaSortDown />
                     </div>
-
                     <div
                       className={`${
                         activeSubMenu === item.title ? "block" : "hidden"
@@ -168,7 +157,7 @@ const Nav = () => {
         {/* Action Buttons */}
         <div className="flex items-center gap-5">
           <Link href="/get-started">
-            <button className="uppercase px-5 py-2 rounded purple-color-btn second-text-color font-medium shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer ">
+            <button className="uppercase px-5 py-2 rounded purple-color-btn second-text-color font-medium shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
               Get Started
             </button>
           </Link>
@@ -199,16 +188,17 @@ const Nav = () => {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Profile Popup */}
-      {profileMenu && (
-        <div className="fixed right-0 top-20 bg-red-300">
-          <button onClick={logoutHandler} className="cursor-pointer">
-            Log Out
-          </button>
-        </div>
-      )}
+        {/* Profile Popup */}
+        {profileMenu && (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="absolute right-0 top-25"
+          >
+            <ProfileSidebar navLinks={navLinks} flag={"user"} />
+          </div>
+        )}
+      </div>
     </nav>
   );
 };

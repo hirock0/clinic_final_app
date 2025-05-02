@@ -8,7 +8,13 @@ import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import ProfileSidebar from "../profileSideBar/ProfileSidebar";
-const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
+const DashboardNav = ({
+  flag,
+  navLinks,
+}: {
+  flag: string;
+  navLinks: any;
+}) => {
   const dispatch = useDispatch();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
@@ -28,9 +34,19 @@ const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  useEffect(() => {
+    const handler = () => {
+      setProfileMenu(false);
+    };
+    window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
+  }, []);
+
   return (
     <nav className="bg-slate-200">
-      <div className="h-20 max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
+      <div className="h-20 relative max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
         <div className="flex items-center gap-5">
           <div className="flex max-lg:gap-5 items-center">
             <button
@@ -53,18 +69,6 @@ const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
               </h1>
             </Link>
           </div>
-          <ul
-            onClick={(e) => e.stopPropagation()}
-            className={`${
-              !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all max-lg:fixed max-lg:flex-col max-lg:bg-slate-400 max-lg:top-20 max-lg:left-0 max-lg:items-start max-lg:p-5 flex items-center gap-5`}
-          >
-            {navInfo?.map((item: any, index: any) => (
-              <Link key={index} href={"/dashboard/find_Job"}>
-                <li>{item?.title}</li>
-              </Link>
-            ))}
-          </ul>
         </div>
         {/* ---------------- */}
         <div className="flex items-center gap-5">
@@ -97,11 +101,18 @@ const DashboardNav = ({ navInfo, flag }: { navInfo: any; flag: string }) => {
             ) : null}
           </div>
         </div>
-      </div>
-      {/* profile_popup */}
+        {/* profile_popup */}
 
-      {profileMenu && <ProfileSidebar flag={flag} />}
-      {/* profile_popup_end */}
+        {profileMenu && (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className=" absolute right-0 top-20"
+          >
+            <ProfileSidebar navLinks={navLinks} flag={flag} />
+          </div>
+        )}
+        {/* profile_popup_end */}
+      </div>
     </nav>
   );
 };

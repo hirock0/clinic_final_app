@@ -4,22 +4,22 @@ import axios from "axios";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FaUserCircle, FaTachometerAlt, FaCog } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-const navItems = [
-  { href: "/profile", label: "Dashboard", icon: <FaTachometerAlt /> },
-  { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
-];
+import { useEffect } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import swal from "sweetalert";
 
-export default function ProfileSidebar({flag}:{flag:string}) {
-  const pathname = usePathname();
+export default function ProfileSidebar({
+  flag,
+  navLinks,
+}: {
+  flag: string;
+  navLinks: any;
+}) {
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
-  const [menuFlag, setMenuFlag] = useState(false);
-  const [profileMenu, setProfileMenu] = useState(false);
-
   const logoutHandler = async () => {
     try {
       const endpoint =
@@ -48,36 +48,37 @@ export default function ProfileSidebar({flag}:{flag:string}) {
   };
 
   useEffect(() => {
-    const handler = () => {
-      setMenuFlag(false);
-    };
-    window.addEventListener("click", handler);
-    return () => {
-      window.removeEventListener("click", handler);
-    };
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-
 
   return (
     <aside className="w-full sm:w-64 bg-white shadow-md h-full p-4 space-y-6">
       <div className="flex items-center gap-3">
         <FaUserCircle size={40} className="text-blue-500" />
         <div>
-          <p className="text-lg font-bold">Your Name</p>
-          <p className="text-sm text-gray-500">your@email.com</p>
+          {flag === "user" && (
+            <div className="">
+              <p className="text-lg font-bold">{userData?.name}</p>
+              <p className="text-sm text-gray-500">{userData?.email}</p>
+            </div>
+          )}
+          {flag === "employee" && (
+            <div className="">
+              <p className="text-lg font-bold">{employeeData?.name}</p>
+              <p className="text-sm text-gray-500">{employeeData?.email}</p>
+            </div>
+          )}
         </div>
       </div>
       <nav className="flex flex-col space-y-2">
-        {navItems.map((item) => (
+        {navLinks.map((item: any) => (
           <Link
             key={item.href}
             href={item.href}
             className={`flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-blue-100 transition ${
-              pathname === item.href ? "bg-blue-500 text-white" : "text-gray-700"
+              pathname === item.href
+                ? "bg-blue-500 text-white"
+                : "text-gray-700"
             }`}
           >
             {item.icon}
@@ -86,10 +87,10 @@ export default function ProfileSidebar({flag}:{flag:string}) {
         ))}
       </nav>
       <div className="">
-          <button onClick={logoutHandler} className="cursor-pointer">
-            Log Out
-          </button>
-        </div>
+        <button onClick={logoutHandler} className="cursor-pointer">
+          Log Out
+        </button>
+      </div>
     </aside>
   );
 }
