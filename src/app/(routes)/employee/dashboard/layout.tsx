@@ -1,26 +1,19 @@
 import Link from "next/link";
 import DashboardNav from "../../../../components/dashboardNav/DashboardNav";
+import { FaTachometerAlt, FaCog } from "react-icons/fa";
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const navInfo = [
+
+  const navLinks = [
     {
-      title: "Find Job",
-      href: "/employee/find_job",
-      icon: "",
+      href: "/employee/dashboard",
+      label: "Dashboard",
+      icon: <FaTachometerAlt />,
     },
-    {
-      title: "Company Application",
-      href: "/employee/company_application",
-      icon: "",
-    },
-    {
-      title: "Employee",
-      href: "/employee/company_reviews",
-      icon: "",
-    },
+    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
   return (
     <div>
-      <DashboardNav navInfo={navInfo} flag={"employee"} />
+      <DashboardNav navLinks={navLinks} flag={"employee"} />
       <div className="  h-[calc(100vh-80px)] ">
         <div className=" h-full flex gap-5 max-w-[1440px]  mx-auto">
           <div className=" bg-white  shadow-lg px-10 ">
