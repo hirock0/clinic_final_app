@@ -74,30 +74,21 @@ const Nav = () => {
   ];
 
   if (!hasMounted) return null;
-
   if (
     pathname?.startsWith("/employee/dashboard") ||
     pathname?.startsWith("/use") ||
-    pathname?.startsWith("/admin")
+    pathname?.startsWith("/admin") ||
+    pathname === "/search-jobs"
   ) {
     return null;
   }
-
   return (
-<<<<<<< HEAD
     <nav
       className={`
-      ${pathname === "/dashboard" || pathname === "/search-jobs" && "hidden"}
     sticky top-0 z-50 main-bg-color shadow-lg`}
     >
-      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between py-8">
+      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between">
         <div className="  max-lg:flex max-lg:items-center max-lg:gap-4">
-=======
-    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
-      <div className="max-w-[1440px] relative w-11/12 mx-auto flex items-center justify-between">
-        {/* Logo and Mobile Menu Button */}
-        <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
->>>>>>> 7e13dddba52a75c12519b3d2c20d231a164395e4
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -116,7 +107,7 @@ const Nav = () => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-26.5 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
               <ul
@@ -164,7 +155,6 @@ const Nav = () => {
             ))}
           </div>
         </div>
-
         {/* Action Buttons */}
         <div className="flex items-center gap-5">
           <Link href="/get-started">
