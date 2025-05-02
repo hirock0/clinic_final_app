@@ -8,13 +8,13 @@ import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import ProfileSidebar from "../profileSideBar/ProfileSidebar";
-const DashboardNav = ({
-  flag,
-  navLinks,
-}: {
-  flag: string;
-  navLinks: any;
-}) => {
+import { adminSideNavLink } from "../allNavLinks/AllNavLinks";
+import { userSideNavLink } from "../allNavLinks/AllNavLinks";
+import { employeeSideNavLink } from "../allNavLinks/AllNavLinks";
+import { usePathname } from "next/navigation";
+import DashboardSideBar from "../dashboardSideBar/DashboardSideBar";
+const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
@@ -45,7 +45,7 @@ const DashboardNav = ({
   }, []);
 
   return (
-    <nav className="bg-slate-200">
+    <nav className="bg-slate-200 sticky top-0 z-50">
       <div className="h-20 relative max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
         <div className="flex items-center gap-5">
           <div className="flex max-lg:gap-5 items-center">
@@ -106,12 +106,49 @@ const DashboardNav = ({
         {profileMenu && (
           <div
             onClick={(e) => e.stopPropagation()}
-            className=" absolute right-0 top-20"
+            className=" absolute z-50 right-0 top-20"
           >
             <ProfileSidebar navLinks={navLinks} flag={flag} />
           </div>
         )}
         {/* profile_popup_end */}
+
+        {/* ------------------------------------ */}
+        {pathname.startsWith("/admin") && (
+          <aside
+            className={` ${
+              !menuFlag
+                ? " max-lg:-translate-x-[110%]"
+                : " max-lg:translate-x-0"
+            } transition-all z-50 fixed left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+          >
+            <DashboardSideBar navLinks={adminSideNavLink} />
+          </aside>
+        )}
+        {/* --------------------------- */}
+        {pathname.startsWith("/user") && (
+          <aside
+            className={` ${
+              !menuFlag
+                ? " max-lg:-translate-x-[110%]"
+                : " max-lg:translate-x-0"
+            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+          >
+            <DashboardSideBar navLinks={userSideNavLink} />
+          </aside>
+        )}
+        {/* --------------------------- */}
+        {pathname.startsWith("/employee") && (
+          <aside
+            className={` ${
+              !menuFlag
+                ? " max-lg:-translate-x-[110%]"
+                : " max-lg:translate-x-0"
+            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+          >
+            <DashboardSideBar navLinks={employeeSideNavLink} />
+          </aside>
+        )}
       </div>
     </nav>
   );

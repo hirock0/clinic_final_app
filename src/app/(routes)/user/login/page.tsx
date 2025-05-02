@@ -48,7 +48,7 @@ export default function LoginPage() {
         });
       }
     } catch (error: any) {
-      console.error("Login Error:", error);
+      throw new Error(error.message)
       swal(
         "Error!",
         error.response?.data?.message || "Login failed. Please try again.",

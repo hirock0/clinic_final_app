@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     //   projectDetails,
     // } = await request.json();
     const reqBody = await request.json()
-    console.log(reqBody)
+   
 
     // console.log(
     //   firstName,

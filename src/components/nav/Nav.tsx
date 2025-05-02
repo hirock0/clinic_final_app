@@ -77,7 +77,8 @@ const Nav = () => {
 
   if (
     pathname?.startsWith("/employee/dashboard") ||
-    pathname?.startsWith("/use")
+    pathname?.startsWith("/use") ||
+    pathname?.startsWith("/admin")
   ) {
     return null;
   }
