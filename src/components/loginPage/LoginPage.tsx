@@ -153,12 +153,14 @@ export default function LoginPage({ flag }: { flag: string }) {
             </span>
           </Link>
         </p>
-        <button
-          onClick={googleLoginHandler}
-          className="btn btn-outline btn-accent w-full flex items-center justify-center gap-2 mt-4"
-        >
-          <FaGoogle /> Sign in with Google
-        </button>
+        {flag === "user" && (
+          <button
+            onClick={googleLoginHandler}
+            className="btn btn-outline btn-accent w-full flex items-center justify-center gap-2 mt-4"
+          >
+            <FaGoogle /> Sign in with Google
+          </button>
+        )}
       </div>
     </div>
   );
