@@ -52,10 +52,11 @@ const ApplyForm = ({
 
   const onSubmit = async (data: FormData) => {
     try {
+      
       const base64Resume = await fileToBase64(data.resume[0]);
       const payload = {
         jobId: job._id,
-        userEmail: userData?.email        ,
+        userEmail: userData?.email,
         fullName: data.fullName,
         email: data.email,
         phone: data.phone,
@@ -65,28 +66,24 @@ const ApplyForm = ({
         position: job.numberOfPositions,
       };
 
-      if (!userData) {
-        router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
-      } else {
-        const response = await axios.post(
-          "/pages/api/user/applied_jobs",
-          payload
-        );
+      const response = await axios.post(
+        "/pages/api/user/applied_jobs",
+        payload
+      );
 
-        if (response?.data?.success) {
-          setSuccessMessage("Application submitted successfully!");
-          reset();
-          setTimeout(onClose, 2000);
-          swal({
-            title: response?.data?.message,
-            icon: "success",
-          });
-        } else {
-          swal({
-            title: response?.data?.message,
-            icon: "warning",
-          });
-        }
+      if (response?.data?.success) {
+        setSuccessMessage("Application submitted successfully!");
+        reset();
+        setTimeout(onClose, 2000);
+        swal({
+          title: response?.data?.message,
+          icon: "success",
+        });
+      } else {
+        swal({
+          title: response?.data?.message,
+          icon: "warning",
+        });
       }
     } catch (error: any) {
       throw new Error(String(error?.message));

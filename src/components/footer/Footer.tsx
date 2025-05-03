@@ -12,7 +12,8 @@ const Footer = () => {
     pathname === "/signup" ||
     pathname === "/login" ||
     pathname.startsWith("/user") ||
-    pathname.startsWith("/awaiting")
+    pathname.startsWith("/awaiting") ||
+    pathname.startsWith("/institutional")
   ) {
     return null;
   }

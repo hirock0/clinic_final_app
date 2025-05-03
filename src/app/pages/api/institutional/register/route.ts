@@ -7,8 +7,8 @@ import jwt from "jsonwebtoken";
 export async function POST(request: NextRequest) {
   try {
     const client = await DBConnection();
-    const userDB = client.db("Employee").collection("users");
-    const { name, email, password, image } = await request.json();
+    const userDB = client.db("Institutional").collection("users");
+    const { name, email, password, image, terms } = await request.json();
     const existingUser = await userDB.findOne({ email: email });
     if (existingUser) {
       return NextResponse.json({
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const uploadResult = await UploadToCloudinary(
       image,
-      "UnitatedCareLinks/Employee/images"
+      "UnitatedCareLinks/Institutional/images"
     );
 
     if (!uploadResult?.secure_url || !uploadResult?.public_id) {
@@ -34,32 +34,36 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       password: hashedPassword,
-      role: "employee",
+      role: "institutional",
       image: {
         secure_url: uploadResult.secure_url,
         public_id: uploadResult.public_id,
       },
+      terms: terms,
       createdAt: new Date(),
     };
 
     await userDB.insertOne(newUser);
-    const employeeTokenData = {
+    const institutionalTokenData = {
       name: name,
       email: email,
-      image: uploadResult.secure_url,
-      role: "employee",
+      image: {
+        secure_url: uploadResult.secure_url,
+        public_id: uploadResult.public_id,
+      },
+      role: "institutional",
     };
-    const employeeToken = jwt.sign(employeeTokenData, process.env.JWT_SECRET!, {
+    const institutionalToken = jwt.sign(institutionalTokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
     const response = NextResponse.json({
       message: "Signup successfully",
       success: true,
-      employeeToken: employeeToken,
+      institutionalToken: institutionalToken,
     });
 
-    response.cookies.set("employeeToken", employeeToken, {
+    response.cookies.set("institutionalToken", institutionalToken, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,

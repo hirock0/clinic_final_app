@@ -28,33 +28,34 @@ const JobsPage = () => {
 
   // get all jobs
   useEffect(() => {
-      const getAllJobs = async () => {
-          setLoading(true);
-          try {
-            const res = await axios.get('/pages/api/jobs');
-            setJobs(res?.data?.data);
-            setLoading(false);
-          }
-          catch (error) {
-            console.error("Error fetching jobs:", error);
-            setLoading(false);
-          }
+    const getAllJobs = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get("/pages/api/jobs");
+        setJobs(res?.data?.data);
+        setLoading(false);
+      } catch (error: any) {
+        setLoading(false);
+        throw new Error(error.message);
       }
-      getAllJobs();
-  },[])
-
+    };
+    getAllJobs();
+  }, []);
 
   return (
     <section className="">
       {/* filter sidebar */}
       <div className="second-bg-color py-4 md:py-8 ">
-      <FilterSidebar />
+        <FilterSidebar />
       </div>
 
       {/* Job Cards */}
       <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20 ">
-      {loading ? <Loading style="flex items-center justify-center"/> : <JobCard jobs={jobs}/>}
-      
+        {loading ? (
+          <Loading style="flex items-center justify-center" />
+        ) : (
+          <JobCard jobs={jobs} />
+        )}
       </div>
     </section>
   );

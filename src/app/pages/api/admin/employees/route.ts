@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { DBConnection } from "@/lib/dbConnection/DBConnection";
+import { revalidatePath } from "next/cache";
 export async function GET() {
   try {
     const client = await DBConnection();
