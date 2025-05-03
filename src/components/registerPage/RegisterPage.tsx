@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import swal from "sweetalert";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type FormData = {
   name: string;
@@ -17,7 +17,9 @@ type FormData = {
 };
 
 export default function RegisterPage({ flag }: { flag: string }) {
-  const router = useRouter();
+   const searchParams = useSearchParams();
+   const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
+   const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -56,7 +58,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
       const response = await axios.post(`/pages/api/${flag}/register`, payload);
       if (response?.data?.success) {
         swal({ title: response?.data?.message, icon: "success" });
-        router.push(`/${flag}/dashboard`);
+        router.push(redirectTo);
       } else {
         swal({ title: response?.data?.message, icon: "warning" });
       }
