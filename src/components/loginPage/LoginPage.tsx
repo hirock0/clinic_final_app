@@ -57,7 +57,7 @@ export default function LoginPage({ flag }: { flag: string }) {
     setGooleLoading(true);
     try {
       await signIn("google", {
-        callbackUrl: redirectTo || `/${flag}/dashboard`,
+        callbackUrl: redirectTo,
       });
       setTimeout(() => {
         setGooleLoading(false);
@@ -147,7 +147,7 @@ export default function LoginPage({ flag }: { flag: string }) {
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
           Don't have an account?
-          <Link href={`/${flag}/register`}>
+          <Link href={`/${flag}/register?redirectTo=${redirectTo}`}>
             <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
               Sign up
             </span>
@@ -156,9 +156,15 @@ export default function LoginPage({ flag }: { flag: string }) {
         {flag === "user" && (
           <button
             onClick={googleLoginHandler}
-            className="btn btn-outline btn-accent w-full flex items-center justify-center gap-2 mt-4"
+            className="btn btn-outline  btn-accent w-full flex items-center justify-center gap-2 mt-4"
           >
-            <FaGoogle /> Sign in with Google
+            {!gooleLoading ? (
+              <div className=" flex items-center gap-4">
+                <FaGoogle /> <span>Sign in with Google</span>
+              </div>
+            ) : (
+              <div className=" loading loading-spinner"></div>
+            )}
           </button>
         )}
       </div>
