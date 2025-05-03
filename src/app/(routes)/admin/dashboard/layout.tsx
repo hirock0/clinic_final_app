@@ -1,4 +1,3 @@
-
 import DashboardNav from "@/components/dashboardNav/DashboardNav";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
 import { Montserrat } from "next/font/google";
@@ -8,7 +7,6 @@ const montserrat = Montserrat({
   weight: ["400", "400"],
   subsets: ["latin"],
 });
-
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [

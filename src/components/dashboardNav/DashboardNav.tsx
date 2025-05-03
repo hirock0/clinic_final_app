@@ -11,6 +11,7 @@ import ProfileSidebar from "../profileSideBar/ProfileSidebar";
 import { adminSideNavLink } from "../allNavLinks/AllNavLinks";
 import { userSideNavLink } from "../allNavLinks/AllNavLinks";
 import { employeeSideNavLink } from "../allNavLinks/AllNavLinks";
+import { institutionalSideNavLink } from "../allNavLinks/AllNavLinks";
 import { usePathname } from "next/navigation";
 import DashboardSideBar from "../dashboardSideBar/DashboardSideBar";
 const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
@@ -155,6 +156,18 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={employeeSideNavLink} />
+          </aside>
+        )}
+        {/* --------------------------- */}
+        {pathname.startsWith("/institutional") && (
+          <aside
+            className={` ${
+              !menuFlag
+                ? " max-lg:-translate-x-[110%]"
+                : " max-lg:translate-x-0"
+            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+          >
+            <DashboardSideBar navLinks={institutionalSideNavLink} />
           </aside>
         )}
       </div>
