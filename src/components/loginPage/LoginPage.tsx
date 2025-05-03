@@ -146,7 +146,7 @@ export default function LoginPage({ flag }: { flag: string }) {
       <div className=" bg-white p-8 rounded-b-2xl shadow-lg w-full max-w-md space-y-6">
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm">
-          Don't have an account?{" "}
+          Don't have an account?
           <Link href={`/${flag}/register`}>
             <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
               Sign up
