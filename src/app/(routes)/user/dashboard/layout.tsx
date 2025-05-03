@@ -9,7 +9,6 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [
     { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },

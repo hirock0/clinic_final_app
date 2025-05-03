@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Main Layout */}
       <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">
         {/* Sidebar */}
-        <aside className="w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400/40 via-yellow-300/30 to-white shadow-md p-6 hidden md:block">
+        <aside className="w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400/40 via-yellow-300/30 to-white shadow-md p-6 hidden lg:block">
           <DashboardSideBar navLinks={employeeSideNavLink} />
         </aside>
 

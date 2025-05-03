@@ -21,42 +21,59 @@ export const adminSideNavLink = [
 ];
 
 export const userSideNavLink = [
-    {
-      title: "Home",
-      href: "/",
-      icon: <IoHomeSharp />,
-    },
-    {
-      title: "Dashboard",
-      href: "/user/dashboard",
-      icon: <AiOutlineDashboard />,
-    },
-    {
-      title: "Accepted Jobs",
-      href: "/user/dashboard/accepted_jobs",
-      icon: <FcAcceptDatabase />,
-    },
-    {
-      title: "User Jobs",
-      href: "/user/dashboard/accepted_jobs",
-      icon: <FcAcceptDatabase />,
-    },
-  ];
+  {
+    title: "Home",
+    href: "/",
+    icon: <IoHomeSharp />,
+  },
+  {
+    title: "Dashboard",
+    href: "/user/dashboard",
+    icon: <AiOutlineDashboard />,
+  },
+  {
+    title: "Accepted Jobs",
+    href: "/user/dashboard/accepted_jobs",
+    icon: <FcAcceptDatabase />,
+  },
+  {
+    title: "User Jobs",
+    href: "/user/dashboard/accepted_jobs",
+    icon: <FcAcceptDatabase />,
+  },
+];
 
-  export const employeeSideNavLink = [
-    {
-      title: "Home",
-      href: "/",
-      icon: <IoHomeSharp />,
-    },
-    {
-      title: "Dashboard",
-      href: "/user/dashboard",
-      icon: <AiOutlineDashboard />,
-    },
-    {
-      title: "Accepted Jobs",
-      href: "/user/dashboard/accepted_jobs",
-      icon: <FcAcceptDatabase />,
-    },
-  ];
+export const employeeSideNavLink = [
+  {
+    title: "Home",
+    href: "/",
+    icon: <IoHomeSharp />,
+  },
+  {
+    title: "Dashboard",
+    href: "/user/dashboard",
+    icon: <AiOutlineDashboard />,
+  },
+  {
+    title: "Accepted Jobs",
+    href: "/user/dashboard/accepted_jobs",
+    icon: <FcAcceptDatabase />,
+  },
+];
+export const institutionalSideNavLink = [
+  {
+    title: "Home",
+    href: "/",
+    icon: <IoHomeSharp />,
+  },
+  {
+    title: "Dashboard",
+    href: "/institutional/dashboard",
+    icon: <AiOutlineDashboard />,
+  },
+  {
+    title: "Accepted Jobs",
+    href: "/institutional/accepted_jobs",
+    icon: <FcAcceptDatabase />,
+  },
+];
