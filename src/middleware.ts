@@ -26,7 +26,6 @@ export async function middleware(request: NextRequest) {
         new TextEncoder().encode(process.env.JWT_SECRET!)
       );
       const role = payload.role as string | undefined;
-
       if (pathname.startsWith("/employee/dashboard") && role === "employee") {
         return NextResponse.redirect(
           new URL("/employee/awaiting", request.url)
@@ -36,6 +35,14 @@ export async function middleware(request: NextRequest) {
       if (
         pathname.startsWith("/employee/awaiting") &&
         role === "approvedEmployee"
+      ) {
+        return NextResponse.redirect(
+          new URL("/employee/dashboard", request.url)
+        );
+      }
+
+      if (
+       employeePublicPath && role === "approvedEmployee"
       ) {
         return NextResponse.redirect(
           new URL("/employee/dashboard", request.url)
@@ -93,11 +100,13 @@ export async function middleware(request: NextRequest) {
     if (!institutionalToken && !institutionalPublicPath) {
       return NextResponse.redirect(new URL(redirectUrl, request.url));
     }
-    // if (institutionalToken && institutionalPublicPath) {
-    //   return NextResponse.redirect(
-    //     new URL("/institutional/dashboard", request.url)
-    //   );
-    // }
+    if (institutionalToken && institutionalPublicPath) {
+      const loginUrl = new URL("/institutional/dashboard", request.url);
+      loginUrl.searchParams.set("redirectTo", pathname + search);
+      return NextResponse.redirect(
+        new URL(loginUrl, request.url)
+      );
+    }
   }
   return NextResponse.next();
 }

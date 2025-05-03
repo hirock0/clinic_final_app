@@ -128,7 +128,7 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
               </button>
               <button
                 onClick={() => applyHandler(job)}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                className="flex-1 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Apply Now
               </button>
