@@ -2,6 +2,7 @@
 import { fetchData } from "@/utils/redux/slices/slice";
 import axios from "axios";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -20,6 +21,8 @@ export default function ProfileSidebar({
   const pathname = usePathname();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
+  console.log(userData)
+  console.log(userData?.image?.secure_url)
   const logoutHandler = async () => {
     try {
       if (flag === "user") {
