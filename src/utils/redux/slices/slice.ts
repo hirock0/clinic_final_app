@@ -6,6 +6,7 @@ interface UserState {
   user: object | null;
   carts: any;
   employee: any;
+  institutionalUser: any;
   appliedJobs: any;
   loading: boolean;
   error: string | null;
@@ -15,6 +16,7 @@ interface UserState {
 const initialState: UserState = {
   user: null,
   employee: null,
+  institutionalUser: null,
   appliedJobs: null,
   carts: [],
   loading: false,
@@ -31,12 +33,17 @@ export const fetchData: any = createAsyncThunk(
       const employee = employeeResponse?.data?.employee;
       const userResponse = await axios.get("/pages/api/user/decodedUser");
       const user = userResponse?.data?.user;
+      const institutionalResponse = await axios.get(
+        "/pages/api/institutional/decodedInstitutionalUser"
+      );
+      const institUser = institutionalResponse?.data?.institutionalUser;
+
       const allAppliedJobsResponse = await axios.get(
         `/pages/api/user/applied_jobs/${user?.email}`
       );
       const allAppliedJobs = allAppliedJobsResponse?.data?.allAppliedJobs;
 
-      return { employee, user, allAppliedJobs };
+      return { employee, user, allAppliedJobs, institUser };
     } catch (error) {
       return rejectWithValue("Failed to fetch users");
     }
@@ -64,6 +71,7 @@ const slice = createSlice({
         state.employee = action.payload.employee;
         state.user = action.payload.user;
         state.appliedJobs = action.payload.allAppliedJobs;
+        state.institutionalUser = action.payload.institUser;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;

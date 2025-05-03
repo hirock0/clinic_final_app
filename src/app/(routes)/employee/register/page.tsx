@@ -1,8 +1,9 @@
 import RegisterPage from "@/components/registerPage/RegisterPage";
+
 const Register = () => {
   return (
     <div>
-      <RegisterPage flag={"user"} />
+      <RegisterPage flag={"employee"} />
     </div>
   );
 };

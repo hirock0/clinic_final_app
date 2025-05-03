@@ -20,48 +20,35 @@ export default function ProfileSidebar({
   const pathname = usePathname();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
+  const institutionalData = useSelector(
+    (state: any) => state?.slices?.institutionalUser
+  );
+
   const logoutHandler = async () => {
     try {
-      if (flag === "user") {
-        const response = await axios.get("/pages/api/user/logout");
-        if (response?.data?.success) {
-          swal({
-            title: response?.data?.message,
-            icon: "success",
-          });
-          await signOut();
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        } else {
-          swal({
-            title: "Something went wrong!",
-            icon: "warning",
-          });
-        }
+      const response = await axios.get(
+        `/pages/api/${flag === "approvedEmployee" ? "employee" : flag}/logout`
+      );
+      if (response?.data?.success) {
+        swal({
+          title: response?.data?.message,
+          icon: "success",
+        });
+        await signOut();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
-        const response = await axios.get("/pages/api/employee/logout");
-        if (response?.data?.success) {
-          swal({
-            title: response?.data?.message,
-            icon: "success",
-          });
-          await signOut();
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        } else {
-          swal({
-            title: "Something went wrong!",
-            icon: "warning",
-          });
-        }
+        swal({
+          title: "Something went wrong!",
+          icon: "warning",
+        });
       }
     } catch (error: any) {
       throw new Error(String(error.message));
     }
   };
-
+  console.log(flag);
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
@@ -71,18 +58,21 @@ export default function ProfileSidebar({
       <div className="flex items-center gap-3">
         <FaUserCircle size={40} className="text-blue-500" />
         <div>
-          {flag === "user" && (
-            <div className="">
-              <p className="text-lg font-bold">{userData?.name}</p>
-              <p className="text-sm text-gray-500">{userData?.email}</p>
-            </div>
-          )}
-          {flag === "employee" && (
-            <div className="">
-              <p className="text-lg font-bold">{employeeData?.name}</p>
-              <p className="text-sm text-gray-500">{employeeData?.email}</p>
-            </div>
-          )}
+          <div className="">
+            <p className="text-lg font-bold">
+              {(flag === "user" && userData?.name) ||
+                ((flag === "approvedEmployee" || flag === "employee") &&
+                  employeeData?.name) ||
+                (flag === "institutional" && institutionalData?.name)}
+            </p>
+
+            <p className="text-sm text-gray-500">
+              {(flag === "user" && userData?.email) ||
+                ((flag === "approvedEmployee" || flag === "employee") &&
+                  employeeData?.email) ||
+                (flag === "institutional" && institutionalData?.email)}
+            </p>
+          </div>
         </div>
       </div>
       <nav className="flex flex-col space-y-2">
