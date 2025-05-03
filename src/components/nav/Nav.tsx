@@ -98,7 +98,7 @@ const Nav = () => {
 
   return (
     <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
-      <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between">
+      <div className="max-w-[1440px] relative w-11/12 mx-auto flex items-center justify-between">
         {/* Logo and Mobile Toggle */}
         <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
@@ -249,7 +249,7 @@ const Nav = () => {
           {profileMenu && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-25"
+              className="absolute right-0 top-17"
             >
               <ProfileSidebar
                 navLinks={navLinks}

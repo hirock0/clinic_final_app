@@ -55,16 +55,34 @@ export default function ProfileSidebar({
   }, [dispatch]);
 
   return (
-    <aside className="w-full sm:w-64 bg-white shadow-md h-full p-4 space-y-6">
+    <aside className="w-full  bg-white shadow-md h-full p-4 space-y-6">
       <div className="flex items-center gap-3">
-        <FaUserCircle size={40} className="text-blue-500" />
+        <div className=" w-12 h-12 overflow-hidden rounded-full">
+          <Image
+            src={
+              (flag === "user" && userData?.image?.secure_url) ||
+              ((flag === "approvedEmployee" || flag === "employee") &&
+                employeeData?.image?.secure_url) ||
+              (flag === "institutional" && institutionalData?.image?.secure_url)
+            }
+            alt={
+              (flag === "user" && userData?.role) ||
+              ((flag === "approvedEmployee" || flag === "employee") &&
+                employeeData?.name) ||
+              (flag === "institutional" && institutionalData?.role)
+            }
+            className=" w-full h-full object-cover"
+            width={500}
+            height={500}
+          />
+        </div>
         <div>
           <div className="">
             <p className="text-lg font-bold">
               {(flag === "user" && userData?.name) ||
                 ((flag === "approvedEmployee" || flag === "employee") &&
                   employeeData?.name) ||
-                (flag === "institutional" && institutionalData?.name)}
+                (flag === "institutional" && institutionalData?.role)}
             </p>
 
             <p className="text-sm text-gray-500">
@@ -73,14 +91,22 @@ export default function ProfileSidebar({
                   employeeData?.email) ||
                 (flag === "institutional" && institutionalData?.email)}
             </p>
+            <p>
+              Role: (
+              {(flag === "user" && userData?.role) ||
+                ((flag === "approvedEmployee" || flag === "employee") &&
+                  employeeData?.name) ||
+                (flag === "institutional" && institutionalData?.role)}
+              )
+            </p>
           </div>
         </div>
       </div>
       <nav className="flex flex-col space-y-2">
-        {navLinks.map((item: any) => (
+        {navLinks?.map((item: any) => (
           <Link
-            key={item.href}
-            href={item.href}
+            key={item?.href}
+            href={item?.href}
             className={`flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-blue-100 transition ${
               pathname === item.href
                 ? "bg-blue-500 text-white"
