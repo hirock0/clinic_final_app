@@ -18,6 +18,10 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   const dispatch = useDispatch();
   const employeeData = useSelector((state: any) => state?.slices?.employee);
   const userData = useSelector((state: any) => state?.slices?.user);
+  const institutionalData = useSelector(
+    (state: any) => state?.slices?.institutionalUser
+  );
+
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   useEffect(() => {
@@ -77,8 +81,10 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             <IoMdNotifications size={25} />
           </button>
           <div>
-            {
-            (flag === "user" && userData?.image?.secure_url) || (flag === "employee" && employeeData?.image?.secure_url) ? (
+            {(flag === "user" && userData?.image?.secure_url) ||
+            (flag === "employee" && employeeData?.image?.secure_url) ||
+            (flag === "institutional" &&
+              institutionalData?.image?.secure_url) ? (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -88,7 +94,11 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
               >
                 <Image
                   src={
-                    flag === "user" ? userData.image.secure_url: employeeData.image.secure_url
+                    flag === "user"
+                      ? userData.image.secure_url
+                      : flag === "institutional"
+                      ? institutionalData?.image?.secure_url
+                      : employeeData.image.secure_url
                   }
                   alt="user"
                   width={500}

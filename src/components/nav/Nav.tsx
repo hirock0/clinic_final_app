@@ -14,6 +14,10 @@ import ProfileSidebar from "../profileSideBar/ProfileSidebar";
 const Nav = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state?.slices?.user);
+  const institutionalData = useSelector(
+    (state: any) => state?.slices?.institutionalUser
+  );
+  const employeeData = useSelector((state: any) => state?.slices?.employee);
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
@@ -67,8 +71,16 @@ const Nav = () => {
     { title: "Contact", href: "/contact" },
   ];
 
+  const role =
+    (employeeData && "employee") ||
+    (institutionalData && institutionalData.role) ||
+    (userData && userData.role);
   const navLinks = [
-    { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
+    {
+      href: `/${role}/dashboard`,
+      label: "Dashboard",
+      icon: <FaTachometerAlt />,
+    },
     { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
 
@@ -76,7 +88,8 @@ const Nav = () => {
   if (
     pathname?.startsWith("/employee/dashboard") ||
     pathname?.startsWith("/use") ||
-    pathname?.startsWith("/admin")
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/institutional")
   ) {
     return null;
   }
@@ -162,7 +175,7 @@ const Nav = () => {
           </Link>
 
           <div>
-            {!userData ? (
+            {!userData && !institutionalData && !employeeData ? (
               <Link href={"/user/login"}>
                 <button>Login</button>
               </Link>
@@ -174,15 +187,17 @@ const Nav = () => {
                 }}
                 className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
-                {userData?.image?.secure_url && (
-                  <Image
-                    src={userData.image.secure_url}
-                    alt="user"
-                    width={500}
-                    height={500}
-                    className="object-cover w-full h-full"
-                  />
-                )}
+                <Image
+                  src={
+                    (institutionalData && institutionalData.image.secure_url) ||
+                    (userData && userData.image.secure_url) ||
+                    (employeeData && employeeData.image.secure_url)
+                  }
+                  alt="user"
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-full"
+                />
               </div>
             )}
           </div>
@@ -194,7 +209,14 @@ const Nav = () => {
             onClick={(e) => e.stopPropagation()}
             className="absolute right-0 top-25"
           >
-            <ProfileSidebar navLinks={navLinks} flag={"user"} />
+            <ProfileSidebar
+              navLinks={navLinks}
+              flag={
+                (userData && userData?.role) ||
+                (institutionalData && institutionalData?.role) ||
+                (employeeData && employeeData?.role)
+              }
+            />
           </div>
         )}
       </div>

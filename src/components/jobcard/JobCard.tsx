@@ -1,8 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
 import ApplyForm from "../applyform/ApplyForm";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "@/utils/redux/slices/slice";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import swal from "sweetalert";
 interface HealthcareJob {
   facilityName: string;
   facilityType: string;
@@ -18,8 +22,44 @@ interface HealthcareJob {
 }
 
 const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+  const userData = useSelector((state: any) => state?.slices?.user);
+  const institutionalData = useSelector(
+    (state: any) => state?.slices?.institutionalUser
+  );
+  const employeeData = useSelector((state: any) => state?.slices?.employee);
+
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
 
+  const applyHandler = (job: any) => {
+    if (institutionalData) {
+      swal({
+        title: "You have already institutional loggedin",
+        text: "Please logout first",
+        icon: "warning",
+      });
+    } else {
+      if (employeeData) {
+        swal({
+          title: "You have already employee loggedin",
+          text: "Please logout first",
+          icon: "warning",
+        });
+      } else {
+        if (!userData) {
+          router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+        } else {
+          setSelectedJob(job);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {jobs?.map((job: any, index: any) => (
@@ -87,8 +127,8 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
                 View Details
               </button>
               <button
-                onClick={() => setSelectedJob(job)}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                onClick={() => applyHandler(job)}
+                className="flex-1 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Apply Now
               </button>
