@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { DBConnection } from "@/lib/dbConnection/DBConnection";
 import jwt from "jsonwebtoken";
+import { revalidatePath } from "next/cache";
 
 // Define JWT secret & cookie options
 const JWT_SECRET = process.env.JWT_SECRET!;

@@ -5,40 +5,45 @@ import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { FaSortDown } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
+import { AiOutlineLogin } from "react-icons/ai";
 import ProfileSidebar from "../profileSideBar/ProfileSidebar";
+
 const Nav = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state?.slices?.user);
+  const institutionalData = useSelector(
+    (state: any) => state?.slices?.institutionalUser
+  );
+  const employeeData = useSelector((state: any) => state?.slices?.employee);
+
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [profileMenu, setProfileMenu] = useState(false);
+  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+
   useEffect(() => {
     setHasMounted(true);
     dispatch(fetchData());
   }, [dispatch]);
 
   useEffect(() => {
-    const closeMenu = () => {
+    const closeAll = () => {
       setMenuOpen(false);
       setActiveSubMenu(null);
-    };
-    const closeProfileMenu = () => {
       setProfileMenu(false);
+      setLoginDropdownOpen(false);
     };
 
-    window.addEventListener("click", closeMenu);
-    window.addEventListener("click", closeProfileMenu);
-
+    window.addEventListener("click", closeAll);
     return () => {
-      window.removeEventListener("click", closeMenu);
-      window.removeEventListener("click", closeProfileMenu);
+      window.removeEventListener("click", closeAll);
     };
   }, []);
 
@@ -67,8 +72,17 @@ const Nav = () => {
     { title: "Contact", href: "/contact" },
   ];
 
+  const role =
+    (employeeData && "employee") ||
+    (institutionalData && institutionalData.role) ||
+    (userData && userData.role);
+
   const navLinks = [
-    { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
+    {
+      href: `/${role}/dashboard`,
+      label: "Dashboard",
+      icon: <FaTachometerAlt />,
+    },
     { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
 
@@ -76,17 +90,17 @@ const Nav = () => {
   if (
     pathname?.startsWith("/employee/dashboard") ||
     pathname?.startsWith("/use") ||
-    pathname?.startsWith("/admin")
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/institutional")
   ) {
     return null;
   }
+
   return (
-    <nav
-      className={`
-    sticky top-0 z-50 main-bg-color shadow-lg`}
-    >
+    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
       <div className="max-w-[1440px] w-11/12 mx-auto flex items-center justify-between">
-        <div className="  max-lg:flex max-lg:items-center max-lg:gap-4">
+        {/* Logo and Mobile Toggle */}
+        <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -131,10 +145,10 @@ const Nav = () => {
                         activeSubMenu === item.title ? "block" : "hidden"
                       } lg:group-hover:block lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
                     >
-                      <ul className="text-nowrap">
+                      <ul className="text-nowrap flex flex-col gap-3">
                         {item.subLinks.map((subItem, subIndex) => (
                           <Link key={subIndex} href={subItem.href}>
-                            <li className="hover:underline hover:underline-offset-4 underline-color decoration-2 decoration-[#fdd25f] py-4">
+                            <li className=" bg-zinc-100 shadow-xl hover:scale-110 rounded-xl px-4  py-4">
                               {subItem.title}
                             </li>
                           </Link>
@@ -153,19 +167,60 @@ const Nav = () => {
             ))}
           </div>
         </div>
-        {/* Action Buttons */}
-        <div className="flex items-center gap-5">
+
+        {/* Right Section */}
+        <div className="flex items-center gap-5 relative">
           <Link href="/get-started">
             <button className="uppercase px-5 py-2 rounded purple-color-btn second-text-color font-medium shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
               Get Started
             </button>
           </Link>
 
-          <div>
-            {!userData ? (
-              <Link href={"/user/login"}>
-                <button>Login</button>
-              </Link>
+          {/* Login Dropdown or Profile Avatar */}
+          <div className="relative">
+            {!userData && !institutionalData && !employeeData ? (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLoginDropdownOpen(!loginDropdownOpen);
+                  }}
+                  className=" second-bg-color shadow-xl text-white p-2 rounded-md hover:scale-105 transition-all font-semibold"
+                >
+                  Login
+                </button>
+                {loginDropdownOpen && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute right-0 top-full mt-2 bg-white rounded shadow-lg z-50 w-55 h-32"
+                  >
+                    <ul className="text-sm text-gray-700 p-2 space-y-2">
+                      <Link
+                        href="/user/login"
+                        className="block hover:scale-105"
+                      >
+                        <li className=" flex gap-3 items-center px-5 py-2 bg-zinc-100 rounded-full hover:bg-zinc-200 active:bg-zinc-300">
+                          <div className=" text-cyan-300">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span>User Login</span>
+                        </li>
+                      </Link>
+                      <Link
+                        href="/institutional/login"
+                        className="block hover:scale-105 "
+                      >
+                        <li className="flex gap-3 items-center px-5 py-2 bg-zinc-100 rounded-full hover:bg-zinc-200 active:bg-zinc-300">
+                          <div className=" text-cyan-300">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span>Institutional Login</span>
+                        </li>
+                      </Link>
+                    </ul>
+                  </div>
+                )}
+              </>
             ) : (
               <div
                 onClick={(e) => {
@@ -174,29 +229,39 @@ const Nav = () => {
                 }}
                 className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
-                {userData?.image?.secure_url && (
-                  <Image
-                    src={userData.image.secure_url}
-                    alt="user"
-                    width={500}
-                    height={500}
-                    className="object-cover w-full h-full"
-                  />
-                )}
+                <Image
+                  src={
+                    (institutionalData &&
+                      institutionalData.image?.secure_url) ||
+                    (userData && userData.image?.secure_url) ||
+                    (employeeData && employeeData.image?.secure_url)
+                  }
+                  alt="user"
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-full"
+                />
               </div>
             )}
           </div>
-        </div>
 
-        {/* Profile Popup */}
-        {profileMenu && (
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="absolute right-0 top-25"
-          >
-            <ProfileSidebar navLinks={navLinks} flag={"user"} />
-          </div>
-        )}
+          {/* Profile Popup */}
+          {profileMenu && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="absolute right-0 top-25"
+            >
+              <ProfileSidebar
+                navLinks={navLinks}
+                flag={
+                  userData?.role ||
+                  institutionalData?.role ||
+                  employeeData?.role
+                }
+              />
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
