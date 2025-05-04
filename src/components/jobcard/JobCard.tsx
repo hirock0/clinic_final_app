@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
-import ApplyForm from "../applyform/ApplyForm";
+import ApplyForm from "../applyform/HealthcareApplicationForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
