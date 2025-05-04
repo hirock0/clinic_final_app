@@ -3,7 +3,6 @@ import { jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 
-// Verify JWT token
 async function verifyToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
@@ -17,9 +16,12 @@ async function verifyToken(token: string) {
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
-  const token = request.cookies.get("token")?.value || "";
   const url = request.nextUrl.clone();
+  const pathname = url.pathname.replace(/\/$/, ""); 
+  const search = url.search;
+
+  const token = request.cookies.get("token")?.value || "";
+
   const isEmployeePath = pathname.startsWith("/employee");
   const isUserPath = pathname.startsWith("/user");
   const isInstitutionalPath = pathname.startsWith("/institutional");
@@ -41,6 +43,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   };
 
+ 
   if (!token) {
     if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
       return redirectWithReturn("/institutional/login");
@@ -57,78 +60,77 @@ export async function middleware(request: NextRequest) {
     if (isHireTalentPath) {
       return redirectWithReturn("/institutional/login");
     }
+    return NextResponse.next();
   }
-  if (token) {
-    const payload: any = await verifyToken(token);
 
-    if (!payload) {
-      if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
-        return redirectWithReturn("/institutional/login");
-      }
-      if (isUserPath && !isPublic(userPublicPaths)) {
-        return redirectWithReturn("/user/login");
-      }
-      if (isAdminPath && !isPublic(adminPublicPaths)) {
-        return redirectWithReturn("/admin/login");
-      }
-      if (isEmployeePath && !isPublic(employeePublicPaths)) {
-        return redirectWithReturn("/employee/login");
-      }
-      if (isHireTalentPath) {
-        return redirectWithReturn("/institutional/login");
-      }
-    }
 
-    const role = payload?.role;
+  const payload: any = await verifyToken(token);
 
-    if (role === "institutional" && isPublic(institutionalPublicPaths)) {
-      const redirectTo =
-        request.nextUrl.searchParams.get("redirectTo") ||
-        "/institutional/dashboard";
-      return NextResponse.redirect(redirectTo);
+  if (!payload) {
+    if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
+      return redirectWithReturn("/institutional/login");
     }
-
-    if (role !== "institutional" && isHireTalentPath) {
-      url.pathname = "/institutional/login";
-      return NextResponse.redirect(url);
+    if (isUserPath && !isPublic(userPublicPaths)) {
+      return redirectWithReturn("/user/login");
     }
-
-    if (role === "user" && isPublic(userPublicPaths)) {
-      const redirectTo =
-        request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
-      return NextResponse.redirect(redirectTo);
+    if (isAdminPath && !isPublic(adminPublicPaths)) {
+      return redirectWithReturn("/admin/login");
     }
-
-    if (role === "admin" && isPublic(adminPublicPaths)) {
-      url.pathname = "/admin/dashboard";
-      return NextResponse.redirect(url);
+    if (isEmployeePath && !isPublic(employeePublicPaths)) {
+      return redirectWithReturn("/employee/login");
     }
-
-    if (role === "employee" && isPublic(employeePublicPaths)) {
-      url.pathname = "/employee/awaiting";
-      return NextResponse.redirect(url);
+    if (isHireTalentPath) {
+      return redirectWithReturn("/institutional/login");
     }
-    if (
-      role === "approvedEmployee" &&
-      isEmployeePath &&
-      !isPublic(employeePublicPaths) &&
-      pathname !== "/employee/dashboard"
-    ) {
-      url.pathname = "/employee/dashboard";
-      return NextResponse.redirect(url);
-    }
-
-    if (
-      role === "employee" &&
-      isEmployeePath &&
-      !isPublic(employeePublicPaths) &&
-      pathname !== "/employee/awaiting"
-    ) {
-      url.pathname = "/employee/awaiting";
-      return NextResponse.redirect(url);
-    }
+    return NextResponse.next();
   }
+
+  const role = payload?.role;
+
+  
+  if (role === "institutional" && isPublic(institutionalPublicPaths)) {
+    const redirectTo = request.nextUrl.searchParams.get("redirectTo") || "/institutional/dashboard";
+    return NextResponse.redirect(new URL(redirectTo, request.url));
+  }
+
+  if (role === "user" && isPublic(userPublicPaths)) {
+    const redirectTo = request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
+    return NextResponse.redirect(new URL(redirectTo, request.url));
+  }
+
+  if (role === "admin" && isPublic(adminPublicPaths)) {
+    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+  }
+
+  if (role === "employee" && isPublic(employeePublicPaths)) {
+    return NextResponse.redirect(new URL("/employee/awaiting", request.url));
+  }
+
+  if (
+    role === "approvedEmployee" &&
+    isEmployeePath &&
+    !isPublic(employeePublicPaths) &&
+    pathname !== "/employee/dashboard"
+  ) {
+    return NextResponse.redirect(new URL("/employee/dashboard", request.url));
+  }
+
+  if (
+    role === "employee" &&
+    isEmployeePath &&
+    !isPublic(employeePublicPaths) &&
+    pathname !== "/employee/awaiting"
+  ) {
+    return NextResponse.redirect(new URL("/employee/awaiting", request.url));
+  }
+
+  if (role !== "institutional" && isHireTalentPath) {
+    return NextResponse.redirect(new URL("/institutional/login", request.url));
+  }
+
+  return NextResponse.next();
 }
+
 export const config = {
   matcher: [
     "/",
