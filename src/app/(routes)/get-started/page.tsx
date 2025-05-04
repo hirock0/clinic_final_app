@@ -9,19 +9,16 @@ const GetStartedPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
+  const { user } = useSelector((state: any) => state?.slices);
+
   const onTalentHandler = () => {
-    if (employeeData) {
+    if (user?.role === "employee") {
       swal({
         title: "You have already employee loggedin",
         text: "please logout",
       });
     } else {
-      if (userData) {
+      if (user?.role === "user") {
         swal({
           title: "You have already user loggedin",
           text: "please logout",

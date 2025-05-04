@@ -2,17 +2,29 @@
 
 import axios from "axios";
 import swal from "sweetalert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
+import { fetchData } from "@/utils/redux/slices/slice";
 
 const ReqEmployees = ({ item }: { item: string | object | any }) => {
+  const dispatch = useDispatch();
+  const pathname = usePathname();
+  const { user } = useSelector((state: any) => state?.slices);
+
   const [loading, setLoading] = useState(false);
   const [isApproved, setIsApproved] = useState(item?.role);
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
   const approveUser = async () => {
     setLoading(true);
     try {
       const userData = {
         email: item?.email,
+        role: user?.role,
       };
       const response = await axios.post(
         "/pages/api/admin/approvedEmloyee",

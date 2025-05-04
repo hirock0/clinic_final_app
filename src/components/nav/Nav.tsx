@@ -15,19 +15,13 @@ import ProfileSidebar from "../profileSideBar/ProfileSidebar";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-
+  const { user } = useSelector((state: any) => state?.slices);
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
   const [profileMenu, setProfileMenu] = useState(false);
   const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-
   useEffect(() => {
     setHasMounted(true);
     dispatch(fetchData());
@@ -46,7 +40,6 @@ const Nav = () => {
       window.removeEventListener("click", closeAll);
     };
   }, []);
-
   const navItems = [
     { title: "Home", href: "/" },
     { title: "Training", href: "/" },
@@ -72,14 +65,9 @@ const Nav = () => {
     { title: "Contact", href: "/contact" },
   ];
 
-  const role =
-    (employeeData && "employee") ||
-    (institutionalData && institutionalData.role) ||
-    (userData && userData.role);
-
   const navLinks = [
     {
-      href: `/${role}/dashboard`,
+      href: `/${user?.role}/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
@@ -178,7 +166,7 @@ const Nav = () => {
 
           {/* Login Dropdown or Profile Avatar */}
           <div className="relative">
-            {!userData && !institutionalData && !employeeData ? (
+            {!user ? (
               <>
                 <button
                   onClick={(e) => {
@@ -230,12 +218,7 @@ const Nav = () => {
                 className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
                 <Image
-                  src={
-                    (institutionalData &&
-                      institutionalData.image?.secure_url) ||
-                    (userData && userData.image?.secure_url) ||
-                    (employeeData && employeeData.image?.secure_url)
-                  }
+                  src={user.image?.secure_url}
                   alt="user"
                   width={500}
                   height={500}
@@ -251,14 +234,7 @@ const Nav = () => {
               onClick={(e) => e.stopPropagation()}
               className="absolute right-0 top-17"
             >
-              <ProfileSidebar
-                navLinks={navLinks}
-                flag={
-                  userData?.role ||
-                  institutionalData?.role ||
-                  employeeData?.role
-                }
-              />
+              <ProfileSidebar navLinks={navLinks} flag={user?.role} />
             </div>
           )}
         </div>

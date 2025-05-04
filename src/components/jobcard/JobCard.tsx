@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
-import ApplyForm from "../applyform/ApplyForm";
+import ApplyForm from "../applyform/HealthcareApplicationForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ interface HealthcareJob {
   shiftsNeeded: string[];
   numberOfPositions: string;
   startDate: string;
-  position: string; // Added position property
+  position: string; 
   otherStaff?: string;
 }
 
@@ -25,35 +25,35 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-
+  const { user } = useSelector((state: any) => state?.slices);
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
-
   const applyHandler = (job: any) => {
-    if (institutionalData) {
-      swal({
-        title: "You have already institutional loggedin",
-        text: "Please logout first",
-        icon: "warning",
-      });
-    } else {
-      if (employeeData) {
+    if (!user) {
+      router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+    } else if (user?.role !== "user") {
+      if (user?.role === "institutional") {
         swal({
-          title: "You have already employee loggedin",
+          title: "You have already institutional loggedin",
           text: "Please logout first",
           icon: "warning",
         });
       } else {
-        if (!userData) {
-          router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+        if (user?.role === "admin") {
+          swal({
+            title: "You have already admin loggedin",
+            text: "Please logout first",
+            icon: "warning",
+          });
         } else {
-          setSelectedJob(job);
+          swal({
+            title: "You have already employee loggedin",
+            text: "Please logout first",
+            icon: "warning",
+          });
         }
       }
+    } else {
+      setSelectedJob(job);
     }
   };
 

@@ -1,23 +1,34 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "@/utils/redux/slices/slice";
 export default function AwaitingApproval() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const pathname = usePathname();
+  const { user } = useSelector((state: any) => state?.slices);
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   useEffect(() => {
     const handler = async () => {
       try {
-        const response =  await axios.get("/pages/api/admin/token_change");
-
-      
+        if (!user) {
+          return;
+        } else {
+          await axios.get(`/pages/api/admin/token_change/${user?.role}`);
+        }
       } catch (error: any) {
         throw new Error(error?.message);
       }
     };
     handler();
-  }, [router]);
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] text-center p-4">

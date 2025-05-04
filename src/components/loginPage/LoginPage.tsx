@@ -9,11 +9,11 @@ import swal from "sweetalert";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 type LoginFormInputs = {
   email: string;
   password: string;
+  flag: string;
 };
 
 export default function LoginPage({ flag }: { flag: string }) {
@@ -27,11 +27,12 @@ export default function LoginPage({ flag }: { flag: string }) {
     formState: { errors },
   } = useForm<LoginFormInputs>();
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // 👈 for password toggle
+  const [showPassword, setShowPassword] = useState(false);
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
     try {
-      const response = await axios.post(`/pages/api/${flag}/login`, data);
+      data.flag = flag;
+      const response = await axios.post(`/pages/api/login`, data);
       if (response?.data?.success) {
         swal({
           title: response?.data?.message,
@@ -76,7 +77,9 @@ export default function LoginPage({ flag }: { flag: string }) {
         <Link href={"/"} className=" absolute">
           Home
         </Link>
-        <h1 className="text-3xl font-bold text-center text-blue-600">Login</h1>
+        <h1 className="text-3xl font-bold text-center text-blue-600">
+          Login({flag})
+        </h1>
 
         {/* Email Field */}
         <div className="flex flex-col space-y-1">

@@ -14,12 +14,13 @@ type FormData = {
   retypePassword: string;
   image: FileList;
   terms: boolean;
+  flag: string;
 };
 
 export default function RegisterPage({ flag }: { flag: string }) {
-   const searchParams = useSearchParams();
-   const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
-   const router = useRouter()
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -45,17 +46,18 @@ export default function RegisterPage({ flag }: { flag: string }) {
     }
 
     setIsLoading(true);
-
+    data.flag = flag;
     const payload = {
       name: data.name,
       email: data.email,
       password: data.password,
       image: base64Image,
       terms: data.terms,
+      flag: data.flag,
     };
 
     try {
-      const response = await axios.post(`/pages/api/${flag}/register`, payload);
+      const response = await axios.post(`/pages/api/register`, payload);
       if (response?.data?.success) {
         swal({ title: response?.data?.message, icon: "success" });
         router.push(redirectTo);
@@ -84,7 +86,9 @@ export default function RegisterPage({ flag }: { flag: string }) {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Register</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">
+        Register({flag})
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name */}
         <div>
