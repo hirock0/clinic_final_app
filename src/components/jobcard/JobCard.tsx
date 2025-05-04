@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
-import ApplyForm from "../applyform/ApplyForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import swal from "sweetalert";
+import ViewJobs from "../viewjobs/ViewJobs";
+import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
+
 interface HealthcareJob {
   facilityName: string;
   facilityType: string;
@@ -17,8 +19,27 @@ interface HealthcareJob {
   shiftsNeeded: string[];
   numberOfPositions: string;
   startDate: string;
-  position: string; // Added position property
+  position: string; 
   otherStaff?: string;
+}
+
+interface viewDetails {
+  facilityName: string;
+  facilityType: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  staffNeeded: string[];
+  otherStaff: string;
+  numberOfPositions: string;
+  shiftsNeeded: string[];
+  startDate: string;
+  assignmentDuration: string;
+  additionalNotes: string;
 }
 
 const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
@@ -32,6 +53,13 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   const employeeData = useSelector((state: any) => state?.slices?.employee);
 
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
+  const [view, setView] = useState<viewDetails | null>(null)
+
+const viewDetails = (job: any) => {
+  console.log(job)
+  setView(job)
+}
+
 
   const applyHandler = (job: any) => {
     if (institutionalData) {
@@ -60,8 +88,10 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {jobs?.map((job: any, index: any) => (
         <div
           key={index}
@@ -123,7 +153,9 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
           {/* Action Buttons - Pushed to bottom */}
           <div className="mt-auto pt-3 border-t border-gray-100">
             <div className="flex gap-3">
-              <button className="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+              <button
+              onClick={()=> viewDetails(job)}
+              className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
                 View Details
               </button>
               <button
@@ -139,8 +171,15 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
 
       {/* Render ApplyForm when a job is selected */}
       {selectedJob && (
-        <ApplyForm job={selectedJob} onClose={() => setSelectedJob(null)} />
+        <HealthcareApplicationForm job={selectedJob} onClose={() => setSelectedJob(null)} />
       )}
+
+      {/* Render view jobs when a job is selected */}
+      {view && (
+        <ViewJobs job={view} onClose={() => setView(null)} />
+      )}
+
+
     </div>
   );
 };
