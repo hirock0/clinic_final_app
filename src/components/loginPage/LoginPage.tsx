@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import { FaUserAlt, FaLock, FaGoogle } from "react-icons/fa";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
@@ -9,7 +9,8 @@ import swal from "sweetalert";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { FaGoogle } from "react-icons/fa";
+import Image from "next/image";
+
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -21,32 +22,26 @@ export default function LoginPage({ flag }: { flag: string }) {
   const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
   const router = useRouter();
   const [gooleLoading, setGooleLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
     try {
       data.flag = flag;
       const response = await axios.post(`/pages/api/login`, data);
       if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
+        swal({ title: response?.data?.message, icon: "success" });
         router.push(redirectTo);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        setTimeout(() => window.location.reload(), 1000);
       } else {
-        swal({
-          title: response?.data?.message,
-          icon: "warning",
-        });
+        swal({ title: response?.data?.message, icon: "warning" });
       }
     } catch (error: any) {
       throw new Error(error.message);
@@ -54,122 +49,140 @@ export default function LoginPage({ flag }: { flag: string }) {
       setLoading(false);
     }
   };
+
   const googleLoginHandler = async () => {
     setGooleLoading(true);
     try {
-      await signIn("google", {
-        callbackUrl: redirectTo,
-      });
-      setTimeout(() => {
-        setGooleLoading(false);
-      }, 1000);
+      await signIn("google", { callbackUrl: redirectTo });
+      setTimeout(() => setGooleLoading(false), 1000);
     } catch (error) {
       setGooleLoading(false);
       throw new Error(String(error));
     }
   };
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className=" relative bg-white p-8 rounded-t-2xl shadow-lg w-full max-w-md space-y-6"
-      >
-        <Link href={"/"} className=" absolute">
-          Home
-        </Link>
-        <h1 className="text-3xl font-bold text-center text-blue-600">
-          Login({flag})
-        </h1>
 
-        {/* Email Field */}
-        <div className="flex flex-col space-y-1">
-          <label htmlFor="email" className="text-gray-600 font-semibold">
-            Email
-          </label>
-          <div className="flex items-center border rounded-lg px-4 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-400">
-            <FaUserAlt className="text-gray-400 mr-3" />
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              {...register("email", { required: "Email is required" })}
-              className="flex-1 bg-transparent focus:outline-none"
-            />
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200">
+      <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* Left Side Image */}
+        <div className="hidden md:flex md:w-1/2 bg-blue-100 items-center justify-center ">
+          <div className="">
+            <iframe
+              className=" w-96 h-96"
+              src="https://lottie.host/embed/17a751d3-cc6d-4915-9cfc-f9845b2ec82c/Ovbn7my9PY.lottie"
+            ></iframe>
           </div>
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
         </div>
 
-        {/* Password Field */}
-        <div className="flex flex-col space-y-1 relative">
-          <label htmlFor="password" className="text-gray-600 font-semibold">
-            Password
-          </label>
-          <div className="flex items-center border rounded-lg px-4 py-2 bg-gray-50 focus-within:ring-2 focus-within:ring-blue-400 relative">
-            <FaLock className="text-gray-400 mr-3" />
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              {...register("password", { required: "Password is required" })}
-              className="flex-1 bg-transparent focus:outline-none"
-            />
-            <div
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 cursor-pointer text-gray-400"
-            >
-              {showPassword ? (
-                <AiOutlineEye size={20} />
-              ) : (
-                <AiOutlineEyeInvisible size={20} />
+        {/* Right Side Form */}
+        <div className="w-full md:w-1/2 p-8 space-y-6">
+          <Link
+            href="/"
+            className="text-blue-600 font-semibold hover:underline"
+          >
+            ← Home
+          </Link>
+          <h1 className="text-3xl font-bold text-blue-600 text-center">
+            Login ({flag})
+          </h1>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Email */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Email
+              </label>
+              <div className="flex items-center border rounded px-3 py-2 bg-gray-50">
+                <FaUserAlt className="text-gray-400 mr-3" />
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  {...register("email", { required: "Email is required" })}
+                  className="w-full bg-transparent outline-none"
+                />
+              </div>
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
-          </div>
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center"
-        >
-          {loading ? (
-            <span className="loading loading-spinner loading-sm"></span> // 👈 DaisyUI loader
-          ) : (
-            "Sign In"
-          )}
-        </button>
-      </form>
-      <div className=" bg-white p-8 rounded-b-2xl shadow-lg w-full max-w-md space-y-6">
-        {/* Footer */}
-        <p className="text-center text-gray-500 text-sm">
-          Don't have an account?
-          <Link href={`/${flag}/register?redirectTo=${redirectTo}`}>
-            <span className="text-blue-600 font-semibold cursor-pointer hover:underline">
-              Sign up
-            </span>
-          </Link>
-        </p>
-        {flag === "user" && (
-          <button
-            onClick={googleLoginHandler}
-            className="btn btn-outline  btn-accent w-full flex items-center justify-center gap-2 mt-4"
-          >
-            {!gooleLoading ? (
-              <div className=" flex items-center gap-4">
-                <FaGoogle /> <span>Sign in with Google</span>
+            {/* Password */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Password
+              </label>
+              <div className="flex items-center border rounded px-3 py-2 bg-gray-50 relative">
+                <FaLock className="text-gray-400 mr-3" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
+                  className="w-full bg-transparent outline-none"
+                />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 cursor-pointer text-gray-400"
+                >
+                  {showPassword ? (
+                    <AiOutlineEye size={20} />
+                  ) : (
+                    <AiOutlineEyeInvisible size={20} />
+                  )}
+                </div>
               </div>
-            ) : (
-              <div className=" loading loading-spinner"></div>
-            )}
-          </button>
-        )}
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded transition duration-300 disabled:opacity-50"
+            >
+              {loading ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                "Sign In"
+              )}
+            </button>
+          </form>
+
+          {/* Google Login */}
+          {flag === "user" && (
+            <button
+              onClick={googleLoginHandler}
+              className="w-full btn btn-outline btn-accent flex items-center justify-center gap-2"
+            >
+              {!gooleLoading ? (
+                <>
+                  <FaGoogle />
+                  <span>Sign in with Google</span>
+                </>
+              ) : (
+                <span className="loading loading-spinner"></span>
+              )}
+            </button>
+          )}
+
+          {/* Footer */}
+          <p className="text-center text-gray-500 text-sm">
+            Don't have an account?{" "}
+            <Link
+              href={`/${flag}/register?redirectTo=${redirectTo}`}
+              className="text-blue-600 hover:underline font-semibold"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
