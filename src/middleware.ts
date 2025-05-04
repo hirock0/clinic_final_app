@@ -1,5 +1,3 @@
-
-
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
@@ -66,11 +64,9 @@ export async function middleware(request: NextRequest) {
     if (!payload) {
       if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
         return redirectWithReturn("/institutional/login");
-
       }
       if (isUserPath && !isPublic(userPublicPaths)) {
         return redirectWithReturn("/user/login");
-
       }
       if (isAdminPath && !isPublic(adminPublicPaths)) {
         return redirectWithReturn("/admin/login");
@@ -82,18 +78,25 @@ export async function middleware(request: NextRequest) {
         return redirectWithReturn("/institutional/login");
       }
     }
+
     const role = payload?.role;
+
     if (role === "institutional" && isPublic(institutionalPublicPaths)) {
-      url.pathname = "/institutional/dashboard";
-      return NextResponse.redirect(url);
+      const redirectTo =
+        request.nextUrl.searchParams.get("redirectTo") ||
+        "/institutional/dashboard";
+      return NextResponse.redirect(redirectTo);
     }
+
     if (role !== "institutional" && isHireTalentPath) {
       url.pathname = "/institutional/login";
       return NextResponse.redirect(url);
     }
+
     if (role === "user" && isPublic(userPublicPaths)) {
-      url.pathname = "/user/dashboard";
-      return NextResponse.redirect(url);
+      const redirectTo =
+        request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
+      return NextResponse.redirect(redirectTo);
     }
 
     if (role === "admin" && isPublic(adminPublicPaths)) {
@@ -125,7 +128,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
   }
-
 }
 export const config = {
   matcher: [
