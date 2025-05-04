@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 
 export async function POST(request: NextRequest) {
   try {
+    const { name, email, password, image, terms, flag } = await request.json();
     const client = await DBConnection();
-    const userDB = client.db("Institutional").collection("users");
-    const { name, email, password, image, terms } = await request.json();
+    const userDB = client.db("AllUsers").collection(flag);
     const existingUser = await userDB.findOne({ email: email });
     if (existingUser) {
       return NextResponse.json({
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const uploadResult = await UploadToCloudinary(
       image,
-      "UnitatedCareLinks/Institutional/images"
+      `UnitatedCareLinks/${flag}/images`
     );
 
     if (!uploadResult?.secure_url || !uploadResult?.public_id) {
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       name: name,
       email: email,
       password: hashedPassword,
-      role: "institutional",
+      role: flag,
       image: {
         secure_url: uploadResult.secure_url,
         public_id: uploadResult.public_id,
@@ -44,26 +44,26 @@ export async function POST(request: NextRequest) {
     };
 
     await userDB.insertOne(newUser);
-    const institutionalTokenData = {
+    const tokenData = {
       name: name,
       email: email,
       image: {
         secure_url: uploadResult.secure_url,
         public_id: uploadResult.public_id,
       },
-      role: "institutional",
+      role: flag,
     };
-    const institutionalToken = jwt.sign(institutionalTokenData, process.env.JWT_SECRET!, {
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
     const response = NextResponse.json({
       message: "Signup successfully",
       success: true,
-      institutionalToken: institutionalToken,
+      token: token,
     });
 
-    response.cookies.set("institutionalToken", institutionalToken, {
+    response.cookies.set("token", token, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,

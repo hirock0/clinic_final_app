@@ -19,26 +19,16 @@ export default function ProfileSidebar({
 }) {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-
+  const { user } = useSelector((state: any) => state?.slices);
   const logoutHandler = async () => {
     try {
-      const response = await axios.get(
-        `/pages/api/${flag === "approvedEmployee" ? "employee" : flag}/logout`
-      );
+      const response = await axios.get(`/pages/api/logout`);
       if (response?.data?.success) {
         swal({
           title: response?.data?.message,
           icon: "success",
         });
         await signOut();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       } else {
         swal({
           title: "Something went wrong!",
@@ -49,7 +39,7 @@ export default function ProfileSidebar({
       throw new Error(String(error.message));
     }
   };
-  console.log(flag);
+
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
@@ -59,18 +49,8 @@ export default function ProfileSidebar({
       <div className="flex items-center gap-3">
         <div className=" w-12 h-12 overflow-hidden rounded-full">
           <Image
-            src={
-              (flag === "user" && userData?.image?.secure_url) ||
-              ((flag === "approvedEmployee" || flag === "employee") &&
-                employeeData?.image?.secure_url) ||
-              (flag === "institutional" && institutionalData?.image?.secure_url)
-            }
-            alt={
-              (flag === "user" && userData?.role) ||
-              ((flag === "approvedEmployee" || flag === "employee") &&
-                employeeData?.name) ||
-              (flag === "institutional" && institutionalData?.role)
-            }
+            src={user?.image?.secure_url}
+            alt={user?.role}
             className=" w-full h-full object-cover"
             width={500}
             height={500}
@@ -78,27 +58,10 @@ export default function ProfileSidebar({
         </div>
         <div>
           <div className="">
-            <p className="text-lg font-bold">
-              {(flag === "user" && userData?.name) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.name) ||
-                (flag === "institutional" && institutionalData?.role)}
-            </p>
+            <p className="text-lg font-bold">{user?.name}</p>
 
-            <p className="text-sm text-gray-500">
-              {(flag === "user" && userData?.email) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.email) ||
-                (flag === "institutional" && institutionalData?.email)}
-            </p>
-            <p>
-              Role: (
-              {(flag === "user" && userData?.role) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.name) ||
-                (flag === "institutional" && institutionalData?.role)}
-              )
-            </p>
+            <p className="text-sm text-gray-500">{user?.email}</p>
+            <p>Role: ({user?.role})</p>
           </div>
         </div>
       </div>

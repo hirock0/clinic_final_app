@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
-import { useRouter, usePathname } from "next/navigation";
-
 interface FormData {
   fullName: string;
   email: string;
@@ -27,11 +25,8 @@ const ApplyForm = ({
   job: FormData | any;
   onClose: () => void;
 }) => {
-  const pathname = usePathname();
-  const router = useRouter();
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state?.slices?.user);
-
+  const { user } = useSelector((state: any) => state?.slices);
   const {
     register,
     handleSubmit,
@@ -52,11 +47,10 @@ const ApplyForm = ({
 
   const onSubmit = async (data: FormData) => {
     try {
-      
       const base64Resume = await fileToBase64(data.resume[0]);
       const payload = {
         jobId: job._id,
-        userEmail: userData?.email,
+        userEmail: user?.email,
         fullName: data.fullName,
         email: data.email,
         phone: data.phone,

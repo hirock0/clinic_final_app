@@ -1,22 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { DBConnection } from "@/lib/dbConnection/DBConnection";
 import jwt from "jsonwebtoken";
-import { revalidatePath } from "next/cache";
 
-// Define JWT secret & cookie options
 const JWT_SECRET = process.env.JWT_SECRET!;
-
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: any) {
   try {
-    const ReqToken = req.cookies.get("employeeToken")?.value;
-    if (!ReqToken) {
+    const { role } = await res?.params;
+    const reqToken = req.cookies.get("token")?.value;
+    if (!reqToken) {
       return NextResponse.json({
         message: "Token not found",
         success: false,
       });
     }
-
-    const decoded: any = jwt.verify(ReqToken, JWT_SECRET);
+    const decoded: any = jwt.verify(reqToken, JWT_SECRET);
     const email = decoded?.email;
     if (!email) {
       return NextResponse.json({
@@ -24,10 +21,8 @@ export async function GET(req: NextRequest) {
         success: false,
       });
     }
-
-    // Connect to DB and find user
     const client = await DBConnection();
-    const DB = client.db("Employee").collection("users");
+    const DB = client.db("AllUsers").collection(role);
     const user = await DB.findOne({ email: email });
     if (!user) {
       return NextResponse.json({
@@ -42,15 +37,15 @@ export async function GET(req: NextRequest) {
       role: user?.role,
     };
 
-    const employeeToken = jwt.sign(tokenData, JWT_SECRET!, { expiresIn: "7d" });
+    const token = jwt.sign(tokenData, JWT_SECRET!, { expiresIn: "7d" });
     const response = NextResponse.json({
       message: "Token Generated",
       success: true,
-      employeeToken: employeeToken,
+      token: token,
       role: user?.role,
     });
 
-    response.cookies.set("employeeToken", employeeToken, {
+    response.cookies.set("token", token, {
       httpOnly: true,
       sameSite: "lax",
       secure: false,
