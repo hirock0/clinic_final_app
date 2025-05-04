@@ -1,3 +1,5 @@
+
+
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
@@ -20,7 +22,6 @@ export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const token = request.cookies.get("token")?.value || "";
   const url = request.nextUrl.clone();
-
   const isEmployeePath = pathname.startsWith("/employee");
   const isUserPath = pathname.startsWith("/user");
   const isInstitutionalPath = pathname.startsWith("/institutional");
@@ -36,7 +37,6 @@ export async function middleware(request: NextRequest) {
   ];
 
   const isPublic = (pathArray: string[]) => pathArray.includes(pathname);
-
   const redirectWithReturn = (path: string) => {
     url.pathname = path;
     url.searchParams.set("redirectTo", pathname + (search || ""));
@@ -66,9 +66,11 @@ export async function middleware(request: NextRequest) {
     if (!payload) {
       if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
         return redirectWithReturn("/institutional/login");
+
       }
       if (isUserPath && !isPublic(userPublicPaths)) {
         return redirectWithReturn("/user/login");
+
       }
       if (isAdminPath && !isPublic(adminPublicPaths)) {
         return redirectWithReturn("/admin/login");
@@ -89,7 +91,6 @@ export async function middleware(request: NextRequest) {
       url.pathname = "/institutional/login";
       return NextResponse.redirect(url);
     }
-
     if (role === "user" && isPublic(userPublicPaths)) {
       url.pathname = "/user/dashboard";
       return NextResponse.redirect(url);
@@ -125,9 +126,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
 }
-
 export const config = {
   matcher: [
     "/",
