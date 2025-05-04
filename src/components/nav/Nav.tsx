@@ -180,29 +180,25 @@ const Nav = () => {
                 {loginDropdownOpen && (
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    className="absolute right-0 top-full mt-2 bg-white rounded shadow-lg z-50 w-55 h-32"
+                    className="absolute right-0 top-full mt-3 w-64 bg-white rounded-xl shadow-xl z-50 border border-gray-100"
                   >
-                    <ul className="text-sm text-gray-700 p-2 space-y-2">
-                      <Link
-                        href="/user/login"
-                        className="block hover:scale-105"
-                      >
-                        <li className=" flex gap-3 items-center px-5 py-2 bg-zinc-100 rounded-full hover:bg-zinc-200 active:bg-zinc-300">
-                          <div className=" text-cyan-300">
+                    <ul className="text-sm text-gray-700 p-3 space-y-2">
+                      <Link href="/user/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
-                          <span>User Login</span>
+                          <span className="font-medium">User Login</span>
                         </li>
                       </Link>
-                      <Link
-                        href="/institutional/login"
-                        className="block hover:scale-105 "
-                      >
-                        <li className="flex gap-3 items-center px-5 py-2 bg-zinc-100 rounded-full hover:bg-zinc-200 active:bg-zinc-300">
-                          <div className=" text-cyan-300">
+                      <Link href="/institutional/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
-                          <span>Institutional Login</span>
+                          <span className="font-medium">
+                            Institutional Login
+                          </span>
                         </li>
                       </Link>
                     </ul>
