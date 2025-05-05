@@ -60,11 +60,13 @@ interface FormData {
   date: string;
   resume: any;
   userEmail: string;
+  jobId: string;
 }
 
 interface Job {
   facilityName: string;
   numberOfPositions: string;
+  _id: string;
 }
 
 const HealthcareApplicationForm = ({
@@ -75,7 +77,6 @@ const HealthcareApplicationForm = ({
   onClose: () => void;
 }) => {
   const [loading, setloading] = useState(false);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
   useEffect(() => {
@@ -123,6 +124,7 @@ const HealthcareApplicationForm = ({
     data.resume = resumeBase64;
     data.signature = signatureBase64;
     data.userEmail = user?.email;
+    data.jobId = job?._id;
     try {
       const response = await axios.post("/pages/api/job_application", data);
       if (response?.data?.success) {
