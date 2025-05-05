@@ -158,9 +158,9 @@ const Nav = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-5 relative">
+        <div className="flex items-center space-x-4 relative">
           <Link href="/get-started">
-            <button className="uppercase px-5 py-2 rounded purple-color-btn second-text-color font-medium shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer">
+            <button className="uppercase px-4 py-2 bg-[#ffdb61] rounded-md text-base font-semibold second-text-color hover:bg-[#ffd23a] cursor-pointer transition-colors duration-300 ease-in-out border-2 border-[#ffdb61] hover:border-[#ffd23a]">
               Get Started
             </button>
           </Link>
@@ -168,16 +168,16 @@ const Nav = () => {
           {/* Login Dropdown or Profile Avatar */}
           <div className="relative">
             {!user ? (
-              user === undefined ? (
-                <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLoginDropdownOpen(!loginDropdownOpen);
-                    }}
-                    className=" second-bg-color shadow-xl text-white p-2 rounded-md hover:scale-105 transition-all font-semibold"
-                  >
-                    Login
+
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLoginDropdownOpen(!loginDropdownOpen);
+                  }}
+                  className="text-base font-semibold border-2 py-2 px-4 rounded-md border-gray-300 text-gray-700 hover:text-gray-500 transition-colors ease-in-out duration-300 cursor-pointer"
+                >
+                  SignUp
                   </button>
                   {loginDropdownOpen && (
                     <div
