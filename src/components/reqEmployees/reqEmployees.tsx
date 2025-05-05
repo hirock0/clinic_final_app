@@ -10,9 +10,7 @@ import { fetchData } from "@/utils/redux/slices/slice";
 
 const ReqEmployees = ({ item }: { item: string | object | any }) => {
   const dispatch = useDispatch();
-  const pathname = usePathname();
   const { user } = useSelector((state: any) => state?.slices);
-
   const [loading, setLoading] = useState(false);
   const [isApproved, setIsApproved] = useState(item?.role);
 

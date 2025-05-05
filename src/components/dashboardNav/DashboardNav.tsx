@@ -94,7 +94,9 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
                   className="object-cover w-full h-full"
                 />
               </button>
-            ) : null}
+            ) : (
+              <div className=" loading loading-spinner"></div>
+            )}
           </div>
         </div>
         {/* profile_popup */}

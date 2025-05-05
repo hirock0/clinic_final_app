@@ -51,10 +51,10 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
   const [view, setView] = useState<viewDetails | null>(null);
 
-const viewDetails = (job: any) => {
-  console.log(job)
-  setView(job)
-}
+  const viewDetails = (job: any) => {
+    console.log(job);
+    setView(job);
+  };
 
   const applyHandler = (job: any) => {
     if (!user) {
@@ -62,21 +62,21 @@ const viewDetails = (job: any) => {
     } else if (user?.role !== "user") {
       if (user?.role === "institutional") {
         swal({
-          title: "You have already institutional loggedin",
-          text: "Please logout first",
+          title: "You are institution",
+          text: "Login for user",
           icon: "warning",
         });
       } else {
         if (user?.role === "admin") {
           swal({
-            title: "You have already admin loggedin",
-            text: "Please logout first",
+            title: "You are admin",
+            text: "Login for user",
             icon: "warning",
           });
         } else {
           swal({
-            title: "You have already employee loggedin",
-            text: "Please logout first",
+            title: "You are employee",
+            text: "Login for user",
             icon: "warning",
           });
         }
@@ -89,7 +89,6 @@ const viewDetails = (job: any) => {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -155,8 +154,9 @@ const viewDetails = (job: any) => {
           <div className="mt-auto pt-3 border-t border-gray-100">
             <div className="flex gap-3">
               <button
-              onClick={()=> viewDetails(job)}
-              className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                onClick={() => viewDetails(job)}
+                className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+              >
                 View Details
               </button>
               <button
@@ -172,15 +172,14 @@ const viewDetails = (job: any) => {
 
       {/* Render ApplyForm when a job is selected */}
       {selectedJob && (
-        <HealthcareApplicationForm job={selectedJob} onClose={() => setSelectedJob(null)} />
+        <HealthcareApplicationForm
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+        />
       )}
 
       {/* Render view jobs when a job is selected */}
-      {view && (
-        <ViewJobs job={view} onClose={() => setView(null)} />
-      )}
-
-
+      {view && <ViewJobs job={view} onClose={() => setView(null)} />}
     </div>
   );
 };
