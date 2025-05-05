@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ContactBtn from "../ui/btns/contactBtn/ContactBtn";
 
 const ContactUs = () => {
   return (
@@ -37,12 +38,7 @@ const ContactUs = () => {
           </p>
 
           <div className="inline-flex flex-col justify-center">
-            <Link
-              href="/contact"
-              className="third-text-color border-2 white-border-color uppercase  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer flex items-center gap-1"
-            >
-              contact us
-            </Link>
+            <ContactBtn design={"third-text-color hover:bg-blue-600 hover:border-blue-600 border-2 white-border-color uppercase  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer flex items-center gap-1"}/>
           </div>
         </div>
       </div>

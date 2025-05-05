@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Hire_Talent from "@/components/ui/ctaBtn/hire_talent/Hire_Talent";
+import Hire_Talent from "@/components/ui/btns/ctaBtn/hire_talent/Hire_Talent";
 const GetStartedPage = () => {
   return (
     <section className="max-w-[1440px] mx-auto w-11/12 flex items-center flex-col justify-center py-12 lg:py-20">
