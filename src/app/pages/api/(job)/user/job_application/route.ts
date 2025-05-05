@@ -25,10 +25,12 @@ export async function POST(req: NextRequest) {
     }
     const timeStamp = Date.now();
     const appliedDate = new Date().toLocaleDateString();
+    const status = "applied";
     await applicationDB.insertOne({
       userEmail,
       jobId,
       timeStamp,
+      status,
       appliedDate,
       ...rest,
     });
