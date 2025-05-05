@@ -9,8 +9,7 @@ const GetStartedPage = () => {
           Get Started With UCL
         </h1>
         <p className="text-xl font-medium">
-          We help companies find great talent — and great talent find great
-          jobs.
+        we help companies & individual people find great talent
         </p>
       </div>
 
@@ -22,7 +21,7 @@ const GetStartedPage = () => {
             For Organizations
           </h3>
           <p className="text-base font-normal mb-6">
-            Hire highly skilled healthcare and life sciences talent with UCL.
+          Hire highly skilled healthcare support talent with UCL.
           </p>
           <Hire_Talent
             design={
