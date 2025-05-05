@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import swal from "sweetalert";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 type FormData = {
   name: string;
@@ -227,11 +228,15 @@ export default function RegisterPage({ flag }: { flag: string }) {
                   onChange={handleImageChange}
                 />
                 {imagePreview && (
-                  <img
-                    src={imagePreview}
-                    alt="Preview"
-                    className="mt-2 w-20 h-20 rounded-full object-cover"
-                  />
+                  <div className="mt-2 w-20 h-20 rounded-full overflow-hidden">
+                    <Image
+                      src={imagePreview}
+                      alt="Preview"
+                      className=" w-full h-full object-cover"
+                      width={500}
+                      height={500}
+                    />
+                  </div>
                 )}
                 {errors.image && (
                   <p className="text-red-500 text-sm">{errors.image.message}</p>
