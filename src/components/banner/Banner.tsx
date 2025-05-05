@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import Hire_Talent from "../ui/ctaBtn/hire_talent/Hire_Talent";
-import Search_Jobs from "../ui/ctaBtn/search_jobs/Search_Jobs";
+import Hire_Talent from "../ui/btns/ctaBtn/hire_talent/Hire_Talent";
+import Search_Jobs from "../ui/btns/ctaBtn/search_jobs/Search_Jobs";
 
 const Banner = () => {
   return (
