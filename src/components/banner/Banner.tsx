@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import Hire_Talent from "../ui/btns/ctaBtn/hire_talent/Hire_Talent";
 import Search_Jobs from "../ui/btns/ctaBtn/search_jobs/Search_Jobs";
 
@@ -30,20 +28,20 @@ const Banner = () => {
             <Hire_Talent 
               
               design={
-                "purple-color-btn main-bg-color border-2 purple-color-border  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer hover:bg-transparent hover:third-text-color "
+                "text-lg font-semibold py-2 px-4 border-2 rounded-md bg-[#ffdb61] text-[#0a0a0a] border-[#ffdb61] hover:bg-transparent hover:text-[#ffdb61] transition-colors duration-300 ease-in-out cursor-pointer"
               }
             />
             <Search_Jobs />
           </div>
         </div>
         {/* Awards */}
-        <div className="flex justify-center gap-6 flex-wrap relative z-10">
+        <div className="flex justify-center gap-6 flex-wrap relative z-10 ">
           <Image
             src="/compressed_successful-medical-team.jpg"
             alt="Staffing Awards"
             width={690}
             height={690}
-            className="w-full max-w-[690px] h-auto rounded-2xl shadow-lg"
+            className="w-full max-w-[690px] h-auto rounded-2xl shadow-lg  "
           />
         </div>
       </div>
