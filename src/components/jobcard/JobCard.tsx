@@ -17,9 +17,9 @@ interface HealthcareJob {
   shiftsNeeded: string[];
   numberOfPositions: string;
   startDate: string;
-  position: string; 
+  position: string;
   otherStaff?: string;
-  _id:string
+  _id: string;
 }
 
 const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {

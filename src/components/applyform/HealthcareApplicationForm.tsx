@@ -61,6 +61,7 @@ interface FormData {
   resume: any;
   userEmail: string;
   jobId: string;
+  status:string
 }
 
 interface Job {
@@ -125,8 +126,9 @@ const HealthcareApplicationForm = ({
     data.signature = signatureBase64;
     data.userEmail = user?.email;
     data.jobId = job?._id;
+    data.status = "applied"
     try {
-      const response = await axios.post("/pages/api/job_application", data);
+      const response = await axios.post("/pages/api/user/job_application", data);
       if (response?.data?.success) {
         swal({
           title: response?.data?.message,
@@ -1001,7 +1003,7 @@ const HealthcareApplicationForm = ({
               <div className="mt-8 flex justify-end">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="px-6 cursor-pointer py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   {!loading ? (
                     "Submit Application"

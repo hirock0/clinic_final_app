@@ -56,10 +56,10 @@ export const authOptions: AuthOptions = {
             email: findUser?.email,
             role: "user",
           };
-          const userToken = jwt.sign(tokenData, process.env.JWT_SECRET!, {
+          const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
             expiresIn: "7d",
           });
-          (await cookies()).set("userToken", userToken, { httpOnly: true });
+          (await cookies()).set("token", token, { httpOnly: true });
         }
       }
 
