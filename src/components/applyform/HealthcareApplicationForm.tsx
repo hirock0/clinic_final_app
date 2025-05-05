@@ -6,96 +6,100 @@ import { useForm } from "react-hook-form";
 import { FiUpload, FiUser, FiX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
+
 interface FormData {
-  fullName: string;
-  dob: string;
-  gender: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  phone: string;
-  email: string;
-  resume: any;
-  contactMethod: string[];
-  whyHealthcare: string;
-  userEmail: string;
-  jobId: string;
+    fullName: string;
+    dob: string;
+    gender: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    phone: string;
+    email: string;
+    resume: any;
+    contactMethod: string[];
+    whyHealthcare: string;
+    userEmail: string;
+    jobId: string;
 }
 
 interface Job {
-  facilityName: string;
-  numberOfPositions: string;
-  _id: string;
+    facilityName: string;
+    numberOfPositions: string;
+    _id: string;
 }
 
 const HealthcareApplicationForm = ({
-  job,
-  onClose,
+    job,
+    onClose,
 }: {
-  job: Job;
-  onClose: () => void;
-}) => {
-  const [loading, setloading] = useState(false);
-  const dispatch = useDispatch();
-  const { user } = useSelector((state: any) => state?.slices);
-  useEffect(() => {
-    dispatch(fetchData);
-  }, [dispatch]);
+    job: Job;
+    onClose: () => void;
+}) =>
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormData>();
+    const [loading, setloading] = useState(false);
+    const dispatch = useDispatch();
+    const { user } = useSelector((state: any) => state?.slices);
+    useEffect(() => {
+        dispatch(fetchData);
+    }, [dispatch]);
 
-  const contactMethods = [
-    { value: "phone", label: "Phone" },
-    { value: "email", label: "Email" },
-    { value: "text", label: "Text" },
-  ];
 
-  const onSubmit = async (data: FormData) => {
-    setloading(true);
-    const resumeFile = data.resume[0];
-    const resumeBase64 = await convertToBase64(resumeFile);
-    data.resume = resumeBase64;
-    data.userEmail = user?.email;
-    data.jobId = job?._id;
 
-    try {
-      const response = await axios.post(
-        "/pages/api/user/job_application",
-        data
-      );
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<FormData>();
 
-      if (response?.data?.success) {
-        swal({
-          title: response?.data?.message,
-          icon: "success",
+    const contactMethods = [
+        { value: "phone", label: "Phone" },
+        { value: "email", label: "Email" },
+        { value: "text", label: "Text" },
+    ];
+
+    const onSubmit = async (data: FormData) => {
+        setloading(true);
+        const resumeFile = data.resume[0];
+        const resumeBase64 = await convertToBase64(resumeFile);
+        data.resume = resumeBase64;
+        data.userEmail = user?.email;
+        data.jobId = job?._id;
+
+        try {
+            const response = await axios.post(
+                "/pages/api/user/job_application",
+                data
+            );
+
+            if (response?.data?.success) {
+                swal({
+                    title: response?.data?.message,
+                    icon: "success",
+                });
+                setloading(false);
+            } else {
+                swal({
+                    title: response?.data?.message,
+                    icon: "warning",
+                });
+                setloading(false);
+            }
+        } catch (error: any) {
+            setloading(false);
+            throw new Error(error.message);
+        }
+    };
+    const convertToBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
         });
-        setloading(false);
-      } else {
-        swal({
-          title: response?.data?.message,
-          icon: "warning",
-        });
-        setloading(false);
-      }
-    } catch (error: any) {
-      setloading(false);
-      throw new Error(error.message);
-    }
-  };
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
-    });
-  };
+    };
 
     return (
         <>
@@ -114,7 +118,7 @@ const HealthcareApplicationForm = ({
                             </div>
                             <button
                                 onClick={onClose}
-                                className="absolute right-5 top-5 bg-base-300 text-gray-700 hover:text-red-500 rounded-md shadow-sm transition-colors duration-300 p-1 cursor-pointer"
+                                className="absolute right-5 top-5 bg-base-300 text-gray-700 hover:text-red-500 rounded-xs shadow-sm transition-colors duration-300 p-1 cursor-pointer"
                             >
                                 <FiX size={24} />
                             </button>
@@ -278,7 +282,9 @@ const HealthcareApplicationForm = ({
 
                                 {/* resume upload section  */}
                                 <div className="mt-4">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Additional Experience (Attach Resume if Available)</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Additional Experience (Attach Resume if Available)
+                                    </label>
                                     <div className="mt-1 flex items-center">
                                         <label className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none cursor-pointer">
                                             <FiUpload className="mr-2" />
@@ -287,8 +293,8 @@ const HealthcareApplicationForm = ({
                                                 type="file"
                                                 className="sr-only"
                                                 accept=".pdf,.doc,.docx"
-                                                {...register('resume', {
-                                                    required: 'Resume is required',
+                                                {...register("resume", {
+                                                    required: "Resume is required",
                                                 })}
                                             />
                                         </label>
@@ -297,12 +303,7 @@ const HealthcareApplicationForm = ({
                                         </span>
                                     </div>
                                 </div>
-
-
                             </section>
-
-
-
 
                             {/* Additional Information */}
                             <section className="border-gray-200 border-b  pb-6">
@@ -339,8 +340,8 @@ const HealthcareApplicationForm = ({
                     </div>
                 </div>
             </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default HealthcareApplicationForm;
