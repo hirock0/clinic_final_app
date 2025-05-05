@@ -1,8 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import CtaBtn from "../ui/ctaBtn/CtaBtn";
-
-
+import Search_Jobs from "../ui/ctaBtn/search_jobs/Search_Jobs";
 const Opportunity = () => {
   return (
     <section className="relative py-12 lg:py-20 max-w-[1440px] mx-auto w-11/12 second-bg-color rounded-2xl mb-12 md:mb-20">
@@ -31,7 +29,7 @@ const Opportunity = () => {
             trusted career partner.
           </p>
           <div className="inline-flex flex-col justify-center">
-            <CtaBtn />
+            <Search_Jobs/>
           </div>
         </div>
       </div>
