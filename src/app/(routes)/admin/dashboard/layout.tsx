@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [
-    { href: "/admin_user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
+    { href: "/admin/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
     { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
 

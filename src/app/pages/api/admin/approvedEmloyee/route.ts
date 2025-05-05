@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { DBConnection } from "@/lib/dbConnection/DBConnection";
 export async function POST(req: NextRequest) {
   try {
-    const { email, role } = await req.json();
-  
+    const { email } = await req.json();
     const filter = {
       email: email,
     };
@@ -13,10 +12,9 @@ export async function POST(req: NextRequest) {
     const client = await DBConnection();
     const findUser = await client
       .db("AllUsers")
-      .collection(role)
+      .collection("employee")
       .find(filter)
       .toArray();
- 
 
     const matchedRole = findUser[0]?.role === "approvedEmployee";
     if (matchedRole) {
@@ -27,7 +25,7 @@ export async function POST(req: NextRequest) {
     } else {
       const updateUser = await client
         .db("AllUsers")
-        .collection(role)
+        .collection("employee")
         .findOneAndUpdate(filter, update);
 
       if (!updateUser) {
