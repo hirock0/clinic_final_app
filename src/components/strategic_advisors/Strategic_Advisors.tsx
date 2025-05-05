@@ -1,5 +1,4 @@
 import { FaUserMd, FaUserTie } from "react-icons/fa";
-import CtaBtn from "../ui/ctaBtn/CtaBtn";
 import Title from "../title/Title";
 const Strategic_Advisors = () => {
   return (
@@ -42,9 +41,6 @@ const Strategic_Advisors = () => {
             </p>
           </div>
         </div>
-        {/* <div className=" mt-5 flex justify-center items-center">
-          <CtaBtn />
-        </div> */}
       </div>
     </section>
   );
