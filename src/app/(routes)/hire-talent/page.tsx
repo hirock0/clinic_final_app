@@ -42,6 +42,7 @@ const HireTalentPage = () => {
         'Therapist',
         'Other'
     ];
+    const staffNeeded = watch('staffNeeded') || [];
 
     const shiftOptions = [
         'Day',
@@ -50,7 +51,7 @@ const HireTalentPage = () => {
         'Weekends',
         'Flexible'
     ];
-    const staffNeeded = watch('staffNeeded') || [];
+  
     const durationOptions = [
         'Per Diem',
         'Temporary (1-12 weeks)',
@@ -216,7 +217,7 @@ const HireTalentPage = () => {
                                     </div>
                                 ))}
                                 {errors.staffNeeded && (
-                                    <span className="text-red-500 text-sm">{errors.staffNeeded.message}</span>
+                                    <span className="text-red-500 text-sm">Staffing Request Details Required</span>
                                 )}
                             </div>
                             {staffNeeded.includes('Other') && (
@@ -242,6 +243,7 @@ const HireTalentPage = () => {
                                     {...register('numberOfPositions', { required: true, min: 1 })}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-md "
                                 />
+                                {errors.numberOfPositions && <span className='text-red-500 text-sm'>Number Of Positions Required</span>}
                             </div>
 
                             <div>
@@ -251,6 +253,7 @@ const HireTalentPage = () => {
                                     {...register('startDate', { required: true })}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-md "
                                 />
+                                {errors.startDate && <span className='text-red-500 text-sm'>Start Date Required</span>}
                             </div>
                         </div>
 
@@ -288,6 +291,7 @@ const HireTalentPage = () => {
                                     <option key={option} value={option}>{option}</option>
                                 ))}
                             </select>
+                            {errors.assignmentDuration && <span className='text-red-500 text-sm'>Assignment Duration Required</span>}
                         </div>
 
                         <div>
@@ -297,6 +301,7 @@ const HireTalentPage = () => {
                                 {...register('additionalNotes')}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md "
                             />
+
                         </div>
                     </div>
                 </div>

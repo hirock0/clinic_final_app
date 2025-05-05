@@ -23,7 +23,15 @@ export async function POST(req: NextRequest) {
         success: false,
       });
     }
-    await applicationDB.insertOne({ userEmail, jobId, ...rest });
+    const timeStamp = Date.now();
+    const appliedDate = new Date().toLocaleDateString();
+    await applicationDB.insertOne({
+      userEmail,
+      jobId,
+      timeStamp,
+      appliedDate,
+      ...rest,
+    });
     return NextResponse.json({
       message: "Form submitted successfully",
       success: true,
