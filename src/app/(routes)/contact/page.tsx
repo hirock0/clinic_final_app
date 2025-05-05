@@ -1,16 +1,20 @@
 // app/contact/page.tsx
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 
 export default function ContactPage() {
   return (
-    <section className="py-12 md:py-20 flex flex-col items-center justify-center">
-      <div className="max-w-7xl mx-auto w-11/12">
+    <section className=" scroll-mt-40 py-20 max-md:py-10 ">
+      <div className=" max-w-[1440px] mx-auto w-11/12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Side - Contact Information */}
           <div className=" p-8 rounded-lg">
-            <h2 className="text-2xl font-semibold second-text-color mb-4">Get in Touch</h2>
-            <p className='mb-6'>Reach out for a no-obligation discovery call or visit. <br/>
-              Call or submit the form.</p>
+            <h2 className="text-2xl font-semibold second-text-color mb-4">
+              Get in Touch
+            </h2>
+            <p className="mb-6">
+              Reach out for a no-obligation discovery call or visit. <br />
+              Call or submit the form.
+            </p>
 
             <div className="space-y-6">
               {/* Phone */}
@@ -31,7 +35,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-gray-500 text-sm font-medium">Email</h3>
-                  <p className="second-text-color text-lg">info@unitedcarelinks.com</p>
+                  <p className="second-text-color text-lg">
+                    info@unitedcarelinks.com
+                  </p>
                 </div>
               </div>
 
@@ -41,9 +47,11 @@ export default function ContactPage() {
                   <FaMapMarkerAlt className="main-text-color text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-gray-500 text-sm font-medium">Our Address</h3>
+                  <h3 className="text-gray-500 text-sm font-medium">
+                    Our Address
+                  </h3>
                   <p className="second-text-color text-lg">
-                  13715 Rosecroft Way, San Diego, CA 92130, USA
+                    13715 Rosecroft Way, San Diego, CA 92130, USA
                   </p>
                 </div>
               </div>
@@ -54,7 +62,9 @@ export default function ContactPage() {
                   <FaClock className="main-text-color text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-gray-500 text-sm font-medium">Hours of Operation</h3>
+                  <h3 className="text-gray-500 text-sm font-medium">
+                    Hours of Operation
+                  </h3>
                   <p className="second-text-color text-lg">
                     Monday - Friday: 8:00 AM - 5:00 PM
                   </p>
@@ -65,12 +75,17 @@ export default function ContactPage() {
 
           {/* Right Side - Contact Form */}
           <div className=" p-8 rounded-lg border-2 main-border-color ">
-            <h2 className="text-2xl font-semibold second-text-color mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-semibold second-text-color mb-6">
+              Send Us a Message
+            </h2>
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="first-name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     First Name*
                   </label>
                   <input
@@ -83,7 +98,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Last Name*
                   </label>
                   <input
@@ -97,7 +115,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email*
                 </label>
                 <input
@@ -110,7 +131,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Phone (Optional)
                 </label>
                 <input
@@ -122,7 +146,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Description*
                 </label>
                 <textarea
