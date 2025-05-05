@@ -20,7 +20,7 @@ interface HealthcareJob {
   startDate: string;
   otherStaff?: string;
   position: string;
-  _id:string
+  _id: string;
 }
 
 const JobsPage = () => {
@@ -53,7 +53,9 @@ const JobsPage = () => {
       {/* Job Cards */}
       <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20 ">
         {loading ? (
-          <Loading style="flex items-center justify-center" />
+          <div className=" h-[60vh] flex items-center justify-center">
+            <Loading style="flex items-center justify-center" />
+          </div>
         ) : (
           <JobCard jobs={jobs} />
         )}
