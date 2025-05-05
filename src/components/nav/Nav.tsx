@@ -106,9 +106,8 @@ const Nav = () => {
         <div className="uppercase max-[1400px]:text-sm max-lg:text-base">
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`${
-              !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            className={`${!menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
+              } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
               <ul
@@ -130,9 +129,8 @@ const Nav = () => {
                       <FaSortDown />
                     </div>
                     <div
-                      className={`${
-                        activeSubMenu === item.title ? "block" : "hidden"
-                      } lg:group-hover:block lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
+                      className={`${activeSubMenu === item.title ? "block" : "hidden"
+                        } lg:group-hover:block lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
                     >
                       <ul className="text-nowrap flex flex-col gap-3">
                         {item.subLinks.map((subItem, subIndex) => (
@@ -178,69 +176,67 @@ const Nav = () => {
                   className="text-base font-semibold border-2 py-2 px-4 rounded-md border-gray-300 text-gray-700 hover:text-gray-500 transition-colors ease-in-out duration-300 cursor-pointer"
                 >
                   SignUp
-                  </button>
-                  {loginDropdownOpen && (
-                    <div
-                      onClick={(e) => e.stopPropagation()}
-                      className="absolute right-0 top-full mt-3 w-64 bg-white rounded-xl shadow-xl z-50 border border-gray-100"
-                    >
-                      <ul className="text-sm text-gray-700 p-3 space-y-2">
-                        <Link href="/user/login" className="block">
-                          <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                            <div className="text-cyan-500 transition-transform group-hover:scale-110">
-                              <AiOutlineLogin size={20} />
-                            </div>
-                            <span className="font-medium">User</span>
-                          </li>
-                        </Link>
-                        <Link href="/institutional/login" className="block">
-                          <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                            <div className="text-cyan-500 transition-transform group-hover:scale-110">
-                              <AiOutlineLogin size={20} />
-                            </div>
-                            <span className="font-medium">Institutional</span>
-                          </li>
-                        </Link>
-                        <Link href="/admin/login" className="block">
-                          <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                            <div className="text-cyan-500 transition-transform group-hover:scale-110">
-                              <AiOutlineLogin size={20} />
-                            </div>
-                            <span className="font-medium">Admin</span>
-                          </li>
-                        </Link>
-                        <Link href="/employee/login" className="block">
-                          <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                            <div className="text-cyan-500 transition-transform group-hover:scale-110">
-                              <AiOutlineLogin size={20} />
-                            </div>
-                            <span className="font-medium">Employee</span>
-                          </li>
-                        </Link>
-                      </ul>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className=" loading loading-spinner"></div>
-              )
+                </button>
+                {loginDropdownOpen && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute right-0 top-full mt-3 w-64 bg-white rounded-xl shadow-xl z-50 border border-gray-100"
+                  >
+                    <ul className="text-sm text-gray-700 p-3 space-y-2">
+                      <Link href="/user/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span className="font-medium">User</span>
+                        </li>
+                      </Link>
+                      <Link href="/institutional/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span className="font-medium">Institutional</span>
+                        </li>
+                      </Link>
+                      <Link href="/admin/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span className="font-medium">Admin</span>
+                        </li>
+                      </Link>
+                      <Link href="/employee/login" className="block">
+                        <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
+                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                            <AiOutlineLogin size={20} />
+                          </div>
+                          <span className="font-medium">Employee</span>
+                        </li>
+                      </Link>
+                    </ul>
+                  </div>
+                )}
+              </>
             ) : (
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setProfileMenu(!profileMenu);
-                }}
-                className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
-              >
-                <Image
-                  src={user.image?.secure_url}
-                  alt="user"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            )}
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setProfileMenu(!profileMenu);
+              }}
+              className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
+            >
+              <Image
+                src={user.image?.secure_url}
+                alt="user"
+                width={500}
+                height={500}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            )
+          }
           </div>
 
           {/* Profile Popup */}
