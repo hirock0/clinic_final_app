@@ -101,9 +101,7 @@ const HealthcareApplicationForm = ({ job, onClose }: { job: Job; onClose: () => 
 
     const onSubmit = (data: FormData) => {
         console.log('Form submitted: ', data);
-        // Use applyform instead of formData
-
-        // ... rest of your submission logic
+        
     };
 
     return (
