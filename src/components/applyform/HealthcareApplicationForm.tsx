@@ -36,7 +36,7 @@ const HealthcareApplicationForm = ({
 }: {
     job: Job;
     onClose: () => void;
-}) =>
+}) => {
 
     const [loading, setloading] = useState(false);
     const dispatch = useDispatch();
