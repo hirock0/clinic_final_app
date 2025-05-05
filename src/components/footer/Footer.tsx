@@ -18,7 +18,7 @@ const Footer = () => {
     return null;
   }
   return (
-    <footer className={` bg-primary-color border-t-1 border-gray-500`}>
+    <footer className={` bg-primary-color border-t-1 border-gray-100`}>
       <div className="footer md:footer-horizontal max-w-[1400px] w-11/12 mx-auto py-12 md:py-20">
         <nav>
           <h6 className="second-text-color font-semibold text-lg">Services</h6>
