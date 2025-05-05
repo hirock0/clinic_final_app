@@ -27,7 +27,7 @@ type FormData = {
 
 export default function RegisterPage({ flag }: { flag: string }) {
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
+  const redirectTo = searchParams.get("redirectTo") ||  `/${flag}/dashboard`;
   const router = useRouter();
   const {
     register,
@@ -69,6 +69,9 @@ export default function RegisterPage({ flag }: { flag: string }) {
       if (response?.data?.success) {
         swal({ title: response?.data?.message, icon: "success" });
         router.push(redirectTo);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         swal({ title: response?.data?.message, icon: "warning" });
       }

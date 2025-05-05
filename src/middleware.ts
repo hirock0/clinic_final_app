@@ -17,7 +17,7 @@ async function verifyToken(token: string) {
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const pathname = url.pathname.replace(/\/$/, ""); 
+  const pathname = url.pathname.replace(/\/$/, "");
   const search = url.search;
 
   const token = request.cookies.get("token")?.value || "";
@@ -43,7 +43,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   };
 
- 
   if (!token) {
     if (isInstitutionalPath && !isPublic(institutionalPublicPaths)) {
       return redirectWithReturn("/institutional/login");
@@ -62,7 +61,6 @@ export async function middleware(request: NextRequest) {
     }
     return NextResponse.next();
   }
-
 
   const payload: any = await verifyToken(token);
 
@@ -87,19 +85,24 @@ export async function middleware(request: NextRequest) {
 
   const role = payload?.role;
 
-  
   if (role === "institutional" && isPublic(institutionalPublicPaths)) {
-    const redirectTo = request.nextUrl.searchParams.get("redirectTo") || "/institutional/dashboard";
+    const redirectTo =
+      request.nextUrl.searchParams.get("redirectTo") ||
+      "/institutional/dashboard";
     return NextResponse.redirect(new URL(redirectTo, request.url));
   }
 
   if (role === "user" && isPublic(userPublicPaths)) {
-    const redirectTo = request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
+    const redirectTo =
+      request.nextUrl.searchParams.get("redirectTo") || "/user/dashboard";
     return NextResponse.redirect(new URL(redirectTo, request.url));
   }
 
   if (role === "admin" && isPublic(adminPublicPaths)) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
+  }
+  if (role !== "admin" && !isPublic(adminPublicPaths) && isAdminPath) {
+    return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
   if (role === "employee" && isPublic(employeePublicPaths)) {
@@ -108,8 +111,7 @@ export async function middleware(request: NextRequest) {
 
   if (
     role === "approvedEmployee" &&
-    isEmployeePath &&
-    !isPublic(employeePublicPaths) &&
+    isPublic(employeePublicPaths) &&
     pathname !== "/employee/dashboard"
   ) {
     return NextResponse.redirect(new URL("/employee/dashboard", request.url));
@@ -124,7 +126,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/employee/awaiting", request.url));
   }
 
-  if (role !== "institutional" && isHireTalentPath) {
+  if ((role === "institutional" || role === "admin") && isHireTalentPath) {
+    return NextResponse.next();
+  }
+  if (role !== "institutional" && role !== "admin" && isHireTalentPath) {
     return NextResponse.redirect(new URL("/institutional/login", request.url));
   }
 

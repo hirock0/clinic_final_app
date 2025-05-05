@@ -27,7 +27,8 @@ const Banner = () => {
             that.
           </p>
           <div className="flex justify-center lg:justify-start gap-4">
-            <Hire_Talent
+            <Hire_Talent 
+              
               design={
                 "purple-color-btn main-bg-color border-2 purple-color-border  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer hover:bg-transparent hover:third-text-color "
               }

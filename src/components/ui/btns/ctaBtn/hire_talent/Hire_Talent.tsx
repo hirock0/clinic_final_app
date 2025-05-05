@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-const Hire_Talent = ({design}:{design:any}) => {
+const Hire_Talent = ({ design }: { design: any }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
@@ -13,15 +13,17 @@ const Hire_Talent = ({design}:{design:any}) => {
   }, [dispatch]);
 
   const onTalentHandler = () => {
-    if (user?.role === "employee") {
+    if (user?.role === "employee" || user?.role === "approvedEmployee") {
       swal({
-        title: "You have already employee logged in",
-        text: "Please logout",
+        title: "You are employee",
+        text: "Login for institutional",
+        icon: "warning",
       });
     } else if (user?.role === "user") {
       swal({
-        title: "You have already user logged in",
-        text: "Please logout",
+        title: "You are user",
+        text: "Login for institution",
+        icon: "warning",
       });
     } else {
       router.push("/hire-talent");
@@ -29,10 +31,7 @@ const Hire_Talent = ({design}:{design:any}) => {
   };
 
   return (
-    <button
-      onClick={onTalentHandler}
-      className={design}
-    >
+    <button onClick={onTalentHandler} className={design}>
       HIRE TALENT
     </button>
   );
