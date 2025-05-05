@@ -338,6 +338,6 @@ const HealthcareApplicationForm = ({
             </div>
         </>
     );
-
+}
 
 export default HealthcareApplicationForm;
