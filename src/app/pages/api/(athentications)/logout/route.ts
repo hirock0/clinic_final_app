@@ -6,7 +6,7 @@ export async function GET() {
       message: "Logout successfully",
       success: true,
     });
-    response.cookies.delete("institutionalToken");
+    response.cookies.delete("token");
     return response;
   } catch (error: any) {
     return NextResponse.json({

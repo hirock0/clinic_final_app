@@ -17,12 +17,7 @@ import DashboardSideBar from "../dashboardSideBar/DashboardSideBar";
 const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-
+  const { user } = useSelector((state: any) => state?.slices);
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   useEffect(() => {
@@ -81,11 +76,9 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             <div className="absolute h-2 w-2 rounded-full bg-red-500"></div>
             <IoMdNotifications size={25} />
           </button>
+          {flag === "admin" && <Link href={"/admin/login"}>Login</Link>}
           <div>
-            {(flag === "user" && userData?.image?.secure_url) ||
-            (flag === "employee" && employeeData?.image?.secure_url) ||
-            (flag === "institutional" &&
-              institutionalData?.image?.secure_url) ? (
+            {user ? (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -94,13 +87,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
                 className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
                 <Image
-                  src={
-                    flag === "user"
-                      ? userData.image.secure_url
-                      : flag === "institutional"
-                      ? institutionalData?.image?.secure_url
-                      : employeeData.image.secure_url
-                  }
+                  src={user.image.secure_url}
                   alt="user"
                   width={500}
                   height={500}

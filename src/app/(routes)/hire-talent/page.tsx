@@ -23,10 +23,7 @@ type FormValues = {
 }
 
 const HireTalentPage = () => {
-
-    //react hook form
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<FormValues>()
-
     const facilityTypes = [
         'Hospital',
         'Clinic',
@@ -54,8 +51,7 @@ const HireTalentPage = () => {
         'Weekends',
         'Flexible'
     ];
-
-
+  
     const durationOptions = [
         'Per Diem',
         'Temporary (1-12 weeks)',
@@ -63,11 +59,7 @@ const HireTalentPage = () => {
         'Permanent',
         'Other'
     ];
-
-
     const onSubmit = async (data: FormValues) => {
-        
-        console.log(data)
         try {
             await axios.post('/pages/api/jobs', data,{
                 headers: {

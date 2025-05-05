@@ -19,7 +19,8 @@ interface HealthcareJob {
   numberOfPositions: string;
   startDate: string;
   otherStaff?: string;
-  position: string; // Added the missing property
+  position: string;
+  _id:string
 }
 
 const JobsPage = () => {

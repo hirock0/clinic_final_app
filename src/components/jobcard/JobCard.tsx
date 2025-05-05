@@ -21,6 +21,7 @@ interface HealthcareJob {
   startDate: string;
   position: string; 
   otherStaff?: string;
+  _id:string
 }
 
 interface viewDetails {
@@ -46,42 +47,42 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-
+  const { user } = useSelector((state: any) => state?.slices);
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
-  const [view, setView] = useState<viewDetails | null>(null)
+  const [view, setView] = useState<viewDetails | null>(null);
 
 const viewDetails = (job: any) => {
   console.log(job)
   setView(job)
 }
 
-
   const applyHandler = (job: any) => {
-    if (institutionalData) {
-      swal({
-        title: "You have already institutional loggedin",
-        text: "Please logout first",
-        icon: "warning",
-      });
-    } else {
-      if (employeeData) {
+    if (!user) {
+      router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+    } else if (user?.role !== "user") {
+      if (user?.role === "institutional") {
         swal({
-          title: "You have already employee loggedin",
+          title: "You have already institutional loggedin",
           text: "Please logout first",
           icon: "warning",
         });
       } else {
-        if (!userData) {
-          router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+        if (user?.role === "admin") {
+          swal({
+            title: "You have already admin loggedin",
+            text: "Please logout first",
+            icon: "warning",
+          });
         } else {
-          setSelectedJob(job);
+          swal({
+            title: "You have already employee loggedin",
+            text: "Please logout first",
+            icon: "warning",
+          });
         }
       }
+    } else {
+      setSelectedJob(job);
     }
   };
 

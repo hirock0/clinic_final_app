@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert";
 
@@ -19,26 +18,18 @@ export default function ProfileSidebar({
 }) {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
+  const { user } = useSelector((state: any) => state?.slices);
 
+  
   const logoutHandler = async () => {
     try {
-      const response = await axios.get(
-        `/pages/api/${flag === "approvedEmployee" ? "employee" : flag}/logout`
-      );
+      const response = await axios.get(`/pages/api/logout`);
       if (response?.data?.success) {
         swal({
           title: response?.data?.message,
           icon: "success",
         });
         await signOut();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       } else {
         swal({
           title: "Something went wrong!",
@@ -49,77 +40,55 @@ export default function ProfileSidebar({
       throw new Error(String(error.message));
     }
   };
-  console.log(flag);
+
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
   return (
-    <aside className="w-full  bg-white shadow-md h-full p-4 space-y-6">
-      <div className="flex items-center gap-3">
-        <div className=" w-12 h-12 overflow-hidden rounded-full">
+    <aside className="w-full sm:max-w-xs bg-white shadow-lg rounded-xl h-full p-6 space-y-8 transition-all">
+      {/* User Profile */}
+      <div className="flex items-center gap-4">
+        <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200">
           <Image
-            src={
-              (flag === "user" && userData?.image?.secure_url) ||
-              ((flag === "approvedEmployee" || flag === "employee") &&
-                employeeData?.image?.secure_url) ||
-              (flag === "institutional" && institutionalData?.image?.secure_url)
-            }
-            alt={
-              (flag === "user" && userData?.role) ||
-              ((flag === "approvedEmployee" || flag === "employee") &&
-                employeeData?.name) ||
-              (flag === "institutional" && institutionalData?.role)
-            }
-            className=" w-full h-full object-cover"
-            width={500}
-            height={500}
+            src={user?.image?.secure_url}
+            alt={user?.role}
+            className="object-cover w-full h-full"
+            width={56}
+            height={56}
           />
         </div>
         <div>
-          <div className="">
-            <p className="text-lg font-bold">
-              {(flag === "user" && userData?.name) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.name) ||
-                (flag === "institutional" && institutionalData?.role)}
-            </p>
-
-            <p className="text-sm text-gray-500">
-              {(flag === "user" && userData?.email) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.email) ||
-                (flag === "institutional" && institutionalData?.email)}
-            </p>
-            <p>
-              Role: (
-              {(flag === "user" && userData?.role) ||
-                ((flag === "approvedEmployee" || flag === "employee") &&
-                  employeeData?.name) ||
-                (flag === "institutional" && institutionalData?.role)}
-              )
-            </p>
-          </div>
+          <p className="text-lg font-semibold">{user?.name}</p>
+          <p className="text-sm text-gray-500">{user?.email}</p>
+          <p className="text-sm text-blue-600 font-medium">Role: {user?.role}</p>
         </div>
       </div>
-      <nav className="flex flex-col space-y-2">
+
+      {/* Navigation Links */}
+      <nav className="flex flex-col gap-2">
         {navLinks?.map((item: any) => (
           <Link
             key={item?.href}
             href={item?.href}
-            className={`flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-blue-100 transition ${
+            className={`flex items-center gap-3 px-4 py-2 rounded-md font-medium transition-all duration-300 ${
               pathname === item.href
-                ? "bg-blue-500 text-white"
-                : "text-gray-700"
+                ? "bg-blue-600 text-white shadow"
+                : "text-gray-700 hover:bg-blue-100"
             }`}
           >
-            {item.icon}
-            <span>{item.label}</span>
+            <span className="text-xl">{item.icon}</span>
+            <span className="truncate">{item.label}</span>
           </Link>
         ))}
       </nav>
-      <div className="">
-        <button onClick={logoutHandler} className="cursor-pointer">
+
+      {/* Logout Button */}
+      <div>
+        <button
+          onClick={logoutHandler}
+          className="w-full text-center bg-red-500 hover:bg-red-700 active:bg-red-800 text-white font-semibold py-2 rounded-md cursor-pointer transition"
+        >
           Log Out
         </button>
       </div>
