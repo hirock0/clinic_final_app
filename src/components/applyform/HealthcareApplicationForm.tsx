@@ -111,7 +111,7 @@ const HealthcareApplicationForm = ({
                             </div>
                             <button
                                 onClick={onClose}
-                                className="absolute right-5 top-5 bg-base-300 text-gray-700 hover:text-red-500 rounded-xs shadow-sm transition-colors duration-300 p-1 cursor-pointer"
+                                className="absolute right-5 top-5 bg-base-300 text-gray-700 hover:text-red-500 rounded-md shadow-sm transition-colors duration-300 p-1 cursor-pointer"
                             >
                                 <FiX size={24} />
                             </button>
