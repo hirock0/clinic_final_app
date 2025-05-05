@@ -1,4 +1,3 @@
-
 "use client";
 import { fetchData } from "@/utils/redux/slices/slice";
 import axios from "axios";
@@ -8,91 +7,95 @@ import { FiUpload, FiUser, FiX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 interface FormData {
-    fullName: string;
-    dob: string;
-    gender: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-    phone: string;
-    email: string;
-    resume: any;
-    contactMethod: string[];
-    whyHealthcare: string;
-    userEmail: string;
-    jobId: string;
+  fullName: string;
+  dob: string;
+  gender: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
+  email: string;
+  resume: any;
+  contactMethod: string[];
+  whyHealthcare: string;
+  userEmail: string;
+  jobId: string;
 }
 
 interface Job {
-    facilityName: string;
-    numberOfPositions: string;
-    _id: string;
+  facilityName: string;
+  numberOfPositions: string;
+  _id: string;
 }
 
 const HealthcareApplicationForm = ({
-    job,
-    onClose,
+  job,
+  onClose,
 }: {
-    job: Job;
-    onClose: () => void;
+  job: Job;
+  onClose: () => void;
 }) => {
-    const [loading, setloading] = useState(false);
-    const dispatch = useDispatch();
-    const { user } = useSelector((state: any) => state?.slices);
-    useEffect(() => {
-        dispatch(fetchData);
-    }, [dispatch]);
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state?.slices);
+  useEffect(() => {
+    dispatch(fetchData);
+  }, [dispatch]);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>();
 
-    const contactMethods = [
-        { value: "phone", label: "Phone" },
-        { value: "email", label: "Email" },
-        { value: "text", label: "Text" },
-    ];
+  const contactMethods = [
+    { value: "phone", label: "Phone" },
+    { value: "email", label: "Email" },
+    { value: "text", label: "Text" },
+  ];
 
+  const onSubmit = async (data: FormData) => {
+    setloading(true);
+    const resumeFile = data.resume[0];
+    const resumeBase64 = await convertToBase64(resumeFile);
+    data.resume = resumeBase64;
+    data.userEmail = user?.email;
+    data.jobId = job?._id;
 
-    const onSubmit = async (data: FormData) => {
-        setloading(true);
-        const resumeFile = data.resume[0];
-        const resumeBase64 = await convertToBase64(resumeFile);
-        data.resume = resumeBase64;
-        data.userEmail = user?.email;
-        data.jobId = job?._id;
-        try {
-            const response = await axios.post("/pages/api/job_application", data);
-            if (response?.data?.success) {
-                swal({
-                    title: response?.data?.message,
-                    icon: "success",
-                });
-                setloading(false);
-            } else {
-                swal({
-                    title: response?.data?.message,
-                    icon: "warning",
-                });
-                setloading(false);
-            }
-        } catch (error: any) {
-            setloading(false);
-            throw new Error(error.message);
-        }
-    };
-    const convertToBase64 = (file: File): Promise<string> => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result as string);
-            reader.onerror = reject;
+    try {
+      const response = await axios.post(
+        "/pages/api/user/job_application",
+        data
+      );
+
+      if (response?.data?.success) {
+        swal({
+          title: response?.data?.message,
+          icon: "success",
         });
-    };
+        setloading(false);
+      } else {
+        swal({
+          title: response?.data?.message,
+          icon: "warning",
+        });
+        setloading(false);
+      }
+    } catch (error: any) {
+      setloading(false);
+      throw new Error(error.message);
+    }
+  };
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+  };
 
     return (
         <>
@@ -336,8 +339,8 @@ const HealthcareApplicationForm = ({
                     </div>
                 </div>
             </div>
-        </>
-    );
-}
+    </>
+  );
+};
 
 export default HealthcareApplicationForm;
