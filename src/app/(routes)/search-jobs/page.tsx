@@ -19,7 +19,8 @@ interface HealthcareJob {
   numberOfPositions: string;
   startDate: string;
   otherStaff?: string;
-  position: string; 
+  position: string;
+  _id:string
 }
 
 const JobsPage = () => {
