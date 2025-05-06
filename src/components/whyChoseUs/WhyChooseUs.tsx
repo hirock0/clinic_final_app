@@ -37,9 +37,11 @@ export default function WhyChooseUs() {
   return (
     <section className="text-center bg-base-100 py-12 md:py-20 ">
       <div className="max-w-[1440px] mx-auto w-11/12">
-        <Title heading="WHY CHOOSE UNITED CARE LINKS" paragraph="United Care Links is a California-based healthcare staffing squad that&apos;s all about one thing: making sure your care team is stacked with reliable, compassionate pros.
+        <div className="mx-auto flex items-center flex-col max-w-5xl">
+          <Title heading="WHY CHOOSE UNITED CARE LINKS" paragraph="United Care Links is a California-based healthcare staffing squad that&apos;s all about one thing: making sure your care team is stacked with reliable, compassionate pros.
 From 24/7 nurses to niche therapists and group facilitators, we&apos;ve got your back—filling in every gap so you can keep your eyes on what matters most: your patients.
 "/>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features?.map((feature, idx) => (

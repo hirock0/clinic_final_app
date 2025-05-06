@@ -1,46 +1,56 @@
 import { FaUserMd, FaUserTie } from "react-icons/fa";
 import Title from "../title/Title";
+import Image from "next/image";
 const Strategic_Advisors = () => {
+
+  const strategicAdvisors = [
+    {
+      name: "Emily Wilson",
+      title: "Chief Medical Officer",
+      photo: "/team/Profile Picture-02.jpg",
+      bio: "Board-certified physician leading clinical quality and compliance initiatives."
+    },
+    {
+      name: "Sarah Johnson",
+      title: "Chief Operations Officer",
+      photo: "/team/Profile Picture-04.jpg",
+      bio: "Specializes in operational efficiency and staff development for healthcare providers."
+    }
+
+  ]
+
+
   return (
 
     <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className=" max-w-[1440px] mx-auto w-11/12 flex flex-col items-center text-center ">
-      <Title heading="Strategic Advisors" paragraph="We&apos;re proud to be guided by trusted advisors whose decades of
-          expertise shape our strategy and vision."/>
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* Advisor 1 */}
-          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple border-2 main-border-color transition-transform duration-300 ease-in-out hover:scale-105">
-            <div className="mb-4">
-              <FaUserMd className="main-text-color text-5xl" />
-            </div>
-            <h3 className="text-2xl font-bold text-secondary-color text-left mb-4">
-            Dr Aboo Nasar
-            </h3>
+      <div className=" max-w-[1440px] mx-auto w-11/12 flex items-center flex-col-reverse lg:flex-row justify-between gap-8">
 
-            <p className="second-text-color text-left ">
-              A respected name in healthcare education and clinical training,
-              Dr. Nasar brings over 30 years of experience in clinical
-              operations, academic leadership, and workforce development. His
-              mentorship helps ensure our staffs are not just placed—they&apos;re
-              prepared to thrive.
-            </p>
-          </div>
-
-          {/* Advisor 2 */}
-          <div className="p-6 lg:p-10 rounded-xl soft-bg-purple border-2 main-border-color transition-transform duration-300 ease-in-out hover:scale-105">
-            <div className="mb-4">
-              <FaUserTie className="main-text-color text-5xl" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:w-1/2">
+          {strategicAdvisors.map((member) => (
+            <div key={member.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative group">
+              <div className="aspect-w-3 aspect-h-3 relative">
+                <Image
+                  src={member.photo}
+                  alt={member.name}
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-[500px] lg:h-[400px]"
+                />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out">
+                <h3 className="text-xl font-semibold text-white text-shadow-[#ffdb61] text-shadow-2xs">{member.name}</h3>
+                <p className="accent-text-color font-medium">{member.title}</p>
+                <p className="mt-3 text-gray-200">{member.bio}</p>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-secondary-color text-left mb-4">
-            (Advisor Name Pending)
-            </h3>
-            <p className="second-text-color text-left ">
-            With a strong background in healthcare policy and systems improvement, our second
-              advisor contributes critical insight that helps us stay agile and forward-thinking in an
-              evolving healthcare landscape.
-            </p>
-          </div>
+          ))}
         </div>
+
+        <div className="w-full flex flex-col items-start text-start lg:items-end lg:text-end lg:max-w-xl lg:w-1/2">
+          <Title heading="Strategic Advisors" paragraph="We&apos;re proud to be guided by trusted advisors whose decades of
+          expertise shape our strategy and vision."/>
+        </div>
+
       </div>
     </section>
   );
