@@ -8,10 +8,10 @@ interface TitleProps {
 const Title: React.FC<TitleProps> = ({ heading, paragraph }) => {
     return (
         <>
-            <h2 className="text-4xl font-black mb-4 second-text-color uppercase text-center" style={{ fontFamily: 'var(--font-inter' }}>
+            <h2 className="text-4xl font-black mb-4 second-text-color uppercase" style={{ fontFamily: 'var(--font-inter' }}>
                 {heading}
             </h2>
-            <p className="text-lg mb-8 max-w-3xl mx-auto text-center" style={{ fontFamily: 'var(--font-inter' }}>
+            <p className="text-lg mb-8 " style={{ fontFamily: 'var(--font-inter' }}>
                 {paragraph}
             </p>
         </>

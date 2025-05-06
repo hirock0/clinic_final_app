@@ -11,35 +11,37 @@ const LeadershipTeam = () => {
             photo: "/team/Profile Picture-02.jpg", // Replace with your image paths
             bio: "Healthcare industry veteran with 15+ years of experience building patient-first organizations."
         },
-        {
-            name: "Sarah Johnson",
-            title: "Chief Operations Officer",
-            photo: "/team/Profile Picture-04.jpg",
-            bio: "Specializes in operational efficiency and staff development for healthcare providers."
-        },
+        // {
+        //     name: "Sarah Johnson",
+        //     title: "Chief Operations Officer",
+        //     photo: "/team/Profile Picture-04.jpg",
+        //     bio: "Specializes in operational efficiency and staff development for healthcare providers."
+        // },
         {
             name: "Michael Chen",
             title: "Chief Technology Officer",
             photo: "/team/Profile Picture-06.jpg",
             bio: "Technology innovator focused on modernizing healthcare staffing solutions."
         },
-        {
-            name: "Emily Wilson",
-            title: "Chief Medical Officer",
-            photo: "/team/Profile Picture-02.jpg",
-            bio: "Board-certified physician leading clinical quality and compliance initiatives."
-        }
+        // {
+        //     name: "Emily Wilson",
+        //     title: "Chief Medical Officer",
+        //     photo: "/team/Profile Picture-02.jpg",
+        //     bio: "Board-certified physician leading clinical quality and compliance initiatives."
+        // }
     ];
 
 
 
     return (
         <section className="pb-12 lg:pb-20 bg-gray-50">
-            <div className="max-w-[1440px] mx-auto w-11/12">
+            <div className="max-w-[1440px] mx-auto w-11/12 flex items-center flex-col lg:flex-row justify-between gap-8">
 
-                <Title heading='Our Leadership Team' paragraph='The experienced professionals guiding our mission' />
+                <div className="w-full flex flex-col items-start text-start lg:max-w-xl lg:w-1/2">
+                <Title heading='Our Leadership Team' paragraph='We&apos;re proud to be guided by trusted advisors whose decades of expertise shape our strategy and vision.' />
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:w-1/2">
                     {teamMembers.map((member) => (
                         <div key={member.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative group">
                             <div className="aspect-w-3 aspect-h-3 relative">
