@@ -50,7 +50,7 @@ const LeadershipTeam = () => {
                                     alt={member.name}
                                     width={500}
                                     height={500}
-                                    className="object-cover w-full h-[500px] lg:h-[400px]"
+                                    className="object-cover w-full h-[500px] lg:h-[500px]"
                                 />
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out">

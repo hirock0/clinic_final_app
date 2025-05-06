@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import ContactBtn from "../ui/btns/contactBtn/ContactBtn";
 
@@ -9,7 +8,7 @@ const ContactUs = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/CTA-Full-Width-Texture.png" // Replace with your image path
+          src="/CTA-Full-Width-Texture.png" 
           alt="Job opportunity background"
           fill
           className="object-cover"
