@@ -1,88 +1,15 @@
+export const dynamic = "force-dynamic";
 import JobsContainer from "@/components/(dashboards)/jobsContainer/JobsContainer";
+import { FindInstitutionalJobs } from "@/app/actions/apis/Apis";
+import { VerifyToken } from "@/app/actions/apis/Apis";
+const JobsPage = async () => {
+  const user = await VerifyToken();
+  const reqApplications = await FindInstitutionalJobs(user?.email);
+  const jobs = await reqApplications?.appliedJobs;
 
-const initialJobs = [
-  {
-    id: 1,
-    title: "Frontend Developer",
-    company: "TechNova",
-    location: "Remote",
-    dateApplied: "2025-05-01",
-  },
-  {
-    id: 2,
-    title: "Backend Engineer",
-    company: "CodeCraft",
-    location: "San Francisco",
-    dateApplied: "2025-04-28",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-  {
-    id: 3,
-    title: "Full Stack Developer",
-    company: "WebWave",
-    location: "New York",
-    dateApplied: "2025-04-25",
-  },
-];
-const JobsPage = () => {
   return (
     <div>
-      {/* <JobsContainer jobsData={initialJobs} title={"posted"} /> */}
+      <JobsContainer jobsData={jobs} title={"Posted"} />
     </div>
   );
 };
