@@ -9,7 +9,8 @@ const JobsPage = async () => {
   );
   return (
     <div>
-      <JobsContainer jobsData={approvedJobs} title={"Posted"} />
+      {/* <JobsContainer jobsData={approvedJobs} title={"Posted"} /> */}
+      <h1>Not applied yet</h1>
     </div>
   );
 };
