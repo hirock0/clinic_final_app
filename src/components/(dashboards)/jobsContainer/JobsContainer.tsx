@@ -24,8 +24,8 @@ const JobsContainer = ({
     job?.facilityName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const deleteHandler = (id: any) => {;
-    setJobs((prevJos: any) => prevJos.filter((job:any) => job._id !== id));
+  const deleteHandler = (id: any) => {
+    setJobs((prevJos: any) => prevJos.filter((job: any) => job._id !== id));
   };
 
   useEffect(() => {
@@ -88,17 +88,18 @@ const JobsContainer = ({
                       Applied on: {job?.postdDate}
                     </p>
                   </div>
-                  .
                   <div className="flex flex-col gap-2 mt-4 sm:mt-0 sm:ml-6">
-                    <DeleteJobBtn deleteHandler={deleteHandler} job={job} />
-
-                    <Link
-                      href={`/admin/posted/add_info/${job?._id}`}
-                      className="text-sm  bg-slate-300 rounded-sm shadow-md hover:scale-105 active:scale-100 p-2 text-blue-600 hover:text-blue-800 transition"
-                    >
-                      Add Info
-                    </Link>
-                    
+                    {user?.role === "admin" && (
+                      <DeleteJobBtn deleteHandler={deleteHandler} job={job} />
+                    )}
+                    {user?.role === "admin" && (
+                      <Link
+                        href={`/admin/posted/add_info/${job?._id}`}
+                        className="text-sm  bg-slate-300 rounded-sm shadow-md hover:scale-105 active:scale-100 p-2 text-blue-600 hover:text-blue-800 transition"
+                      >
+                        Add Info
+                      </Link>
+                    )}
                   </div>
                 </div>
 
