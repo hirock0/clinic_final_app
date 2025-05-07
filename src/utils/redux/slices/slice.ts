@@ -5,7 +5,7 @@ import axios from "axios";
 interface UserState {
   user: object | null;
   allJobs: any;
-  watingApplications: any;
+  allApplications: any;
   loading: boolean;
   error: string | null;
 }
@@ -14,7 +14,7 @@ interface UserState {
 const initialState: UserState = {
   user: null,
   allJobs: null,
-  watingApplications: null,
+  allApplications: null,
   loading: false,
   error: null,
 };
@@ -26,15 +26,15 @@ export const fetchData: any = createAsyncThunk(
       const userRes = await axios.get(`/pages/api/decodedToken`);
       const user = userRes?.data?.user;
       const allAppliedJobsResponse = await axios.get(
-        `/pages/api/user/all_jobs/${user?.email}`
+        `/pages/api/user/applications/${user?.email}`
       );
-      const allJobs = allAppliedJobsResponse?.data?.allJobs;
-      const waitingAplicationResponse = await axios.get(
-        `/pages/api/waitingForApproveApplications`
+      const allApplications = allAppliedJobsResponse?.data?.allApplications;
+
+      const reqAllAppliedJobs = await axios.get(
+        `/pages/api/allJobs`
       );
-      const watingApplications =
-        waitingAplicationResponse?.data?.waitingForApproved;
-      return { user, allJobs, watingApplications };
+      const allAppliedJobs = reqAllAppliedJobs?.data?.allJobs;
+      return { user, allApplications, allAppliedJobs };
     } catch (error: any) {
       return rejectWithValue("Failed to fetch users");
     }
@@ -60,8 +60,8 @@ const slice = createSlice({
       .addCase(fetchData.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.user = action.payload.user;
-        state.allJobs = action.payload.allJobs;
-        state.watingApplications = action.payload.watingApplications;
+        state.allJobs = action.payload.allAppliedJobs;
+        state.allApplications = action.payload.allAppliedJobs;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;

@@ -14,6 +14,11 @@ export const adminSideNavLink = [
     icon: <AiOutlineDashboard />,
   },
   {
+    title: "Employees",
+    href: "/admin/employees",
+    icon: <AiOutlineDashboard />,
+  },
+  {
     title: "Accepted Jobs",
     href: "/admin/dashboard/accepted_jobs",
     icon: <FcAcceptDatabase />,

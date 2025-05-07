@@ -6,7 +6,7 @@ const DashboardSideBar = ({ navLinks }: { navLinks: any }) => {
         {navLinks?.map((item: any, index: any) => (
           <li key={index} className=" flex items-center gap-5 group">
             <div className=" text-2xl">{item?.icon}</div>
-            <div className=" flex flex-col  overflow-hidden">
+            <div className=" flex flex-col overflow-hidden">
               <Link
                 href={item?.href}
                 className="hover:text-indigo-600 transition"

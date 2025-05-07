@@ -1,7 +1,9 @@
 "use client";
+import { fetchData } from "@/utils/redux/slices/slice";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 type FormValues = {
   facilityName: string;
@@ -20,9 +22,12 @@ type FormValues = {
   startDate: string;
   assignmentDuration: string;
   additionalNotes: string;
+  institutionalEmail: string;
 };
 
 const HireTalentPage = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state?.slices);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -63,7 +68,11 @@ const HireTalentPage = () => {
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
     try {
-      const response = await axios.post("/pages/api/jobs", data);
+      data.institutionalEmail = user?.email;
+      const response = await axios.post(
+        "/pages/api/hire_talent_application",
+        data
+      );
       if (response?.data?.success) {
         swal({
           title: response?.data?.message,
@@ -81,11 +90,14 @@ const HireTalentPage = () => {
       setLoading(false);
       console.error("Error submitting form:", error);
     } finally {
-      reset();
+      // reset();
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
   return (
     <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-md my-12 md:my-20">
       <h1 className="text-2xl font-bold text-gray-800 mb-2">

@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  IoSearchOutline,
-  IoTrashOutline,
-  IoArrowBackOutline,
-} from "react-icons/io5";
+import { IoSearchOutline, IoArrowBackOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "@/utils/redux/slices/slice";
+import Link from "next/link";
+import ApprovedBtn from "@/components/ui/btns/approvedBtn/ApprovedBtn";
+import DeleteJobBtn from "@/components/ui/btns/deleteJobBtn/DeleteJobBtn";
 
 const JobsContainer = ({
   jobsData,
@@ -14,20 +15,25 @@ const JobsContainer = ({
   jobsData: any;
   title: string;
 }) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state?.slices);
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [jobs, setJobs] = useState(jobsData);
-
-  const filteredJobs = jobs.filter((job: any) =>
-    job.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredJobs = jobs?.filter((job: any) =>
+    job?.facilityName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = (id: number) => {
-    setJobs((prevJobs: any) => prevJobs.filter((job: any) => job.id !== id));
+  const deleteHandler = (id: any) => {;
+    setJobs((prevJos: any) => prevJos.filter((job:any) => job._id !== id));
   };
 
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
-    <div className="bg-zinc-100 min-h-screen py-6">
+    <div className="bg-zinc-100 py-6">
       <div className="max-w-5xl w-11/12 mx-auto">
         {/* Top Bar */}
         <div className="mb-6 sticky top-0 z-50 bg-zinc-100 py-4">
@@ -66,28 +72,39 @@ const JobsContainer = ({
         {/* Job List */}
         <div className="grid gap-4">
           {filteredJobs.length > 0 ? (
-            filteredJobs.map((job: any, index: any) => (
+            filteredJobs?.map((job: any, index: number) => (
               <div
                 key={index}
-                className="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                className="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition "
               >
-                <div>
-                  <h2 className="text-lg font-semibold text-gray-800">
-                    {job.title}
-                  </h2>
-                  <p className="text-sm text-gray-600">{job.company}</p>
-                  <p className="text-sm text-gray-500">{job.location}</p>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Applied on: {job.dateApplied}
-                  </p>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      {job?.facilityName}
+                    </h2>
+                    <p className="text-sm text-gray-600">{job?.facilityType}</p>
+                    <p className="text-sm text-gray-500">{job?.city}</p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Applied on: {job?.postdDate}
+                    </p>
+                  </div>
+                  .
+                  <div className="flex flex-col gap-2 mt-4 sm:mt-0 sm:ml-6">
+                    <DeleteJobBtn deleteHandler={deleteHandler} job={job} />
+
+                    <Link
+                      href={`/admin/posted/add_info/${job?._id}`}
+                      className="text-sm  bg-slate-300 rounded-sm shadow-md hover:scale-105 active:scale-100 p-2 text-blue-600 hover:text-blue-800 transition"
+                    >
+                      Add Info
+                    </Link>
+                    
+                  </div>
                 </div>
-                <button
-                  onClick={() => handleDelete(job.id)}
-                  className="mt-4 sm:mt-0 sm:ml-6 flex items-center gap-1 text-sm text-red-500 hover:text-red-700 transition"
-                >
-                  <IoTrashOutline size={18} />
-                  Delete
-                </button>
+
+                <div className=" w-full">
+                  {user?.role === "admin" && <ApprovedBtn job={job} />}
+                </div>
               </div>
             ))
           ) : (
