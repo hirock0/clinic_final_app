@@ -82,7 +82,7 @@ const initialJobs = [
 const JobsPage = () => {
   return (
     <div>
-      {/* <JobsContainer jobsData={initialJobs} title={"Rejected"} /> */}
+      {/* <JobsContainer jobsData={initialJobs} title={"posted"} /> */}
     </div>
   );
 };

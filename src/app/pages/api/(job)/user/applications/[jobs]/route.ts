@@ -5,7 +5,7 @@ export async function GET(req: NextRequest, res: any) {
     const { jobs } = await res.params;
     if (jobs) {
       const client = await DBConnection();
-      const applicationDB = client.db("Application").collection("applications");
+      const applicationDB = client.db("UserApplication").collection("applications");
       const appliedJobs = await applicationDB
         .find({ userEmail: jobs, status: "applied" })
         .toArray();
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, res: any) {
       return NextResponse.json({
         message: "data fouJobnd",
         success: true,
-        allJobs: { appliedJobs, acceptedJobs, rejectedJobs },
+        allApplications: { appliedJobs, acceptedJobs, rejectedJobs },
       });
     } else {
       return NextResponse.json({

@@ -81,7 +81,7 @@ const initialJobs = [
 const JobsPage = () => {
   return (
     <div>
-      <JobsContainer jobsData={initialJobs} title={"Applied Jobs"} />
+      {/* <JobsContainer jobsData={initialJobs} title={"Applied Jobs"} /> */}
     </div>
   );
 };
