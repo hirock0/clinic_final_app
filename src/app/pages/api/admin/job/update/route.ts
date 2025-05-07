@@ -14,8 +14,6 @@ export async function POST(req: NextRequest) {
       {
         $set: {
           ...rest,
-          newTimeStamp: new Date(),
-          newAdminPost: new Date().toLocaleDateString(),
         },
       }
     );

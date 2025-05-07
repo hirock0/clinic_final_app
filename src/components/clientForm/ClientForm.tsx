@@ -25,17 +25,36 @@ const ClientForm = ({ job }: { job: any }) => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/pages/api/admin/job/update", data);
-      if (response?.data?.success) {
+      console.log(data?.maxSalary);
+      console.log(data?.minSalary);
+      if (Number(data?.minSalary) > Number(data?.maxSalary)) {
         swal({
-          title: response?.data?.message,
-          icon: "success",
-        });
-      } else {
-        swal({
-          title: response?.data?.message,
+          title: "Min Salary must be less than Max Salary",
           icon: "warning",
         });
+      } else {
+        if (data?.minSalary === "" || data?.maxSalary === "") {
+          swal({
+            title: "Salary must be added",
+            icon: "warning",
+          });
+        } else {
+          const response = await axios.post(
+            "/pages/api/admin/job/update",
+            data
+          );
+          if (response?.data?.success) {
+            swal({
+              title: response?.data?.message,
+              icon: "success",
+            });
+          } else {
+            swal({
+              title: response?.data?.message,
+              icon: "warning",
+            });
+          }
+        }
       }
     } catch (error) {
       console.error(error);
@@ -59,21 +78,77 @@ const ClientForm = ({ job }: { job: any }) => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input name="facilityName" register={register} design={design} />
-          <Input name="facilityType" register={register} design={design} />
-          <Input name="address" register={register} design={design} />
-          <Input name="city" register={register} design={design} />
-          <Input name="state" register={register} design={design} />
-          <Input name="zipCode" register={register} design={design} />
-          <Input name="contactName" register={register} design={design} />
-          <Input name="contactEmail" register={register} design={design} />
-          <Input name="contactPhone" register={register} design={design} />
-          <Input name="numberOfPositions" register={register} design={design} />
-          <Input name="startDate" register={register} design={design} />
+          <Input
+            name="facilityName"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="facilityType"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="address"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="city"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="state"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="zipCode"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="contactName"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="contactEmail"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="contactPhone"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="numberOfPositions"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
+          <Input
+            name="startDate"
+            register={register}
+            design={design}
+            placeholder={""}
+          />
           <Input
             name="assignmentDuration"
             register={register}
             design={design}
+            placeholder={""}
           />
         </div>
 
@@ -236,6 +311,20 @@ const ClientForm = ({ job }: { job: any }) => {
             </select>
           </div>
         ))}
+        <div className="">
+          <Input
+            name="minSalary"
+            register={register}
+            design={design}
+            placeholder="MinSalary"
+          />
+          <Input
+            name="maxSalary"
+            register={register}
+            design={design}
+            placeholder="MaxSalary"
+          />
+        </div>
       </div>
     </form>
   );

@@ -1,14 +1,14 @@
 export const dynamic = "force-dynamic";
-import JobsContainer from "@/components/(dashboards)/jobsContainer/JobsContainer";
 import { FindUserApplications } from "@/app/actions/apis/Apis";
 import { VerifyToken } from "@/app/actions/apis/Apis";
+import ApplicationContainer from "@/components/(dashboards)/applicationContainer/ApplicationContainer";
 const JobsPage = async () => {
   const user = await VerifyToken();
   const reqApplications = await FindUserApplications(user?.email);
   const applications = reqApplications?.appliedJobs;
   return (
     <div>
-      <JobsContainer jobsData={applications} title={"Posted"} />
+      <ApplicationContainer jobsData={applications} title={"Applied"} />
     </div>
   );
 };

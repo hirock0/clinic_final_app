@@ -4,7 +4,7 @@ export async function POST(req: NextRequest, res: any) {
   try {
     const reqBody = await req.json();
     const timeStamp = Date.now();
-    const postdDate = new Date().toLocaleDateString();
+    const postdDate = new Date().toDateString();
     const userIdandEmails: string[] = [];
     const client = await DBConnection();
     const db = client.db("unitedCare");
