@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 const DashboardPage = () => {
   const dispatch = useDispatch();
   const { watingApplications } = useSelector((state: any) => state?.slices);
-  console.log(watingApplications)
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);

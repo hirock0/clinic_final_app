@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FiUpload, FiUser, FiX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
+
 interface FormData {
     fullName: string;
     dob: string;

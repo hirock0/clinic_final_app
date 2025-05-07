@@ -7,6 +7,8 @@ const ApplicationCard = ({
   title: string;
   design: string;
 }) => {
+  
+  
   return (
     <div className=" w-full">
       <div className={design}>

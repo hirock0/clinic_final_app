@@ -67,6 +67,10 @@
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
   }
+  .accent-bg-color:hover{
+    
+  }
+  
 }
 
 html,

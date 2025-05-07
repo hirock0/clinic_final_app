@@ -6,7 +6,7 @@ const Search_Jobs = () => {
       <>
         <Link
           href="/search-jobs"
-          className=" hover:bg-blue-600 hover:border-blue-600 third-text-color border-2 white-border-color  rounded-md px-6 py-2 text-lg font-semibold cursor-pointer flex items-center gap-1"
+          className="text-lg font-semibold py-2 px-4 border-2 rounded-md hover:bg-[#fafafa] hover:text-[#0a0a0a] border-[#fafafa] bg-transparent text-[#fafafa] transition-colors duration-300 ease-in-out cursor-pointer flex items-center gap-1"
         >
           SEARCH JOBS
           <span className="ml-1 text-sm">

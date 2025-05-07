@@ -4,15 +4,14 @@ export async function GET(req: NextRequest, res: any) {
   try {
     const client = await DBConnection();
     const applicationDB = client.db("unitedCare").collection("jobs");
-    const findunDisApprovedApplications = await applicationDB
-      .find({
-        approvedStatus: false,
-      })
+    const allJobs = await applicationDB
+      .find()
+      .sort({ timeStamp: -1 })
       .toArray();
     return NextResponse.json({
       message: "All data got it!",
       success: true,
-      waitingForApproved:findunDisApprovedApplications
+      allJobs: allJobs,
     });
   } catch (error: any) {
     return NextResponse.json({
