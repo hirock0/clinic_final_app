@@ -6,11 +6,13 @@ type InputProps = {
   name: string;
   register: UseFormRegister<any>;
   design?: string;
+  placeholder: any;
 };
 
 const Input = ({
   name,
   register,
+  placeholder,
   design = "input input-bordered w-full",
 }: InputProps) => {
   const label = name
@@ -24,8 +26,12 @@ const Input = ({
       </label>
       <input
         id={name}
-        type="text"
-        placeholder={`Enter ${label}`}
+        type={
+          placeholder === "MinSalary" || placeholder === "MaxSalary"
+            ? "number"
+            : "text"
+        }
+        placeholder={placeholder}
         {...register(name)}
         className={design}
       />

@@ -14,6 +14,8 @@ export async function POST(req: NextRequest) {
       {
         $set: {
           approvedStatus: true,
+          newTimeStamp: new Date(),
+          newAdminPost: new Date().toDateString(),
         },
       }
     );
