@@ -43,7 +43,6 @@ const Nav = () => {
   }, []);
   const navItems = [
     { title: "Home", href: "/" },
-    { title: "Training", href: "/" },
     {
       title: "FOR ORGANIZATIONS",
       href: "/",
