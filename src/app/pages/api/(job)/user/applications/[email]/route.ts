@@ -2,23 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { DBConnection } from "@/lib/dbConnection/DBConnection";
 export async function GET(req: NextRequest, res: any) {
   try {
-    const { jobs } = await res.params;
-    if (jobs) {
+    const { email } = await res.params;
+    if (email) {
       const client = await DBConnection();
-      const applicationDB = client.db("UserApplication").collection("applications");
+      const applicationDB = client.db("unitedCare").collection("jobs");
       const appliedJobs = await applicationDB
-        .find({ userEmail: jobs, status: "applied" })
-        .toArray();
-      const acceptedJobs = await applicationDB
-        .find({ userEmail: jobs, status: "accepted" })
-        .toArray();
-      const rejectedJobs = await applicationDB
-        .find({ userEmail: jobs, status: "rejected" })
+        .find({
+          userIdandEmails: {
+            $elemMatch: {
+              userEmail: email,
+            },
+          },
+        })
         .toArray();
       return NextResponse.json({
         message: "data fouJobnd",
         success: true,
-        allApplications: { appliedJobs, acceptedJobs, rejectedJobs },
+        appliedJobs: appliedJobs,
       });
     } else {
       return NextResponse.json({

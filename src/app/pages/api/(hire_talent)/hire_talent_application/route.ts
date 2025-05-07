@@ -9,10 +9,12 @@ export async function POST(req: NextRequest, res: any) {
     const client = await DBConnection();
     const db = client.db("unitedCare");
     const collection = db.collection("jobs");
+    const approvedStatus = false;
     const savedData = await collection.insertOne({
       timeStamp,
       postdDate,
       userIdandEmails,
+      approvedStatus,
       ...reqBody,
     });
     if (savedData?.insertedId) {

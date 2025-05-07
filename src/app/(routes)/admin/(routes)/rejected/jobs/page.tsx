@@ -83,6 +83,7 @@ const JobsPage = () => {
   return (
     <div>
       {/* <JobsContainer jobsData={initialJobs} title={"Rejected"} /> */}
+      <h1>This page is not availeable yet</h1>
     </div>
   );
 };

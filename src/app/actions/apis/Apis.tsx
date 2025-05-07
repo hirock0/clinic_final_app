@@ -1,3 +1,18 @@
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
+
+export const VerifyToken = async (): Promise<any | null> => {
+  try {
+    const token = (await cookies()).get("token")?.value;
+    if (!token) return null;
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+    const { payload } = await jwtVerify(token, secret);
+    return payload as any;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const AllJobs = async () => {
   try {
     const res = await fetch(
@@ -10,10 +25,10 @@ export const AllJobs = async () => {
     if (!res.ok) throw new Error("Failed to fetch jobs");
     return await res.json();
   } catch (error) {
-    console.error("Error fetching jobs:", error);
     return [];
   }
 };
+
 export const FindAJob = async (id: string) => {
   try {
     const res = await fetch(
@@ -30,3 +45,18 @@ export const FindAJob = async (id: string) => {
   }
 };
 
+export const FindUserApplications = async (email: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN_URL}/pages/api/user/applications/${email}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+    if (!res.ok) throw new Error("Failed to fetch jobs");
+    return await res.json();
+  } catch (error) {
+    return null;
+  }
+};
