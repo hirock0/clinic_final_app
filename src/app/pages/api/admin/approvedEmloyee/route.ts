@@ -11,10 +11,11 @@ export async function POST(req: NextRequest) {
     };
     const client = await DBConnection();
     const findUser = await client
-      .db("Employee")
-      .collection("users")
+      .db("AllUsers")
+      .collection("employee")
       .find(filter)
       .toArray();
+
     const matchedRole = findUser[0]?.role === "approvedEmployee";
     if (matchedRole) {
       return NextResponse.json({
@@ -23,8 +24,8 @@ export async function POST(req: NextRequest) {
       });
     } else {
       const updateUser = await client
-        .db("Employee")
-        .collection("users")
+        .db("AllUsers")
+        .collection("employee")
         .findOneAndUpdate(filter, update);
 
       if (!updateUser) {

@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
-import ApplyForm from "../applyform/ApplyForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import swal from "sweetalert";
+import ViewJobs from "../viewjobs/ViewJobs";
+import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
+
 interface HealthcareJob {
   facilityName: string;
   facilityType: string;
@@ -17,113 +19,107 @@ interface HealthcareJob {
   shiftsNeeded: string[];
   numberOfPositions: string;
   startDate: string;
-  position: string; // Added position property
+  position: string;
   otherStaff?: string;
+  _id: string;
+}
+
+interface viewDetails {
+  facilityName: string;
+  facilityType: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  staffNeeded: string[];
+  otherStaff: string;
+  numberOfPositions: string;
+  shiftsNeeded: string[];
+  startDate: string;
+  assignmentDuration: string;
+  additionalNotes: string;
 }
 
 const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-
+  const { user } = useSelector((state: any) => state?.slices);
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
+  const [view, setView] = useState<viewDetails | null>(null);
+
+  const viewDetails = (job: any) => {
+    setView(job);
+  };
 
   const applyHandler = (job: any) => {
-    if (institutionalData) {
-      swal({
-        title: "You have already institutional loggedin",
-        text: "Please logout first",
-        icon: "warning",
-      });
-    } else {
-      if (employeeData) {
+    if (!user) {
+      router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+    } else if (user?.role !== "user") {
+      if (user?.role === "institutional") {
         swal({
-          title: "You have already employee loggedin",
-          text: "Please logout first",
+          title: "You are institution",
+          text: "Login for user",
           icon: "warning",
         });
       } else {
-        if (!userData) {
-          router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
+        if (user?.role === "admin") {
+          swal({
+            title: "You are admin",
+            text: "Login for user",
+            icon: "warning",
+          });
         } else {
-          setSelectedJob(job);
+          swal({
+            title: "You are employee",
+            text: "Login for user",
+            icon: "warning",
+          });
         }
       }
+    } else {
+      setSelectedJob(job);
     }
   };
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {jobs?.map((job: any, index: any) => (
         <div
           key={index}
-          className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[350px]"
+          className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[250px]"
         >
-          {/* Facility Header */}
-          <div className="mb-3">
-            <h3 className="text-lg font-semibold text-gray-800">
-              {job.facilityName}
-            </h3>
-            <p className="text-gray-600">
-              {job?.facilityType} • {job?.address}, {job?.state} {job?.zipCode}
-            </p>
-          </div>
-
-          {/* Staffing Needs */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="flex items-center bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-sm">
-              <FiUsers className="mr-1" /> {job?.numberOfPositions} positions
-            </span>
-            <span className="flex items-center bg-green-50 text-green-800 px-3 py-1 rounded-full text-sm">
-              <FiClock className="mr-1" /> {job?.shiftsNeeded.join(", ")} shifts
-            </span>
-          </div>
-
-          {/* Positions Needed */}
-          <div className="mb-3 flex-grow">
-            <h4 className="text-sm font-medium text-gray-700 mb-1">
-              Staff Needed:
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {job?.staffNeeded?.map((staff: any, i: any) => (
-                <span
-                  key={i}
-                  className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"
-                >
-                  {staff}
-                </span>
-              ))}
-              {job?.otherStaff && (
-                <span className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm">
-                  {job?.otherStaff}
-                </span>
-              )}
+          <div className="h-full flex justify-between flex-col">
+            <div className="mb-3">
+              <h3 className="text-lg font-semibold text-gray-800">
+                {job?.facilityName}
+              </h3>
+              <p className="text-gray-600 text-sm mt-2">{job?.address}</p>
+            </div>
+            <div className="">
+              <p className="text-gray-600 ">
+      
+                <span>$ {job?.minSalary}</span>
+                <span className="mx-1">-</span>
+                <span>$ {job?.maxSalary}</span>
+              </p>
+              <p className="text-gray-600 ">{job?.newAdminPost}</p>
             </div>
           </div>
 
-          {/* Start Date */}
-          <div className="flex items-center text-sm text-gray-600 mb-4">
-            <FiCalendar className="mr-2" />
-            Starts:{" "}
-            {new Date(job?.startDate).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </div>
-
-          {/* Action Buttons - Pushed to bottom */}
           <div className="mt-auto pt-3 border-t border-gray-100">
             <div className="flex gap-3">
-              <button className="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+              <button
+                onClick={() => viewDetails(job)}
+                className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+              >
                 View Details
               </button>
               <button
@@ -137,10 +133,13 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
         </div>
       ))}
 
-      {/* Render ApplyForm when a job is selected */}
       {selectedJob && (
-        <ApplyForm job={selectedJob} onClose={() => setSelectedJob(null)} />
+        <HealthcareApplicationForm
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+        />
       )}
+      {view && <ViewJobs job={view} onClose={() => setView(null)} />}
     </div>
   );
 };

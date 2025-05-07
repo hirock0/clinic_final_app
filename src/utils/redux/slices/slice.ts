@@ -4,10 +4,8 @@ import axios from "axios";
 
 interface UserState {
   user: object | null;
-  carts: any;
-  employee: any;
-  institutionalUser: any;
-  appliedJobs: any;
+  allJobs: any;
+  allApplications: any;
   loading: boolean;
   error: string | null;
 }
@@ -15,10 +13,8 @@ interface UserState {
 // Initial State
 const initialState: UserState = {
   user: null,
-  employee: null,
-  institutionalUser: null,
-  appliedJobs: null,
-  carts: [],
+  allJobs: null,
+  allApplications: null,
   loading: false,
   error: null,
 };
@@ -27,24 +23,19 @@ export const fetchData: any = createAsyncThunk(
   "fetcData",
   async (_, { rejectWithValue }) => {
     try {
-      const employeeResponse = await axios.get(
-        "/pages/api/employee/decodedEmployee"
-      );
-      const employee = employeeResponse?.data?.employee;
-      const userResponse = await axios.get("/pages/api/user/decodedUser");
-      const user = userResponse?.data?.user;
-      const institutionalResponse = await axios.get(
-        "/pages/api/institutional/decodedInstitutionalUser"
-      );
-      const institUser = institutionalResponse?.data?.institutionalUser;
-
+      const userRes = await axios.get(`/pages/api/decodedToken`);
+      const user = userRes?.data?.user;
       const allAppliedJobsResponse = await axios.get(
-        `/pages/api/user/applied_jobs/${user?.email}`
+        `/pages/api/user/applications/${user?.email}`
       );
-      const allAppliedJobs = allAppliedJobsResponse?.data?.allAppliedJobs;
+      const allApplications = allAppliedJobsResponse?.data?.allApplications;
 
-      return { employee, user, allAppliedJobs, institUser };
-    } catch (error) {
+      const reqAllAppliedJobs = await axios.get(
+        `/pages/api/allJobs`
+      );
+      const allAppliedJobs = reqAllAppliedJobs?.data?.allJobs;
+      return { user, allApplications, allAppliedJobs };
+    } catch (error: any) {
       return rejectWithValue("Failed to fetch users");
     }
   }
@@ -68,10 +59,9 @@ const slice = createSlice({
     builder
       .addCase(fetchData.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.employee = action.payload.employee;
         state.user = action.payload.user;
-        state.appliedJobs = action.payload.allAppliedJobs;
-        state.institutionalUser = action.payload.institUser;
+        state.allJobs = action.payload.allAppliedJobs;
+        state.allApplications = action.payload.allAppliedJobs;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;

@@ -5,8 +5,8 @@ export async function GET() {
   try {
     const client = await DBConnection();
     const users = await client
-      .db("Employee")
-      .collection("users")
+      .db("AllUsers")
+      .collection("employee")
       .find()
       .sort({ createdAt: -1 })
       .toArray();

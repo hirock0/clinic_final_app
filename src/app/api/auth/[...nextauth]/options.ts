@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         const client = await DBConnection();
-        const userDB = client.db("Users").collection("loggedUsers");
+        const userDB = client.db("AllUsers").collection("user");
         const findUser: any = await userDB.findOne({ email: user?.email });
 
         if (!findUser) {
@@ -41,10 +41,10 @@ export const authOptions: AuthOptions = {
               email: user?.email,
               role: "user",
             };
-            const userToken = jwt.sign(tokenData, process.env.JWT_SECRET!, {
+            const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
               expiresIn: "7d",
             });
-            (await cookies()).set("userToken", userToken, { httpOnly: true });
+            (await cookies()).set("token", token, { httpOnly: true });
           }
         } else {
           const tokenData = {
@@ -56,10 +56,10 @@ export const authOptions: AuthOptions = {
             email: findUser?.email,
             role: "user",
           };
-          const userToken = jwt.sign(tokenData, process.env.JWT_SECRET!, {
+          const token = jwt.sign(tokenData, process.env.JWT_SECRET!, {
             expiresIn: "7d",
           });
-          (await cookies()).set("userToken", userToken, { httpOnly: true });
+          (await cookies()).set("token", token, { httpOnly: true });
         }
       }
 

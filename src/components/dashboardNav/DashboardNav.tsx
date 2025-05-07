@@ -17,12 +17,7 @@ import DashboardSideBar from "../dashboardSideBar/DashboardSideBar";
 const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
-  const employeeData = useSelector((state: any) => state?.slices?.employee);
-  const userData = useSelector((state: any) => state?.slices?.user);
-  const institutionalData = useSelector(
-    (state: any) => state?.slices?.institutionalUser
-  );
-
+  const { user } = useSelector((state: any) => state?.slices);
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   useEffect(() => {
@@ -81,11 +76,9 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             <div className="absolute h-2 w-2 rounded-full bg-red-500"></div>
             <IoMdNotifications size={25} />
           </button>
+          {flag === "admin" && <Link href={"/admin/login"}>Login</Link>}
           <div>
-            {(flag === "user" && userData?.image?.secure_url) ||
-            (flag === "employee" && employeeData?.image?.secure_url) ||
-            (flag === "institutional" &&
-              institutionalData?.image?.secure_url) ? (
+            {user ? (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -94,20 +87,16 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
                 className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
               >
                 <Image
-                  src={
-                    flag === "user"
-                      ? userData.image.secure_url
-                      : flag === "institutional"
-                      ? institutionalData?.image?.secure_url
-                      : employeeData.image.secure_url
-                  }
+                  src={user.image.secure_url}
                   alt="user"
                   width={500}
                   height={500}
                   className="object-cover w-full h-full"
                 />
               </button>
-            ) : null}
+            ) : (
+              <div className=" loading loading-spinner"></div>
+            )}
           </div>
         </div>
         {/* profile_popup */}
@@ -125,11 +114,12 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
         {/* ------------------------------------ */}
         {pathname.startsWith("/admin") && (
           <aside
+            onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag
                 ? " max-lg:-translate-x-[110%]"
                 : " max-lg:translate-x-0"
-            } transition-all z-50 fixed left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all z-50 fixed left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={adminSideNavLink} />
           </aside>
@@ -137,11 +127,12 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
         {/* --------------------------- */}
         {pathname.startsWith("/user") && (
           <aside
+            onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag
                 ? " max-lg:-translate-x-[110%]"
                 : " max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={userSideNavLink} />
           </aside>
@@ -149,11 +140,12 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
         {/* --------------------------- */}
         {pathname.startsWith("/employee") && (
           <aside
+            onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag
                 ? " max-lg:-translate-x-[110%]"
                 : " max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={employeeSideNavLink} />
           </aside>
@@ -161,11 +153,12 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
         {/* --------------------------- */}
         {pathname.startsWith("/institutional") && (
           <aside
+            onClick={(e) => e.stopPropagation()}
             className={` ${
               !menuFlag
                 ? " max-lg:-translate-x-[110%]"
                 : " max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-full  overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={institutionalSideNavLink} />
           </aside>

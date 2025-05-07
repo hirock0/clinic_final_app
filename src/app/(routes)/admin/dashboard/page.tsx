@@ -1,53 +1,59 @@
-// app/dashboard/admin/page.tsx
-"use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import ReqEmployees from "@/components/reqEmployees/reqEmployees";
-
-interface User {
-  name: string;
-  email: string;
-  isApproved: boolean;
-}
-export default function AdminDashboard() {
-  const [employees, setEmployees] = useState<User[]>([]);
-  const userHandler = async () => {
-    try {
-      const response = await axios.get("/pages/api/admin/employees");
-      const reqUsers = response?.data?.users;
-      setEmployees(reqUsers);
-    } catch (error: any) {
-      throw new Error(error?.message);
-    }
-  };
-  useEffect(() => {
-    userHandler();
-  }, []);
+export const dynamic = "force-dynamic";
+import { AllJobs } from "@/app/actions/apis/Apis";
+import ApplicationCard from "@/components/(dashboards)/applicationCard/ApplicationCard";
+import Link from "next/link";
+const DashboardPage = async () => {
+  const reqAllJobs = await AllJobs();
+  const allJobs = await reqAllJobs?.allJobs;
+  const approvedJobs = await allJobs?.filter(
+    (item: any) => item?.approvedStatus === true
+  );
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      {employees?.length === 0 ? (
-        <div className=" h-[50vh] flex items-center justify-center">
-          <div className=" loading loading-spinner w-5 h-5"></div>
-        </div>
-      ) : (
-        <table className="w-full text-left border border-gray-200">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-2 border">Name</th>
-              <th className="p-2 border">Email</th>
-              <th className="p-2 border">Status</th>
-              <th className="p-2 border">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees?.map((item, index) => (
-              <ReqEmployees item={item} key={index} />
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className=" flex flex-col gap-5">
+      <div className=" grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
+        <Link
+          href={`/admin/posted/jobs`}
+          className=" w-full tooltip tooltip-bottom"
+          data-tip="Click"
+        >
+          <ApplicationCard
+            design={
+              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+            }
+            applications={allJobs}
+            title="Posted"
+          />
+        </Link>
+        <Link
+          href={`/admin/approved/jobs`}
+          className=" w-full tooltip tooltip-bottom"
+          data-tip="Click"
+        >
+          <ApplicationCard
+            design={
+              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-green-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+            }
+            applications={approvedJobs}
+            title="Approved"
+          />
+        </Link>
+        <Link
+          href={`/admin/rejected/jobs`}
+          className=" w-full tooltip tooltip-bottom"
+          data-tip="Click"
+        >
+          <ApplicationCard
+            design={
+              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+            }
+            applications={approvedJobs}
+            title="Rejected"
+          />
+        </Link>
+      </div>
     </div>
   );
-}
+};
+
+export default DashboardPage;

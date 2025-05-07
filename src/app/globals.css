@@ -2,10 +2,10 @@
 @plugin "daisyui";
 
 :root {
-  --primary: #35a09a;
+  --primary: #308d89;
   --background: #fafafa;
   --text: #0a0a0a;
-  --sort-purple: #f5ffff;
+  --sort-purple: #f3fffe;
   --gray: #b0b0c0;
   --accent: #ffdb61;
 }
@@ -67,6 +67,10 @@
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
   }
+  .accent-bg-color:hover{
+    
+  }
+  
 }
 
 html,
