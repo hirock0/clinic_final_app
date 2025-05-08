@@ -11,7 +11,7 @@ const DashboardPage = async () => {
 
   return (
     <div className=" flex flex-col gap-5">
-      <div className=" grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
+      <div className=" grid grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
         <Link
           href={`/admin/posted/jobs`}
           className=" w-full tooltip tooltip-bottom"
@@ -23,8 +23,10 @@ const DashboardPage = async () => {
             }
             applications={allJobs}
             title="Posted"
+            title2="Jobs"
           />
         </Link>
+        
         <Link
           href={`/admin/approved/jobs`}
           className=" w-full tooltip tooltip-bottom"
@@ -36,10 +38,14 @@ const DashboardPage = async () => {
             }
             applications={approvedJobs}
             title="Approved"
+            title2="Jobs"
           />
         </Link>
+
+      </div>
+      <div className=" grid grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
         <Link
-          href={`/admin/rejected/jobs`}
+          href={`/admin/posted/applications`}
           className=" w-full tooltip tooltip-bottom"
           data-tip="Click"
         >
@@ -47,10 +53,28 @@ const DashboardPage = async () => {
             design={
               " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
             }
-            applications={approvedJobs}
-            title="Rejected"
+            applications={allJobs}
+            title="User Posted"
+            title2="Applications"
           />
         </Link>
+
+        <Link
+          href={`/admin/approved/applications`}
+          className=" w-full tooltip tooltip-bottom"
+          data-tip="Click"
+        >
+          <ApplicationCard
+            design={
+              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-green-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+            }
+            applications={approvedJobs}
+            title="Approved"
+            title2="Applications"
+          />
+        </Link>
+
+
       </div>
     </div>
   );

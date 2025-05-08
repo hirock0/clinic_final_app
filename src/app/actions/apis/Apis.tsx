@@ -75,3 +75,18 @@ export const FindInstitutionalJobs = async (email: string) => {
     return null;
   }
 };
+export const FindAllApplications = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN_URL}/pages/api/admin/allApplications`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+    if (!res.ok) throw new Error("Failed to fetch jobs");
+    return await res.json();
+  } catch (error) {
+    return null;
+  }
+};
