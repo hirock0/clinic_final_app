@@ -5,10 +5,10 @@ import ApplicationContainer from "@/components/(dashboards)/applicationContainer
 const JobsPage = async () => {
   const user = await VerifyToken();
   const reqApplications = await FindUserApplications(user?.email);
-  const applications = reqApplications?.appliedJobs;
+  const applications = await reqApplications?.appliedApplications;
   return (
     <div>
-      <ApplicationContainer jobsData={applications} title={"Applied"} />
+      <ApplicationContainer applicationData={applications} title={"Applied"} />
     </div>
   );
 };

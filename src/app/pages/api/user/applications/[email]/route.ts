@@ -5,20 +5,19 @@ export async function GET(req: NextRequest, res: any) {
     const { email } = await res.params;
     if (email) {
       const client = await DBConnection();
-      const applicationDB = client.db("unitedCare").collection("jobs");
-      const appliedJobs = await applicationDB
-        .find({
-          userIdandEmails: {
-            $elemMatch: {
-              userEmail: email,
-            },
-          },
+      const applicationDB = client
+        .db("UserApplication")
+        .collection("applications");
+      const appliedApplications = await applicationDB
+        .find({ userEmail: email })
+        .sort({
+          timeStamp: -1,
         })
         .toArray();
       return NextResponse.json({
         message: "data fouJobnd",
         success: true,
-        appliedJobs: appliedJobs,
+        appliedApplications: appliedApplications,
       });
     } else {
       return NextResponse.json({
