@@ -23,6 +23,7 @@ const DashboardPage = async () => {
             }
             applications={allJobs}
             title="Posted"
+            title2="Jobs"
           />
         </Link>
         <Link
@@ -36,6 +37,7 @@ const DashboardPage = async () => {
             }
             applications={approvedJobs}
             title="Approved"
+            title2="Jobs"
           />
         </Link>
         <Link
@@ -49,6 +51,7 @@ const DashboardPage = async () => {
             }
             applications={approvedJobs}
             title="Rejected"
+            title2="Jobs"
           />
         </Link>
       </div>
