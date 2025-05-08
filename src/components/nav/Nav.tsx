@@ -48,18 +48,18 @@ const Nav = () => {
       href: "/",
       subLinks: [
         { title: "How we can help", href: "/" },
+        { title: "Book an appointment", href: "/contact" },
         { title: "Clinical support staffing", href: "/" },
-        { title: "Book an appointment", href: "/" },
       ],
     },
     {
       title: "FOR JOB SEEKERS",
       href: "/",
       subLinks: [
-        { title: "Search Jobs", href: "/" },
-        { title: "Why United Care Links", href: "/" },
         { title: "Help Center", href: "/" },
-        { title: "View Job Board", href: "/" },
+        { title: "Search Jobs", href: "/search-jobs" },
+        { title: "View Job Board", href: "/search-jobs" },
+        { title: "Why United Care Links", href: "/" },
       ],
     },
     { title: "Contact", href: "/contact" },
@@ -129,12 +129,12 @@ const Nav = () => {
                     </div>
                     <div
                       className={`${activeSubMenu === item.title ? "block" : "hidden"
-                        } lg:group-hover:block lg:absolute lg:top-5 z-50 bg-white rounded shadow p-5`}
+                        } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
                     >
-                      <ul className="text-nowrap flex flex-col gap-3">
+                      <ul className="text-nowrap flex flex-col gap-3 p-4">
                         {item.subLinks.map((subItem, subIndex) => (
-                          <Link key={subIndex} href={subItem.href}>
-                            <li className=" bg-zinc-100 shadow-xl hover:scale-110 rounded-xl px-4  py-4">
+                          <Link key={subIndex} href={subItem.href} className="space-y-3">
+                            <li className="text-sm hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f]">
                               {subItem.title}
                             </li>
                           </Link>
