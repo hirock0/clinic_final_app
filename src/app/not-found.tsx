@@ -4,10 +4,8 @@
 import { useRouter } from "next/navigation";
 import { FaSadTear } from "react-icons/fa";
 import { MdArrowBack } from "react-icons/md";
-
 export default function NotFoundPage() {
   const router = useRouter();
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 via-white to-gray-200 text-gray-800 p-4">
       <div className="text-9xl mb-6 animate-bounce">

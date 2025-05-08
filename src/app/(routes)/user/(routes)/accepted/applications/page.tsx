@@ -1,16 +1,20 @@
 export const dynamic = "force-dynamic";
-import { AllJobs } from "@/app/actions/apis/Apis";
-import JobsContainer from "@/components/(dashboards)/jobsContainer/JobsContainer";
+import { FindUserApplications } from "@/app/actions/apis/Apis";
+import { VerifyToken } from "@/app/actions/apis/Apis";
+import ApplicationContainer from "@/components/(dashboards)/applicationContainer/ApplicationContainer";
 const JobsPage = async () => {
-  const reqJobsData = await AllJobs();
-  const initialJobs = await reqJobsData?.allJobs;
-  const approvedJobs = await initialJobs?.filter(
-    (item: any) => item?.approvedStatus === true
+  const user = await VerifyToken();
+  const reqApplications = await FindUserApplications(user?.email);
+  const applications = await reqApplications?.appliedApplications;
+  const approvedApplications = await applications?.filter(
+    (item: any) => item?.status === "approved"
   );
   return (
     <div>
-      {/* <JobsContainer jobsData={approvedJobs} title={"Posted"} /> */}
-      <h1>Not ready yet</h1>
+      <ApplicationContainer
+        applicationData={approvedApplications}
+        title={"Applied"}
+      />
     </div>
   );
 };

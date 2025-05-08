@@ -1,104 +1,108 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { IoSearchOutline, IoArrowBackOutline } from "react-icons/io5";
-import { fetchData } from "@/utils/redux/slices/slice";
-import ViewJobs from "@/components/viewjobs/ViewJobs";
+
+import Link from "next/link";
+import { useState } from "react";
+
 const ApplicationContainer = ({
-  jobsData,
+  applicationData,
   title,
 }: {
-  jobsData: any;
+  applicationData: any[];
   title: string;
 }) => {
-  const [view, setView] = useState<any | null>(null);
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [jobs, setJobs] = useState(jobsData);
-  const filteredJobs = jobs?.filter((job: any) =>
-    job?.facilityName?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const viewDetails = (job: any) => {
-    setView(job);
-  };
-  return (
-    <div className="bg-zinc-100 py-6">
-      <div className="max-w-5xl w-11/12 mx-auto">
-        {/* Top Bar */}
-        <div className="mb-6 sticky top-0 z-50 bg-zinc-100 py-4">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between">
-            <button
-              onClick={() => router.back()}
-              className="flex items-center text-gray-600 hover:text-gray-900 transition"
-            >
-              <IoArrowBackOutline size={22} className="mr-1" />
-              <span className="text-sm">Back</span>
-            </button>
-            <h1 className="text-2xl font-semibold text-center md:text-left">
-              {title}
-            </h1>
-            <div className="w-full md:w-1/2">
-              <div className="relative flex items-center rounded-md shadow-sm bg-white border border-slate-300">
-                <input
-                  type="text"
-                  placeholder="Search jobs..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full h-10 pl-3 pr-10 text-sm rounded-md border-0 outline-none bg-transparent"
-                />
-                <IoSearchOutline
-                  className="absolute right-3 text-gray-500"
-                  size={18}
-                />
-              </div>
-            </div>
-            <div className="text-sm text-gray-600">
-              Applications: <span className="font-medium">{jobs.length}</span>
-            </div>
-          </div>
-        </div>
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-        {/* Job List */}
-        <div className="grid gap-4">
-          {filteredJobs.length > 0 ? (
-            filteredJobs?.map((job: any, index: number) => (
-              <div
-                key={index}
-                className="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition "
-              >
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-800">
-                      {job?.facilityName}
-                    </h2>
-                    <p className="text-sm text-gray-600">{job?.facilityType}</p>
-                    <p className="text-sm text-gray-500">{job?.city}</p>
-                    <div className="text-xs text-gray-400 mt-1">
-                      {job?.userIdandEmails?.map((item: any, index: any) => (
-                        <div className="" key={index}>
-                          Applied on: {item?.userAppliedDate}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="">
-                    <button
-                      onClick={() => viewDetails(job)}
-                      className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                    >
-                      View Details
-                    </button>
-                  </div>
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-2xl font-bold mb-6 text-center">{title}</h1>
+
+      <div className="space-y-6">
+        {applicationData.map((application) => {
+          const hasResume =
+            typeof application.resume === "string" &&
+            application.resume.trim().length > 0;
+
+          return (
+            <div
+              key={application._id}
+              className="bg-white rounded-xl shadow-md p-6 border border-gray-200"
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="text-lg font-semibold text-gray-800">
+                    {application.fullName}
+                  </p>
+                  <p className="text-sm text-gray-500">{application.email}</p>
+                  <p className="text-sm text-gray-500">
+                    Applied: {application.appliedDate}
+                  </p>
+                  <p className="text-sm text-green-600 capitalize">
+                    Status: {application.status}
+                  </p>
                 </div>
-                {view && <ViewJobs job={view} onClose={() => setView(null)} />}
+
+                <button
+                  onClick={() =>
+                    setSelectedId(
+                      selectedId === application._id ? null : application._id
+                    )
+                  }
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                >
+                  {selectedId === application._id ? "Hide" : "View"} Details
+                </button>
               </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500 mt-10 text-sm">
-              No jobs found.
-            </p>
-          )}
-        </div>
+
+              {selectedId === application._id && (
+                <div className="mt-4 border-t pt-4 text-sm space-y-2 text-gray-700">
+                  <p>
+                    <strong>Phone:</strong> {application.phone}
+                  </p>
+                  <p>
+                    <strong>DOB:</strong> {application.dob}
+                  </p>
+                  <p>
+                    <strong>Gender:</strong> {application.gender}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {application.address}
+                  </p>
+                  <p>
+                    <strong>City:</strong> {application.city}
+                  </p>
+                  <p>
+                    <strong>State:</strong> {application.state}
+                  </p>
+                  <p>
+                    <strong>ZIP:</strong> {application.zip}
+                  </p>
+                  <p>
+                    <strong>Contact Method:</strong>{" "}
+                    {application.contactMethod?.join(", ")}
+                  </p>
+                  <p>
+                    <strong>Why Healthcare:</strong> {application.whyHealthcare}
+                  </p>
+                  <p>
+                    <strong>Resume:</strong>{" "}
+                    {hasResume ? (
+                      <Link
+                        href={application.resume}
+                        className="text-blue-600 underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Resume
+                      </Link>
+                    ) : (
+                      <span className="text-gray-500">Not uploaded</span>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
