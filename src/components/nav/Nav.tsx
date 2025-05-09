@@ -56,10 +56,10 @@ const Nav = () => {
       title: "FOR JOB SEEKERS",
       href: "/",
       subLinks: [
-        { title: "Help Center", href: "/" },
+        { title: "Help Center", href: "/help-center" },
         { title: "Search Jobs", href: "/search-jobs" },
         { title: "View Job Board", href: "/search-jobs" },
-        { title: "Why United Care Links", href: "/" },
+        { title: "Why United Care Links", href: "/why-ucl" },
       ],
     },
     { title: "Contact", href: "/contact" },
