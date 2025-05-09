@@ -1,11 +1,10 @@
 import { FindAJob } from "@/app/actions/apis/Apis";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
-import Link from "next/link";
 
 const View = async (props: any) => {
   const { id } = await props?.params;
   const reqFindJob = await FindAJob(id);
-  const job = reqFindJob?.job;
+  const job = await reqFindJob?.job;
 
   return (
     <div className="bg-gray-100 min-h-screen py-8">

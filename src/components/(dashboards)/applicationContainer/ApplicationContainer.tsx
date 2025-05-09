@@ -101,7 +101,7 @@ const ApplicationContainer = ({
                 {/* Application View Button */}
                 <div className="mt-4">
                   <Link
-                    href={`/user/application/view/${application?.jobId}`}
+                    href={`/application/view/${application?.jobId}`}
                     className="main-text-color underline"
                   >
                     View Full Application
