@@ -7,16 +7,15 @@ import { LuMenu } from "react-icons/lu";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
-import ProfileSidebar from "../profileSideBar/ProfileSidebar";
+import ProfileSidebar from "../../(profile)/profileSideBar/ProfileSidebar";
 import {
   adminSideNavLink,
   userSideNavLink,
   employeeSideNavLink,
   institutionalSideNavLink,
-} from "../allNavLinks/AllNavLinks";
+} from "../../allNavLinks/AllNavLinks";
 import { usePathname } from "next/navigation";
 import DashboardSideBar from "../dashboardSideBar/DashboardSideBar";
-
 const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -24,7 +23,6 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   const [menuFlag, setMenuFlag] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -149,7 +147,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-screen overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={employeeSideNavLink} />
           </aside>
@@ -160,7 +158,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-screen overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={institutionalSideNavLink} />
           </aside>

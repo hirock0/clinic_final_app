@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { IoSearchOutline, IoArrowBackOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import Link from "next/link";
 import ApprovedBtn from "@/components/ui/btns/approvedBtn/ApprovedBtn";
 import DeleteJobBtn from "@/components/ui/btns/deleteJobBtn/DeleteJobBtn";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
+import { MdOutlineAddTask } from "react-icons/md";
 
 const JobsContainer = ({
   jobsData,
@@ -18,7 +18,6 @@ const JobsContainer = ({
 }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
-  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [jobs, setJobs] = useState(jobsData);
   const filteredJobs = jobs?.filter((job: any) =>
@@ -35,9 +34,9 @@ const JobsContainer = ({
 
   return (
     <div className="main-bg-color py-6">
-      <div className="max-w-5xl w-11/12 mx-auto">
+      <div className="max-w-[1440px] w-11/12 mx-auto">
         {/* Top Bar */}
-        <div className="mb-6 sticky top-0 z-50 main-bg-color py-4">
+        <div className="mb-6 sticky top-0 z-50 main-bg-color p-4">
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between">
             <BackBtn />
             <h1 className="text-2xl font-semibold text-center md:text-left main-text-color">
@@ -90,9 +89,10 @@ const JobsContainer = ({
                     {user?.role === "admin" && (
                       <Link
                         href={`/admin/posted/add_info/${job?._id}`}
-                        className="flex justify-center second-bg-color text-white rounded-sm shadow-md hover:scale-105 active:scale-100 w-32 h-10 items-center gap-1 text-sm transition"
+                        className="flex justify-center second-bg-color text-white rounded-sm shadow-md hover:scale-105 active:scale-100 w-32 h-10 items-center gap-2 text-sm transition"
                       >
-                        Add Info
+                        <MdOutlineAddTask size={20} />
+                        <span>Add Info</span>
                       </Link>
                     )}
                   </div>

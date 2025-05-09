@@ -1,15 +1,15 @@
-import DashboardNav from "@/components/dashboardNav/DashboardNav";
+import DashboardNav from "@/components/(dashboards)/dashboardNav/DashboardNav";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
 import { Montserrat } from "next/font/google";
 import { userSideNavLink } from "@/components/allNavLinks/AllNavLinks";
-import DashboardSideBar from "@/components/dashboardSideBar/DashboardSideBar";
+import DashboardSideBar from "@/components/(dashboards)/dashboardSideBar/DashboardSideBar";
 const montserrat = Montserrat({
   weight: ["400", "400"],
   subsets: ["latin"],
 });
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [
-    { href: "/dashboard/dashboard/profile", label: "Profile", icon: <FaCog /> },
+    { href: "/user/profile", label: "Profile", icon: <FaCog /> },
     { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
   ];
   return (

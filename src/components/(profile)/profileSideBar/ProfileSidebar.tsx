@@ -20,7 +20,6 @@ export default function ProfileSidebar({
   const pathname = usePathname();
   const { user } = useSelector((state: any) => state?.slices);
 
-  
   const logoutHandler = async () => {
     try {
       const response = await axios.get(`/pages/api/logout`);
@@ -61,7 +60,9 @@ export default function ProfileSidebar({
         <div>
           <p className="text-lg font-semibold">{user?.name}</p>
           <p className="text-sm text-gray-500">{user?.email}</p>
-          <p className="text-sm text-blue-600 font-medium">Role: {user?.role}</p>
+          <p className="text-sm text-blue-600 font-medium">
+            Role: {user?.role}
+          </p>
         </div>
       </div>
 
@@ -87,7 +88,7 @@ export default function ProfileSidebar({
       <div>
         <button
           onClick={logoutHandler}
-          className="w-full text-center bg-red-500 hover:bg-red-700 active:bg-red-800 text-white font-semibold py-2 rounded-md cursor-pointer transition"
+          className="w-full text-center accent-bg-color hover:scale-105 active:scale-100 text-white font-semibold py-2 rounded-md cursor-pointer transition"
         >
           Log Out
         </button>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Search_Jobs from "../ui/btns/ctaBtn/search_jobs/Search_Jobs";
+import Search_Jobs from "@/components/ui/btns/ctaBtn/search_jobs/Search_Jobs";
 const Opportunity = () => {
   return (
     <section className="relative py-12 lg:py-20 max-w-[1440px] mx-auto w-11/12 second-bg-color rounded-2xl mb-12 md:mb-20">

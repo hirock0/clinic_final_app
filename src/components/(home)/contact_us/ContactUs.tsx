@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import ContactBtn from "../ui/btns/contactBtn/ContactBtn";
+import ContactBtn from "../../ui/btns/contactBtn/ContactBtn";
 
 const ContactUs = () => {
   return (

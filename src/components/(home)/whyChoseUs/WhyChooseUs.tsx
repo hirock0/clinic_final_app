@@ -5,7 +5,7 @@ import {
   FaCheckCircle,
   FaShieldAlt,
 } from "react-icons/fa";
-import Title from "../title/Title";
+import Title from "@/components/title/Title";
 
 const features = [
   {
@@ -17,7 +17,8 @@ const features = [
   {
     icon: <FaHandsHelping />,
     title: "Urgency Met with Expertise",
-    description: "Connect directly with a dedicated staffing professional who understands the urgency of your needs. Most roles are filled within 24–48 hours, and we ensure consistent communication every step of the way—so you're never left in the dark.",
+    description:
+      "Connect directly with a dedicated staffing professional who understands the urgency of your needs. Most roles are filled within 24–48 hours, and we ensure consistent communication every step of the way—so you're never left in the dark.",
   },
   {
     icon: <FaCheckCircle />,
@@ -38,14 +39,20 @@ export default function WhyChooseUs() {
     <section className="text-center bg-base-100 py-12 md:py-20 ">
       <div className="max-w-[1440px] mx-auto w-11/12">
         <div className="mx-auto flex items-center flex-col max-w-5xl">
-          <Title heading="WHY CHOOSE UNITED CARE LINKS" paragraph="United Care Links is a California-based healthcare staffing squad that&apos;s all about one thing: making sure your care team is stacked with reliable, compassionate pros.
-From 24/7 nurses to niche therapists and group facilitators, we&apos;ve got your back—filling in every gap so you can keep your eyes on what matters most: your patients.
-"/>
+          <Title
+            heading="WHY CHOOSE UNITED CARE LINKS"
+            paragraph="United Care Links is a California-based healthcare staffing squad that's all about one thing: making sure your care team is stacked with reliable, compassionate pros.
+From 24/7 nurses to niche therapists and group facilitators, we've got your back—filling in every gap so you can keep your eyes on what matters most: your patients.
+"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features?.map((feature, idx) => (
-            <div key={idx} className="card soft-bg-purple p-6 transition-transform hover:scale-105 duration-300 ease-in-out border-2 main-border-color">
+            <div
+              key={idx}
+              className="card soft-bg-purple p-6 transition-transform hover:scale-105 duration-300 ease-in-out border-2 main-border-color"
+            >
               <div className="flex justify-start mb-4">
                 <div className=" main-bg-color shadow main-text-color text-4xl p-4 rounded-full">
                   {feature?.icon}
@@ -61,8 +68,6 @@ From 24/7 nurses to niche therapists and group facilitators, we&apos;ve got your
             </div>
           ))}
         </div>
-
-
       </div>
     </section>
   );
