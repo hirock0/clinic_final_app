@@ -1,9 +1,8 @@
-
-import DashboardNav from "@/components/dashboardNav/DashboardNav";
+import DashboardNav from "@/components/(dashboards)/dashboardNav/DashboardNav";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
 import { Montserrat } from "next/font/google";
 import { employeeSideNavLink } from "@/components/allNavLinks/AllNavLinks";
-import DashboardSideBar from "@/components/dashboardSideBar/DashboardSideBar";
+import DashboardSideBar from "@/components/(dashboards)/dashboardSideBar/DashboardSideBar";
 const montserrat = Montserrat({
   weight: ["400", "400"],
   subsets: ["latin"],
@@ -11,8 +10,8 @@ const montserrat = Montserrat({
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [
-    { href: "/user/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
-    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
+    { href: "/employee/profile", label: "Profile", icon: <FaCog /> },
+    { href: "/employee/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
   ];
 
   return (
@@ -23,7 +22,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Main Layout */}
       <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">
         {/* Sidebar */}
-        <aside className="w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400/40 via-yellow-300/30 to-white shadow-md p-6 hidden lg:block">
+        <aside className="w-64 overflow-y-scroll soft-bg-purple shadow-md p-6 hidden lg:block">
           <DashboardSideBar navLinks={employeeSideNavLink} />
         </aside>
 

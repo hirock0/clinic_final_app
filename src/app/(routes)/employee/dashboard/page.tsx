@@ -14,6 +14,10 @@ const DashboardPage = async () => {
   const approvedApplications = await allApplications?.filter(
     (item: any) => item?.status === "approved"
   );
+  const design1 =
+    " bg-gradient-to-br from-yellow-300 via-yellow-400 to-red-400";
+  const design2 =
+    " bg-gradient-to-br from-green-400 via-green-300 to-yellow-300";
 
   return (
     <div className=" flex flex-col gap-5">
@@ -24,9 +28,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
-            }
+            design={design1}
             applications={allJobs}
             title="Posted"
             title2="Jobs"
@@ -39,9 +41,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-green-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
-            }
+            design={design2}
             applications={approvedJobs}
             title="Approved"
             title2="Jobs"
@@ -55,9 +55,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
-            }
+            design={design2}
             applications={allApplications}
             title="User Posted"
             title2="Applications"
@@ -70,9 +68,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-green-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
-            }
+            design={design1}
             applications={approvedApplications}
             title="Approved"
             title2="Applications"

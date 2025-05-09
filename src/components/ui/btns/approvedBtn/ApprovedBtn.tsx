@@ -46,7 +46,7 @@ const ApprovedBtn = ({ job }: { job: any }) => {
       <button
         onClick={handleApprove}
         disabled={status || loading}
-        className={`flex justify-center second-bg-color text-white rounded-sm shadow-md w-32 h-10 items-center gap-1 text-sm transition
+        className={`flex justify-center second-bg-color text-white rounded-sm shadow-md w-32 h-10 items-center gap-2 text-sm transition
     ${
       status || loading
         ? "opacity-60 cursor-not-allowed"
@@ -57,12 +57,12 @@ const ApprovedBtn = ({ job }: { job: any }) => {
       >
         {loading ? (
           <>
-            <AiOutlineLoading3Quarters className="animate-spin" />
+            <AiOutlineLoading3Quarters size={20} className="animate-spin" />
             Approving...
           </>
         ) : (
           <>
-            <FaCheckCircle />
+            <FaCheckCircle size={20} />
             Approve
           </>
         )}
