@@ -10,8 +10,8 @@ const montserrat = Montserrat({
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const navLinks = [
+    { href: "/admin/dashboard/profile", label: "Profile", icon: <FaCog /> },
     { href: "/admin/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
-    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
   ];
 
   return (
@@ -21,7 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Main Layout */}
       <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">
         {/* Sidebar */}
-        <aside className="w-64 overflow-y-scroll bg-gradient-to-tr from-yellow-400/40 via-yellow-300/30 to-white shadow-md p-6 hidden lg:block">
+        <aside className="w-64 overflow-y-scroll soft-bg-purple  shadow-md p-6 hidden lg:block">
           <DashboardSideBar navLinks={adminSideNavLink} />
         </aside>
 

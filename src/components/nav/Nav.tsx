@@ -66,12 +66,13 @@ const Nav = () => {
   ];
 
   const navLinks = [
+    { href: "/user/dashboard/profile", label: "Profile", icon: <FaCog /> },
     {
       href: `/${user?.role}/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
-    { href: "/profile/settings", label: "Settings", icon: <FaCog /> },
+    
   ];
 
   if (!hasMounted) return null;

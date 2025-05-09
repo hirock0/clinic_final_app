@@ -72,13 +72,13 @@ export default function ProfileSidebar({
             key={item?.href}
             href={item?.href}
             className={`flex items-center gap-3 px-4 py-2 rounded-md font-medium transition-all duration-300 ${
-              pathname === item.href
+              pathname === item?.href
                 ? "bg-blue-600 text-white shadow"
                 : "text-gray-700 hover:bg-blue-100"
             }`}
           >
-            <span className="text-xl">{item.icon}</span>
-            <span className="truncate">{item.label}</span>
+            <span className="text-xl">{item?.icon}</span>
+            <span className="truncate">{item?.label}</span>
           </Link>
         ))}
       </nav>

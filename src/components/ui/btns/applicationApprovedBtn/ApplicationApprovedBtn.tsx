@@ -17,7 +17,7 @@ const ApplicationApprovedBtn = ({ app }: { app: any }) => {
 
     const confirm = await swal({
       title: "Approve Application?",
-      text: `Are you sure you want to approve ${app.fullName}?`,
+      text: `Are you sure you want to approve ${app?.fullName}?`,
       icon: "info",
       buttons: ["Cancel", "Yes, approve"],
     });

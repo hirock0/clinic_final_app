@@ -3,7 +3,8 @@
 import axios from "axios";
 import { useState } from "react";
 import swal from "sweetalert";
-
+import { FaCheckCircle } from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const ApprovedBtn = ({ job }: { job: any }) => {
   const [status, setStatus] = useState<boolean>(job?.approvedStatus);
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,15 +46,26 @@ const ApprovedBtn = ({ job }: { job: any }) => {
       <button
         onClick={handleApprove}
         disabled={status || loading}
-        className={`text-sm bg-slate-300 rounded-sm shadow-md p-2 transition 
-          ${
-            status || loading
-              ? "opacity-60 cursor-not-allowed"
-              : "hover:scale-105 active:scale-100"
-          }
-          ${loading ? "text-gray-500" : "text-green-600 hover:text-green-800"}`}
+        className={`flex justify-center second-bg-color text-white rounded-sm shadow-md w-32 h-10 items-center gap-1 text-sm transition
+    ${
+      status || loading
+        ? "opacity-60 cursor-not-allowed"
+        : "hover:scale-105 active:scale-100"
+    }
+    ${loading ? "text-gray-500" : "text-green-600"}
+  `}
       >
-        {loading ? "Approving..." : "Approve"}
+        {loading ? (
+          <>
+            <AiOutlineLoading3Quarters className="animate-spin" />
+            Approving...
+          </>
+        ) : (
+          <>
+            <FaCheckCircle />
+            Approve
+          </>
+        )}
       </button>
     </div>
   );
