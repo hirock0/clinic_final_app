@@ -66,15 +66,21 @@ const Nav = () => {
   ];
 
   const navLinks = [
-    { href: "/user/profile", label: "Profile", icon: <FaCog /> },
     {
-      href: `/${user?.role}/dashboard`,
+      href: `/${
+        user?.role === "approvedEmployee" ? "employee" : user?.role
+      }/profile`,
+      label: "Profile",
+      icon: <FaCog />,
+    },
+    {
+      href: `/${
+        user?.role === "approvedEmployee" ? "employee" : user?.role
+      }/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
-    
   ];
-
 
   if (!hasMounted) return null;
   if (
@@ -107,8 +113,9 @@ const Nav = () => {
         <div className="uppercase max-[1400px]:text-sm max-lg:text-base">
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`${!menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-              } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            className={`${
+              !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
+            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
               <ul
@@ -130,12 +137,17 @@ const Nav = () => {
                       <FaSortDown />
                     </div>
                     <div
-                      className={`${activeSubMenu === item.title ? "block" : "hidden"
-                        } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
+                      className={`${
+                        activeSubMenu === item.title ? "block" : "hidden"
+                      } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
                     >
                       <ul className="text-nowrap flex flex-col gap-3 p-4">
                         {item.subLinks.map((subItem, subIndex) => (
-                          <Link key={subIndex} href={subItem.href} className="space-y-3">
+                          <Link
+                            key={subIndex}
+                            href={subItem.href}
+                            className="space-y-3"
+                          >
                             <li className="text-sm hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f]">
                               {subItem.title}
                             </li>
@@ -167,7 +179,6 @@ const Nav = () => {
           {/* Login Dropdown or Profile Avatar */}
           <div className="relative">
             {!user ? (
-
               <>
                 <button
                   onClick={(e) => {
@@ -221,23 +232,22 @@ const Nav = () => {
                 )}
               </>
             ) : (
-            <div
-              onClick={(e) => {
-                e.stopPropagation();
-                setProfileMenu(!profileMenu);
-              }}
-              className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
-            >
-              <Image
-                src={user.image?.secure_url}
-                alt="user"
-                width={500}
-                height={500}
-                className="object-cover w-full h-full"
-              />
-            </div>
-            )
-          }
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setProfileMenu(!profileMenu);
+                }}
+                className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
+              >
+                <Image
+                  src={user.image?.secure_url}
+                  alt="user"
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            )}
           </div>
 
           {/* Profile Popup */}
