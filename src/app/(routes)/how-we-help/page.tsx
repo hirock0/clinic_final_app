@@ -79,12 +79,6 @@ const HowWeCanHelpPage = () => {
 
     return (
         <section className=' scroll-mt-40 max-w-[1440px] mx-auto w-11/12'>
-            {/* <div className="text-center py-10 bg-[#f9fafb]">
-                <h1 className="text-3xl font-bold uppercase">How We Can Help Supporting Organizations. Empowering Individuals.</h1>
-                <p className="text-lg text-gray-600 mt-2">
-                    Supporting Organizations. Empowering Individuals.
-                </p>
-            </div> */}
 
             <div className="max-w-4xl mx-auto text-center pt-12">
             <h1 className="text-3xl font-bold uppercase mb-4">How We Can Help Supporting Organizations, Empowering Individuals.</h1>
@@ -100,8 +94,8 @@ const HowWeCanHelpPage = () => {
                     {healthcareOrg.map((card, index) => (
                         <div key={index} className="p-6 bg-white rounded-2xl shadow hover:shadow-lg">
                             <card.icon size={40} className='mb-4 text-[#308d89]' />
-                            <h3 className="font-semibold text-base mb-2 ">{card.title}</h3>
-                            <p className='text-sm text-gray-500'>{card.paragraph}</p>
+                            <h3 className="font-semibold text-lg mb-2 ">{card.title}</h3>
+                            <p className='text-base text-gray-500'>{card.paragraph}</p>
                         </div>
                     ))}
                 </div>
@@ -113,8 +107,8 @@ const HowWeCanHelpPage = () => {
                     {individuals.map((card, index) => (
                         <div key={index} className="p-6 bg-white rounded-2xl shadow hover:shadow-lg">
                             <card.icon size={40} className='mb-4 text-[#308d89]' />
-                            <h3 className="font-semibold text-base mb-2 ">{card.title}</h3>
-                            <p className='text-sm text-gray-500'>{card.paragraph}</p>
+                            <h3 className="font-semibold text-lg mb-2 ">{card.title}</h3>
+                            <p className='text-base text-gray-500'>{card.paragraph}</p>
                         </div>
                     ))}
                 </div>
@@ -129,7 +123,7 @@ const HowWeCanHelpPage = () => {
                         <div key={index} className="bg-[#f3fffe] border border-[#308d89] rounded-2xl flex flex-col items-center justify-center space-y-4 p-6">
                             {/* icon */}
                             <card.icon size={40} className="text-[#308d89]" />
-                            <p className='text-sm text-gray-500'>{card.title}</p>
+                            <p className='text-base text-gray-500'>{card.title}</p>
                         </div>
                     ))}
                 </div>
@@ -137,16 +131,16 @@ const HowWeCanHelpPage = () => {
 
 
             <div className="py-10 text-center">
-                <p className="text-lg font-medium mb-4">Let&apos;s connect.</p>
-                <div className="space-x-4">
+                <p className="text-xl font-medium mb-4">Let&apos;s connect.</p>
+                <div className="w-full flex flex-wrap gap-5 items-center justify-center">
                     <Link href="tel:5104029388">
-                        <button className="bg-[#ffdb61] px-5 py-2 rounded hover:bg-[#ffdb61]/80 text-[#171717] cursor-pointer">Call Us</button>
+                        <button className="bg-[#ffdb61] px-5 py-2 rounded hover:bg-[#ffdb61]/80 text-[#171717] cursor-pointer whitespace-nowrap">Call Us</button>
                     </Link>
                     <Link href="/">
-                        <button className="border border-[#308d89] text-[#308d89] px-5 py-2 rounded hover:bg-[#f3fffe] cursor-pointer">Get a Free Consultation</button>
+                        <button className="border border-[#308d89] text-[#308d89] px-5 py-2 rounded hover:bg-[#f3fffe] cursor-pointer whitespace-nowrap">Get a Free Consultation</button>
                     </Link>
                     <Link href="/">
-                        <button className="bg-[#171717] text-white px-5 py-2 rounded hover:bg-gray-800 cursor-pointer">Request Care</button>
+                        <button className="bg-[#171717] text-white px-5 py-2 rounded hover:bg-gray-800 cursor-pointer whitespace-nowrap">Request Care</button>
                     </Link>
                 </div>
             </div>
