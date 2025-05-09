@@ -1,5 +1,4 @@
-import { FaUserMd, FaUserTie } from "react-icons/fa";
-import Title from "../title/Title";
+import Title from "@/components/title/Title";
 import Image from "next/image";
 const Strategic_Advisors = () => {
 

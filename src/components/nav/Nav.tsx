@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { FaTachometerAlt, FaCog } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
-import ProfileSidebar from "../profileSideBar/ProfileSidebar";
+import ProfileSidebar from "../(profile)/profileSideBar/ProfileSidebar";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const Nav = () => {
   ];
 
   const navLinks = [
-    { href: "/user/dashboard/profile", label: "Profile", icon: <FaCog /> },
+    { href: "/user/profile", label: "Profile", icon: <FaCog /> },
     {
       href: `/${user?.role}/dashboard`,
       label: "Dashboard",
@@ -75,9 +75,10 @@ const Nav = () => {
     
   ];
 
+
   if (!hasMounted) return null;
   if (
-    pathname?.startsWith("/employee/dashboard") ||
+    pathname?.startsWith("/employee") ||
     pathname?.startsWith("/use") ||
     pathname?.startsWith("/admin") ||
     pathname?.startsWith("/institutional")

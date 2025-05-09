@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import Title from '../title/Title';
+import Title from '@/components/title/Title';
 
 const LeadershipTeam = () => {
 

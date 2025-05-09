@@ -10,7 +10,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 
-
 type LoginFormInputs = {
   email: string;
   password: string;

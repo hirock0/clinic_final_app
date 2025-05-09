@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import Hire_Talent from "../ui/btns/ctaBtn/hire_talent/Hire_Talent";
-import Search_Jobs from "../ui/btns/ctaBtn/search_jobs/Search_Jobs";
+import Hire_Talent from "../../ui/btns/ctaBtn/hire_talent/Hire_Talent";
+import Search_Jobs from "../../ui/btns/ctaBtn/search_jobs/Search_Jobs";
 
 const Banner = () => {
   return (
