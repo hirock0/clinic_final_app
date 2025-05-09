@@ -20,7 +20,7 @@ const DashboardPage = async () => {
         >
           <ApplicationCard
             design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-yellow-300 via-yellow-300 text-2xl to-red-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+              " cursor-pointer accent-bg-color text-center flex-col gap-2  w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
             }
             applications={applications}
             title="Applied"
@@ -34,7 +34,7 @@ const DashboardPage = async () => {
         >
           <ApplicationCard
             design={
-              " cursor-pointer text-center flex-col gap-2 bg-gradient-to-tl from-green-300 via-yellow-300 text-2xl to-yellow-400 w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
+              " cursor-pointer text-center flex-col gap-2 accent-bg-color w-full   h-52 rounded-xl p-5 flex items-center justify-center shadow-xl lg:hover:scale-105"
             }
             applications={approvedApplications}
             title="Accepted"

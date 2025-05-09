@@ -1,6 +1,5 @@
 import { IoHomeSharp } from "react-icons/io5";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { FcAcceptDatabase } from "react-icons/fc";
 
 export const adminSideNavLink = [
   {
@@ -17,12 +16,7 @@ export const adminSideNavLink = [
     title: "Employees",
     href: "/admin/employees",
     icon: <AiOutlineDashboard />,
-  },
-  {
-    title: "Accepted Jobs",
-    href: "/admin/dashboard/accepted_jobs",
-    icon: <FcAcceptDatabase />,
-  },
+  }
 ];
 
 export const userSideNavLink = [
@@ -36,16 +30,7 @@ export const userSideNavLink = [
     href: "/user/dashboard",
     icon: <AiOutlineDashboard />,
   },
-  {
-    title: "Accepted Jobs",
-    href: "/user/dashboard/accepted_jobs",
-    icon: <FcAcceptDatabase />,
-  },
-  {
-    title: "User Jobs",
-    href: "/user/dashboard/accepted_jobs",
-    icon: <FcAcceptDatabase />,
-  },
+
 ];
 
 export const employeeSideNavLink = [
@@ -59,11 +44,7 @@ export const employeeSideNavLink = [
     href: "/user/dashboard",
     icon: <AiOutlineDashboard />,
   },
-  {
-    title: "Accepted Jobs",
-    href: "/user/dashboard/accepted_jobs",
-    icon: <FcAcceptDatabase />,
-  },
+
 ];
 export const institutionalSideNavLink = [
   {
@@ -75,10 +56,5 @@ export const institutionalSideNavLink = [
     title: "Dashboard",
     href: "/institutional/dashboard",
     icon: <AiOutlineDashboard />,
-  },
-  {
-    title: "Accepted Jobs",
-    href: "/institutional/accepted_jobs",
-    icon: <FcAcceptDatabase />,
-  },
+  }
 ];

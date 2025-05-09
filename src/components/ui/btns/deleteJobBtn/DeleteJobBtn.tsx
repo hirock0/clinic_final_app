@@ -41,10 +41,12 @@ const DeleteJobBtn = ({
     <div className="">
       <button
         onClick={handleDelete}
-        className="flex bg-slate-300 rounded-sm shadow-md hover:scale-105 active:scale-100 p-2 items-center gap-1 text-sm text-red-500 hover:text-red-700 transition"
+        className="flex justify-center accent-bg-color rounded-sm shadow-md hover:scale-105 active:scale-100 w-32 h-10 items-center gap-1 text-sm transition"
       >
-        <IoTrashOutline size={18} />
-        {loading ? "Deleting..." : "Delete"}
+        <div className=" flex items-center">
+          <IoTrashOutline size={18} />
+          {loading ? "Deleting..." : "Delete"}
+        </div>
       </button>
     </div>
   );
