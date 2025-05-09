@@ -133,6 +133,40 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/institutional/login", request.url));
   }
 
+  if (role !== "user" && pathname.startsWith("/user")) {
+    return NextResponse.redirect(
+      new URL(
+        `/${role === "approvedEmployee" ? "employee" : role}/dashboard`,
+        request.url
+      )
+    );
+  }
+  if (role !== "admin" && pathname.startsWith("/admin")) {
+    return NextResponse.redirect(
+      new URL(
+        `/${role === "approvedEmployee" ? "employee" : role}/dashboard`,
+        request.url
+      )
+    );
+  }
+
+  if (role !== "approvedEmployee" && pathname.startsWith("/employee")) {
+    return NextResponse.redirect(
+      new URL(
+        `/${role === "approvedEmployee" ? "employee" : role}/dashboard`,
+        request.url
+      )
+    );
+  }
+  if (role !== "institutional" && pathname.startsWith("/institutional")) {
+    return NextResponse.redirect(
+      new URL(
+        `/${role === "approvedEmployee" ? "employee" : role}/dashboard`,
+        request.url
+      )
+    );
+  }
+
   return NextResponse.next();
 }
 

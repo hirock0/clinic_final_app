@@ -41,7 +41,7 @@ export const employeeSideNavLink = [
   },
   {
     title: "Dashboard",
-    href: "/user/dashboard",
+    href: "/employee/dashboard",
     icon: <AiOutlineDashboard />,
   },
 
