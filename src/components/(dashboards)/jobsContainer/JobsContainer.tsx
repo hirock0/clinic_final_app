@@ -95,6 +95,15 @@ const JobsContainer = ({
                         <span>Add Info</span>
                       </Link>
                     )}
+                    {/* View Details Button */}
+                    {user?.role !== "admin" && (
+                      <Link
+                        href={`/job/view/${job?._id}`}
+                        className="flex justify-center accent-bg-color text-white rounded-sm shadow-md hover:scale-105 active:scale-100 w-32 h-10 items-center gap-2 text-sm transition"
+                      >
+                        <span>View Details</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
 
