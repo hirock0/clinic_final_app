@@ -47,9 +47,9 @@ const Nav = () => {
       title: "FOR ORGANIZATIONS",
       href: "/",
       subLinks: [
-        { title: "How we can help", href: "/" },
+        { title: "How we can help", href: "/how-we-help" },
         { title: "Book an appointment", href: "/contact" },
-        { title: "Clinical support staffing", href: "/" },
+        { title: "Clinical support staffing", href: "/clinical-support-staffing" },
       ],
     },
     {
