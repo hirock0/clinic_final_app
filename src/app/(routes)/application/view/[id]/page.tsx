@@ -1,4 +1,5 @@
 import { FindAJob } from "@/app/actions/apis/Apis";
+import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
 import Link from "next/link";
 
 const View = async (props: any) => {
@@ -8,13 +9,10 @@ const View = async (props: any) => {
 
   return (
     <div className="bg-gray-100 min-h-screen py-8">
-      <div className="  shadow-lg p-6 relative w-fit max-w-6xl mx-auto rounded-xl">
-        <Link
-          href={"/user/accepted/applications"}
-          className=" absolute left-5 top-5"
-        >
-          Back
-        </Link>
+      <div className="  shadow-lg p-6 relative max-w-[1440px] w-11/12 mx-auto rounded-xl">
+        <div className="absolute left-5 top-5">
+          <BackBtn />
+        </div>
         <div className=" space-y-8 ">
           {/* Job Header */}
           <div className="text-center">

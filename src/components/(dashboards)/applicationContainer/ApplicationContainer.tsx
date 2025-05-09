@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useMemo } from "react";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ApplicationContainer = ({
   applicationData,
@@ -29,9 +30,9 @@ const ApplicationContainer = ({
           <div className=" absolute mt-5 left-5">
             <Link
               href="/user/dashboard"
-              className="inline-block text-blue-600 text-lg mb-5"
+              className="inline-block main-text-color text-lg mb-5"
             >
-              Back
+              <FaArrowLeft />
             </Link>
           </div>
         </div>
@@ -91,7 +92,7 @@ const ApplicationContainer = ({
                           : application?._id
                       )
                     }
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    className="px-4 py-2 accent-bg-color text-white rounded-lg hover:bg-yellow-500 transition"
                   >
                     {selectedId === application?._id ? "Hide" : "View"} Details
                   </button>
@@ -101,7 +102,7 @@ const ApplicationContainer = ({
                 <div className="mt-4">
                   <Link
                     href={`/user/application/view/${application?.jobId}`}
-                    className="text-blue-600 underline"
+                    className="main-text-color underline"
                   >
                     View Full Application
                   </Link>

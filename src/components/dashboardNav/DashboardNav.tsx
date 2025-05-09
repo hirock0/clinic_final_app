@@ -54,7 +54,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   }, []);
 
   return (
-    <nav className="bg-slate-200 sticky top-0 z-50">
+    <nav className="soft-bg-purple sticky top-0 z-50">
       <div className="h-20 relative max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
         <div className="flex items-center gap-5">
           <div className="flex max-lg:gap-5 items-center">
@@ -97,7 +97,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
                   className="w-10 h-10 cursor-pointer rounded-full overflow-hidden"
                 >
                   <Image
-                    src={user.image.secure_url}
+                    src={user?.image?.secure_url}
                     alt="user"
                     width={500}
                     height={500}
@@ -127,7 +127,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all z-50 fixed left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all z-50 fixed left-0 top-20 h-screen overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={adminSideNavLink} />
           </aside>
@@ -138,7 +138,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-screen overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={userSideNavLink} />
           </aside>
@@ -149,7 +149,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={employeeSideNavLink} />
           </aside>
@@ -160,7 +160,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
             onClick={(e) => e.stopPropagation()}
             className={`${
               !menuFlag ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-md p-6 hidden max-lg:block`}
+            } transition-all fixed z-50 left-0 top-20 h-full overflow-y-scroll soft-bg-purple shadow-md p-6 hidden max-lg:block`}
           >
             <DashboardSideBar navLinks={institutionalSideNavLink} />
           </aside>
