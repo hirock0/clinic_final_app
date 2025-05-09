@@ -87,7 +87,9 @@ const Nav = () => {
     pathname?.startsWith("/employee") ||
     pathname?.startsWith("/use") ||
     pathname?.startsWith("/admin") ||
-    pathname?.startsWith("/institutional")
+    pathname?.startsWith("/institutional") ||
+    pathname?.startsWith("/job") ||
+    pathname?.startsWith("/application")
   ) {
     return null;
   }

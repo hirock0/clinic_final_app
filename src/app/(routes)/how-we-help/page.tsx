@@ -126,7 +126,7 @@ const HowWeCanHelpPage = () => {
                 <h2 className="text-2xl font-bold mb-4 uppercase">Why Choose Us?</h2>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
                     {chooseUs.map((card, index) => (
-                        <div key={index} className="bg-[#f3fffe] border border-[#308d89] rounded-md flex flex-col items-center justify-center space-y-4 p-6">
+                        <div key={index} className="bg-[#f3fffe] border border-[#308d89] rounded-2xl flex flex-col items-center justify-center space-y-4 p-6">
                             {/* icon */}
                             <card.icon size={40} className="text-[#308d89]" />
                             <p className='text-sm text-gray-500'>{card.title}</p>
