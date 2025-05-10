@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReqEmployees from "@/components/reqEmployees/reqEmployees";
-import { useRouter } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
 
 interface User {
@@ -16,8 +14,6 @@ interface User {
 export default function Employees() {
   const [employees, setEmployees] = useState<User[]>([]);
   const [search, setSearch] = useState("");
-  const router = useRouter();
-
   const userHandler = async () => {
     try {
       const response = await axios.get("/pages/api/admin/employees");
