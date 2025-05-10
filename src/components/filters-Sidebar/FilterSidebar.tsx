@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FiFilter, FiRefreshCw } from "react-icons/fi";
-import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
 import ViewJobs from "../viewjobs/ViewJobs";
 
 const cities = ["New York", "Los Angeles", "Chicago"];
@@ -133,7 +132,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
 
       {showFilter && (
         <div className="bg-gray-100 p-4 mt-4 rounded space-y-4">
-          {/* Location */}
+
           <div>
             <label className="block text-sm font-semibold mb-1">Location</label>
             <input
@@ -151,7 +150,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </datalist>
           </div>
 
-          {/* Facility */}
+
           <div>
             <label className="block text-sm font-semibold mb-1">
               Facility Type
@@ -171,7 +170,6 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
-          {/* Job Type */}
           <div>
             <label className="block text-sm font-semibold mb-1">Job Type</label>
             <select
@@ -189,7 +187,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
-          {/* Role */}
+  
           <div>
             <label className="block text-sm font-semibold mb-1">Role</label>
             <select
@@ -209,7 +207,6 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
         </div>
       )}
 
-      {/* Matched Jobs */}
       <div className="mt-6">
         <h2 className="text-lg font-semibold mb-2">Matched Jobs</h2>
         {filteredJobs.length > 0 ? (
