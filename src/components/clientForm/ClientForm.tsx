@@ -26,8 +26,6 @@ const ClientForm = ({ job }: { job: any }) => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-      console.log(data?.maxSalary);
-      console.log(data?.minSalary);
       if (Number(data?.minSalary) > Number(data?.maxSalary)) {
         swal({
           title: "Min Salary must be less than Max Salary",
@@ -57,8 +55,8 @@ const ClientForm = ({ job }: { job: any }) => {
           }
         }
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error:any) {
+     throw new Error(error.message)
       swal("Error", "Something went wrong.", "error");
     } finally {
       setIsLoading(false);

@@ -20,7 +20,7 @@ export default function Employees() {
       const reqUsers = response?.data?.users;
       setEmployees(reqUsers);
     } catch (error: any) {
-      console.error(error);
+      throw new Error(error.message)
     }
   };
 

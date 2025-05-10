@@ -86,9 +86,9 @@ const HireTalentPage = () => {
         });
         setLoading(false);
       }
-    } catch (error) {
+    } catch (error:any) {
       setLoading(false);
-      console.error("Error submitting form:", error);
+      throw new Error(error.message)
     } finally {
       // reset();
       setLoading(false);
