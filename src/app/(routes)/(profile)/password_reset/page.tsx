@@ -5,8 +5,12 @@ import emailjs from "@emailjs/browser";
 import { FiMail } from "react-icons/fi";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "@/utils/redux/slices/slice";
 
 const Password_resetPage = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state?.slices);
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -67,6 +71,9 @@ const Password_resetPage = () => {
     tokenHandler(); // 👈 Removed wrong dependency
   }, [token]); // ✅ Should run once only
 
+  useEffect(() => {
+    dispatch(fetchData());
+  }, []);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white rounded shadow p-6">
@@ -83,16 +90,20 @@ const Password_resetPage = () => {
             </label>
             <div className="flex items-center border rounded px-3 py-2">
               <FiMail className="text-gray-400 mr-2" />
-              <input
-                id="user_email"
-                name="user_email"
-                type="email"
-                placeholder="Enter your email"
-                className="w-full outline-none"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              {user ? (
+                <input
+                  id="user_email"
+                  name="user_email"
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full outline-none"
+                  value={user?.email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              ) : (
+                <div className="">No user yet!</div>
+              )}
             </div>
           </div>
           <input type="hidden" name="from_name" value="Hirock Dutta" />
