@@ -112,7 +112,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
     <div className="relative p-4">
       <div className="flex items-center justify-between">
         <button
-          className="text-white px-4 py-2 rounded flex items-center gap-2"
+          className="text-white cursor-pointer px-4 py-2 rounded flex items-center gap-2"
           onClick={() => setShowFilter(!showFilter)}
         >
           <FiFilter />
@@ -120,7 +120,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
         </button>
 
         <button
-          className="text-white px-4 py-2 rounded flex items-center gap-2"
+          className="text-white cursor-pointer px-4 py-2 rounded flex items-center gap-2"
           onClick={handleReset}
         >
           <FiRefreshCw />

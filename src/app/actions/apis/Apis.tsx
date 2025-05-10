@@ -90,3 +90,19 @@ export const FindAllApplications = async () => {
     return null;
   }
 };
+
+export const VerifiedToken = async (data: any) => {
+  try {
+    const token = data;
+    if (!token) return null;
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+    const { payload } = await jwtVerify(token, secret);
+    if (payload) {
+      return payload as any;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
+};
