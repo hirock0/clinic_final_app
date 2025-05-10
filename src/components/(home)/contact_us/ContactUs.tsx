@@ -22,14 +22,14 @@ const ContactUs = () => {
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6 sm:px-8">
         <div className="max-w-5xl mx-auto text-white">
           <h2
-            className="text-3xl sm:text-4xl font-black mb-4 uppercase"
+            className="text-2xl md:text-4xl  font-black mb-3 lg:mb-6 uppercase"
             style={{ fontFamily: "var(--font-inter" }}
           >
             Work with a staffing partner focused on healthcare and clinical
             support excellence
           </h2>
           <p
-            className="text-lg mb-8 text-center"
+            className="text-base lg:text-lg mb-6 lg:mb-8 text-center"
             style={{ fontFamily: "var(--font-inter" }}
           >
             Connect with UCL to get the expertise and resources you need to
@@ -37,7 +37,7 @@ const ContactUs = () => {
           </p>
 
           <div className="inline-flex flex-col justify-center">
-            <ContactBtn design={"text-lg font-semibold py-2 px-4 border-2 rounded-md hover:bg-[#fafafa] hover:text-[#0a0a0a] border-[#fafafa] bg-transparent text-[#fafafa] transition-colors duration-300 ease-in-out cursor-pointer uppercase"}/>
+            <ContactBtn design={"text-base lg:text-lg font-semibold py-1.5 px-2.5 md:py-2 md:px-4 border-2 rounded-md hover:bg-[#fafafa] hover:text-[#0a0a0a] border-[#fafafa] bg-transparent text-[#fafafa] transition-colors duration-300 ease-in-out cursor-pointer uppercase"}/>
           </div>
         </div>
       </div>

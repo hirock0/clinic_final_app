@@ -1,7 +1,7 @@
 import Image from "next/image";
 const Faqs = () => {
   return (
-    <div className=" my-14 max-w-[1440px] mx-auto w-11/12 gap-6 flex items-center lg:flex-row flex-col-reverse">
+    <div className=" py-12 lg:py-20 max-w-[1440px] mx-auto w-11/12 gap-6 flex items-center lg:flex-row flex-col">
       <div className="w-full h-full">
         <Image src={"https://cdn.pixabay.com/photo/2024/10/07/13/00/unknown-9102980_960_720.jpg"} alt="poster" width={500} height={500}
         className="w-full h-full object-cover rounded-lg"

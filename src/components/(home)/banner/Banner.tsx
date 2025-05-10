@@ -11,24 +11,23 @@ const Banner = () => {
       {/* Content Container */}
       <div className="max-w-[1440px] mx-auto w-11/12 flex flex-col lg:flex-row items-center justify-between gap-8">
         {/* Text Content */}
-        <div className="text-center lg:text-left max-w-[800px] third-text-color">
+        <div className="text-left max-w-[800px] third-text-color">
           <h1
-            className="text-4xl md:text-5xl font-black mb-6 tracking-wider leading-14 uppercase"
+            className=" text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 tracking-wider uppercase"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Your Reliable Partner in Healthcare Staffing and Workforce
-            Development.
+            Your Reliable Partner in Healthcare Staffing and Workforce Development.
           </h1>
-          <p className=" text-base lg:text-lg mb-8   lg:mx-0 leading-7">
+          <p className="text-base lg:text-lg mb-6 md:mb-8 lg:mx-0 text-gray-200">
             Helping your mission thrive—by putting the right people in the right
             places. We match meaningful work with world-class talent.Simple as
             that.
           </p>
-          <div className="flex justify-center lg:justify-start gap-4">
-            <Hire_Talent 
-              
+          <div className="flex justify-start gap-4">
+            <Hire_Talent
+
               design={
-                "text-lg font-semibold py-2 px-4 border-2 rounded-md bg-[#ffdb61] text-[#0a0a0a] border-[#ffdb61] hover:bg-transparent hover:text-[#ffdb61] transition-colors duration-300 ease-in-out cursor-pointer"
+                "text-base lg:text-lg font-semibold py-1.5 px-2.5 md:py-2 md:px-4 border-2 rounded md:rounded-md bg-[#ffdb61] text-[#0a0a0a] border-[#ffdb61] hover:bg-transparent hover:text-[#ffdb61] transition-colors duration-300 ease-in-out cursor-pointer"
               }
             />
             <Search_Jobs />

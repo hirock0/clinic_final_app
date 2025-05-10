@@ -20,10 +20,10 @@ const Opportunity = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6 sm:px-8">
         <div className=" text-center third-text-color">
-          <h2 className="text-3xl sm:text-4xl font-black mb-4 uppercase" style={{fontFamily: 'var(--font-inter'}}>
+          <h2 className="text-2xl md:text-4xl  font-black mb-3 lg:mb-6 uppercase" style={{fontFamily: 'var(--font-inter'}}>
             Looking for Your Next Job Opportunity?
           </h2>
-          <p className="text-lg mb-8 max-w-3xl " style={{ fontFamily: 'var(--font-inter' }}>
+          <p className="text-base lg:text-lg mb-6 lg:mb-8 max-w-3xl " style={{ fontFamily: 'var(--font-inter' }}>
             Match your unique skills with in-demand jobs at growing
             organizations — and positively impact your life — by working with a
             trusted career partner.

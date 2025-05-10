@@ -67,16 +67,14 @@ const Nav = () => {
 
   const navLinks = [
     {
-      href: `/${
-        user?.role === "approvedEmployee" ? "employee" : user?.role
-      }/profile`,
+      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
+        }/profile`,
       label: "Profile",
       icon: <FaCog />,
     },
     {
-      href: `/${
-        user?.role === "approvedEmployee" ? "employee" : user?.role
-      }/dashboard`,
+      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
+        }/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
@@ -95,10 +93,10 @@ const Nav = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-50 main-bg-color shadow-lg">
+    <nav className="sticky top-0 z-50 main-bg-color shadow-lg py-3">
       <div className="max-w-[1440px] relative w-11/12 mx-auto flex items-center justify-between">
         {/* Logo and Mobile Toggle */}
-        <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
+        <div className="max-lg:flex max-lg:items-center space-x-3 lg:space-x-0">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -108,25 +106,26 @@ const Nav = () => {
           >
             {menuOpen ? <IoClose size={35} /> : <MdMenu size={35} />}
           </button>
-          <Image src="/UCL logo.png" alt="logo" width={100} height={50} />
+          <Image src="/UCL logo.png" alt="logo" width={60} height={60}
+            className="h-auto w-10 lg:h-full lg:w-full"
+          />
         </div>
 
         {/* Navigation Links */}
-        <div className="uppercase max-[1400px]:text-sm max-lg:text-base">
+        <div className="uppercase max-[1400px] text-sm lg:text-base">
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`${
-              !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all max-lg:fixed z-50 max-lg:left-0 max-lg:top-25 max-lg:flex-col max-lg:backdrop:filter max-lg:bg-blue-700/40 max-lg:pb-30 max-lg:backdrop-blur-3xl max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            className={`${!menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
+              } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all  max-lg:fixed z-50 max-lg:left-0 max-lg:top-[67px] max-lg:flex-col accent-bg-color lg:bg-[#fafafa] max-lg:pb-0 max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
               <ul
                 key={index}
-                className="max-lg:w-full max-lg:hover:bg-blue-200/20"
+                className="max-lg:w-full"
               >
                 {item.subLinks ? (
                   <li
-                    className="cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full max-lg:border-b max-lg:border-b-indigo-600 max-lg:p-5 flex items-center gap-2"
+                    className="cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full max-lg:border-b max-lg:border-gray-400 max-lg:p-5 flex items-center gap-2"
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveSubMenu(
@@ -135,13 +134,12 @@ const Nav = () => {
                     }}
                   >
                     <div className="flex justify-between w-full items-center">
-                      <span className="max-lg:text-white">{item.title}</span>
+                      <span className="">{item.title}</span>
                       <FaSortDown />
                     </div>
                     <div
-                      className={`${
-                        activeSubMenu === item.title ? "block" : "hidden"
-                      } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
+                      className={`${activeSubMenu === item.title ? "block" : "hidden"
+                        } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
                     >
                       <ul className="text-nowrap flex flex-col gap-3 p-4">
                         {item.subLinks.map((subItem, subIndex) => (
@@ -160,7 +158,7 @@ const Nav = () => {
                   </li>
                 ) : (
                   <Link href={item.href}>
-                    <li className="max-lg:w-full max-lg:text-white hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f] max-lg:border-b-indigo-600 max-lg:p-5">
+                    <li className="max-lg:w-full  hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f]  max-lg:p-5">
                       {item.title}
                     </li>
                   </Link>
@@ -171,9 +169,9 @@ const Nav = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center space-x-4 relative">
+        <div className="flex items-center space-x-3 lg:space-x-4 relative">
           <Link href="/get-started">
-            <button className="uppercase px-4 py-2 bg-[#ffdb61] rounded-md text-base font-semibold second-text-color hover:bg-[#ffd23a] cursor-pointer transition-colors duration-300 ease-in-out border-2 border-[#ffdb61] hover:border-[#ffd23a]">
+            <button className="uppercase  py-1.5 px-2.5 lg:px-4 lg:py-2 bg-[#ffdb61] rounded-md text-base lg:text-lg font-semibold second-text-color hover:bg-[#ffd23a] cursor-pointer transition-colors duration-300 ease-in-out border-2 border-[#ffdb61] hover:border-[#ffd23a]">
               Get Started
             </button>
           </Link>
@@ -187,7 +185,7 @@ const Nav = () => {
                     e.stopPropagation();
                     setLoginDropdownOpen(!loginDropdownOpen);
                   }}
-                  className="text-base font-semibold border-2 py-2 px-4 rounded-md border-gray-300 text-gray-700 hover:text-gray-500 transition-colors ease-in-out duration-300 cursor-pointer"
+                  className="text-base lg:text-lg font-semibold border-2 py-1.5 px-2.5 lg:py-2 lg:px-4 rounded-md border-gray-300 text-gray-700 hover:text-gray-500 transition-colors ease-in-out duration-300 cursor-pointer"
                 >
                   SignUp
                 </button>

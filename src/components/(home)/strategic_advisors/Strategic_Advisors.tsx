@@ -21,10 +21,10 @@ const Strategic_Advisors = () => {
 
   return (
 
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-12 md:py-20">
       <div className=" max-w-[1440px] mx-auto w-11/12 flex items-center flex-col-reverse lg:flex-row justify-between gap-8">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:w-1/2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full lg:w-1/2">
           {strategicAdvisors.map((member) => (
             <div key={member.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative group">
               <div className="aspect-w-3 aspect-h-3 relative">
