@@ -7,9 +7,9 @@ async function verifyToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
     return payload;
-  } catch (error) {
+  } catch (error: any) {
     if (process.env.NODE_ENV === "development") {
-      console.warn("JWT verification failed:", error);
+      throw new Error(error.message);
     }
     return null;
   }
