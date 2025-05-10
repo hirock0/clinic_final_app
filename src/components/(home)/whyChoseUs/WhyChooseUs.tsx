@@ -54,17 +54,17 @@ From 24/7 nurses to niche therapists and group facilitators, we've got your back
               className="card soft-bg-purple p-6 transition-transform hover:scale-105 duration-300 ease-in-out border-2 main-border-color"
             >
               <div className="flex justify-start mb-4">
-                <div className=" main-bg-color shadow main-text-color text-4xl p-4 rounded-full">
+                <div className=" main-bg-color shadow main-text-color text-3xl md:text-4xl p-4 rounded-full">
                   {feature?.icon}
                 </div>
               </div>
               <h3
-                className="font-bold uppercase  text-base max-sm:text-2xl mb-4 text-left"
+                className="font-bold uppercase  md:text-base text-xl mb-4 text-left"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {feature?.title}
               </h3>
-              <p className="sm:text-xs text-left">{feature?.description}</p>
+              <p className="text-xs text-left">{feature?.description}</p>
             </div>
           ))}
         </div>

@@ -21,15 +21,17 @@ const Footer = () => {
     return null;
   }
   return (
-    <footer className={` bg-[#1e1e1e] border-t-1 border-[#1e1e1e] text-[#ececec]`}>
+    <footer className={`bg-gray-50  border-t-1 border-gray-200  text-[#1e1e1e]`}>
       <div className="max-w-[1400px] w-11/12 mx-auto pt-12 md:pt-20 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 ">
-          <div className="flex flex-col space-y-1 lg:col-span-2">
-            <Image src='/UCL logo.png' alt="ucl logo" height={100} width={100} />
-            <p className="md:max-w-[350px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet id asperiores consequuntur similique earum.</p>
+          <div className="flex flex-col space-y-3 lg:col-span-2">
+            <Image src="/UCL logo.png" alt="logo" width={80} height={80}
+              className="h-auto w-16 lg:h-full lg:w-full"
+            />
+            <p className="md:max-w-[350px] text-base ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet id asperiores consequuntur similique earum.</p>
           </div>
           <nav className="flex flex-col space-y-4">
-            <h6 className="font-semibold text-lg accent-text-color">Services</h6>
+            <h6 className="font-semibold text-lg main-text-color">Services</h6>
             <Link href={"/pricing"} className="link link-hover">
               Hire Talent
             </Link>
@@ -41,7 +43,7 @@ const Footer = () => {
             </Link>
           </nav>
           <nav className="flex flex-col space-y-4">
-            <h6 className=" font-semibold text-lg accent-text-color">Company</h6>
+            <h6 className=" font-semibold text-lg main-text-color">Company</h6>
             <Link href={"/pricing"} className="link link-hover">
               Pricing
             </Link>
@@ -53,7 +55,7 @@ const Footer = () => {
             </Link>
           </nav>
           <nav className="flex flex-col space-y-4">
-            <h6 className="accent-text-color font-semibold text-lg">Legal</h6>
+            <h6 className="main-text-color font-semibold text-lg">Legal</h6>
             <Link href={"/how-we-help"} className="link link-hover">
               How We Can Help
             </Link>

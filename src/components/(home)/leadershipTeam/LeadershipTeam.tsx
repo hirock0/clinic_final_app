@@ -41,7 +41,7 @@ const LeadershipTeam = () => {
                 <Title heading='Our Leadership Team' paragraph='We&apos;re proud to be guided by trusted advisors whose decades of expertise shape our strategy and vision.' />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full lg:w-1/2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full lg:w-1/2">
                     {teamMembers.map((member) => (
                         <div key={member.name} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative group">
                             <div className="aspect-w-3 aspect-h-3 relative">
