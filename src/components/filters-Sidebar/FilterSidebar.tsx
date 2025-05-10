@@ -6,7 +6,7 @@ import { FiFilter, FiX } from 'react-icons/fi';
 const FilterSidebar = () => {
   return (
     <section className="max-w-[1440px] w-11/12 mx-auto gap-6 mt-8">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
         <h3 className="text-lg font-semibold flex items-center third-text-color">
           <FiFilter className="mr-2" /> Filter Jobs
@@ -16,10 +16,9 @@ const FilterSidebar = () => {
         </button>
       </div>
 
-      {/* Filters */}
+  
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-
-        {/* Facility Type */}
+   
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Facility Type</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -30,7 +29,6 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Location */}
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Location</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -41,7 +39,7 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Shift */}
+
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Shift</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -53,7 +51,7 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Start Date */}
+
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Start After</label>
           <input
@@ -62,7 +60,7 @@ const FilterSidebar = () => {
           />
         </div>
 
-        {/* Medical & Diagnostic Professionals */}
+
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Medical & Diagnostic Professionals</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -81,7 +79,6 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Diagnostic & Lab Professionals */}
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Diagnostic & Lab Professionals</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -95,7 +92,6 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Nursing Professionals */}
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Nursing Professionals</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -109,7 +105,6 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Pharmacy & Medication */}
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Pharmacy & Medication</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
@@ -119,7 +114,7 @@ const FilterSidebar = () => {
           </select>
         </div>
 
-        {/* Mental & Behavioral Health */}
+    
         <div>
           <label className="block text-sm font-medium third-text-color mb-1">Mental & Behavioral Health</label>
           <select className="w-full px-3 py-2 border border-gray-300 rounded-md main-bg-color">
