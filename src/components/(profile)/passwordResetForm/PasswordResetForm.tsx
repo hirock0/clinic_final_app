@@ -27,18 +27,22 @@ const PasswordResetForm = ({ verifyUser }: any) => {
     }
 
     try {
-      const email = verifyUser?.email;
-      const role = verifyUser?.role;
-      const res = await axios.post("/pages/api/reset_password", {
-        password,
-        email,
-        role,
-      });
-      if (res?.data?.success) {
-        setMessage("Password reset successfully!");
-        router.push(`/${role}/dashboard`);
+      if (verifyUser) {
+        const email = verifyUser?.email;
+        const role = verifyUser?.role;
+        const res = await axios.post("/pages/api/reset_password", {
+          password,
+          email,
+          role,
+        });
+        if (res?.data?.success) {
+          setMessage("Password reset successfully!");
+          router.push(`/${role}/dashboard`);
+        } else {
+          setError("Failed to reset password.");
+        }
       } else {
-        setError("Failed to reset password.");
+        throw new Error("User not found!");
       }
     } catch (err: any) {
       setError(err?.response?.data?.message || "Something went wrong.");
