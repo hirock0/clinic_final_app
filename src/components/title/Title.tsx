@@ -14,7 +14,7 @@ const Title: React.FC<TitleProps> = ({ heading, paragraph }) => {
       >
         {heading}
       </h2>
-      <p className="text-lg mb-8 " style={{ fontFamily: "var(--font-inter" }}>
+      <p className="text-lg mb-8 text-gray-500" style={{ fontFamily: "var(--font-inter" }}>
         {paragraph}
       </p>
     </>

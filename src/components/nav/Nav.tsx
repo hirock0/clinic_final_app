@@ -47,19 +47,19 @@ const Nav = () => {
       title: "FOR ORGANIZATIONS",
       href: "/",
       subLinks: [
-        { title: "How we can help", href: "/" },
+        { title: "How we can help", href: "/how-we-help" },
         { title: "Book an appointment", href: "/contact" },
-        { title: "Clinical support staffing", href: "/" },
+        { title: "Clinical support staffing", href: "/clinical-support-staffing" },
       ],
     },
     {
       title: "FOR JOB SEEKERS",
       href: "/",
       subLinks: [
-        { title: "Help Center", href: "/" },
+        { title: "Help Center", href: "/help-center" },
         { title: "Search Jobs", href: "/search-jobs" },
         { title: "View Job Board", href: "/search-jobs" },
-        { title: "Why United Care Links", href: "/" },
+        { title: "Why United Care Links", href: "/why-ucl" },
       ],
     },
     { title: "Contact", href: "/contact" },
