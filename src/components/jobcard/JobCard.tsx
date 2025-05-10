@@ -105,7 +105,6 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
             </div>
             <div className="">
               <p className="text-gray-600 ">
-      
                 <span>$ {job?.minSalary}</span>
                 <span className="mx-1">-</span>
                 <span>$ {job?.maxSalary}</span>

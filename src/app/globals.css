@@ -14,9 +14,6 @@
   .main-bg-color {
     background-color: var(--background);
   }
-  .underline-color {
-    @apply divide-[#5D3FD3];
-  }
   .second-bg-color {
     background-color: var(--primary);
   }
@@ -51,7 +48,6 @@
   }
   .soft-bg-purple {
     background-color: var(--sort-purple);
-    backdrop-filter: blur(10px);
   }
   .purple-color-btn {
     background-color: var(--accent);
@@ -66,9 +62,6 @@
   }
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
-  }
-  .accent-bg-color:hover{
-    
   }
   
 }

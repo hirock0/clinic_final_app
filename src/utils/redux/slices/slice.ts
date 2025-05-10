@@ -61,7 +61,7 @@ const slice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.allJobs = action.payload.allAppliedJobs;
-        state.allApplications = action.payload.allAppliedJobs;
+
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
