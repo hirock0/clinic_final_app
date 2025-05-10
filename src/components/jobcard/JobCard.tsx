@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FiCalendar, FiClock, FiUsers } from "react-icons/fi";
+import { FaSackDollar, FaLocationDot } from "react-icons/fa6";
+import { FaCalendarCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
@@ -84,7 +85,6 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
       setSelectedJob(job);
     }
   };
-
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
@@ -94,22 +94,34 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
       {jobs?.map((job: any, index: any) => (
         <div
           key={index}
-          className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[250px]"
+          className="bg-white hover:scale-105 p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[250px]"
         >
           <div className="h-full flex justify-between flex-col">
             <div className="mb-3">
               <h3 className="text-lg font-semibold text-gray-800">
                 {job?.facilityName}
               </h3>
-              <p className="text-gray-600 text-sm mt-2">{job?.address}</p>
+              <div className="flex items-center gap-3">
+                <div className="">
+                  <FaLocationDot size={18} className=" text-red-700" />
+                </div>
+
+                <p className="text-gray-600 text-sm mt-2">{job?.address}</p>
+              </div>
             </div>
             <div className="">
-              <p className="text-gray-600 ">
-                <span>$ {job?.minSalary}</span>
-                <span className="mx-1">-</span>
-                <span>$ {job?.maxSalary}</span>
-              </p>
-              <p className="text-gray-600 ">{job?.newAdminPost}</p>
+              <div className=" flex items-center gap-2">
+                <FaSackDollar size={18} className=" text-cyan-700" />
+                <p className="text-gray-600 ">
+                  <span>$ {job?.minSalary}</span>
+                  <span className="mx-1">-</span>
+                  <span>$ {job?.maxSalary}</span>
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <FaCalendarCheck size={18} className=" text-cyan-700" />
+                <p className="text-gray-600 ">{job?.newAdminPost}</p>
+              </div>
             </div>
           </div>
 
@@ -123,7 +135,7 @@ const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
               </button>
               <button
                 onClick={() => applyHandler(job)}
-                className="flex-1 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                className="flex-1 cursor-pointer accent-bg-color hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Apply Now
               </button>
