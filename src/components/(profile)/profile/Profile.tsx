@@ -1,6 +1,7 @@
 "use client";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
-import { FaEnvelope, FaUserPlus, FaCommentDots, FaLock } from "react-icons/fa";
+import { FaUserPlus, FaCommentDots, FaLock } from "react-icons/fa";
+import Image from "next/image";
 
 const Profile = () => {
   const user = {
@@ -26,7 +27,6 @@ const Profile = () => {
   return (
     <main className="relative">
       <div className="min-h-screen max-w-[1440px] w-11/12 mx-auto flex flex-col items-center justify-center main-bg-color overflow-hidden">
-
         {/* Back Button */}
         <div className="absolute top-6 left-6 z-20">
           <BackBtn />
@@ -50,27 +50,31 @@ const Profile = () => {
 
           {/* Avatar */}
           <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-            <img
-              src={user.imageUrl}
-              alt="profile"
-              className="w-28 h-28 rounded-full border-4 border-white shadow-md object-cover"
-            />
+            <div className="w-28 h-28 rounded-full overflow-hidden">
+              <Image
+                src={user?.imageUrl}
+                alt="profile"
+                width={500}
+                height={500}
+                className=" w-full h-full border-4 border-white shadow-md object-cover"
+              />
+            </div>
           </div>
 
           {/* Info */}
           <h1 className="text-xl font-semibold main-text-color mt-4">
-            {user.name}
+            {user?.name}
           </h1>
-          <p className="text-sm gray-text-color">{user.location}</p>
+          <p className="text-sm gray-text-color">{user?.location}</p>
           <p className="text-sm second-text-color mt-2">
-            {user.description}
+            {user?.description}
             <br />
-            {user.university}
+            {user?.university}
           </p>
 
           {/* Stats */}
           <div className="flex justify-center items-center gap-6 mt-6 text-[--text]">
-            {Object.entries(user.stats).map(([label, value]) => (
+            {Object.entries(user?.stats).map(([label, value]) => (
               <div key={label} className="text-center">
                 <p className="font-semibold text-lg">{value}</p>
                 <p className="text-xs capitalize">{label}</p>

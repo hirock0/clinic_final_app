@@ -57,7 +57,6 @@ const roleGroups = [
     options: ["MFT", "Couples Therapist"],
   },
 ];
-
 export default function FilterSidebar({ jobs }: { jobs: any }) {
   const [filters, setFilters] = useState({
     location: "",
@@ -65,11 +64,9 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
     jobType: "",
     role: "",
   });
-
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [view, setView] = useState<any>(null);
-
   const viewDetails = (job: any) => {
     setView(job);
   };
@@ -96,7 +93,8 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
       if (filters.facilityType && job.facilityType !== filters.facilityType)
         return false;
       if (filters.jobType && job.jobType !== filters.jobType) return false;
-      if (filters.role && !job.staffNeeded.includes(filters.role)) return false;
+      if (filters.medicalRole
+ && !job.staffNeeded.includes(filters.medicalRole)) return false;
       return true;
     });
   };
