@@ -8,7 +8,7 @@ const LeadershipTeam = () => {
         {
             name: "John Smith",
             title: "CEO & Founder",
-            photo: "/team/Profile Picture-02.jpg", // Replace with your image paths
+            photo: "/team/default_profile.png", // Replace with your image paths
             bio: "Healthcare industry veteran with 15+ years of experience building patient-first organizations."
         },
         // {
@@ -20,7 +20,7 @@ const LeadershipTeam = () => {
         {
             name: "Michael Chen",
             title: "Chief Technology Officer",
-            photo: "/team/Profile Picture-06.jpg",
+            photo: "/team/default_profile.png",
             bio: "Technology innovator focused on modernizing healthcare staffing solutions."
         },
         // {
@@ -54,7 +54,7 @@ const LeadershipTeam = () => {
                                 />
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent transform translate-y-full group-hover:translate-y-0 transition-all duration-300 ease-in-out">
-                                <h3 className="text-xl font-semibold text-white text-shadow-[#ffdb61] text-shadow-2xs">{member.name}</h3>
+                                <h3 className="text-xl font-semibold text-white text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
                                 <p className="accent-text-color font-medium">{member.title}</p>
                                 <p className="mt-3 text-gray-200">{member.bio}</p>
                             </div>

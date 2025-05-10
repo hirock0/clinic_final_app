@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 ">
           <div className="flex flex-col space-y-1 lg:col-span-2">
             <Image src='/UCL logo.png' alt="ucl logo" height={100} width={100} />
-            <p className="lg:max-w-[350px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet id asperiores consequuntur similique earum.</p>
+            <p className="md:max-w-[350px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet id asperiores consequuntur similique earum.</p>
           </div>
           <nav className="flex flex-col space-y-4">
             <h6 className="font-semibold text-lg accent-text-color">Services</h6>
