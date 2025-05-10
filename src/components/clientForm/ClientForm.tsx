@@ -57,7 +57,6 @@ const ClientForm = ({ job }: { job: any }) => {
       }
     } catch (error:any) {
      throw new Error(error.message)
-      swal("Error", "Something went wrong.", "error");
     } finally {
       setIsLoading(false);
     }

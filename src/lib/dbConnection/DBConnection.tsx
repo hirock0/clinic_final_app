@@ -8,8 +8,6 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-
-
 export const DBConnection = async () => {
   try {
     await client.connect();
@@ -19,4 +17,3 @@ export const DBConnection = async () => {
     throw new Error(String(error));
   }
 };
-

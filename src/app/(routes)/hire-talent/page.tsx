@@ -86,9 +86,9 @@ const HireTalentPage = () => {
         });
         setLoading(false);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       setLoading(false);
-      throw new Error(error.message)
+      throw new Error(error.message);
     } finally {
       // reset();
       setLoading(false);

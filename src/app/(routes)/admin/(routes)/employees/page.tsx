@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReqEmployees from "@/components/reqEmployees/reqEmployees";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
-
 interface User {
   name: string;
   email: string;
@@ -21,6 +20,7 @@ export default function Employees() {
       setEmployees(reqUsers);
     } catch (error: any) {
       throw new Error(error.message)
+
     }
   };
 
