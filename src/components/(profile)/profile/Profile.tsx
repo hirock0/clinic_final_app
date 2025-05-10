@@ -1,6 +1,5 @@
 "use client";
 import BackBtn from "@/components/ui/btns/backBtn/BackBtn";
-import Image from "next/image";
 import { FaEnvelope, FaUserPlus, FaCommentDots, FaLock } from "react-icons/fa";
 
 const Profile = () => {
@@ -27,6 +26,7 @@ const Profile = () => {
   return (
     <main className="relative">
       <div className="min-h-screen max-w-[1440px] w-11/12 mx-auto flex flex-col items-center justify-center main-bg-color overflow-hidden">
+
         {/* Back Button */}
         <div className="absolute top-6 left-6 z-20">
           <BackBtn />
@@ -50,15 +50,11 @@ const Profile = () => {
 
           {/* Avatar */}
           <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-            <div className="w-28 h-28 rounded-full overflow-hidden">
-              <Image
-                src={user.imageUrl}
-                alt="profile"
-                width={500}
-                height={500}
-                className=" border-4 border-white shadow-md object-cover"
-              />
-            </div>
+            <img
+              src={user.imageUrl}
+              alt="profile"
+              className="w-28 h-28 rounded-full border-4 border-white shadow-md object-cover"
+            />
           </div>
 
           {/* Info */}
