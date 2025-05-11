@@ -121,44 +121,46 @@ const JobCard = () => {
           {pageData?.map((job: any, index: any) => (
             <div
               key={index}
-              className="bg-white hover:scale-105 p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[250px]"
+              className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out"
             >
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {job?.facilityName}
-                  </h3>
-                  <div className="flex items-center gap-3">
-                    <FaLocationDot size={18} className=" text-red-700" />
-                    <p className="text-gray-600 text-sm mt-2">{job?.address}</p>
+                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
+                  <div className="flex items-end space-x-3">
+                    <div>
+                      <FaLocationDot size={20} className=" main-text-color" />
+                    </div>
+
+                    <p className="text-gray-500 text-sm mt-2">{job?.address}</p>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <FaSackDollar size={18} className=" text-cyan-700" />
-                    <p className="text-gray-600">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <FaSackDollar size={20} className=" main-text-color" />
+                    <p className="text-gray-500 ">
                       <span>$ {job?.minSalary}</span>
                       <span className="mx-1">-</span>
                       <span>$ {job?.maxSalary}</span>
                     </p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <FaCalendarCheck size={18} className=" text-cyan-700" />
-                    <p className="text-gray-600 ">{job?.newAdminPost}</p>
+                  <div className="flex items-center space-x-3">
+                    <FaCalendarCheck size={20} className=" main-text-color" />
+                    <p className="text-gray-500 ">{job?.newAdminPost}</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-auto pt-3 border-t border-gray-100">
+
+              <div className="mt-3 pt-3 border-t border-gray-100">
                 <div className="flex gap-3">
                   <button
                     onClick={() => viewDetails(job)}
-                    className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="flex-1 btn1 cursor-pointer  px-4 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     View Details
                   </button>
                   <button
                     onClick={() => applyHandler(job)}
-                    className="flex-1 cursor-pointer accent-bg-color hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="flex-1 cursor-pointer btn2 px-4 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     Apply Now
                   </button>
