@@ -63,7 +63,26 @@
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
   }
-  
+
+  .btn1 {
+    border: 2px solid var(--accent);
+    background-color: #fffaea;
+    color: var(--accent);
+    &:hover {
+      background-color: var(--accent);
+      color: var(--text);
+    }
+  }
+
+  .btn2 {
+    background-color: var(--accent);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    &:hover {
+    background-color: #fffaea;
+    color: var(--accent);
+    }
+  }
 }
 
 html,

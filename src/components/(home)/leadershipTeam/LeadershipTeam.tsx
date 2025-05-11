@@ -52,7 +52,7 @@ const LeadershipTeam = () => {
                                     className="object-cover opacity-30"
                                 />
                             </div>
-                            <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#308d89] to-transparent
+                            <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#ffdb61] to-transparent
                             transition-transform duration-300 ease-in-out ${activeIndex === index ? 'translate-y-0' : 'translate-y-full'} 
                             group-hover:translate-y-0
                                 `}>
