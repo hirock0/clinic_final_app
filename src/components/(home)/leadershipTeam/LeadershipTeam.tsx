@@ -14,13 +14,13 @@ const LeadershipTeam = () => {
         {
             name: "Imtiaz Kasem",
             title: "Chief Executive Officer",
-            photo: "/team/bussiness-man.png",
+            photo: "/team/Picture-02.jpg",
             bio: "Blending 27+ years of business and medical insight to lead in healthcare innovation."
         },
         {
             name: "Kirsten Chazaud",
             title: "Director of Business Development",
-            photo: "/team/woman.png",
+            photo: "/team/Picture-06.jpg",
             bio: "Strategic leader in senior care, driving innovation and compassionate solutions."
         },
     ];
@@ -49,7 +49,7 @@ const LeadershipTeam = () => {
                                     src={member.photo}
                                     alt={member.name}
                                     fill  
-                                    className="object-cover opacity-30"
+                                    className="object-cover items-start"
                                 />
                             </div>
                             <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#ffdb61] to-transparent

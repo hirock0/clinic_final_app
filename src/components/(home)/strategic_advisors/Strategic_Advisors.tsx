@@ -16,7 +16,7 @@ const Strategic_Advisors = () => {
     {
       name: "Sarah Johnson",
       title: "Chief Operations Officer",
-      photo: "/team/bussiness-man.png",
+      photo: "/team/Picture-04.jpg",
       bio: "Specializes in operational efficiency and staff development for healthcare providers."
     }
 
@@ -42,10 +42,10 @@ const Strategic_Advisors = () => {
                   src={member.photo}
                   alt={member.name}
                   fill
-                  className="object-cover opacity-30"
+                  className="object-cover items-start justify-start"
                 />
               </div>
-              <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#ffdb61] to-transparent transition-transform group-hover:translate-y-0  duration-300 ease-in-out
+              <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#308d89] to-transparent transition-transform group-hover:translate-y-0  duration-300 ease-in-out
                 ${activeIndex === index ? 'translate-y-0' : 'translate-y-full'}
                 `}>
                 <h3 className="text-xl font-semibold second-text-color text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
