@@ -56,7 +56,7 @@ const Footer = () => {
             </Link>
           </nav>
           <nav className="flex flex-col space-y-3 md:space-y-4">
-            <h6 className="main-text-color font-semibold text-lg">Legal</h6>
+            <h6 className="main-text-color font-semibold text-lg">Information</h6>
             <Link href={"/how-we-help"} className="link link-hover">
               How We Can Help
             </Link>

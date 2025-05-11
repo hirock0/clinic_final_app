@@ -90,7 +90,7 @@ const HireTalentPage = () => {
       setLoading(false);
       throw new Error(error.message);
     } finally {
-      // reset();
+      reset();
       setLoading(false);
     }
   };

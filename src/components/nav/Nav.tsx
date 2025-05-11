@@ -111,13 +111,13 @@ const Nav = () => {
           >
             {menuOpen ? <IoClose size={35} /> : <MdMenu size={35} />}
           </button>
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={80}
-            height={80}
-            className="h-auto w-16 lg:h-full lg:w-full"
-          />
+          <div className="h-auto w-16 lg:w-20">
+            <Image src="/logo.png" alt="logo" width={500} height={500}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
+
         </div>
 
         {/* Navigation Links */}

@@ -1,3 +1,4 @@
+import Title from '@/components/title/Title';
 import Link from 'next/link';
 import { title } from 'process';
 import React from 'react';
@@ -81,9 +82,11 @@ const HowWeCanHelpPage = () => {
         <section className=' scroll-mt-40 max-w-[1440px] mx-auto w-11/12'>
 
             <div className="max-w-4xl mx-auto text-center pt-12">
-            <h1 className="text-3xl font-bold uppercase mb-4">How We Can Help Supporting Organizations, Empowering Individuals.</h1>
+
+                <Title heading='How We Can Help Supporting Organizations, Empowering Individuals.' paragraph="At United Care Links, we specialize in healthcare staffing and caregiver support — connecting experienced, compassionate professionals with those who need them most. Whether you're a facility or a family — we're here to make life easier."/>
+                <h1 className="text-3xl font-bold uppercase mb-4"></h1>
                 <p className="text-lg text-gray-600">
-                    At <strong>United Care Links</strong>, we specialize in healthcare staffing and caregiver support — connecting experienced, compassionate professionals with those who need them most. Whether you're a facility or a family — we're here to make life easier.
+                    
                 </p>
             </div>
 
@@ -133,10 +136,10 @@ const HowWeCanHelpPage = () => {
             <div className="py-10 text-center">
                 <p className="text-xl font-medium mb-4">Let&apos;s connect.</p>
                 <div className="w-full flex flex-wrap gap-5 items-center justify-center">
-                    <Link href="tel:5104029388">
+                    <Link href="tel:8588640192">
                         <button className="bg-[#ffdb61] px-5 py-2 rounded hover:bg-[#ffdb61]/80 text-[#171717] cursor-pointer whitespace-nowrap">Call Us</button>
                     </Link>
-                    <Link href="/">
+                    <Link href="/contact">
                         <button className="border border-[#308d89] text-[#308d89] px-5 py-2 rounded hover:bg-[#f3fffe] cursor-pointer whitespace-nowrap">Get a Free Consultation</button>
                     </Link>
                     <Link href="/">
