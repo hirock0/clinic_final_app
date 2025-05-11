@@ -13,7 +13,7 @@ const Banner = () => {
         {/* Text Content */}
         <div className="text-left max-w-[800px] third-text-color">
           <h1
-            className=" text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 tracking-wider uppercase"
+            className=" text-4xl lg:text-5xl font-black mb-4 md:mb-6 tracking-wider uppercase"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Your Reliable Partner in Healthcare Staffing and Workforce Development.
