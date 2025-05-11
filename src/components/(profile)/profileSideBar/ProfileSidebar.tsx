@@ -45,22 +45,13 @@ export default function ProfileSidebar({
   }, [dispatch]);
 
   return (
-    <aside className="w-full sm:max-w-xs bg-white shadow-lg rounded-xl h-full p-6 space-y-8 transition-all">
+    <aside className="w-full sm:max-w-xs bg-white shadow-lg rounded-xl h-full p-5 space-y-4 transition-all">
       {/* User Profile */}
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-full overflow-hidden border border-gray-200">
-          <Image
-            src={user?.image?.secure_url}
-            alt={user?.role}
-            className="object-cover w-full h-full"
-            width={56}
-            height={56}
-          />
-        </div>
         <div>
           <p className="text-lg font-semibold">{user?.name}</p>
           <p className="text-sm text-gray-500">{user?.email}</p>
-          <p className="text-sm text-blue-600 font-medium">
+          <p className="text-sm main-text-color font-medium">
             Role: {user?.role}
           </p>
         </div>
@@ -75,7 +66,7 @@ export default function ProfileSidebar({
             className={`flex items-center gap-3 px-4 py-2 rounded-md font-medium transition-all duration-300 ${
               pathname === item?.href
                 ? "bg-blue-600 text-white shadow"
-                : "text-gray-700 hover:bg-blue-100"
+                : "text-gray-700 hover:bg-[#fff6d7]"
             }`}
           >
             <span className="text-xl">{item?.icon}</span>
@@ -88,7 +79,7 @@ export default function ProfileSidebar({
       <div>
         <button
           onClick={logoutHandler}
-          className="w-full text-center accent-bg-color hover:scale-105 active:scale-100 text-white font-semibold py-2 rounded-md cursor-pointer transition"
+          className="w-full text-center bg-red-500 hover:scale-105 active:scale-100 text-white font-semibold py-2 rounded-md cursor-pointer transition"
         >
           Log Out
         </button>

@@ -63,6 +63,7 @@
   .scrollbar-removed::-webkit-scrollbar {
     display: none;
   }
+
   .btn1 {
     border: 2px solid var(--accent);
     background-color: #fffaea;
@@ -78,8 +79,8 @@
     color: var(--text);
     border: 2px solid var(--accent);
     &:hover {
-      background-color: #fffaea;
-      color: var(--accent);
+    background-color: #fffaea;
+    color: var(--accent);
     }
   }
 }
