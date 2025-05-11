@@ -14,13 +14,13 @@ const LeadershipTeam = () => {
         {
             name: "Imtiaz Kasem",
             title: "Chief Executive Officer",
-            photo: "/team/default_profile.png",
+            photo: "/team/bussiness-man.png",
             bio: "Blending 27+ years of business and medical insight to lead in healthcare innovation."
         },
         {
             name: "Kirsten Chazaud",
             title: "Director of Business Development",
-            photo: "/team/default_profile.png",
+            photo: "/team/woman.png",
             bio: "Strategic leader in senior care, driving innovation and compassionate solutions."
         },
     ];
@@ -49,16 +49,16 @@ const LeadershipTeam = () => {
                                     src={member.photo}
                                     alt={member.name}
                                     fill  
-                                    className="object-cover"
+                                    className="object-cover opacity-30"
                                 />
                             </div>
-                            <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent
+                            <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#308d89] to-transparent
                             transition-transform duration-300 ease-in-out ${activeIndex === index ? 'translate-y-0' : 'translate-y-full'} 
                             group-hover:translate-y-0
                                 `}>
-                                <h3 className="text-xl font-semibold text-white text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
-                                <p className="accent-text-color font-medium">{member.title}</p>
-                                <p className="mt-3 text-gray-200">{member.bio}</p>
+                                <h3 className="text-xl font-semibold second-text-color text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
+                                <p className="second-text-color font-medium">{member.title}</p>
+                                <p className="mt-3 text-gray-700">{member.bio}</p>
                             </div>
                         </div>
                     ))}
