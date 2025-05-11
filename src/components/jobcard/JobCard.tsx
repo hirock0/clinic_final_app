@@ -125,9 +125,7 @@ const JobCard = () => {
             >
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold">
-                    {job?.facilityName}
-                  </h3>
+                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
                   <div className="flex items-end space-x-3">
                     <div>
                       <FaLocationDot size={20} className=" main-text-color" />
@@ -211,10 +209,11 @@ const JobCard = () => {
                   )}
                   <button
                     onClick={() => pageJobsHandler(page)}
-                    className={`px-4 py-2 rounded-md border ${currentPage === page
+                    className={`px-4 py-2 rounded-md border ${
+                      currentPage === page
                         ? "bg-blue-600 text-white"
                         : "bg-white text-blue-600 border-blue-600 hover:bg-blue-100"
-                      }`}
+                    }`}
                   >
                     {page}
                   </button>
