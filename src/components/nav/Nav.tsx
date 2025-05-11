@@ -106,8 +106,8 @@ const Nav = () => {
           >
             {menuOpen ? <IoClose size={35} /> : <MdMenu size={35} />}
           </button>
-          <Image src="/UCL logo.png" alt="logo" width={60} height={60}
-            className="h-auto w-10 lg:h-full lg:w-full"
+          <Image src="/logo.png" alt="logo" width={80} height={80}
+            className="h-auto w-16 lg:h-full lg:w-full"
           />
         </div>
 
