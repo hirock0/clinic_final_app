@@ -18,6 +18,7 @@ const ReqEmployees = ({ item }: { item: User }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
   const [loading, setLoading] = useState(false);
+  const [delLoading, setDelLoading] = useState(false);
   const [isApproved, setIsApproved] = useState(item?.role);
 
   useEffect(() => {
@@ -48,6 +49,30 @@ const ReqEmployees = ({ item }: { item: User }) => {
       setLoading(false);
     }
   };
+  const deleteEmployeeHandler = async (id: any, role: any) => {
+    setDelLoading(true);
+    try {
+      const employee = {
+        id: id,
+        role: role,
+      };
+      const response = await axios.post(
+        "/pages/api/admin/employee/delete",
+        employee
+      );
+
+      if (response?.data?.success) {
+        swal({ title: response?.data?.message, icon: "success" });
+        setDelLoading(false);
+      } else {
+        swal({ title: response?.data?.message, icon: "warning" });
+      }
+    } catch (error: any) {
+      swal({ title: error.message || "Something went wrong", icon: "error" });
+    } finally {
+      setDelLoading(false);
+    }
+  };
 
   return (
     <tr className="hover:bg-gray-50 transition">
@@ -62,13 +87,23 @@ const ReqEmployees = ({ item }: { item: User }) => {
           {isApproved === "employee" ? "Pending" : "Approved"}
         </span>
       </td>
-      <td className="p-3">
+      <td className="p-3 flex items-center gap-3">
         <button
           onClick={approveUser}
           className="btn btn-success btn-sm flex items-center gap-2"
           disabled={loading || isApproved !== "employee"}
         >
           {loading ? <FaSpinner className="animate-spin" /> : "Approve"}
+        </button>
+        <button
+          onClick={() => deleteEmployeeHandler(item?.email, item?.role)}
+          className="btn btn-success btn-sm flex items-center gap-2"
+        >
+          {!delLoading ? (
+            "  Delete"
+          ) : (
+            <div className=" loading loading-spinner"></div>
+          )}
         </button>
       </td>
     </tr>

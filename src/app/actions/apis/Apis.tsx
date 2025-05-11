@@ -106,3 +106,19 @@ export const VerifiedToken = async (data: any) => {
     return null;
   }
 };
+
+export const AllEmployees = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_DOMAIN_URL}/pages/api/admin/employees`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+    if (!res.ok) throw new Error("Failed to fetch jobs");
+    return await res.json();
+  } catch (error) {
+    return null;
+  }
+};
