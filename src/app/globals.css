@@ -67,10 +67,9 @@
   .btn1 {
     border: 2px solid var(--accent);
     background-color: #fffaea;
-    color: var(--accent);
+    color: var(--text);
     &:hover {
       background-color: var(--accent);
-      color: var(--text);
     }
   }
 
@@ -80,7 +79,6 @@
     border: 2px solid var(--accent);
     &:hover {
     background-color: #fffaea;
-    color: var(--accent);
     }
   }
 }
