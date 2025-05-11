@@ -49,7 +49,10 @@ const Nav = () => {
       subLinks: [
         { title: "How we can help", href: "/how-we-help" },
         { title: "Book an appointment", href: "/contact" },
-        { title: "Clinical support staffing", href: "/clinical-support-staffing" },
+        {
+          title: "Clinical support staffing",
+          href: "/clinical-support-staffing",
+        },
       ],
     },
     {
@@ -67,14 +70,16 @@ const Nav = () => {
 
   const navLinks = [
     {
-      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
-        }/profile`,
+      href: `/${
+        user?.role === "approvedEmployee" ? "employee" : user?.role
+      }/profile`,
       label: "Profile",
       icon: <FaCog />,
     },
     {
-      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
-        }/dashboard`,
+      href: `/${
+        user?.role === "approvedEmployee" ? "employee" : user?.role
+      }/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
@@ -112,46 +117,50 @@ const Nav = () => {
               priority
             />
           </div>
+
         </div>
 
         {/* Navigation Links */}
         <div className="uppercase max-[1400px] text-sm lg:text-base">
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`${!menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-              } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all  max-lg:fixed z-50 max-lg:left-0 max-lg:top-[67px] max-lg:flex-col accent-bg-color lg:bg-[#fafafa] max-lg:pb-0 max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            className={`${
+              !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
+            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all  max-lg:fixed z-50 max-lg:left-0 max-lg:top-[88px] max-lg:flex-col accent-bg-color lg:bg-[#fafafa] max-lg:pb-0 max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
-              <ul
-                key={index}
-                className="max-lg:w-full"
-              >
+              <ul key={index} className="max-lg:w-full">
                 {item.subLinks ? (
                   <li
-                    className="cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full max-lg:border-b max-lg:border-gray-400 max-lg:p-5 flex items-center gap-2"
+                    className="cursor-pointer relative max-lg:flex-col max-lg:items-start group max-lg:w-full  flex items-center gap-2 max-lg:p-5 max-lg:hover:bg-[#ffe488]  "
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveSubMenu(
-                        activeSubMenu === item.title ? null : item.title
+                        activeSubMenu === item?.title ? null : item?.title
                       );
                     }}
                   >
                     <div className="flex justify-between w-full items-center">
-                      <span className="">{item.title}</span>
+                      <span className="">{item?.title}</span>
                       <FaSortDown />
                     </div>
                     <div
-                      className={`${activeSubMenu === item.title ? "block" : "hidden"
-                        } lg:group-hover:block lg:absolute lg:top-6 z-50 bg-white rounded shadow `}
+                      className={`${
+                        activeSubMenu === item?.title ? "block" : "hidden"
+                      } lg:group-hover:block lg:bg-white lg:p-5 lg:absolute lg:top-6 z-50  rounded-lg max-lg:w-full lg:shadow-xl `}
                     >
-                      <ul className="text-nowrap flex flex-col gap-3 p-4">
+                      <ul className="text-nowrap flex flex-col gap-3 max-lg:pl-5  ">
                         {item.subLinks.map((subItem, subIndex) => (
                           <Link
                             key={subIndex}
                             href={subItem.href}
                             className="space-y-3"
                           >
-                            <li className="text-sm hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f]">
+                            <li
+                              className="text-sm hover:underline
+                             
+                            hover:underline-offset-4 underline-color decoration-2 decoration-[#fdd25f] "
+                            >
                               {subItem.title}
                             </li>
                           </Link>
@@ -161,7 +170,7 @@ const Nav = () => {
                   </li>
                 ) : (
                   <Link href={item.href}>
-                    <li className="max-lg:w-full  hover:underline hover:underline-offset-4 underline-color decoration-2 max-lg:border-b decoration-[#fdd25f]  max-lg:p-5">
+                    <li className="max-lg:w-full lg:hover:underline hover:underline-offset-4 lg:underline-color lg:decoration-2 lg:decoration-[#fdd25f] max-lg:hover:bg-[#ffe488]  max-lg:p-5 ">
                       {item.title}
                     </li>
                   </Link>
