@@ -1,4 +1,5 @@
 import PricingExplain from '@/components/pricing-explain/PricingExplain';
+import Link from 'next/link';
 import { FiCheck, FiZap, FiShield, FiClock, FiUser, FiVideo, FiPhone } from 'react-icons/fi';
 
 const PricingPage = () => {
@@ -117,9 +118,9 @@ const PricingPage = () => {
                                     </p>
                                 </div>
                                 <div className="mt-8 md:mt-0 md:ml-8">
-                                    <button className="px-6 py-3 border border-transparent text-base font-medium rounded-md second-text-color accent-bg-color hover:opacity-90 cursor-pointer">
+                                    <Link href={'/contact'} className="px-6 py-3 border border-transparent text-base font-medium rounded-md second-text-color accent-bg-color hover:opacity-90 cursor-pointer">
                                         Contact Enterprise Team
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

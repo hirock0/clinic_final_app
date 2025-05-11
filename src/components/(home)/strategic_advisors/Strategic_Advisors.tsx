@@ -10,13 +10,13 @@ const Strategic_Advisors = () => {
     {
       name: "Emily Wilson",
       title: "Chief Medical Officer",
-      photo: "/team/default_profile.png",
+      photo: "/team/bussiness-man.png",
       bio: "Board-certified physician leading clinical quality and compliance initiatives."
     },
     {
       name: "Sarah Johnson",
       title: "Chief Operations Officer",
-      photo: "/team/default_profile.png",
+      photo: "/team/bussiness-man.png",
       bio: "Specializes in operational efficiency and staff development for healthcare providers."
     }
 
@@ -42,15 +42,15 @@ const Strategic_Advisors = () => {
                   src={member.photo}
                   alt={member.name}
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-30"
                 />
               </div>
-              <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent transition-transform group-hover:translate-y-0  duration-300 ease-in-out
+              <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#308d89] to-transparent transition-transform group-hover:translate-y-0  duration-300 ease-in-out
                 ${activeIndex === index ? 'translate-y-0' : 'translate-y-full'}
                 `}>
-                <h3 className="text-xl font-semibold text-white text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
-                <p className="accent-text-color font-medium">{member.title}</p>
-                <p className="mt-3 text-gray-200">{member.bio}</p>
+                <h3 className="text-xl font-semibold second-text-color text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
+                <p className="second-text-color font-medium">{member.title}</p>
+                <p className="mt-3 text-gray-700">{member.bio}</p>
               </div>
             </div>
           ))}
