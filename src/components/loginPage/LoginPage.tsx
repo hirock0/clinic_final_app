@@ -9,13 +9,11 @@ import swal from "sweetalert";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-
 type LoginFormInputs = {
   email: string;
   password: string;
   flag: string;
 };
-
 export default function LoginPage({ flag }: { flag: string }) {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
@@ -23,24 +21,42 @@ export default function LoginPage({ flag }: { flag: string }) {
   const [gooleLoading, setGooleLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-
   const onSubmit = async (data: LoginFormInputs) => {
     setLoading(true);
     try {
       data.flag = flag;
-      const response = await axios.post(`/pages/api/login`, data);
-      if (response?.data?.success) {
-        swal({ title: response?.data?.message, icon: "success" });
-        router.push(redirectTo);
-        setTimeout(() => window.location.reload(), 1000);
+      if (flag === "institutional") {
+        const splitData = data?.email.split(".");
+        const gmailArr = splitData[0].split("@");
+        const gmail = gmailArr[1];
+        if (gmail === "gmail") {
+          swal({
+            title: "Please enter company gmail",
+          });
+        } else {
+          const response = await axios.post(`/pages/api/login`, data);
+          if (response?.data?.success) {
+            swal({ title: response?.data?.message, icon: "success" });
+            router.push(redirectTo);
+            setTimeout(() => window.location.reload(), 1000);
+          } else {
+            swal({ title: response?.data?.message, icon: "warning" });
+          }
+        }
       } else {
-        swal({ title: response?.data?.message, icon: "warning" });
+        const response = await axios.post(`/pages/api/login`, data);
+        if (response?.data?.success) {
+          swal({ title: response?.data?.message, icon: "success" });
+          router.push(redirectTo);
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          swal({ title: response?.data?.message, icon: "warning" });
+        }
       }
     } catch (error: any) {
       throw new Error(error.message);
@@ -48,7 +64,6 @@ export default function LoginPage({ flag }: { flag: string }) {
       setLoading(false);
     }
   };
-
   const googleLoginHandler = async () => {
     setGooleLoading(true);
     try {
@@ -59,7 +74,6 @@ export default function LoginPage({ flag }: { flag: string }) {
       throw new Error(String(error));
     }
   };
-
   return (
     <div className="bg-zinc-200 h-screen flex items-center">
       <div className=" max-w-[1440px] w-11/12 mx-auto ">
@@ -73,7 +87,6 @@ export default function LoginPage({ flag }: { flag: string }) {
               ></iframe>
             </div>
           </div>
-
           {/* Right Side Form */}
           <div className="w-full md:w-1/2 p-8 space-y-6">
             <Link
@@ -85,7 +98,6 @@ export default function LoginPage({ flag }: { flag: string }) {
             <h1 className="text-3xl uppercase font-bold text-blue-600 text-center">
               Login ({flag})
             </h1>
-
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Email */}
               <div>
@@ -107,7 +119,6 @@ export default function LoginPage({ flag }: { flag: string }) {
                   </p>
                 )}
               </div>
-
               {/* Password */}
               <div>
                 <label className="block text-gray-700 font-medium mb-1">
@@ -140,7 +151,6 @@ export default function LoginPage({ flag }: { flag: string }) {
                   </p>
                 )}
               </div>
-
               {/* Submit */}
               <button
                 type="submit"
@@ -154,7 +164,6 @@ export default function LoginPage({ flag }: { flag: string }) {
                 )}
               </button>
             </form>
-
             {/* Google Login */}
             {flag === "user" && (
               <button
@@ -171,7 +180,6 @@ export default function LoginPage({ flag }: { flag: string }) {
                 )}
               </button>
             )}
-
             {/* Footer */}
             <p className="text-center text-gray-500 text-sm">
               Don't have an account?{" "}
