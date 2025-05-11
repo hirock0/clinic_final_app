@@ -119,20 +119,17 @@ const JobCard = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {pageData?.map((job: any, index: any) => (
-<div
-          key={index}
-          className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out"
-        >
-          <div className="h-full flex justify-between flex-col">
-            <div className="mb-3">
-              <h3 className="text-xl font-semibold">
-                {job?.facilityName}
-              </h3>
-              <div className="flex items-end space-x-3">
+            <div
+              key={index}
+              className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out"
+            >
+              <div className="h-full flex justify-between flex-col">
+                <div className="mb-3">
+                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
+                  <div className="flex items-end space-x-3">
                 <div>
                   <FaLocationDot size={20} className=" main-text-color" />
                 </div>
-
                 <p className="text-gray-500 text-sm mt-2">{job?.address}</p>
               </div>
             </div>
@@ -213,6 +210,7 @@ const JobCard = () => {
                     onClick={() => pageJobsHandler(page)}
                     className={`px-4 py-2 rounded-md border ${
                       currentPage === page
+
                         ? "accent-bg-color second-text-color accent-border-color"
                         : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
                     }`}
