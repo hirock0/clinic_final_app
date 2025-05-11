@@ -45,7 +45,7 @@ export default function ProfileSidebar({
   }, [dispatch]);
 
   return (
-    <aside className="w-full sm:max-w-xs bg-white shadow-lg rounded-xl h-full p-6 space-y-4 transition-all">
+    <aside className="w-full sm:max-w-xs bg-white shadow-lg rounded-xl h-full p-5 space-y-4 transition-all">
       {/* User Profile */}
       <div className="flex items-center gap-4">
         <div>
