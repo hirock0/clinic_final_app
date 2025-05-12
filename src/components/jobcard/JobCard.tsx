@@ -55,9 +55,7 @@ const JobCard = () => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-
   const { user } = useSelector((state: any) => state?.slices);
-
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
   const [view, setView] = useState<viewDetails | null>(null);
   const [loading, setLoading] = useState(false);
@@ -112,6 +110,7 @@ const JobCard = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  console.log(pageData)
   return (
     <div className="space-y-6">
       {/* Job Cards */}
@@ -128,7 +127,7 @@ const JobCard = () => {
             >
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
+                  <h3 className="text-xl font-semibold">{job?.jobInfo?.facilityName}</h3>
                   <div className="flex items-end space-x-3">
                     <div>
                       <FaLocationDot size={20} className=" main-text-color" />
@@ -150,6 +149,10 @@ const JobCard = () => {
                     <p className="text-gray-500 ">{job?.newAdminPost}</p>
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+                <p className="text-gray-500 text-sm mt-2">{job?.location?.address}</p>
+>>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
               </div>
 
               <div className="mt-3 pt-3 border-t border-gray-100">

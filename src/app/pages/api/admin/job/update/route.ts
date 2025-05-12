@@ -3,8 +3,8 @@ import { DBConnection } from "@/lib/dbConnection/DBConnection";
 import { ObjectId } from "mongodb";
 export async function POST(req: NextRequest) {
   try {
-    const { _id, ...rest } = await req.json();
-    const id = new ObjectId(String(_id));
+    const { jobId, ...rest } = await req.json();
+    const id = new ObjectId(String(jobId));
     const client = await DBConnection();
     const applicationDB = client.db("unitedCare").collection("jobs");
     const findJob = await applicationDB.updateOne(

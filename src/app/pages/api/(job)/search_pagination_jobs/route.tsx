@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const totalCount = await applicationDB.countDocuments();
     const totalPages = Math.ceil(totalCount / perPage);
     const pageJobs = await applicationDB
-      .find()
+      .find({approvedStatus:true})
       .sort({ timeStamp: -1 })
       .skip(skip)
       .limit(perPage)
