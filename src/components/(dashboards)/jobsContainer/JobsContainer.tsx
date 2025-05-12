@@ -21,7 +21,7 @@ const JobsContainer = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [jobs, setJobs] = useState(jobsData);
   const filteredJobs = jobs?.filter((job: any) =>
-    job?.jobInfo?.facilityName?.toLowerCase().includes(searchTerm.toLowerCase())
+    job?.facilityName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const deleteHandler = (id: any) => {
@@ -74,13 +74,13 @@ const JobsContainer = ({
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                   <div>
                     <h2 className="text-lg font-semibold text-text">
-                      {job?.jobInfo?.facilityName}
+                      {job?.facilityName}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      {job?.jobInfo?.facilityType}
+                      {job?.facilityType}
                     </p>
                     <p className="text-sm text-gray-500">
-                      {job?.loacation?.city}
+                      {job?.city}
                     </p>
                     <p className="text-xs text-gray-400 mt-1">
                       Applied on: {job?.postdDate}

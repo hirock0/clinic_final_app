@@ -2,12 +2,13 @@
 import { fetchData } from "@/utils/redux/slices/slice";
 import axios from "axios";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import swal from "sweetalert";
+
+
 
 export default function ProfileSidebar({
   flag,
