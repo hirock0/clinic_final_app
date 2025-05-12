@@ -6,7 +6,6 @@ import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import BackBtn from "../ui/btns/backBtn/BackBtn";
-import { label } from "framer-motion/client";
 
 const staffNeeded = [
   "Registered Nurse (RN)",
