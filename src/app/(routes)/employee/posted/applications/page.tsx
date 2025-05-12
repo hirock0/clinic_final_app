@@ -4,10 +4,13 @@ import ForDashboardAplicationsContainer from "@/components/(dashboards)/forDashb
 const ApplicationsPage = async () => {
   const reqJobsData = await FindAllApplications();
   const allApplications = await reqJobsData?.applications;
+  const approvedApplications = await allApplications?.filter(
+    (item: any) => item?.status !== "approved"
+  );
   return (
     <div>
       <ForDashboardAplicationsContainer
-        ApplicationData={allApplications}
+        ApplicationData={approvedApplications}
         title={"Posted"}
       />
     </div>

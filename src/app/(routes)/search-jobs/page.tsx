@@ -201,7 +201,7 @@ const JobsPage = () => {
       </div>
 
       <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20">
-        <JobCard jobs={approvedJobs} />
+        <JobCard/>
       </div>
     </section>
   );

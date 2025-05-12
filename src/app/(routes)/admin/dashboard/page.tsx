@@ -7,17 +7,28 @@ const DashboardPage = async () => {
   const allJobs = reqAllJobs?.allJobs;
   const reqApplications = await FindAllApplications();
   const allApplications = reqApplications?.applications;
-  const approvedJobs = allJobs?.filter((item: any) => item?.approvedStatus);
-  const approvedApplications = allApplications?.filter(
+
+  const approvedJobs = await allJobs?.filter(
+    (item: any) => item?.approvedStatus === true
+  );
+  const unApprovedJobs = await allJobs?.filter(
+    (item: any) => item?.approvedStatus === false
+  );
+
+  const approvedApplications = await allApplications?.filter(
     (item: any) => item?.status === "approved"
   );
+  const unApprovedApplications = await allApplications?.filter(
+    (item: any) => item?.status !== "approved"
+  );
+
   return (
     <div className="flex flex-col gap-5 p-4">
       {/* Jobs Section */}
       <div className="grid grid-cols-2 max-md:grid-cols-1 gap-5">
         <Link href="/admin/posted/jobs" className="w-full" data-tip="Click">
           <ApplicationCard
-            applications={allJobs}
+            applications={unApprovedJobs}
             title="Posted"
             title2="Jobs"
           />
@@ -40,7 +51,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            applications={allApplications}
+            applications={unApprovedApplications}
             title="User Posted"
             title2="Applications"
           />
