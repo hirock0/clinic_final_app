@@ -124,30 +124,31 @@ const JobCard = ({ data }: any) => {
       const approvedData = await allData?.filter(
         (item: any) => item?.approvedStatus === true
       );
+
       const filterData = approvedData?.filter((item: any) => {
         const matchCity =
-          !selectedCity ||
+          selectedCity &&
           item?.city?.toLowerCase().includes(selectedCity.toLowerCase());
 
         const matchFacilityType =
-          !selectedFacilityType ||
+          selectedFacilityType &&
           item?.facilityType
             ?.toLowerCase()
             .includes(selectedFacilityType.toLowerCase());
 
         const matchJobType =
-          !selectedJobType ||
-          item?.jobFacilityType
+          selectedJobType &&
+          item?.salaryType
             ?.toLowerCase()
             .includes(selectedJobType.toLowerCase());
 
         const matchRole =
-          !selectedRole ||
+          selectedRole &&
           item?.jobFacilityRole
             ?.toLowerCase()
             .includes(selectedRole.toLowerCase());
 
-        return matchCity && matchFacilityType && matchJobType && matchRole;
+        return matchCity || matchFacilityType || matchJobType || matchRole;
       });
       if (
         selectedCity !== "" ||
