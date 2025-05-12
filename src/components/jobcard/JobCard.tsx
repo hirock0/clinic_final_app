@@ -107,7 +107,7 @@ const JobCard = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  console.log(pageData)
+
   return (
     <div className="space-y-6">
       {/* Job Cards */}
