@@ -51,7 +51,8 @@ interface viewDetails {
   maxSalary: number;
 }
 
-const JobCard = () => {
+const JobCard = ({}) => {
+
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -79,6 +80,8 @@ const JobCard = () => {
       setSelectedJob(job);
     }
   };
+
+  
   const pageJobsHandler = async (page: number) => {
     setLoading(true);
     try {
