@@ -8,6 +8,11 @@ const JobsPage = async () => {
   const approvedJobs = await allJobs.filter(
     (job: any) => job?.approvedStatus === true
   );
+
+
+
+
+  
   return (
     <section>
       <div className="second-bg-color ">

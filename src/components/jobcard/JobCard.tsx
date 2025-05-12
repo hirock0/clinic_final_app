@@ -110,7 +110,6 @@ const JobCard = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  console.log(pageData)
   return (
     <div className="space-y-6">
       {/* Job Cards */}
@@ -149,10 +148,7 @@ const JobCard = () => {
                     <p className="text-gray-500 ">{job?.newAdminPost}</p>
                   </div>
                 </div>
-<<<<<<< HEAD
-=======
                 <p className="text-gray-500 text-sm mt-2">{job?.location?.address}</p>
->>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
               </div>
 
               <div className="mt-3 pt-3 border-t border-gray-100">
