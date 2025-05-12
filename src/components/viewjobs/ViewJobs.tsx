@@ -1,4 +1,6 @@
 import React from "react";
+import { FaCalendarCheck } from "react-icons/fa";
+import { FaLocationDot, FaSackDollar } from "react-icons/fa6";
 import {
   FiX,
   FiMapPin,
@@ -15,41 +17,26 @@ interface ViewJobsProps {
     facilityName: string;
     facilityType: string;
     address: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    contactName: string;
-    contactEmail: string;
-    contactPhone: string;
-    staffNeeded: string[];
-    otherStaff?: string;
-    numberOfPositions: string;
-    shiftsNeeded: string[];
-    startDate: string;
     assignmentDuration: string;
     additionalNotes: string;
+    newAdminPost: string;
+    minSalary: number;
+    maxSalary: number;
   };
   onClose: () => void;
 }
 
 const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
+
+  console.log(job)
+
   const {
-    facilityName,
     facilityType,
     address,
-    city,
-    state,
-    zipCode,
-    contactName,
-    contactEmail,
-    contactPhone,
-    staffNeeded,
-    otherStaff,
-    numberOfPositions,
-    shiftsNeeded,
-    startDate,
-    assignmentDuration,
     additionalNotes,
+    minSalary,
+    maxSalary,
+    newAdminPost
   } = job;
 
   return (
@@ -60,9 +47,8 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
           <div className="flex justify-between items-start mb-6">
             <div>
               <h2 className="text-2xl font-bold text-gray-800">
-                {facilityName}
+                {facilityType}
               </h2>
-              <p className="text-gray-600">{facilityType}</p>
             </div>
             <button
               onClick={onClose}
@@ -79,146 +65,30 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
               <h3 className="text-lg font-semibold text-gray-800 border-gray-200 border-b pb-2">
                 Facility Information
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start">
-                  <FiMapPin className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center space-x-3">
                   <div>
-                    <p className="font-medium text-gray-700">Address</p>
-                    <p className="text-gray-600">
-                      {address}, {city}, {state} {zipCode}
-                    </p>
+                    <FaLocationDot size={20} className="main-text-color" />
                   </div>
+                  <p className="text-gray-500 text-sm mt-2">{address}</p>
+                </div>
+                {/* ammount */}
+                <div className="flex items-center space-x-3">
+                  <FaSackDollar size={20} className=" main-text-color" />
+                  <p className="text-gray-500 ">
+                    <span>$ {minSalary}</span>
+                    <span className="mx-1">-</span>
+                    <span>$ {maxSalary}</span>
+                  </p>
+                </div>
+                {/* time */}
+                <div className="flex items-center space-x-3">
+                  <FaCalendarCheck size={20} className=" main-text-color" />
+                  <p className="text-gray-500">{newAdminPost}</p>
                 </div>
               </div>
-            </div>
-
-            {/* Staffing Needs */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800 border-gray-200 border-b pb-2">
-                Staffing Requirements
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start">
-                  <FiUsers className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">
-                      Positions Needed
-                    </p>
-                    <p className="text-gray-600">
-                      {numberOfPositions} positions
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {staffNeeded.map((staff, index) => (
-                        <span
-                          key={index}
-                          className="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-sm"
-                        >
-                          {staff}
-                        </span>
-                      ))}
-                      {otherStaff && (
-                        <span className="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-sm">
-                          {otherStaff}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <FiClock className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">Shifts Needed</p>
-                    <div className="flex flex-wrap gap-2">
-                      {shiftsNeeded.map((shift, index) => (
-                        <span
-                          key={index}
-                          className="bg-green-50 text-green-800 px-3 py-1 rounded-full text-sm"
-                        >
-                          {shift}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <FiCalendar className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">Start Date</p>
-                    <p className="text-gray-600">
-                      {new Date(startDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <FiBriefcase className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">
-                      Assignment Duration
-                    </p>
-                    <p className="text-gray-600">{assignmentDuration}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Additional Notes */}
-            {additionalNotes && (
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-gray-800 border-gray-200 border-b pb-2">
-                  Additional Information
-                </h3>
-                <p className="text-gray-600 whitespace-pre-line">
-                  {additionalNotes}
-                </p>
-              </div>
-            )}
-
-            {/* Contact Information */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800 border-gray-200 border-b pb-2">
-                Contact Information
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-start">
-                  <FiUser className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">Contact Person</p>
-                    <p className="text-gray-600">{contactName}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <FiMail className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">Email</p>
-                    <a
-                      href={`mailto:${contactEmail}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {contactEmail}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <FiPhone className="text-gray-500 mt-1 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-gray-700">Phone</p>
-                    <a
-                      href={`tel:${contactPhone}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {contactPhone}
-                    </a>
-                  </div>
-                </div>
+              <div>
+                <p className="text-base text-gray-500">{additionalNotes}</p>
               </div>
             </div>
           </div>

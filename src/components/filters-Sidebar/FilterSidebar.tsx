@@ -4,8 +4,8 @@ import { FiFilter, FiRefreshCw } from "react-icons/fi";
 import ViewJobs from "../viewjobs/ViewJobs";
 
 const cities = ["New York", "Los Angeles", "Chicago"];
-const facilities = ["Hospital", "Clinic", "Private Practice"];
-const jobTypes = ["Full-Time", "Part-Time", "Contract", "Temporary"];
+const facilities = ["Hospital", "Clinic", "Long-Term Care Facility", "Rehabilitation Center", "Urgent Care", "Other"];
+const jobTypes = ["Per Diem", "Temporary (1-12 weeks)", "Temporary (13-26 weeks)", "Permanent", "Other"];
 
 const roleGroups = [
   {
@@ -57,6 +57,9 @@ const roleGroups = [
     options: ["MFT", "Couples Therapist"],
   },
 ];
+
+
+
 export default function FilterSidebar({ jobs }: { jobs: any }) {
   const [filters, setFilters] = useState({
     location: "",
@@ -94,7 +97,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
         return false;
       if (filters.jobType && job.jobType !== filters.jobType) return false;
       if (filters.medicalRole
- && !job.staffNeeded.includes(filters.medicalRole)) return false;
+        && !job.staffNeeded.includes(filters.medicalRole)) return false;
       return true;
     });
   };
@@ -185,7 +188,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
-  
+
           <div>
             <label className="block text-sm font-semibold mb-1">Role</label>
             <select
