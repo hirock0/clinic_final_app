@@ -8,7 +8,7 @@ import WhyChooseUs from "@/components/(home)/whyChoseUs/WhyChooseUs";
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="scroll-mt-40">
       <Banner />
       <Strategic_Advisors />
       <LeadershipTeam />
