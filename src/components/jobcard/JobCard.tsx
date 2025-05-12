@@ -168,6 +168,9 @@ const JobCard = ({ data }: any) => {
     searcHandler();
   }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
 
+  console.log(pageData)
+
+
   return (
     <div className="space-y-6">
       {/* Job Cards */}
@@ -185,7 +188,7 @@ const JobCard = ({ data }: any) => {
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
                   <h3 className="text-xl font-semibold">
-                    {job?.jobInfo?.facilityName}
+                    {job?.facilityName}
                   </h3>
                   <div className="flex items-end space-x-3">
                     <div>
@@ -208,9 +211,6 @@ const JobCard = ({ data }: any) => {
                     <p className="text-gray-500 ">{job?.newAdminPost}</p>
                   </div>
                 </div>
-                <p className="text-gray-500 text-sm mt-2">
-                  {job?.location?.address}
-                </p>
               </div>
 
               <div className="mt-3 pt-3 border-t border-gray-100">
