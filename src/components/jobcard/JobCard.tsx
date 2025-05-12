@@ -7,8 +7,10 @@ import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import swal from "sweetalert";
+import { FaExclamationCircle } from "react-icons/fa";
 import ViewJobs from "../viewjobs/ViewJobs";
 import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
+import axios from "axios";
 
 interface HealthcareJob {
   facilityName: string;
@@ -23,6 +25,10 @@ interface HealthcareJob {
   position: string;
   otherStaff?: string;
   _id: string;
+  minSalary?: number;
+  maxSalary?: number;
+  newAdminPost?: string;
+  jobFacilityType: string;
 }
 
 interface viewDetails {
@@ -42,115 +48,258 @@ interface viewDetails {
   startDate: string;
   assignmentDuration: string;
   additionalNotes: string;
+  newAdminPost: string;
+  minSalary: number;
+  maxSalary: number;
+  jobFacilityType: string; 
 }
 
-const JobCard = ({ jobs }: { jobs: HealthcareJob[] }) => {
+const JobCard = ({ data }: any) => {
+  const { selectedCity, selectedFacilityType, selectedJobType, selectedRole } =
+    data;
+
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
   const [view, setView] = useState<viewDetails | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [pageData, setPageData] = useState<HealthcareJob[]>([]);
+  const [afterFilter, setAfterFilter] = useState<HealthcareJob[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const perPage = 12;
 
   const viewDetails = (job: any) => {
     setView(job);
   };
-
   const applyHandler = (job: any) => {
     if (!user) {
       router.push(`/user/login?redirectTo=${encodeURIComponent(pathname)}`);
     } else if (user?.role !== "user") {
-      if (user?.role === "institutional") {
-        swal({
-          title: "You are institution",
-          text: "Login for user",
-          icon: "warning",
-        });
-      } else {
-        if (user?.role === "admin") {
-          swal({
-            title: "You are admin",
-            text: "Login for user",
-            icon: "warning",
-          });
-        } else {
-          swal({
-            title: "You are employee",
-            text: "Login for user",
-            icon: "warning",
-          });
-        }
-      }
+      swal({
+        title: `You are ${user.role}`,
+        text: "Login as a user",
+        icon: "warning",
+      });
     } else {
       setSelectedJob(job);
     }
   };
+
+  const pageJobsHandler = async (page: number) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `/pages/api/search_pagination_jobs?page=${page}&perPage=${perPage}`
+      );
+      if (response?.data?.success) {
+        setPageData(response?.data?.pageJobs || []);
+        setAfterFilter(response?.data?.pageJobs || []);
+        setTotalPages(response?.data?.totalPages || 1);
+        setCurrentPage(page);
+        setLoading(false);
+      } else {
+        swal({
+          title: `Somethig goes wrong`,
+          icon: "warning",
+        });
+      }
+    } catch (error: any) {
+      throw new Error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    pageJobsHandler(currentPage);
+  }, []);
+
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  const searcHandler = async () => {
+    try {
+      const response = await axios.get(`/pages/api/allJobs`);
+      const allData = await response?.data?.allJobs;
+      const approvedData = await allData?.filter(
+        (item: any) => item?.approvedStatus === true
+      );
+
+      const filterData = approvedData?.filter((item: any) => {
+        const matchCity =
+          selectedCity &&
+          item?.city?.toLowerCase().includes(selectedCity.toLowerCase());
+
+        const matchFacilityType =
+          selectedFacilityType &&
+          item?.facilityType
+            ?.toLowerCase()
+            .includes(selectedFacilityType.toLowerCase());
+
+        const matchJobType =
+          selectedJobType &&
+          item?.salaryType
+            ?.toLowerCase()
+            .includes(selectedJobType.toLowerCase());
+
+        const matchRole =
+          selectedRole &&
+          item?.jobFacilityRole
+            ?.toLowerCase()
+            .includes(selectedRole.toLowerCase());
+
+        return matchCity || matchFacilityType || matchJobType || matchRole;
+      });
+      if (
+        selectedCity !== "" ||
+        selectedFacilityType !== "" ||
+        selectedJobType !== "" ||
+        selectedRole !== ""
+      ) {
+        setPageData(filterData);
+      } else {
+        setPageData(afterFilter);
+      }
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    searcHandler();
+  }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {jobs?.map((job: any, index: any) => (
-        <div
-          key={index}
-          className="bg-white hover:scale-105 p-4 rounded-lg shadow-sm border border-gray-100 flex flex-col min-h-[250px]"
-        >
-          <div className="h-full flex justify-between flex-col">
-            <div className="mb-3">
-              <h3 className="text-lg font-semibold text-gray-800">
-                {job?.facilityName}
-              </h3>
-              <div className="flex items-center gap-3">
-                <div className="">
-                  <FaLocationDot size={18} className=" text-red-700" />
+    <div className="space-y-6">
+      {/* Job Cards */}
+      {loading ? (
+        <div className=" h-[70vh] w-full flex items-center justify-center">
+          <div className=" loading loading-spinner"></div>
+        </div>
+      ) : pageData.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500">
+          <FaExclamationCircle className="text-5xl text-red-400 mb-4" />
+          <h2 className="text-xl font-semibold">No Data Found</h2>
+          <p className="text-sm mt-1">We couldn't find any matching results.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {pageData?.map((job: any, index: any) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col hover:shadow-xl transition-all duration-300"
+            >
+
+              <div className="flex flex-col justify-between h-full">
+                {/* Header */}
+                <div className="mb-4">
+                  <h3 className="text-2xl font-semibold mb-2">
+                    {job?.jobFacilityType}
+                  </h3>
                 </div>
 
-                <p className="text-gray-600 text-sm mt-2">{job?.address}</p>
-              </div>
-            </div>
-            <div className="">
-              <div className=" flex items-center gap-2">
-                <FaSackDollar size={18} className=" text-cyan-700" />
-                <p className="text-gray-600 ">
-                  <span>$ {job?.minSalary}</span>
-                  <span className="mx-1">-</span>
-                  <span>$ {job?.maxSalary}</span>
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <FaCalendarCheck size={18} className=" text-cyan-700" />
-                <p className="text-gray-600 ">{job?.newAdminPost}</p>
-              </div>
-            </div>
-          </div>
+                {/* Salary and Post Info */}
+                <div className="space-y-2">
+                  <div className="flex items-center text-gray-500 text-sm space-x-2">
+                    <FaLocationDot size={18} className="main-text-color" />
+                    <span>{job?.address}</span>
+                  </div>
 
-          <div className="mt-auto pt-3 border-t border-gray-100">
-            <div className="flex gap-3">
-              <button
-                onClick={() => viewDetails(job)}
-                className="flex-1 bg-white border cursor-pointer border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                View Details
-              </button>
-              <button
-                onClick={() => applyHandler(job)}
-                className="flex-1 cursor-pointer accent-bg-color hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Apply Now
-              </button>
+                  <div className="flex items-center text-gray-600 text-sm space-x-2">
+                    <FaSackDollar size={18} className="main-text-color" />
+                    <span>
+                      ${job?.minSalary} - ${job?.maxSalary}
+                    </span>
+                  </div>
+                  <div className="flex items-center text-gray-600 text-sm space-x-2">
+                    <FaCalendarCheck size={18} className="main-text-color" />
+                    <span>{job?.newAdminPost}</span>
+                  </div>
+                </div>
+
+                {/* Footer Buttons */}
+                <div className="mt-5 pt-4 border-t border-gray-200 flex gap-3">
+                  <button
+                    onClick={() => viewDetails(job)}
+                    className="w-full btn1 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    onClick={() => applyHandler(job)}
+                    className="w-full btn2 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+
+          {selectedJob && (
+            <HealthcareApplicationForm
+              job={selectedJob}
+              onClose={() => setSelectedJob(null)}
+            />
+          )}
+          {view && <ViewJobs job={view} onClose={() => setView(null)} />}
         </div>
-      ))}
-
-      {selectedJob && (
-        <HealthcareApplicationForm
-          job={selectedJob}
-          onClose={() => setSelectedJob(null)}
-        />
       )}
-      {view && <ViewJobs job={view} onClose={() => setView(null)} />}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-4 flex-wrap">
+          {currentPage > 1 && (
+            <button
+              onClick={() => pageJobsHandler(currentPage - 1)}
+              className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+            >
+              Prev
+            </button>
+          )}
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((page) => {
+              return (
+                page === 1 ||
+                page === totalPages ||
+                (page >= currentPage - 1 && page <= currentPage + 1)
+              );
+            })
+            .map((page, i, arr) => {
+              const prevPage = arr[i - 1];
+              const showEllipsis = prevPage && page - prevPage > 1;
+              return (
+                <React.Fragment key={page}>
+                  {showEllipsis && (
+                    <span className="px-2 text-gray-500">...</span>
+                  )}
+                  <button
+                    onClick={() => pageJobsHandler(page)}
+                    className={`px-4 py-2 rounded-md border ${currentPage === page
+                      ? "accent-bg-color second-text-color accent-border-color"
+                      : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+                      }`}
+                  >
+                    {page}
+                  </button>
+                </React.Fragment>
+              );
+            })}
+
+          {currentPage < totalPages && (
+            <button
+              onClick={() => pageJobsHandler(currentPage + 1)}
+              className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+            >
+              Next
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

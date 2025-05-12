@@ -75,11 +75,18 @@ export default function LoginPage({ flag }: { flag: string }) {
     }
   };
   return (
-    <div className="bg-zinc-200 h-screen flex items-center">
-      <div className=" max-w-[1440px] w-11/12 mx-auto ">
+    <div className=" h-screen flex items-center">
+        <Link
+          href="/"
+          className="main-text-color font-semibold hover:underline"
+        >
+          ← Home
+        </Link>
+      <div className="max-w-[1024px] w-11/12 mx-auto ">
         <div className="flex bg-white rounded-2xl shadow-lg overflow-hidden">
+
           {/* Left Side Image */}
-          <div className="hidden md:flex md:w-1/2 bg-blue-100 items-center justify-center ">
+          <div className="hidden md:flex md:w-1/2  items-center justify-center ">
             <div className="">
               <iframe
                 className=" w-96 h-96"
@@ -89,14 +96,8 @@ export default function LoginPage({ flag }: { flag: string }) {
           </div>
           {/* Right Side Form */}
           <div className="w-full md:w-1/2 p-8 space-y-6">
-            <Link
-              href="/"
-              className="text-blue-600 font-semibold hover:underline"
-            >
-              ← Home
-            </Link>
-            <h1 className="text-3xl uppercase font-bold text-blue-600 text-center">
-              Login ({flag})
+            <h1 className="text-3xl uppercase font-bold main-text-color text-center">
+              Login Job Seeker
             </h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Email */}
@@ -185,7 +186,7 @@ export default function LoginPage({ flag }: { flag: string }) {
               Don't have an account?{" "}
               <Link
                 href={`/${flag}/register?redirectTo=${redirectTo}`}
-                className="text-blue-600 hover:underline font-semibold"
+                className="main-text-color hover:underline font-semibold"
               >
                 Sign up
               </Link>

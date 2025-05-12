@@ -23,6 +23,7 @@ type FormValues = {
   assignmentDuration: string;
   additionalNotes: string;
   institutionalEmail: string;
+  jobInfo: any;
 };
 
 const HireTalentPage = () => {
@@ -42,6 +43,7 @@ const HireTalentPage = () => {
     "Long-Term Care Facility",
     "Rehabilitation Center",
     "Urgent Care",
+    "Transportation",
     "Other",
   ];
 
@@ -90,7 +92,7 @@ const HireTalentPage = () => {
       setLoading(false);
       throw new Error(error.message);
     } finally {
-      // reset();
+      reset();
       setLoading(false);
     }
   };

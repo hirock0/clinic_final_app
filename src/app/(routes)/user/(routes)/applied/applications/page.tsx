@@ -6,9 +6,12 @@ const JobsPage = async () => {
   const user = await VerifyToken();
   const reqApplications = await FindUserApplications(user?.email);
   const applications = await reqApplications?.appliedApplications;
+    const unApprovedApplications = await applications?.filter(
+    (item: any) => item?.status !== "approved"
+  );
   return (
     <div>
-      <ApplicationContainer applicationData={applications} title={"Applied"} />
+      <ApplicationContainer applicationData={unApprovedApplications} title={"Applied"} />
     </div>
   );
 };

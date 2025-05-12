@@ -18,9 +18,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <DashboardNav navLinks={navLinks} flag="user" />
 
       {/* Main Layout */}
-      <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex gap-5">
+      <div className="h-[calc(100vh-80px)] max-w-[1440px] mx-auto flex">
         {/* Sidebar */}
-        <aside className="w-64 overflow-y-scroll  soft-bg-purple shadow-md p-6 hidden lg:block">
+        <aside className="w-64 overflow-y-scroll bg-white shadow-md p-6 hidden lg:block">
           <DashboardSideBar navLinks={userSideNavLink} />
         </aside>
 

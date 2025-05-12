@@ -76,8 +76,12 @@ const JobsContainer = ({
                     <h2 className="text-lg font-semibold text-text">
                       {job?.facilityName}
                     </h2>
-                    <p className="text-sm text-gray-600">{job?.facilityType}</p>
-                    <p className="text-sm text-gray-500">{job?.city}</p>
+                    <p className="text-sm text-gray-600">
+                      {job?.facilityType}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {job?.city}
+                    </p>
                     <p className="text-xs text-gray-400 mt-1">
                       Applied on: {job?.postdDate}
                     </p>

@@ -16,14 +16,14 @@ const Strategic_Advisors = () => {
     {
       name: "Sarah Johnson",
       title: "Chief Operations Officer",
-      photo: "/team/bussiness-man.png",
+      photo: "/team/Picture-04.jpg",
       bio: "Specializes in operational efficiency and staff development for healthcare providers."
     }
 
   ]
 
   const handleActiveCard = (index: number) => {
-    setActiveIndex(prev =>(prev === index ? index : null) )
+    setActiveIndex(prev =>(prev === index ? null : index));
   }
 
 
@@ -42,7 +42,7 @@ const Strategic_Advisors = () => {
                   src={member.photo}
                   alt={member.name}
                   fill
-                  className="object-cover opacity-30"
+                  className="object-cover items-start justify-start"
                 />
               </div>
               <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#308d89] to-transparent transition-transform group-hover:translate-y-0  duration-300 ease-in-out

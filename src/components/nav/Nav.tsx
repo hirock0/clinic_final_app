@@ -43,6 +43,7 @@ const Nav = () => {
   }, []);
   const navItems = [
     { title: "Home", href: "/" },
+    { title: "Caregiver", href: "/" },
     {
       title: "FOR ORGANIZATIONS",
       href: "/",
@@ -70,16 +71,14 @@ const Nav = () => {
 
   const navLinks = [
     {
-      href: `/${
-        user?.role === "approvedEmployee" ? "employee" : user?.role
-      }/profile`,
+      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
+        }/profile`,
       label: "Profile",
       icon: <FaCog />,
     },
     {
-      href: `/${
-        user?.role === "approvedEmployee" ? "employee" : user?.role
-      }/dashboard`,
+      href: `/${user?.role === "approvedEmployee" ? "employee" : user?.role
+        }/dashboard`,
       label: "Dashboard",
       icon: <FaTachometerAlt />,
     },
@@ -111,22 +110,21 @@ const Nav = () => {
           >
             {menuOpen ? <IoClose size={35} /> : <MdMenu size={35} />}
           </button>
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={80}
-            height={80}
-            className="h-auto w-16 lg:h-full lg:w-full"
-          />
+          <div className="h-auto w-16 lg:w-20">
+            <Image src="/logo.png" alt="logo" width={500} height={500}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
+
         </div>
 
         {/* Navigation Links */}
         <div className="uppercase max-[1400px] text-sm lg:text-base">
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`${
-              !menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
-            } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all  max-lg:fixed z-50 max-lg:left-0 max-lg:top-[88px] max-lg:flex-col accent-bg-color lg:bg-[#fafafa] max-lg:pb-0 max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
+            className={`${!menuOpen ? "max-lg:-translate-x-[110%]" : "max-lg:translate-x-0"
+              } h-full second-text-color font-semibold scroll-removed max-lg:overflow-y-scroll max-lg:transition-all  max-lg:fixed z-50 max-lg:left-0 max-lg:top-[88px] max-lg:flex-col accent-bg-color lg:bg-[#fafafa] max-lg:pb-0 max-lg:h-full max-lg:w-5/6 max-lg:items-start flex items-center lg:gap-5`}
           >
             {navItems.map((item, index) => (
               <ul key={index} className="max-lg:w-full">
@@ -145,9 +143,8 @@ const Nav = () => {
                       <FaSortDown />
                     </div>
                     <div
-                      className={`${
-                        activeSubMenu === item?.title ? "block" : "hidden"
-                      } lg:group-hover:block lg:bg-white lg:p-5 lg:absolute lg:top-6 z-50  rounded-lg max-lg:w-full lg:shadow-xl `}
+                      className={`${activeSubMenu === item?.title ? "block" : "hidden"
+                        } lg:group-hover:block lg:bg-white lg:p-5 lg:absolute lg:top-6 z-50  rounded-lg max-lg:w-full lg:shadow-xl `}
                     >
                       <ul className="text-nowrap flex flex-col gap-3 max-lg:pl-5  ">
                         {item.subLinks.map((subItem, subIndex) => (
@@ -209,23 +206,23 @@ const Nav = () => {
                     <ul className="text-sm text-gray-700 p-3 space-y-2">
                       <Link href="/user/login" className="block">
                         <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                          <div className="accent-text-color transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
-                          <span className="font-medium">User</span>
+                          <span className="font-medium">For Job Seeker</span>
                         </li>
                       </Link>
                       <Link href="/institutional/login" className="block">
                         <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                          <div className="accent-text-color transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
-                          <span className="font-medium">Institutional</span>
+                          <span className="font-medium">For Organization</span>
                         </li>
                       </Link>
                       <Link href="/admin/login" className="block">
                         <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                          <div className="accent-text-color transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
                           <span className="font-medium">Admin</span>
@@ -233,7 +230,7 @@ const Nav = () => {
                       </Link>
                       <Link href="/employee/login" className="block">
                         <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
-                          <div className="text-cyan-500 transition-transform group-hover:scale-110">
+                          <div className="accent-text-color transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
                           </div>
                           <span className="font-medium">Employee</span>

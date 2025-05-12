@@ -5,9 +5,12 @@ import JobsContainer from "@/components/(dashboards)/jobsContainer/JobsContainer
 const JobsPage = async () => {
   const reqJobsData = await AllJobs();
   const initialJobs = await reqJobsData?.allJobs;
+  const unApprovedJobs = await initialJobs.filter(
+    (job: any) => job?.approvedStatus === false
+  );
   return (
     <div>
-      <JobsContainer jobsData={initialJobs} title={"Posted"} />
+      <JobsContainer jobsData={unApprovedJobs} title={"Posted"} />
     </div>
   );
 };

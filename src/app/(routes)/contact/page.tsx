@@ -24,7 +24,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-gray-500 text-sm font-medium">Phone</h3>
-                  <p className="second-text-color text-lg">(510) 402 9388</p>
+                  <p className="second-text-color text-lg">(858)864-0192</p>
                 </div>
               </div>
 
