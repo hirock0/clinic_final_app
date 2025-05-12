@@ -7,6 +7,7 @@ import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import swal from "sweetalert";
+import { FaExclamationCircle } from "react-icons/fa";
 import ViewJobs from "../viewjobs/ViewJobs";
 import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
 import axios from "axios";
@@ -169,15 +170,18 @@ const JobCard = ({ data }: any) => {
     searcHandler();
   }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
 
-  console.log(pageData)
-
-
   return (
     <div className="space-y-6">
       {/* Job Cards */}
       {loading ? (
         <div className=" h-[70vh] w-full flex items-center justify-center">
           <div className=" loading loading-spinner"></div>
+        </div>
+      ) : pageData.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500">
+          <FaExclamationCircle className="text-5xl text-red-400 mb-4" />
+          <h2 className="text-xl font-semibold">No Data Found</h2>
+          <p className="text-sm mt-1">We couldn't find any matching results.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -188,9 +192,7 @@ const JobCard = ({ data }: any) => {
             >
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold">
-                    {job?.facilityName}
-                  </h3>
+                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
                   <div className="flex items-end space-x-3">
                     <div>
                       <FaLocationDot size={20} className=" main-text-color" />
