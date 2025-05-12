@@ -28,6 +28,7 @@ interface HealthcareJob {
   minSalary?: number;
   maxSalary?: number;
   newAdminPost?: string;
+  jobFacilityType: string;
 }
 
 interface viewDetails {
@@ -50,6 +51,7 @@ interface viewDetails {
   newAdminPost: string;
   minSalary: number;
   maxSalary: number;
+  jobFacilityType: string; 
 }
 
 const JobCard = ({ data }: any) => {
@@ -188,45 +190,47 @@ const JobCard = ({ data }: any) => {
           {pageData?.map((job: any, index: any) => (
             <div
               key={index}
-              className="bg-white p-5 rounded-lg shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out"
+              className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col hover:shadow-xl transition-all duration-300"
             >
-              <div className="h-full flex justify-between flex-col">
-                <div className="mb-3">
-                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
-                  <div className="flex items-end space-x-3">
-                    <div>
-                      <FaLocationDot size={20} className=" main-text-color" />
-                    </div>
-                    <p className="text-gray-500 text-sm mt-2">{job?.address}</p>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3 mb-2">
-                    <FaSackDollar size={20} className=" main-text-color" />
-                    <p className="text-gray-500 ">
-                      <span>$ {job?.minSalary}</span>
-                      <span className="mx-1">-</span>
-                      <span>$ {job?.maxSalary}</span>
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <FaCalendarCheck size={20} className=" main-text-color" />
-                    <p className="text-gray-500 ">{job?.newAdminPost}</p>
-                  </div>
-                </div>
-              </div>
 
-              <div className="mt-3 pt-3 border-t border-gray-100">
-                <div className="flex gap-3">
+              <div className="flex flex-col justify-between h-full">
+                {/* Header */}
+                <div className="mb-4">
+                  <h3 className="text-2xl font-semibold mb-2">
+                    {job?.jobFacilityType}
+                  </h3>
+                </div>
+
+                {/* Salary and Post Info */}
+                <div className="space-y-2">
+                  <div className="flex items-center text-gray-500 text-sm space-x-2">
+                    <FaLocationDot size={18} className="main-text-color" />
+                    <span>{job?.address}</span>
+                  </div>
+
+                  <div className="flex items-center text-gray-600 text-sm space-x-2">
+                    <FaSackDollar size={18} className="main-text-color" />
+                    <span>
+                      ${job?.minSalary} - ${job?.maxSalary}
+                    </span>
+                  </div>
+                  <div className="flex items-center text-gray-600 text-sm space-x-2">
+                    <FaCalendarCheck size={18} className="main-text-color" />
+                    <span>{job?.newAdminPost}</span>
+                  </div>
+                </div>
+
+                {/* Footer Buttons */}
+                <div className="mt-5 pt-4 border-t border-gray-200 flex gap-3">
                   <button
                     onClick={() => viewDetails(job)}
-                    className="flex-1 btn1 cursor-pointer  px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="w-full btn1 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
                   >
                     View Details
                   </button>
                   <button
                     onClick={() => applyHandler(job)}
-                    className="flex-1 cursor-pointer btn1 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="w-full btn2 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
                   >
                     Apply Now
                   </button>
@@ -275,11 +279,10 @@ const JobCard = ({ data }: any) => {
                   )}
                   <button
                     onClick={() => pageJobsHandler(page)}
-                    className={`px-4 py-2 rounded-md border ${
-                      currentPage === page
-                        ? "accent-bg-color second-text-color accent-border-color"
-                        : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
-                    }`}
+                    className={`px-4 py-2 rounded-md border ${currentPage === page
+                      ? "accent-bg-color second-text-color accent-border-color"
+                      : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+                      }`}
                   >
                     {page}
                   </button>

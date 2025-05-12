@@ -47,7 +47,7 @@ export default function FilterSidebar({
             <input
               name="location"
               list="city-options"
-              className="w-full p-2 rounded border bg-gray-50 border-gray-700"
+              className="w-full p-2 rounded border bg-gray-50 border-gray-200"
               placeholder="Type or select a city"
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
@@ -67,7 +67,7 @@ export default function FilterSidebar({
             <select
               value={selectedFacilityType}
               onChange={(e) => setSelectedFacilityType(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-700 bg-gray-50 rounded-md"
+              className="w-full px-4 py-2 border border-gray-200 bg-gray-50 rounded-md"
             >
               <option value="">Select job facility type</option>
               {facilities.map((type: any, index: any) => (
@@ -86,7 +86,7 @@ export default function FilterSidebar({
             <select
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-700 bg-gray-50 rounded-md">
+            className="w-full px-4 py-2 border border-gray-200 bg-gray-50 rounded-md">
               <option value="">Select job facility role</option>
               {selectedFacility?.options.map((role: any, index: number) => (
                 <option key={index} value={role}>
@@ -102,7 +102,7 @@ export default function FilterSidebar({
             <select
             value={selectedJobType}
             onChange={(e) => setSelectedJobType(e.target.value)}
-            name="jobType" className="w-full p-2 rounded border bg-gray-50 border-gray-700">
+            name="jobType" className="w-full p-2 rounded border bg-gray-50 border-gray-200">
               <option value="">Select Job Type</option>
               {jobTypes.map((type: any, index: number) => (
                 <option key={index} value={type}>

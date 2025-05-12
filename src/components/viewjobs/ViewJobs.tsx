@@ -14,8 +14,7 @@ import {
 } from "react-icons/fi";
 interface ViewJobsProps {
   job: {
-    facilityName: string;
-    facilityType: string;
+    jobFacilityType: string;
     address: string;
     assignmentDuration: string;
     additionalNotes: string;
@@ -28,10 +27,8 @@ interface ViewJobsProps {
 
 const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
 
-  console.log(job)
-
   const {
-    facilityType,
+    jobFacilityType,
     address,
     additionalNotes,
     minSalary,
@@ -47,7 +44,7 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
           <div className="flex justify-between items-start mb-6">
             <div>
               <h2 className="text-2xl font-bold text-gray-800">
-                {facilityType}
+                {jobFacilityType}
               </h2>
             </div>
             <button

@@ -65,20 +65,22 @@
   }
 
   .btn1 {
-    border: 2px solid var(--accent);
-    background-color: #fffaea;
-    color: var(--text);
+    border: 2px solid #ebf8f8;
+    background-color: #ebf8f8;
+    color: var(--primary);
     &:hover {
-      background-color: var(--accent);
+      background-color: #ceedee;
+      border: 2px solid #ceedee;
     }
   }
 
   .btn2 {
-    background-color: var(--accent);
-    color: var(--text);
-    border: 2px solid var(--accent);
+    background-color: var(--primary);
+    color: var(--background);
+    border: 2px solid var(--primary);
     &:hover {
-    background-color: #fffaea;
+    background-color: #1a9da3;
+    border: 2px solid #1a9da3;
     }
   }
 }
