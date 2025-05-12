@@ -183,67 +183,7 @@ const ClientForm = ({ job }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // const onSubmit = async (data: any) => {
-  //   setIsLoading(true);
-  //   try {
-  //     const schema = {
-  //       jobId: job?._id,
-  //       institutionalEmail: data?.institutionalEmail,
-  //       jobInfo: {
-  //         facilityName: data?.facilityName,
-  //         facilityType: data?.facilityType,
-  //         additionalInfo: {
-  //           medicalDiagnostic: data?.medicalDiagnostic,
-  //           labDiagnostic: data?.labDiagnostic,
-  //           nursing: data?.nursing,
-  //           pharmacy: data?.pharmacy,
-  //           mentalBehavioral: data?.mentalBehavioral,
-  //           alliedHealth: data?.alliedHealth,
-  //           dentalSupport: data?.dentalSupport,
-  //           publicHealthAdmin: data?.publicHealthAdmin,
-  //           emergencyField: data?.emergencyField,
-  //           directPatientCare: data?.directPatientCare,
-  //         },
-  //       },
-  //       location: {
-  //         address: data?.address,
-  //         city: data?.city,
-  //         state: data?.state,
-  //         zipCode: data?.zipCode,
-  //       },
-  //       contacts: {
-  //         contactName: data?.contactName,
-  //         contactEmail: data?.contactEmail,
-  //         contactPhone: data?.contactPhone,
-  //       },
-  //       salary: {
-  //         minSalary: data?.minSalary,
-  //         maxSalary: data?.maxSalary,
-  //       },
-  //       shiftsNeeded: data.shiftsNeeded || [],
-  //       staffNeeded: data?.staffNeeded || [],
-  //       startDate: data?.startDate,
-  //       numberOfPositions: data?.numberOfPositions,
-  //       assignmentDuration: data?.assignmentDuration,
-  //       additionalNotes: data?.additionalNotes,
-  //     };
-  //     if (data?.maxSalary < data?.minSalary) {
-  //       swal({ title: "Max is less than min salary", icon: "warning" });
-  //     } else {
-  //       const response = await axios.post(
-  //         "/pages/api/admin/job/update",
-  //         schema
-  //       );
-  //       if (response?.data?.success) {
-  //         swal({ title: response?.data?.message, icon: "success" });
-  //       } else {
-  //         swal({ title: response?.data?.message, icon: "warning" });
-  //       }
-  //     }
-  //   } catch (error: any) {
-  //     swal({ title: error.message || "Something went wrong", icon: "error" });
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
+  //  
   // };
 
   const design = "input input-bordered w-full";
@@ -265,10 +205,28 @@ const ClientForm = ({ job }: any) => {
     (item) => item.label === selectedFacilityLabel
   )
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async(data: any) => {
+     setIsLoading(true);
+    try {
+      if (data?.maxSalary < data?.minSalary) {
+        swal({ title: "Max is less than min salary", icon: "warning" });
+      } else {
+        const response = await axios.post(
+          "/pages/api/admin/job/update",
+          data
+        );
+        if (response?.data?.success) {
+          swal({ title: response?.data?.message, icon: "success" });
+        } else {
+          swal({ title: response?.data?.message, icon: "warning" });
+        }
+      }
+    } catch (error: any) {
+      swal({ title: error.message || "Something went wrong", icon: "error" });
+    } finally {
+      setIsLoading(false);
+    }
   }
-
 
   return (
     <div className="py-10">
