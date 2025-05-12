@@ -10,6 +10,9 @@ const DashboardPage = async () => {
   const approvedApplications = await applications?.filter(
     (item: any) => item?.status === "approved"
   );
+  const unApprovedApplications = await applications?.filter(
+    (item: any) => item?.status !== "approved"
+  );
   return (
     <div className=" flex flex-col gap-5">
       <div className=" grid grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
@@ -19,7 +22,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            applications={applications}
+            applications={unApprovedApplications}
             title="Applied"
             title2="Applications"
           />
