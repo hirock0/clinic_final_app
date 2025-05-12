@@ -26,11 +26,7 @@ const Input = ({
       </label>
       <input
         id={name}
-        type={
-          placeholder === "MinSalary" || placeholder === "MaxSalary"
-            ? "number"
-            : "text"
-        }
+        type={"text"}
         placeholder={placeholder}
         {...register(name)}
         className={design}

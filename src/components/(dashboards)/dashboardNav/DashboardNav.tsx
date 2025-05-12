@@ -52,7 +52,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
   }, []);
 
   return (
-    <nav className="soft-bg-purple sticky top-0 z-50">
+    <nav className=" bg-white shadow-xl sticky top-0 z-50">
       <div className="h-20 relative max-w-[1440px] mx-auto w-11/12 flex items-center justify-between">
         <div className="flex items-center gap-5">
           <div className="flex max-lg:gap-5 items-center">

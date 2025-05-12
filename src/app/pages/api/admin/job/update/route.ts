@@ -3,7 +3,6 @@ import { DBConnection } from "@/lib/dbConnection/DBConnection";
 import { ObjectId } from "mongodb";
 export async function POST(req: NextRequest) {
   try {
-
     const { jobId, ...rest } = await req.json();
     const id = new ObjectId(String(jobId));
     const client = await DBConnection();
@@ -29,8 +28,6 @@ export async function POST(req: NextRequest) {
         success: false,
       });
     }
-
-
   } catch (error: any) {
     return NextResponse.json({
       message: error.message,
