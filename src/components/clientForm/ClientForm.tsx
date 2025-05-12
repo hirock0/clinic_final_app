@@ -171,7 +171,7 @@ const ClientForm = ({ job }: any) => {
       shiftsNeeded: job?.shiftsNeeded || [],
       staffNeeded: job?.staffNeeded || [],
       // additionsal_start
-      jobFacilityType:  job?.jobFacilityType,
+      jobFacilityType: job?.jobFacilityType,
       jobFacilityRole: job?.jobFacilityRole,
       minSalary: job?.minSalary,
       maxSalary: job?.maxSalary,
@@ -427,6 +427,10 @@ const ClientForm = ({ job }: any) => {
                       <option value="hourly">Hourly</option>
                       <option value="weekly">Weekly</option>
                       <option value="per_diem">Per Diem</option>
+                      <option value="full_time">Full-Time</option>
+                      <option value="part_time">Part-Time</option>
+                      <option value="temporary">Temporary</option>
+
                     </select>
                     {errors.salaryType && (
                       <p className="text-sm text-red-500">Salary type is required</p>

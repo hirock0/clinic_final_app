@@ -1,166 +1,29 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { FiFilter, FiRefreshCw } from "react-icons/fi";
 
-const cities = ["New York", "Los Angeles", "Chicago"];
-const jobTypes = ["Full-Time", "Part-Time", "Contract", "Temporary"];
-const facilities = [
-  {
-    label: "Medical & Diagnostic Professionals",
-    options: [
-      "Doctor (MD/DO) – Physicians in various specialties (cardiologist, surgeon, pediatrician)",
-      "Physician Assistant (PA) – Can diagnose, treat, and prescribe under doctor supervision",
-      "Nurse Practitioner (NP) – Advanced practice nurses who can often work independently",
-      "Clinical Nurse Specialist (CNS)",
-      "Anesthesiologist Assistant",
-      "Radiologist – Doctor specialized in medical imaging",
-      "Pathologist – Doctor who analyzes lab results and biopsies",
-      "Dentist (DDS/DMD) – Doctor for oral health",
-      "Optometrist (OD) – Eye care specialist",
-      "Podiatrist (DPM) – Foot and ankle doctor",
-      "Chiropractor (DC) – Spine/musculoskeletal specialist",
-    ],
-  },
-  {
-    label: "Diagnostic & Lab Professionals",
-    options: [
-      "Medical Laboratory Scientist",
-      "Phlebotomist – Blood draw specialist",
-      "Radiologic Technologist (X-ray Tech)",
-      "Ultrasound Technician (Sonographer)",
-      "MRI/CT Technologist",
-      "Nuclear Medicine Technologist",
-    ],
-  },
-  {
-    label: "Nursing Professionals",
-    options: [
-      "Registered Nurse (RN)",
-      "Licensed Practical/Vocational Nurse (LPN/LVN)",
-      "Certified Nursing Assistant (CNA)",
-      "School Nurse",
-      "Travel Nurse",
-      "Dialysis Nurse",
-    ],
-  },
-  {
-    label: "Pharmacy & Medication",
-    options: ["Pharmacist (PharmD)", "Pharmacy Technician"],
-  },
-  {
-    label: "Mental & Behavioral Health",
-    options: [
-      "Psychiatrist (MD)",
-      "Psychologist (PhD/PsyD)",
-      "Licensed Clinical Social Worker (LCSW)",
-      "Marriage & Family Therapist (MFT)",
-      "Mental Health Counselor",
-      "Substance Abuse Counselor",
-      "Behavioral Technician (ABA Tech)",
-    ],
-  },
-  {
-    label: "Allied Health Professionals",
-    options: [
-      "Occupational Therapist (OT)",
-      "Physical Therapist (PT)",
-      "Speech-Language Pathologist (SLP)",
-      "Respiratory Therapist",
-      "Athletic Trainer",
-      "Audiologist",
-    ],
-  },
-  {
-    label: "Dental Support Staff",
-    options: ["Dental Hygienist", "Dental Assistant", "Dental Lab Technician"],
-  },
-  {
-    label: "Public Health & Admin",
-    options: [
-      "Epidemiologist",
-      "Public Health Nurse",
-      "Health Educator",
-      "Community Health Worker",
-      "Health Information Technician",
-      "Medical Coder/Biller",
-      "Healthcare Administrator",
-      "Medical Office Assistant",
-      "Medical Scribe",
-      "Virtual Medical Administrative Assistant",
-    ],
-  },
-  {
-    label: "Emergency & Field Support",
-    options: [
-      "EMT (Emergency Medical Technician)",
-      "Paramedic",
-      "Flight Nurse",
-      "Search and Rescue Medic",
-      "Disaster Response Specialist",
-    ],
-  },
-  {
-    label: "Direct Patient Care & Support",
-    options: [
-      "Caregiver",
-      "Home Health Aide (HHA)",
-      "Personal Care Assistant (PCA)",
-      "Companion Caregiver",
-      "Hospice Aide",
-      "Geriatric Aide",
-      "Medical Transport Driver",
-    ],
-  },
-  {
-    label: 'Transportation',
-    options: [
-      "Non-Emergency Medical Transportation (NEMT)",
-      "Emergency Medical Services (EMS)",
-      'Staff Transportation',
-      'Interfacility Transport (IFT)',
-      "Medical Courier Services",
-      "Mobile Clinics/Vehicles",
-      "Patient Discharge Transportation",
-      "Home Health Visit Transportation",
-      "Medical Equipment Delivery Vehicles",
-      "Specialty Transport (neonatal or bariatric)",
-      "Air Ambulance",
-      "Shuttle Services (internal or external)",
-      "On-demand Ride Services (Uber Health, Lyft Concierge)",
-      "Volunteer Driver Programs",
-      "Dial-a-Ride Services",
-    ]
-  }
-];
 
-
-
-export default function FilterSidebar({ jobs }: { jobs: any }) {
-
-
-  const [filters, setFilters] = useState({
-    location: "",
-    facilityType: "",
-    jobType: "",
-    role: "",
-  });
-  const [showFilter, setShowFilter] = useState(false);
-
-
-  const handleReset = () => {
-    setFilters({
-      location: "",
-      facilityType: "",
-      jobType: "",
-      role: "",
-    });
-  };
+export default function FilterSidebar({ 
+  handleReset,
+  showFilter,
+  setShowFilter,
+  cities,
+  selectedFacility,
+  selectedFacilityType,
+  setSelectedFacilityType,
+  facilities,
+  jobTypes,
+  selectedRole,
+  setSelectedRole,
+  selectedJobType,
+  setSelectedJobType,
+  selectedCity,
+  setSelectedCity }: any) {
 
   return (
-    <div className="relative p-4">
+    <div className="relative">
       <div className="flex items-center justify-between">
         <button
-          className="text-white cursor-pointer px-4 py-2 rounded flex items-center gap-2"
+          className="text-gray-50 cursor-pointer px-4 py-2 rounded flex items-center gap-2"
           onClick={() => setShowFilter(!showFilter)}
         >
           <FiFilter />
@@ -168,7 +31,7 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
         </button>
 
         <button
-          className="text-white cursor-pointer px-4 py-2 rounded flex items-center gap-2"
+          className="text-gray-50 cursor-pointer px-4 py-2 rounded flex items-center gap-2"
           onClick={handleReset}
         >
           <FiRefreshCw />
@@ -177,18 +40,20 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
       </div>
 
       {showFilter && (
-        <div className="bg-gray-100 p-4 mt-4 rounded space-y-4">
+        <div className="accent-bg-color p-5 mt-4 rounded gap-5 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4">
+          {/* Location */}
           <div>
             <label className="block text-sm font-semibold mb-1">Location</label>
             <input
               name="location"
               list="city-options"
-              value=''
-              className="w-full p-2 rounded"
+              className="w-full p-2 rounded border bg-gray-50 border-gray-700"
               placeholder="Type or select a city"
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
             />
             <datalist id="city-options">
-              {cities.map((city, index) => (
+              {cities.map((city: any, index: any) => (
                 <option key={index} value={city} />
               ))}
             </datalist>
@@ -196,15 +61,16 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
 
           {/* Facility Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
               Job Facility Type*
             </label>
             <select
-
-              className="w-full px-4 py-2 border border-gray-300 rounded-md "
+              value={selectedFacilityType}
+              onChange={(e) => setSelectedFacilityType(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-700 bg-gray-50 rounded-md"
             >
               <option value="">Select job facility type</option>
-              {facilities.map((type, index) => (
+              {facilities.map((type: any, index: any) => (
                 <option key={index} value={type.label}>
                   {type.label}
                 </option>
@@ -212,41 +78,39 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
-
           {/* Role */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Job  Facility Role*
+            <label className="block text-sm font-semibold  text-gray-700 mb-1">
+              Job Facility Role*
             </label>
             <select
-
-              className="w-full px-4 py-2 border border-gray-300 rounded-md "
-     
-            >
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-700 bg-gray-50 rounded-md">
               <option value="">Select job facility role</option>
-              {/* {selectedJobFacility?.options.map((role, index) => (
+              {selectedFacility?.options.map((role: any, index: number) => (
                 <option key={index} value={role}>
                   {role}
                 </option>
-              ))} */}
+              ))}
             </select>
           </div>
 
+          {/* Job Type */}
           <div>
             <label className="block text-sm font-semibold mb-1">Job Type</label>
             <select
-              name="jobType"
-              className="w-full p-2 rounded"
-            >
+            value={selectedJobType}
+            onChange={(e) => setSelectedJobType(e.target.value)}
+            name="jobType" className="w-full p-2 rounded border bg-gray-50 border-gray-700">
               <option value="">Select Job Type</option>
-              {jobTypes.map((type, index) => (
+              {jobTypes.map((type: any, index: number) => (
                 <option key={index} value={type}>
                   {type}
                 </option>
               ))}
             </select>
           </div>
-
         </div>
       )}
     </div>
