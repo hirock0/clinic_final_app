@@ -198,17 +198,17 @@ const ClientForm = ({ job }: any) => {
     name: "salaryNegotiable",
   });
   // Get the matching role options based on selected label
-  const selectedJobFacility = facilityData.find( (item) => item.label === selectedFacilityLabel );
-  const onSubmit = async(data: any) => {
-     setIsLoading(true);
+  const selectedJobFacility = facilityData.find(
+    (item) => item.label === selectedFacilityLabel
+  );
+  const onSubmit = async (data: any) => {
+    setIsLoading(true);
     try {
       if (data?.maxSalary < data?.minSalary) {
         swal({ title: "Max is less than min salary", icon: "warning" });
       } else {
-        const response = await axios.post(
-          "/pages/api/admin/job/update",
-          data
-        );
+        data.jobId = job._id;
+        const response = await axios.post("/pages/api/admin/job/update", data);
         if (response?.data?.success) {
           swal({ title: response?.data?.message, icon: "success" });
         } else {
@@ -220,8 +220,7 @@ const ClientForm = ({ job }: any) => {
     } finally {
       setIsLoading(false);
     }
-  }
-
+  };
 
   return (
     <div className="py-10">
