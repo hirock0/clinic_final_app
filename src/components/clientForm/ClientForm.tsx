@@ -6,6 +6,7 @@ import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import BackBtn from "../ui/btns/backBtn/BackBtn";
+import { span } from "framer-motion/client";
 
 const staffNeeded = [
   "Registered Nurse (RN)",
@@ -198,13 +199,15 @@ const ClientForm = ({ job }: any) => {
     name: "salaryNegotiable",
   });
   // Get the matching role options based on selected label
-  const selectedJobFacility = facilityData.find( (item) => item.label === selectedFacilityLabel );
-  const onSubmit = async(data: any) => {
-     setIsLoading(true);
+  const selectedJobFacility = facilityData.find((item) => item.label === selectedFacilityLabel);
+  const onSubmit = async (data: any) => {
+    setIsLoading(true);
     try {
+
       if (data?.maxSalary < data?.minSalary) {
         swal({ title: "Max is less than min salary", icon: "warning" });
       } else {
+        data.jobId = job._id;
         const response = await axios.post(
           "/pages/api/admin/job/update",
           data
@@ -397,12 +400,15 @@ const ClientForm = ({ job }: any) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 accent-bg-color text-white rounded-lg hover:bg-yellow-500 transition flex justify-center items-center"
+            className="w-full py-3 accent-bg-color rounded-lg hover:bg-yellow-500 transition flex justify-center items-center font-medium cursor-pointer"
           >
             {isLoading ? (
-              <span className="loading loading-spinner loading-sm"></span>
+              <div className="">
+                <span>Saveing...</span>
+                <span className="loading loading-spinner loading-sm"></span>
+              </div>
             ) : (
-              "Submit"
+              "Save Data"
             )}
           </button>
         </form>

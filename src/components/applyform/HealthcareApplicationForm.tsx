@@ -25,7 +25,7 @@ interface FormData {
 }
 
 interface Job {
-    facilityName: string;
+    jobFacilityType: string;
     numberOfPositions: string;
     _id: string;
 }
@@ -110,7 +110,7 @@ const HealthcareApplicationForm = ({
                         <div className="flex justify-between items-start">
                             <div>
                                 <h3 className="text-xl font-semibold mb-2">
-                                    Apply to {job?.facilityName}
+                                    Apply to {job?.jobFacilityType}
                                 </h3>
                                 <p className="text-gray-600 mb-6">
                                     Position: {job?.numberOfPositions}
@@ -326,7 +326,7 @@ const HealthcareApplicationForm = ({
                             <div className="mt-8 flex justify-end">
                                 <button
                                     type="submit"
-                                    className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    className="px-6 py-3 btn2 text-white font-medium rounded-md transition-colors duration-300"
                                 >
                                     {!loading ? (
                                         "Submit Application"
