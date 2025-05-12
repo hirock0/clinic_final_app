@@ -4,7 +4,14 @@ import { FiFilter, FiRefreshCw } from "react-icons/fi";
 import ViewJobs from "../viewjobs/ViewJobs";
 
 const cities = ["New York", "Los Angeles", "Chicago"];
-const facilities = ["Hospital", "Clinic", "Private Practice"];
+const facilities = [
+  "Hospital",
+  "Clinic",
+  "Long-Term Care Facility",
+  "Rehabilitation Center",
+  "Urgent Care",
+  "Other",
+];
 const jobTypes = ["Full-Time", "Part-Time", "Contract", "Temporary"];
 
 const roleGroups = [
@@ -25,36 +32,6 @@ const roleGroups = [
       "Licensed Practical Nurse (LPN)",
       "Certified Nursing Assistant (CNA)",
     ],
-  },
-  {
-    name: "labRole",
-    label: "Laboratory Role",
-    options: ["Medical Technologist", "Phlebotomist", "Pathologist"],
-  },
-  {
-    name: "pharmacyRole",
-    label: "Pharmacy Role",
-    options: ["Pharmacist", "Pharmacy Technician"],
-  },
-  {
-    name: "psychiatrist",
-    label: "Psychiatrist Role",
-    options: ["Adult Psychiatrist", "Child Psychiatrist"],
-  },
-  {
-    name: "psychologist",
-    label: "Psychologist Role",
-    options: ["Clinical Psychologist", "Neuropsychologist"],
-  },
-  {
-    name: "lcsw",
-    label: "LCSW Role",
-    options: ["Clinical Social Worker", "School Social Worker"],
-  },
-  {
-    name: "mft",
-    label: "Marriage & Family Therapist Role",
-    options: ["MFT", "Couples Therapist"],
   },
 ];
 export default function FilterSidebar({ jobs }: { jobs: any }) {
@@ -89,12 +66,26 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
 
   const filterJobs = (jobs: any, filters: any) => {
     return jobs.filter((job: any) => {
-      if (filters.location && job.city !== filters.location) return false;
-      if (filters.facilityType && job.facilityType !== filters.facilityType)
+      if (
+        filters.location.toLowerCase() &&
+        job.city.toLowerCase() !== filters.location.toLowerCase()
+      )
         return false;
-      if (filters.jobType && job.jobType !== filters.jobType) return false;
-      if (filters.medicalRole
- && !job.staffNeeded.includes(filters.medicalRole)) return false;
+      if (
+        filters.facilityType.toLowerCase() &&
+        job.facilityType.toLowerCase() !== filters.facilityType.toLowerCase()
+      )
+        return false;
+      if (
+        filters.jobType.toLowerCase() &&
+        job.jobType.toLowerCase() !== filters.jobType.toLowerCase()
+      )
+        return false;
+      if (
+        filters.medicalRole &&
+        !job.staffNeeded.includes(filters.medicalRole).toLowerCase()
+      )
+        return false;
       return true;
     });
   };
@@ -130,7 +121,6 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
 
       {showFilter && (
         <div className="bg-gray-100 p-4 mt-4 rounded space-y-4">
-
           <div>
             <label className="block text-sm font-semibold mb-1">Location</label>
             <input
@@ -147,7 +137,6 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
               ))}
             </datalist>
           </div>
-
 
           <div>
             <label className="block text-sm font-semibold mb-1">
@@ -185,7 +174,6 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
-  
           <div>
             <label className="block text-sm font-semibold mb-1">Role</label>
             <select

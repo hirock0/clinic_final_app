@@ -109,6 +109,7 @@ const JobCard = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  console.log(pageData)
   return (
     <div className="space-y-6">
       {/* Job Cards */}
@@ -125,12 +126,12 @@ const JobCard = () => {
             >
               <div className="h-full flex justify-between flex-col">
                 <div className="mb-3">
-                  <h3 className="text-xl font-semibold">{job?.facilityName}</h3>
+                  <h3 className="text-xl font-semibold">{job?.jobInfo?.facilityName}</h3>
                   <div className="flex items-end space-x-3">
                 <div>
                   <FaLocationDot size={20} className=" main-text-color" />
                 </div>
-                <p className="text-gray-500 text-sm mt-2">{job?.address}</p>
+                <p className="text-gray-500 text-sm mt-2">{job?.location?.address}</p>
               </div>
             </div>
             <div>
