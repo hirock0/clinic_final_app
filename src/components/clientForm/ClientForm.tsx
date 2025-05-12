@@ -6,7 +6,6 @@ import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import BackBtn from "../ui/btns/backBtn/BackBtn";
-import { label } from "framer-motion/client";
 
 const staffNeeded = [
   "Registered Nurse (RN)",
@@ -181,10 +180,6 @@ const ClientForm = ({ job }: any) => {
     },
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  // const onSubmit = async (data: any) => {
-  //  
-  // };
 
   const design = "input input-bordered w-full";
 
