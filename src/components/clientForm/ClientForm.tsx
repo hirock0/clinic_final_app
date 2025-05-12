@@ -1,11 +1,12 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Input from "../ui/inputs/Input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import BackBtn from "../ui/btns/backBtn/BackBtn";
+import { label } from "framer-motion/client";
 
 const staffNeeded = [
   "Registered Nurse (RN)",
@@ -16,12 +17,12 @@ const staffNeeded = [
   "Therapist",
   "Other",
 ];
-const additionalInfoFields = [
+
+const facilityData = [
   {
-    name: "medicalDiagnostic",
     label: "Medical & Diagnostic Professionals",
     options: [
-      "Doctor (MD/DO) – Physicians in various specialties (e.g., cardiologist, surgeon, pediatrician)",
+      "Doctor (MD/DO) – Physicians in various specialties (cardiologist, surgeon, pediatrician)",
       "Physician Assistant (PA) – Can diagnose, treat, and prescribe under doctor supervision",
       "Nurse Practitioner (NP) – Advanced practice nurses who can often work independently",
       "Clinical Nurse Specialist (CNS)",
@@ -35,7 +36,6 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "labDiagnostic",
     label: "Diagnostic & Lab Professionals",
     options: [
       "Medical Laboratory Scientist",
@@ -47,7 +47,6 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "nursing",
     label: "Nursing Professionals",
     options: [
       "Registered Nurse (RN)",
@@ -59,12 +58,10 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "pharmacy",
     label: "Pharmacy & Medication",
     options: ["Pharmacist (PharmD)", "Pharmacy Technician"],
   },
   {
-    name: "mentalBehavioral",
     label: "Mental & Behavioral Health",
     options: [
       "Psychiatrist (MD)",
@@ -77,7 +74,6 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "alliedHealth",
     label: "Allied Health Professionals",
     options: [
       "Occupational Therapist (OT)",
@@ -89,12 +85,10 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "dentalSupport",
     label: "Dental Support Staff",
     options: ["Dental Hygienist", "Dental Assistant", "Dental Lab Technician"],
   },
   {
-    name: "publicHealthAdmin",
     label: "Public Health & Admin",
     options: [
       "Epidemiologist",
@@ -110,7 +104,6 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "emergencyField",
     label: "Emergency & Field Support",
     options: [
       "EMT (Emergency Medical Technician)",
@@ -121,7 +114,6 @@ const additionalInfoFields = [
     ],
   },
   {
-    name: "directPatientCare",
     label: "Direct Patient Care & Support",
     options: [
       "Caregiver",
@@ -133,22 +125,43 @@ const additionalInfoFields = [
       "Medical Transport Driver",
     ],
   },
+  {
+    label: 'Transportation',
+    options: [
+      "Non-Emergency Medical Transportation (NEMT)",
+      "Emergency Medical Services (EMS)",
+      'Staff Transportation',
+      'Interfacility Transport (IFT)',
+      "Medical Courier Services",
+      "Mobile Clinics/Vehicles",
+      "Patient Discharge Transportation",
+      "Home Health Visit Transportation",
+      "Medical Equipment Delivery Vehicles",
+      "Specialty Transport (e.g., neonatal or bariatric)",
+      "Air Ambulance",
+      "Shuttle Services (internal or external)",
+      "On-demand Ride Services (e.g., Uber Health, Lyft Concierge)",
+      "Volunteer Driver Programs",
+      "Dial-a-Ride Services",
+    ]
+  }
 ];
 
 const shifts = ["Day", "Evening", "Night", "Weekends", "Flexible"];
 
 const ClientForm = ({ job }: any) => {
-  const { register, handleSubmit, setValue } = useForm({
+
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     defaultValues: {
-      facilityName: job?.jobInfo?.facilityName,
-      facilityType: job?.jobInfo?.facilityType,
-      contactName: job?.contacts?.contactName,
-      contactEmail: job?.contacts?.contactEmail,
-      contactPhone: job?.contacts?.contactPhone,
-      address: job?.location?.address,
-      city: job?.location?.city,
-      state: job?.location?.state,
-      zipCode: job?.location?.zipCode,
+      facilityName: job?.facilityName,
+      facilityType: job?.facilityType,
+      contactName: job?.contactName,
+      contactEmail: job?.contactEmail,
+      contactPhone: job?.contactPhone,
+      address: job?.address,
+      city: job?.city,
+      state: job?.state,
+      zipCode: job?.zipCode,
       startDate: job?.startDate,
       numberOfPositions: job?.numberOfPositions,
       assignmentDuration: job?.assignmentDuration,
@@ -157,90 +170,105 @@ const ClientForm = ({ job }: any) => {
       approvedStatus: job?.approvedStatus,
       shiftsNeeded: job?.shiftsNeeded || [],
       staffNeeded: job?.staffNeeded || [],
-      // additional_start
-      medicalDiagnostic: job?.jobInfo?.additionalInfo?.medicalDiagnostic,
-      labDiagnostic: job?.jobInfo?.additionalInfo?.labDiagnostic,
-      nursing: job?.jobInfo?.additionalInfo?.nursing,
-      pharmacy: job?.jobInfo?.additionalInfo?.pharmacy,
-      mentalBehavioral: job?.jobInfo?.additionalInfo?.mentalBehavioral,
-      alliedHealth: job?.jobInfo?.additionalInfo?.alliedHealth,
-      dentalSupport: job?.jobInfo?.additionalInfo?.dentalSupport,
-      publicHealthAdmin: job?.jobInfo?.additionalInfo?.publicHealthAdmin,
-      emergencyField: job?.jobInfo?.additionalInfo?.emergencyField,
-      directPatientCare: job?.jobInfo?.additionalInfo?.directPatientCare,
-      minSalary: job?.salary.minSalary,
-      maxSalary: job?.salary.maxSalary,
-      // additionsal_end
+      // additionsal_start
+      jobFacilityType:  job?.jobFacilityType,
+      jobFacilityRole: job?.jobFacilityRole,
+      minSalary: job?.minSalary,
+      maxSalary: job?.maxSalary,
+      negotiationNote: job?.negotiationNote,
+      salaryNegotiable: job.salaryNegotiable,
+      salaryType: job?.salaryType,
     },
   });
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (data: any) => {
-    setIsLoading(true);
-    try {
-      const schema = {
-        jobId: job?._id,
-        institutionalEmail: data?.institutionalEmail,
-        jobInfo: {
-          facilityName: data?.facilityName,
-          facilityType: data?.facilityType,
-          additionalInfo: {
-            medicalDiagnostic: data?.medicalDiagnostic,
-            labDiagnostic: data?.labDiagnostic,
-            nursing: data?.nursing,
-            pharmacy: data?.pharmacy,
-            mentalBehavioral: data?.mentalBehavioral,
-            alliedHealth: data?.alliedHealth,
-            dentalSupport: data?.dentalSupport,
-            publicHealthAdmin: data?.publicHealthAdmin,
-            emergencyField: data?.emergencyField,
-            directPatientCare: data?.directPatientCare,
-          },
-        },
-        location: {
-          address: data?.address,
-          city: data?.city,
-          state: data?.state,
-          zipCode: data?.zipCode,
-        },
-        contacts: {
-          contactName: data?.contactName,
-          contactEmail: data?.contactEmail,
-          contactPhone: data?.contactPhone,
-        },
-        salary: {
-          minSalary: data?.minSalary,
-          maxSalary: data?.maxSalary,
-        },
-        shiftsNeeded: data.shiftsNeeded || [],
-        staffNeeded: data?.staffNeeded || [],
-        startDate: data?.startDate,
-        numberOfPositions: data?.numberOfPositions,
-        assignmentDuration: data?.assignmentDuration,
-        additionalNotes: data?.additionalNotes,
-      };
-      if (data?.maxSalary < data?.minSalary) {
-        swal({ title: "Max is less than min salary", icon: "warning" });
-      } else {
-        const response = await axios.post(
-          "/pages/api/admin/job/update",
-          schema
-        );
-        if (response?.data?.success) {
-          swal({ title: response?.data?.message, icon: "success" });
-        } else {
-          swal({ title: response?.data?.message, icon: "warning" });
-        }
-      }
-    } catch (error: any) {
-      swal({ title: error.message || "Something went wrong", icon: "error" });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const onSubmit = async (data: any) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const schema = {
+  //       jobId: job?._id,
+  //       institutionalEmail: data?.institutionalEmail,
+  //       jobInfo: {
+  //         facilityName: data?.facilityName,
+  //         facilityType: data?.facilityType,
+  //         additionalInfo: {
+  //           medicalDiagnostic: data?.medicalDiagnostic,
+  //           labDiagnostic: data?.labDiagnostic,
+  //           nursing: data?.nursing,
+  //           pharmacy: data?.pharmacy,
+  //           mentalBehavioral: data?.mentalBehavioral,
+  //           alliedHealth: data?.alliedHealth,
+  //           dentalSupport: data?.dentalSupport,
+  //           publicHealthAdmin: data?.publicHealthAdmin,
+  //           emergencyField: data?.emergencyField,
+  //           directPatientCare: data?.directPatientCare,
+  //         },
+  //       },
+  //       location: {
+  //         address: data?.address,
+  //         city: data?.city,
+  //         state: data?.state,
+  //         zipCode: data?.zipCode,
+  //       },
+  //       contacts: {
+  //         contactName: data?.contactName,
+  //         contactEmail: data?.contactEmail,
+  //         contactPhone: data?.contactPhone,
+  //       },
+  //       salary: {
+  //         minSalary: data?.minSalary,
+  //         maxSalary: data?.maxSalary,
+  //       },
+  //       shiftsNeeded: data.shiftsNeeded || [],
+  //       staffNeeded: data?.staffNeeded || [],
+  //       startDate: data?.startDate,
+  //       numberOfPositions: data?.numberOfPositions,
+  //       assignmentDuration: data?.assignmentDuration,
+  //       additionalNotes: data?.additionalNotes,
+  //     };
+  //     if (data?.maxSalary < data?.minSalary) {
+  //       swal({ title: "Max is less than min salary", icon: "warning" });
+  //     } else {
+  //       const response = await axios.post(
+  //         "/pages/api/admin/job/update",
+  //         schema
+  //       );
+  //       if (response?.data?.success) {
+  //         swal({ title: response?.data?.message, icon: "success" });
+  //       } else {
+  //         swal({ title: response?.data?.message, icon: "warning" });
+  //       }
+  //     }
+  //   } catch (error: any) {
+  //     swal({ title: error.message || "Something went wrong", icon: "error" });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const design = "input input-bordered w-full";
+
+  // Watch the selected Job facility  type
+  const selectedFacilityLabel = useWatch({
+    control,
+    name: 'jobFacilityType',
+  })
+
+  // Salary Negotiable
+  const isNegotiable = useWatch({
+    control,
+    name: 'salaryNegotiable',
+  })
+
+  // Get the matching role options based on selected label
+  const selectedJobFacility = facilityData.find(
+    (item) => item.label === selectedFacilityLabel
+  )
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
 
   return (
     <div className="py-10">
@@ -295,49 +323,121 @@ const ClientForm = ({ job }: any) => {
             placeholder="Write additional information here..."
           ></textarea>
           <h2 className="text-xl font-semibold">Additional Information</h2>
-          <div className=" grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-5">
-            {additionalInfoFields.map(
-              ({ name, label, options }: any, idx: any) => (
-                <div
-                  className=" flex flex-col p-3 rounded-3xl shadow-2xl hover:scale-105"
-                  key={idx}
-                >
-                  <label htmlFor={name} className=" text-blue-600">
-                    {label}
+          <div className="grid grid-cols-2 gap-5">
+            {/* Facility Type */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Job Facility Type*
+              </label>
+              <select
+                {...register("jobFacilityType")}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md "
+              >
+                <option value="">Select job facility type</option>
+                {facilityData.map((type, index) => (
+                  <option key={index} value={type.label}>
+                    {type.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Role */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Job  Facility Role*
+              </label>
+              <select
+                {...register("jobFacilityRole")}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md "
+                disabled={!selectedJobFacility}
+              >
+                <option value="">Select job facility role</option>
+                {selectedJobFacility?.options.map((role, index) => (
+                  <option key={index} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+
+            <div>
+              {/* Negotiable Checkbox */}
+              <div className="mb-4">
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    {...register("salaryNegotiable")}
+                    className="mr-2"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Salary is negotiable
+                  </span>
+                </label>
+              </div>
+              {/* Conditional Salary Inputs */}
+              {isNegotiable ? (
+                // Negotiable Field
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Negotiation Details*
                   </label>
-                  <select id={name} {...register(name)} className=" outline-0">
-                    <option value="N/A" className="">
-                      Select One
-                    </option>
-                    {options?.map((item: any, index: any) => (
-                      <option key={index} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
+                  <input
+                    type="text"
+                    {...register("negotiationNote")}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    placeholder="Open to negotiation"
+                  />
                 </div>
-              )
-            )}
-            <div className="flex flex-col p-3 rounded-3xl shadow-2xl hover:scale-105">
-              <div className="text-blue-600">Min Salary</div>
-              <input
-                type="number"
-                {...register("minSalary")}
-                placeholder="Min-Salary"
-                className=" h-full outline-0 w-full"
-              />
+              ) : (
+                <div className="flex items-center gap-5">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Min Salary*
+                    </label>
+                    <input
+                      type="number"
+                      {...register("minSalary",)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md "
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Max Salary*
+                    </label>
+                    <input
+                      type="number"
+                      {...register("maxSalary")}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md "
+                    />
+                  </div>
+
+                  {/* Salary Type Dropdown */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Salary Type*
+                    </label>
+                    <select
+                      {...register("salaryType", { required: true })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="">Select type</option>
+                      <option value="hourly">Hourly</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="per_diem">Per Diem</option>
+                    </select>
+                    {errors.salaryType && (
+                      <p className="text-sm text-red-500">Salary type is required</p>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="flex flex-col p-3 rounded-3xl shadow-2xl hover:scale-105">
-              <div className="text-blue-600">Max Salary</div>
-              <input
-                type="number"
-                {...register("maxSalary")}
-                placeholder="Max-Salary"
-                className=" h-full outline-0 w-full"
-              />
-            </div>
+
           </div>
-          .
+
           <button
             type="submit"
             disabled={isLoading}

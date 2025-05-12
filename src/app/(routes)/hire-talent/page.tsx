@@ -43,6 +43,7 @@ const HireTalentPage = () => {
     "Long-Term Care Facility",
     "Rehabilitation Center",
     "Urgent Care",
+    "Transportation",
     "Other",
   ];
 
@@ -69,36 +70,10 @@ const HireTalentPage = () => {
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
     try {
-      const schema = {
-        institutionalEmail: user?.email,
-        jobInfo: {
-          facilityName: data?.facilityName,
-          facilityType: data?.facilityType,
-          additionalInfo: {},
-        },
-        location: {
-          address: data?.address,
-          city: data?.city,
-          state: data?.state,
-          zipCode: data?.zipCode,
-        },
-        contacts: {
-          contactName: data?.contactName,
-          contactEmail: data?.contactEmail,
-          contactPhone: data?.contactPhone,
-        },
-
-        shiftsNeeded: data.shiftsNeeded,
-        staffNeeded: data?.staffNeeded,
-        startDate: data?.startDate,
-        numberOfPositions: data?.numberOfPositions,
-        assignmentDuration: data?.assignmentDuration,
-        additionalNotes: data?.additionalNotes,
-      };
-
+      data.institutionalEmail = user?.email;
       const response = await axios.post(
         "/pages/api/hire_talent_application",
-        schema
+        data
       );
       if (response?.data?.success) {
         swal({
@@ -117,7 +92,7 @@ const HireTalentPage = () => {
       setLoading(false);
       throw new Error(error.message);
     } finally {
-      // reset();
+      reset();
       setLoading(false);
     }
   };
