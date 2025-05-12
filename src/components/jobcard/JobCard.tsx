@@ -7,6 +7,7 @@ import { fetchData } from "@/utils/redux/slices/slice";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import swal from "sweetalert";
+import { FaExclamationCircle } from "react-icons/fa";
 import ViewJobs from "../viewjobs/ViewJobs";
 import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
 import axios from "axios";
@@ -171,15 +172,18 @@ const JobCard = ({ data }: any) => {
     searcHandler();
   }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
 
-  console.log(pageData)
-
-
   return (
     <div className="space-y-6">
       {/* Job Cards */}
       {loading ? (
         <div className=" h-[70vh] w-full flex items-center justify-center">
           <div className=" loading loading-spinner"></div>
+        </div>
+      ) : pageData.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500">
+          <FaExclamationCircle className="text-5xl text-red-400 mb-4" />
+          <h2 className="text-xl font-semibold">No Data Found</h2>
+          <p className="text-sm mt-1">We couldn't find any matching results.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -188,13 +192,13 @@ const JobCard = ({ data }: any) => {
               key={index}
               className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col hover:shadow-xl transition-all duration-300"
             >
+
               <div className="flex flex-col justify-between h-full">
                 {/* Header */}
                 <div className="mb-4">
                   <h3 className="text-2xl font-semibold mb-2">
                     {job?.jobFacilityType}
                   </h3>
-
                 </div>
 
                 {/* Salary and Post Info */}

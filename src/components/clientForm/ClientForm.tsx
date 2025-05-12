@@ -200,6 +200,8 @@ const ClientForm = ({ job }: any) => {
   });
   // Get the matching role options based on selected label
   const selectedJobFacility = facilityData.find((item) => item.label === selectedFacilityLabel);
+
+
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
@@ -223,8 +225,7 @@ const ClientForm = ({ job }: any) => {
     } finally {
       setIsLoading(false);
     }
-  }
-
+  };
 
   return (
     <div className="py-10">
