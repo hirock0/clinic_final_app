@@ -52,9 +52,7 @@ const JobCard = () => {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-
   const { user } = useSelector((state: any) => state?.slices);
-
   const [selectedJob, setSelectedJob] = useState<HealthcareJob | null>(null);
   const [view, setView] = useState<viewDetails | null>(null);
   const [loading, setLoading] = useState(false);
