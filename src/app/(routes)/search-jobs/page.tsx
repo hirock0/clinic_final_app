@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import JobCard from "@/components/jobcard/JobCard";
 import FilterSidebar from "@/components/filters-Sidebar/FilterSidebar";
@@ -111,12 +111,12 @@ const facilities = [
     ],
   },
   {
-    label: 'Transportation',
+    label: "Transportation",
     options: [
       "Non-Emergency Medical Transportation (NEMT)",
       "Emergency Medical Services (EMS)",
-      'Staff Transportation',
-      'Interfacility Transport (IFT)',
+      "Staff Transportation",
+      "Interfacility Transport (IFT)",
       "Medical Courier Services",
       "Mobile Clinics/Vehicles",
       "Patient Discharge Transportation",
@@ -128,8 +128,8 @@ const facilities = [
       "On-demand Ride Services (Uber Health, Lyft Concierge)",
       "Volunteer Driver Programs",
       "Dial-a-Ride Services",
-    ]
-  }
+    ],
+  },
 ];
 
 const JobsPage = () => {
@@ -147,7 +147,9 @@ const JobsPage = () => {
     setShowFilter(false);
   };
 
-  const selectedFacility = facilities.find(f => f.label === selectedFacilityType);
+  const selectedFacility = facilities.find(
+    (f) => f.label === selectedFacilityType
+  );
 
   const cities = [
     "New York",
@@ -169,11 +171,14 @@ const JobsPage = () => {
     "Full-Time",
     "Part-Time",
     "Temporary",
-
-
   ];
 
-  console.log(selectedFacilityType, selectedRole, selectedJobType, selectedCity)
+  const data = {
+    selectedFacilityType,
+    selectedRole,
+    selectedJobType,
+    selectedCity,
+  };
 
   return (
     <section>
@@ -196,17 +201,14 @@ const JobsPage = () => {
             selectedCity={selectedCity}
             setSelectedCity={setSelectedCity}
           />
-
         </div>
       </div>
 
       <div className="max-w-[1440px] w-11/12 mx-auto gap-6 py-12 md:py-20">
-        <JobCard />
+        <JobCard data={data} />
       </div>
     </section>
   );
 };
 
 export default JobsPage;
-
-

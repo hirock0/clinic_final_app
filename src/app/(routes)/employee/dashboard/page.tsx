@@ -5,15 +5,26 @@ import Link from "next/link";
 import { FindAllApplications } from "@/app/actions/apis/Apis";
 const DashboardPage = async () => {
   const reqAllJobs = await AllJobs();
-  const allJobs = await reqAllJobs?.allJobs;
+  const allJobs = reqAllJobs?.allJobs;
   const reqApplications = await FindAllApplications();
-  const allApplications = await reqApplications?.applications;
+  const allApplications = reqApplications?.applications;
+
   const approvedJobs = await allJobs?.filter(
     (item: any) => item?.approvedStatus === true
   );
+  const unApprovedJobs = await allJobs?.filter(
+    (item: any) => item?.approvedStatus === false
+  );
+
   const approvedApplications = await allApplications?.filter(
     (item: any) => item?.status === "approved"
   );
+  const unApprovedApplications = await allApplications?.filter(
+    (item: any) => item?.status !== "approved"
+  );
+
+
+
   return (
     <div className=" flex flex-col gap-5">
       <div className=" grid grid-cols-2 max-md:grid-cols-1 justify-items-center gap-5">
@@ -23,7 +34,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            applications={allJobs}
+            applications={unApprovedJobs}
             title="Posted"
             title2="Jobs"
           />
@@ -48,7 +59,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            applications={allApplications}
+            applications={unApprovedApplications}
             title="User Posted"
             title2="Applications"
           />

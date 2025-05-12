@@ -1,6 +1,4 @@
 "use client";
-
-import { IoArrowBackOutline } from "react-icons/io5";
 import Link from "next/link";
 import ApplicationDelBtn from "@/components/ui/btns/applicationDelBtn/ApplicationDelBtn";
 import ApplicationApprovedBtn from "@/components/ui/btns/applicationApprovedBtn/ApplicationApprovedBtn";

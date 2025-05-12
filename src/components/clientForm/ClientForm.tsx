@@ -125,12 +125,12 @@ const facilityData = [
     ],
   },
   {
-    label: 'Transportation',
+    label: "Transportation",
     options: [
       "Non-Emergency Medical Transportation (NEMT)",
       "Emergency Medical Services (EMS)",
-      'Staff Transportation',
-      'Interfacility Transport (IFT)',
+      "Staff Transportation",
+      "Interfacility Transport (IFT)",
       "Medical Courier Services",
       "Mobile Clinics/Vehicles",
       "Patient Discharge Transportation",
@@ -142,15 +142,19 @@ const facilityData = [
       "On-demand Ride Services (e.g., Uber Health, Lyft Concierge)",
       "Volunteer Driver Programs",
       "Dial-a-Ride Services",
-    ]
-  }
+    ],
+  },
 ];
 
 const shifts = ["Day", "Evening", "Night", "Weekends", "Flexible"];
 
 const ClientForm = ({ job }: any) => {
-
-  const { register, handleSubmit, control, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       facilityName: job?.facilityName,
       facilityType: job?.facilityType,
@@ -186,20 +190,15 @@ const ClientForm = ({ job }: any) => {
   // Watch the selected Job facility  type
   const selectedFacilityLabel = useWatch({
     control,
-    name: 'jobFacilityType',
-  })
-
+    name: "jobFacilityType",
+  });
   // Salary Negotiable
   const isNegotiable = useWatch({
     control,
-    name: 'salaryNegotiable',
-  })
-
+    name: "salaryNegotiable",
+  });
   // Get the matching role options based on selected label
-  const selectedJobFacility = facilityData.find(
-    (item) => item.label === selectedFacilityLabel
-  )
-
+  const selectedJobFacility = facilityData.find( (item) => item.label === selectedFacilityLabel );
   const onSubmit = async(data: any) => {
      setIsLoading(true);
     try {
@@ -222,6 +221,7 @@ const ClientForm = ({ job }: any) => {
       setIsLoading(false);
     }
   }
+
 
   return (
     <div className="py-10">
@@ -298,7 +298,7 @@ const ClientForm = ({ job }: any) => {
             {/* Role */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Job  Facility Role*
+                Job Facility Role*
               </label>
               <select
                 {...register("jobFacilityRole")}
@@ -313,7 +313,6 @@ const ClientForm = ({ job }: any) => {
                 ))}
               </select>
             </div>
-
 
             <div>
               {/* Negotiable Checkbox */}
@@ -351,7 +350,7 @@ const ClientForm = ({ job }: any) => {
                     </label>
                     <input
                       type="number"
-                      {...register("minSalary",)}
+                      {...register("minSalary")}
                       className="w-full px-4 py-2 border border-gray-300 rounded-md "
                     />
                   </div>
@@ -383,16 +382,16 @@ const ClientForm = ({ job }: any) => {
                       <option value="full_time">Full-Time</option>
                       <option value="part_time">Part-Time</option>
                       <option value="temporary">Temporary</option>
-
                     </select>
                     {errors.salaryType && (
-                      <p className="text-sm text-red-500">Salary type is required</p>
+                      <p className="text-sm text-red-500">
+                        Salary type is required
+                      </p>
                     )}
                   </div>
                 </div>
               )}
             </div>
-
           </div>
 
           <button
