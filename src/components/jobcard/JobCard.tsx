@@ -46,6 +46,9 @@ interface viewDetails {
   startDate: string;
   assignmentDuration: string;
   additionalNotes: string;
+  newAdminPost: string;
+  minSalary: number;
+  maxSalary: number;
 }
 
 const JobCard = () => {
@@ -126,45 +129,49 @@ const JobCard = () => {
                 <div className="mb-3">
                   <h3 className="text-xl font-semibold">{job?.jobInfo?.facilityName}</h3>
                   <div className="flex items-end space-x-3">
-                <div>
-                  <FaLocationDot size={20} className=" main-text-color" />
+                    <div>
+                      <FaLocationDot size={20} className=" main-text-color" />
+                    </div>
+                    <p className="text-gray-500 text-sm mt-2">{job?.address}</p>
+                  </div>
                 </div>
+                <div>
+                  <div className="flex items-center space-x-3 mb-2">
+                    <FaSackDollar size={20} className=" main-text-color" />
+                    <p className="text-gray-500 ">
+                      <span>$ {job?.minSalary}</span>
+                      <span className="mx-1">-</span>
+                      <span>$ {job?.maxSalary}</span>
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <FaCalendarCheck size={20} className=" main-text-color" />
+                    <p className="text-gray-500 ">{job?.newAdminPost}</p>
+                  </div>
+                </div>
+<<<<<<< HEAD
+=======
                 <p className="text-gray-500 text-sm mt-2">{job?.location?.address}</p>
+>>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
               </div>
-            </div>
-            <div>
-              <div className="flex items-center space-x-3 mb-2">
-                <FaSackDollar size={20} className=" main-text-color" />
-                <p className="text-gray-500 ">
-                  <span>$ {job?.minSalary}</span>
-                  <span className="mx-1">-</span>
-                  <span>$ {job?.maxSalary}</span>
-                </p>
-              </div>
-              <div className="flex items-center space-x-3">
-                <FaCalendarCheck size={20} className=" main-text-color" />
-                <p className="text-gray-500 ">{job?.newAdminPost}</p>
-              </div>
-            </div>
-          </div>
 
-          <div className="mt-3 pt-3 border-t border-gray-100">
-            <div className="flex gap-3">
-              <button
-                onClick={() => viewDetails(job)}
-                className="flex-1 btn1 cursor-pointer  px-4 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                View Details
-              </button>
-              <button
-                onClick={() => applyHandler(job)}
-                className="flex-1 cursor-pointer btn1 px-4 py-2 rounded-md text-sm font-medium transition-colors"
-              >
-                Apply Now
-              </button>
+              <div className="mt-3 pt-3 border-t border-gray-100">
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => viewDetails(job)}
+                    className="flex-1 btn1 cursor-pointer  px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    onClick={() => applyHandler(job)}
+                    className="flex-1 cursor-pointer btn1 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
           ))}
 
           {selectedJob && (
@@ -207,12 +214,11 @@ const JobCard = () => {
                   )}
                   <button
                     onClick={() => pageJobsHandler(page)}
-                    className={`px-4 py-2 rounded-md border ${
-                      currentPage === page
+                    className={`px-4 py-2 rounded-md border ${currentPage === page
 
                         ? "accent-bg-color second-text-color accent-border-color"
                         : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
-                    }`}
+                      }`}
                   >
                     {page}
                   </button>

@@ -4,6 +4,10 @@ import { FiFilter, FiRefreshCw } from "react-icons/fi";
 import ViewJobs from "../viewjobs/ViewJobs";
 
 const cities = ["New York", "Los Angeles", "Chicago"];
+<<<<<<< HEAD
+const facilities = ["Hospital", "Clinic", "Long-Term Care Facility", "Rehabilitation Center", "Urgent Care", "Other"];
+const jobTypes = ["Per Diem", "Temporary (1-12 weeks)", "Temporary (13-26 weeks)", "Permanent", "Other"];
+=======
 const facilities = [
   "Hospital",
   "Clinic",
@@ -13,6 +17,7 @@ const facilities = [
   "Other",
 ];
 const jobTypes = ["Full-Time", "Part-Time", "Contract", "Temporary"];
+>>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
 
 const roleGroups = [
   {
@@ -34,6 +39,9 @@ const roleGroups = [
     ],
   },
 ];
+
+
+
 export default function FilterSidebar({ jobs }: { jobs: any }) {
   const [filters, setFilters] = useState({
     location: "",
@@ -86,6 +94,12 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
         !job.staffNeeded.includes(filters.medicalRole).toLowerCase()
       )
         return false;
+<<<<<<< HEAD
+      if (filters.jobType && job.jobType !== filters.jobType) return false;
+      if (filters.medicalRole
+        && !job.staffNeeded.includes(filters.medicalRole)) return false;
+=======
+>>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
       return true;
     });
   };
@@ -174,6 +188,10 @@ export default function FilterSidebar({ jobs }: { jobs: any }) {
             </select>
           </div>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 20919a2d3071443bd0ab9ed081991bb578722a7b
           <div>
             <label className="block text-sm font-semibold mb-1">Role</label>
             <select
