@@ -6,19 +6,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 import { FaSpinner } from "react-icons/fa";
 import swal from "sweetalert";
+import EmployeeDeleteBtn from "../ui/btns/employeeDeleteBtn/EmployeeDeleteBtn";
 
 interface User {
   name: string;
   email: string;
   isApproved: boolean;
   role: string;
+  _id: string;
 }
 
-const ReqEmployees = ({ item }: { item: User }) => {
+const ReqEmployees = ({
+  item,
+  setDeleteId,
+}: {
+  item: User;
+  setDeleteId: any;
+}) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state?.slices);
   const [loading, setLoading] = useState(false);
-  const [delLoading, setDelLoading] = useState(false);
   const [isApproved, setIsApproved] = useState(item?.role);
 
   useEffect(() => {
@@ -49,30 +56,6 @@ const ReqEmployees = ({ item }: { item: User }) => {
       setLoading(false);
     }
   };
-  const deleteEmployeeHandler = async (id: any, role: any) => {
-    setDelLoading(true);
-    try {
-      const employee = {
-        id: id,
-        role: role,
-      };
-      const response = await axios.post(
-        "/pages/api/admin/employee/delete",
-        employee
-      );
-
-      if (response?.data?.success) {
-        swal({ title: response?.data?.message, icon: "success" });
-        setDelLoading(false);
-      } else {
-        swal({ title: response?.data?.message, icon: "warning" });
-      }
-    } catch (error: any) {
-      swal({ title: error.message || "Something went wrong", icon: "error" });
-    } finally {
-      setDelLoading(false);
-    }
-  };
 
   return (
     <tr className="hover:bg-gray-50 transition">
@@ -80,9 +63,7 @@ const ReqEmployees = ({ item }: { item: User }) => {
       <td className="p-3">{item?.email}</td>
       <td className="p-3">
         <span
-          className={`badge ${
-            isApproved === "employee" ? "badge-warning" : "badge-success"
-          }`}
+          className={` ${isApproved === "employee" ? "badge-warning" : "text-green-700 -success"}`}
         >
           {isApproved === "employee" ? "Pending" : "Approved"}
         </span>
@@ -90,21 +71,13 @@ const ReqEmployees = ({ item }: { item: User }) => {
       <td className="p-3 flex items-center gap-3">
         <button
           onClick={approveUser}
-          className="btn btn-success btn-sm flex items-center gap-2"
+          className="btn btn-success  btn-sm flex items-center gap-2"
           disabled={loading || isApproved !== "employee"}
         >
           {loading ? <FaSpinner className="animate-spin" /> : "Approve"}
         </button>
-        <button
-          onClick={() => deleteEmployeeHandler(item?.email, item?.role)}
-          className="btn btn-success btn-sm flex items-center gap-2"
-        >
-          {!delLoading ? (
-            "  Delete"
-          ) : (
-            <div className=" loading loading-spinner"></div>
-          )}
-        </button>
+
+        <EmployeeDeleteBtn setDeleteId={setDeleteId} item={item} />
       </td>
     </tr>
   );

@@ -21,7 +21,7 @@ const Banner = () => {
 
 
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/70 lg:bg-black/5 z-0"></div>
+      <div className="absolute inset-0 bg-black/75 lg:bg-black/5 z-0"></div>
       <div className="relative z-10 max-w-[1440px] mx-auto w-11/12 text-left">
         <h1
           className="max-w-4xl text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 tracking-wider uppercase text-white lg:text-[#308d89]"
@@ -29,7 +29,7 @@ const Banner = () => {
         >
           Your Reliable Partner in Healthcare Staffing and Workforce Development.
         </h1>
-        <p className="text-base lg:text-lg mb-6 md:mb-8 text-gray-200 lg:text-gray-600 max-w-[650px]">
+        <p className="text-base lg:text-lg mb-6 md:mb-8 text-gray-200 lg:text-gray-600 max-w-[680px]">
           Helping your mission thrive—by putting the right people in the right places.
           We match meaningful work with world-class talent. Simple as that.
         </p>

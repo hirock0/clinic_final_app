@@ -9,7 +9,7 @@ const GetStartedPage = () => {
           Get Started With UCL
         </h1>
         <p className=" text-base md:text-xl font-medium">
-        We help companies & individual find great talent
+        We help companies & individuals find great talent
         </p>
       </div>
 
