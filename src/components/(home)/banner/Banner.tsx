@@ -29,7 +29,7 @@ const Banner = () => {
         >
           Your Reliable Partner in Healthcare Staffing and Workforce Development.
         </h1>
-        <p className="text-base lg:text-lg mb-6 md:mb-8 text-gray-200 lg:text-gray-600 max-w-[650px]">
+        <p className="text-base lg:text-lg mb-6 md:mb-8 text-gray-200 lg:text-gray-600 max-w-[680px]">
           Helping your mission thrive—by putting the right people in the right places.
           We match meaningful work with world-class talent. Simple as that.
         </p>
