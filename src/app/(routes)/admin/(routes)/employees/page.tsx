@@ -8,25 +8,36 @@ interface User {
   email: string;
   isApproved: boolean;
   role: string;
+  _id: string;
 }
 
 export default function Employees() {
   const [employees, setEmployees] = useState<User[]>([]);
   const [search, setSearch] = useState("");
+  const [deleteId, setDeleteId] = useState<any>(null);
+
   const userHandler = async () => {
     try {
       const response = await axios.get("/pages/api/admin/employees");
       const reqUsers = response?.data?.users;
       setEmployees(reqUsers);
     } catch (error: any) {
-      throw new Error(error.message)
-
+      throw new Error(error.message);
     }
   };
 
   useEffect(() => {
     userHandler();
   }, []);
+
+  useEffect(() => {
+    if (deleteId !== null) {
+      setEmployees((prev) =>
+        prev.filter((item: any) => item?._id !== deleteId)
+      );
+      setDeleteId(null);
+    }
+  }, [deleteId]);
 
   const filteredEmployees = employees?.filter((user) =>
     (user.name + user.email).toLowerCase().includes(search.toLowerCase())
@@ -76,7 +87,11 @@ export default function Employees() {
               </thead>
               <tbody>
                 {filteredEmployees?.map((item, index) => (
-                  <ReqEmployees key={index} item={item} />
+                  <ReqEmployees
+                    setDeleteId={setDeleteId}
+                    key={index}
+                    item={item}
+                  />
                 ))}
               </tbody>
             </table>

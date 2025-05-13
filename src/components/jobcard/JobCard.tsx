@@ -49,6 +49,7 @@ interface viewDetails {
 const JobCard = ({ data }: any) => {
   const { selectedCity, selectedFacilityType, selectedJobType, selectedRole } = data;
 
+
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -118,7 +119,6 @@ const JobCard = ({ data }: any) => {
       const approvedData = await allData?.filter(
         (item: any) => item?.approvedStatus === true
       );
-
       const filterData = approvedData?.filter((item: any) => {
         const matchCity =
           selectedCity &&
@@ -126,7 +126,7 @@ const JobCard = ({ data }: any) => {
 
         const matchFacilityType =
           selectedFacilityType &&
-          item?.facilityType
+          item?.jobFacilityType
             ?.toLowerCase()
             .includes(selectedFacilityType.toLowerCase());
 
