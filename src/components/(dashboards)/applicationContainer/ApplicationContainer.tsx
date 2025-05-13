@@ -104,7 +104,7 @@ const ApplicationContainer = ({
                     href={`/application/view/${application?.jobId}`}
                     className="main-text-color underline"
                   >
-                    View Full Application
+                    View Full Job
                   </Link>
                 </div>
 
