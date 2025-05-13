@@ -48,7 +48,6 @@ const DeleteJobBtn = ({
       >
         <div className=" flex gap-2 items-center">
           <IoTrashOutline size={20} />
-          {loading ? "Deleting..." : "Delete"}
         </div>
       </button>
       <div
@@ -95,6 +94,7 @@ const DeleteJobBtn = ({
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
