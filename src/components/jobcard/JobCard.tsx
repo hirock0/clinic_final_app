@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaSackDollar, FaLocationDot } from "react-icons/fa6";
+import { FaSackDollar, FaLocationDot, FaHandshakeSimple } from "react-icons/fa6";
 import { FaCalendarCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
@@ -13,7 +13,6 @@ import HealthcareApplicationForm from "../applyform/HealthcareApplicationForm";
 import axios from "axios";
 
 interface HealthcareJob {
-  facilityName: string;
   facilityType: string;
   address: string;
   state: string;
@@ -29,34 +28,26 @@ interface HealthcareJob {
   maxSalary?: number;
   newAdminPost?: string;
   jobFacilityType: string;
+  negotiationNote: string;
+  salaryNegotiable: boolean;
+
 }
 
 interface viewDetails {
-  facilityName: string;
-  facilityType: string;
+  jobFacilityType: string;
+  jobFacilityRole: string;
   address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  contactName: string;
-  contactEmail: string;
-  contactPhone: string;
-  staffNeeded: string[];
-  otherStaff: string;
-  numberOfPositions: string;
-  shiftsNeeded: string[];
-  startDate: string;
   assignmentDuration: string;
   additionalNotes: string;
   newAdminPost: string;
   minSalary: number;
   maxSalary: number;
-  jobFacilityType: string; 
+  negotiationNote: string;
+  salaryNegotiable: boolean;
 }
 
 const JobCard = ({ data }: any) => {
-  const { selectedCity, selectedFacilityType, selectedJobType, selectedRole } =
-    data;
+  const { selectedCity, selectedFacilityType, selectedJobType, selectedRole } = data;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -208,12 +199,23 @@ const JobCard = ({ data }: any) => {
                     <span>{job?.address}</span>
                   </div>
 
-                  <div className="flex items-center text-gray-600 text-sm space-x-2">
-                    <FaSackDollar size={18} className="main-text-color" />
-                    <span>
-                      ${job?.minSalary} - ${job?.maxSalary}
-                    </span>
-                  </div>
+
+                  {job?.salaryNegotiable ? (
+                    <div className="flex items-center text-gray-600 text-sm space-x-2">
+                      <FaHandshakeSimple size={18} className="main-text-color" />
+                      <span>
+                        {job?.negotiationNote}
+                      </span>
+                    </div>
+                  ) :
+                    <div className="flex items-center text-gray-600 text-sm space-x-2">
+                      <FaSackDollar size={18} className="main-text-color" />
+                      <span>
+                        ${job?.minSalary} - ${job?.maxSalary}
+                      </span>
+                    </div>
+                  }
+
                   <div className="flex items-center text-gray-600 text-sm space-x-2">
                     <FaCalendarCheck size={18} className="main-text-color" />
                     <span>{job?.newAdminPost}</span>
@@ -224,13 +226,13 @@ const JobCard = ({ data }: any) => {
                 <div className="mt-5 pt-4 border-t border-gray-200 flex gap-3">
                   <button
                     onClick={() => viewDetails(job)}
-                    className="w-full btn1 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
+                    className="w-full btn1 transition-colors px-4 py-2 rounded-lg font-semibold text-sm cursor-pointer"
                   >
                     View Details
                   </button>
                   <button
                     onClick={() => applyHandler(job)}
-                    className="w-full btn2 transition-colors px-4 py-2 rounded-lg font-semibold text-sm"
+                    className="w-full btn2 transition-colors px-4 py-2 rounded-lg font-semibold text-sm cursor-pointer"
                   >
                     Apply Now
                   </button>
@@ -247,60 +249,63 @@ const JobCard = ({ data }: any) => {
           )}
           {view && <ViewJobs job={view} onClose={() => setView(null)} />}
         </div>
-      )}
+      )
+      }
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-4 flex-wrap">
-          {currentPage > 1 && (
-            <button
-              onClick={() => pageJobsHandler(currentPage - 1)}
-              className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
-            >
-              Prev
-            </button>
-          )}
+      {
+        totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-4 flex-wrap">
+            {currentPage > 1 && (
+              <button
+                onClick={() => pageJobsHandler(currentPage - 1)}
+                className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+              >
+                Prev
+              </button>
+            )}
 
-          {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .filter((page) => {
-              return (
-                page === 1 ||
-                page === totalPages ||
-                (page >= currentPage - 1 && page <= currentPage + 1)
-              );
-            })
-            .map((page, i, arr) => {
-              const prevPage = arr[i - 1];
-              const showEllipsis = prevPage && page - prevPage > 1;
-              return (
-                <React.Fragment key={page}>
-                  {showEllipsis && (
-                    <span className="px-2 text-gray-500">...</span>
-                  )}
-                  <button
-                    onClick={() => pageJobsHandler(page)}
-                    className={`px-4 py-2 rounded-md border ${currentPage === page
-                      ? "accent-bg-color second-text-color accent-border-color"
-                      : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
-                      }`}
-                  >
-                    {page}
-                  </button>
-                </React.Fragment>
-              );
-            })}
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => {
+                return (
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 1 && page <= currentPage + 1)
+                );
+              })
+              .map((page, i, arr) => {
+                const prevPage = arr[i - 1];
+                const showEllipsis = prevPage && page - prevPage > 1;
+                return (
+                  <React.Fragment key={page}>
+                    {showEllipsis && (
+                      <span className="px-2 text-gray-500">...</span>
+                    )}
+                    <button
+                      onClick={() => pageJobsHandler(page)}
+                      className={`px-4 py-2 rounded-md border ${currentPage === page
+                        ? "accent-bg-color second-text-color accent-border-color"
+                        : "bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+                        }`}
+                    >
+                      {page}
+                    </button>
+                  </React.Fragment>
+                );
+              })}
 
-          {currentPage < totalPages && (
-            <button
-              onClick={() => pageJobsHandler(currentPage + 1)}
-              className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
-            >
-              Next
-            </button>
-          )}
-        </div>
-      )}
-    </div>
+            {currentPage < totalPages && (
+              <button
+                onClick={() => pageJobsHandler(currentPage + 1)}
+                className="px-3 py-1 rounded-md border bg-white second-text-color accent-border-color hover:bg-[#fff6d7]"
+              >
+                Next
+              </button>
+            )}
+          </div>
+        )
+      }
+    </div >
   );
 };
 

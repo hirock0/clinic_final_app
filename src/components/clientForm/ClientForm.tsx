@@ -6,7 +6,6 @@ import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import BackBtn from "../ui/btns/backBtn/BackBtn";
-import { span } from "framer-motion/client";
 
 const staffNeeded = [
   "Registered Nurse (RN)",
@@ -137,10 +136,10 @@ const facilityData = [
       "Patient Discharge Transportation",
       "Home Health Visit Transportation",
       "Medical Equipment Delivery Vehicles",
-      "Specialty Transport (e.g., neonatal or bariatric)",
+      "Specialty Transport (neonatal or bariatric)",
       "Air Ambulance",
       "Shuttle Services (internal or external)",
-      "On-demand Ride Services (e.g., Uber Health, Lyft Concierge)",
+      "On-demand Ride Services (Uber Health, Lyft Concierge)",
       "Volunteer Driver Programs",
       "Dial-a-Ride Services",
     ],
@@ -280,7 +279,7 @@ const ClientForm = ({ job }: any) => {
             placeholder="Write additional information here..."
           ></textarea>
           <h2 className="text-xl font-semibold">Additional Information</h2>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Facility Type */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -288,7 +287,7 @@ const ClientForm = ({ job }: any) => {
               </label>
               <select
                 {...register("jobFacilityType")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md "
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
               >
                 <option value="">Select job facility type</option>
                 {facilityData.map((type, index) => (
@@ -347,7 +346,7 @@ const ClientForm = ({ job }: any) => {
                   />
                 </div>
               ) : (
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 flex-wrap">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Min Salary*
