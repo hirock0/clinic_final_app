@@ -64,6 +64,24 @@
     display: none;
   }
 
+
+  .banner-btn1{
+    color: var(--text);
+    background-color: var(--accent);
+    border: 2px solid var(--accent);
+    &:hover{
+      background-color: #fff1c3;
+    }
+  }
+  .banner-btn2{
+    color: var(--text);
+     background-color: #fff1c3;
+    border: 2px solid var(--accent);
+    &:hover{
+     background-color: var(--accent);
+    }
+  }
+
   .btn1 {
     border: 2px solid #ebf8f8;
     background-color: #ebf8f8;
