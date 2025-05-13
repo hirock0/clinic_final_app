@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { FcGoogle } from "react-icons/fc";
 type LoginFormInputs = {
   email: string;
   password: string;
@@ -100,7 +101,10 @@ export default function LoginPage({ flag }: { flag: string }) {
 
         {/* Heading */}
         <h2 className="text-2xl font-bold text-left mb-6 uppercase">
-          Login Job Seeker
+          {flag === "user" && `Login For User`}
+          {flag === "institutional" && `Login For Organizer`}
+          {flag === "admin" && `Login For Admin`}
+          {flag === "employee" && `Login For Employee`}
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -173,26 +177,15 @@ export default function LoginPage({ flag }: { flag: string }) {
         {/* Divider */}
         <div className="text-center my-4 text-gray-400 text-sm">OR</div>
 
-
         {/* Google Login */}
-        {flag === "user" && (
+        {(flag === "user" || flag === "institutional") && (
           <button
             onClick={googleLoginHandler}
             className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 hover:bg-gray-100 transition"
           >
             {!gooleLoading ? (
               <>
-                <svg
-                  className="w-5 h-5"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path fill="#4285F4" d="M24 9.5c3.54 0 6.49 1.45 8.38 3.78l6.22-6.22C34.79 3.41 29.73 1 24 1 14.62 1 6.97 6.95 3.8 15.24l7.5 5.83C12.9 15.08 17.97 9.5 24 9.5z" />
-                  <path fill="#34A853" d="M46.15 24.49c0-1.53-.14-3.02-.39-4.45H24v8.43h12.45c-.54 2.83-2.14 5.23-4.51 6.83l7.18 5.56C43.83 36.56 46.15 30.98 46.15 24.49z" />
-                  <path fill="#FBBC05" d="M11.3 28.92c-1.15-3.43-1.15-7.11 0-10.54l-7.5-5.84C.84 18.37-.53 21.56.03 24.89c.56 3.33 2.11 6.42 4.44 8.94l7.5-5.83z" />
-                  <path fill="#EA4335" d="M24 46c5.73 0 10.79-1.89 14.5-5.13l-7.18-5.56c-2.01 1.35-4.55 2.13-7.32 2.13-6.03 0-11.1-5.58-12.7-12.91l-7.5 5.83C6.97 41.05 14.62 46 24 46z" />
-                </svg>
+                <FcGoogle size={25} />
                 <span className="text-sm font-medium">Sign in with Google</span>
               </>
             ) : (
@@ -213,6 +206,5 @@ export default function LoginPage({ flag }: { flag: string }) {
         </p>
       </div>
     </section>
-
   );
 }
