@@ -30,7 +30,7 @@ interface HealthcareJob {
   jobFacilityType: string;
   negotiationNote: string;
   salaryNegotiable: boolean;
-
+  salaryType: string;
 }
 
 interface viewDetails {
@@ -44,6 +44,7 @@ interface viewDetails {
   maxSalary: number;
   negotiationNote: string;
   salaryNegotiable: boolean;
+  salaryType: string;
 }
 
 const JobCard = ({ data }: any) => {
@@ -163,6 +164,9 @@ const JobCard = ({ data }: any) => {
     searcHandler();
   }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
 
+
+  console.log(pageData)
+
   return (
     <div className="space-y-6">
       {/* Job Cards */}
@@ -211,7 +215,7 @@ const JobCard = ({ data }: any) => {
                     <div className="flex items-center text-gray-600 text-sm space-x-2">
                       <FaSackDollar size={18} className="main-text-color" />
                       <span>
-                        ${job?.minSalary} - ${job?.maxSalary}
+                        ${job?.minSalary} - ${job?.maxSalary} /<span className="text-xs">{job?.salaryType}</span>
                       </span>
                     </div>
                   }
