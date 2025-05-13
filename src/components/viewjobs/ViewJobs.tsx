@@ -1,17 +1,7 @@
 import React from "react";
 import { FaCalendarCheck } from "react-icons/fa";
-import { FaLocationDot, FaSackDollar } from "react-icons/fa6";
-import {
-  FiX,
-  FiMapPin,
-  FiClock,
-  FiUsers,
-  FiCalendar,
-  FiMail,
-  FiPhone,
-  FiBriefcase,
-  FiUser,
-} from "react-icons/fi";
+import { FaHandshakeSimple, FaLocationDot, FaSackDollar } from "react-icons/fa6";
+import { FiX } from "react-icons/fi";
 interface ViewJobsProps {
   job: {
     jobFacilityType: string;
@@ -21,11 +11,17 @@ interface ViewJobsProps {
     newAdminPost: string;
     minSalary: number;
     maxSalary: number;
+    negotiationNote: string;
+    salaryNegotiable: boolean;
+    jobFacilityRole: string;
+
   };
   onClose: () => void;
 }
 
 const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
+
+  console.log(job)
 
   const {
     jobFacilityType,
@@ -33,7 +29,10 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
     additionalNotes,
     minSalary,
     maxSalary,
-    newAdminPost
+    newAdminPost,
+    negotiationNote,
+    salaryNegotiable,
+    jobFacilityRole
   } = job;
 
   return (
@@ -43,9 +42,11 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
           {/* Header */}
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 {jobFacilityType}
               </h2>
+
+              <p className="text-gray-600 font-medium ">{jobFacilityRole}</p>
             </div>
             <button
               onClick={onClose}
@@ -59,7 +60,7 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
           <div className="space-y-6">
             {/* Facility Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800 border-gray-200 border-b pb-2">
+              <h3 className="text-lg font-semibold text-gray-600 border-gray-200 border-b pb-2">
                 Facility Information
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -67,17 +68,24 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
                   <div>
                     <FaLocationDot size={20} className="main-text-color" />
                   </div>
-                  <p className="text-gray-500 text-sm mt-2">{address}</p>
+                  <p className="text-gray-600 text-sm mt-2">{address}</p>
                 </div>
                 {/* ammount */}
-                <div className="flex items-center space-x-3">
-                  <FaSackDollar size={20} className=" main-text-color" />
-                  <p className="text-gray-500 ">
-                    <span>$ {minSalary}</span>
-                    <span className="mx-1">-</span>
-                    <span>$ {maxSalary}</span>
-                  </p>
-                </div>
+                {salaryNegotiable ? (
+                  <div className="flex items-center text-gray-600 text-sm space-x-3">
+                    <FaHandshakeSimple size={20} className="main-text-color" />
+                    <span>
+                      {negotiationNote}
+                    </span>
+                  </div>
+                ) :
+                  <div className="flex items-center text-gray-600 text-sm space-x-3">
+                    <FaSackDollar size={20} className="main-text-color" />
+                    <span>
+                      ${minSalary} - ${maxSalary}
+                    </span>
+                  </div>
+                }
                 {/* time */}
                 <div className="flex items-center space-x-3">
                   <FaCalendarCheck size={20} className=" main-text-color" />
