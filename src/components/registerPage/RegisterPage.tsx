@@ -27,7 +27,7 @@ type FormData = {
 
 export default function RegisterPage({ flag }: { flag: string }) {
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") ||  `/${flag}/dashboard`;
+  const redirectTo = searchParams.get("redirectTo") || `/${flag}/dashboard`;
   const router = useRouter();
   const {
     register,
@@ -96,45 +96,55 @@ export default function RegisterPage({ flag }: { flag: string }) {
   };
 
   return (
-    <div className=" bg-zinc-200 py-10">
+    <section className="min-h-screen flex items-center justify-center bg-zinc-200 py-12">
       <div className="max-w-[1440px] rounded-xl overflow-hidden shadow-xl w-11/12 mx-auto">
-        <div className="  flex flex-col md:flex-row ">
-          <div className="md:w-1/2 max-md:hidden bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex flex-col justify-center items-center p-10">
+
+        <div className="  flex flex-col md:flex-row">
+          <div className="md:w-1/2 max-md:hidden second-bg-color text-white flex flex-col justify-center items-center p-10">
             <h2 className="text-4xl font-bold mb-4">Welcome to Our Platform</h2>
             <p className="text-lg mb-8 text-center max-w-sm">
-              Join us today and experience premium access tailored just for{" "}
-              <span className="font-semibold">{flag}</span>.
+              Join us today and experience premium access tailored just for
+
+              <span className="font-semibold ml-1">
+                {flag === "user" && `Job Seeker`}
+                {flag === "institutional" && `Organizer`}
+                {flag === "admin" && `Admin`}
+                {flag === "employee" && `Employee`}
+              </span>.
             </p>
             <iframe
               className="w-96 h-96"
-              src="https://lottie.host/embed/17a751d3-cc6d-4915-9cfc-f9845b2ec82c/Ovbn7my9PY.lottie"
+              src="https://lottie.host/embed/10ba0d32-02f9-488d-8036-1db7cd3c573a/mLCoeDDIna.lottie"
             ></iframe>
           </div>
 
           <div className="md:w-1/2 w-full bg-white p-8 md:p-16 shadow-md">
-            <h2 className="text-2xl uppercase font-bold mb-6 text-center text-gray-700">
-              Register ({flag})
-            </h2>
-
             {/* Back Button */}
             <button
               type="button"
               onClick={() => router.back()}
-              className="mb-4 text-indigo-600 hover:underline flex items-center gap-2"
+              className="mb-8 main-text-color hover:underline flex items-center gap-2"
             >
               ← Back
             </button>
 
+            <h2 className="text-2xl uppercase font-bold mb-4 text-center text-gray-700">
+              {flag === "user" && `Register For Job Seeker`}
+              {flag === "institutional" && `Register For Organizer`}
+              {flag === "admin" && `Register For Admin`}
+              {flag === "employee" && `Register For Employee`}
+            </h2>
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block font-medium text-gray-700 flex items-center gap-2">
+                <label className="font-medium text-gray-700 flex items-center gap-2">
                   <FaUser /> Name
                 </label>
                 <input
                   {...register("name", { required: "Name is required" })}
                   type="text"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#308d89]"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -143,7 +153,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
 
               {/* Email */}
               <div>
-                <label className="block font-medium text-gray-700 flex items-center gap-2">
+                <label className=" font-medium text-gray-700 flex items-center gap-2">
                   <FaEnvelope /> Email
                 </label>
                 <input
@@ -155,7 +165,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
                     },
                   })}
                   type="email"
-                  className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#308d89]"
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -164,7 +174,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
 
               {/* Password */}
               <div className="relative">
-                <label className="block font-medium text-gray-700 flex items-center gap-2">
+                <label className="font-medium text-gray-700 flex items-center gap-2">
                   <FaLock /> Password
                 </label>
                 <input
@@ -176,10 +186,10 @@ export default function RegisterPage({ flag }: { flag: string }) {
                     },
                   })}
                   type={showPassword ? "text" : "password"}
-                  className="w-full p-3 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-[#308d89]"
                 />
                 <span
-                  className="absolute right-3 top-10 text-gray-600 cursor-pointer"
+                  className="absolute right-3 top-[44px] text-gray-600 cursor-pointer"
                   onClick={() => setShowPassword((prev) => !prev)}
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -193,7 +203,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
 
               {/* Retype Password */}
               <div className="relative">
-                <label className="block font-medium text-gray-700 flex items-center gap-2">
+                <label className=" font-medium text-gray-700 flex items-center gap-2">
                   <FaLock /> Retype Password
                 </label>
                 <input
@@ -203,10 +213,10 @@ export default function RegisterPage({ flag }: { flag: string }) {
                       value === watch("password") || "Passwords don't match",
                   })}
                   type={showRetypePassword ? "text" : "password"}
-                  className="w-full p-3 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-[#308d89]"
                 />
                 <span
-                  className="absolute right-3 top-10 text-gray-600 cursor-pointer"
+                  className="absolute right-3 top-[44px] text-gray-600 cursor-pointer"
                   onClick={() => setShowRetypePassword((prev) => !prev)}
                 >
                   {showRetypePassword ? <FaEyeSlash /> : <FaEye />}
@@ -220,14 +230,14 @@ export default function RegisterPage({ flag }: { flag: string }) {
 
               {/* Image Upload */}
               <div>
-                <label className="block font-medium text-gray-700 flex items-center gap-2">
+                <label className=" font-medium text-gray-700 flex items-center gap-2">
                   <FaImage /> Profile Image
                 </label>
                 <input
                   {...register("image", { required: "Image is required" })}
                   type="file"
                   accept="image/*"
-                  className="w-full mt-1"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded pr-10 focus:outline-none focus:ring-2 focus:ring-[#308d89]"
                   onChange={handleImageChange}
                 />
                 {imagePreview && (
@@ -267,7 +277,7 @@ export default function RegisterPage({ flag }: { flag: string }) {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 transition text-white py-3 rounded font-semibold"
+                className="w-full btn2 transition text-white py-3 rounded font-semibold"
               >
                 {isLoading ? (
                   <div className="loading loading-spinner"></div>
@@ -277,8 +287,9 @@ export default function RegisterPage({ flag }: { flag: string }) {
               </button>
             </form>
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 }
