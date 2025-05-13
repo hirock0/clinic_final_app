@@ -14,6 +14,7 @@ interface ViewJobsProps {
     negotiationNote: string;
     salaryNegotiable: boolean;
     jobFacilityRole: string;
+    salaryType: string;
 
   };
   onClose: () => void;
@@ -32,7 +33,8 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
     newAdminPost,
     negotiationNote,
     salaryNegotiable,
-    jobFacilityRole
+    jobFacilityRole,
+    salaryType
   } = job;
 
   return (
@@ -82,7 +84,7 @@ const ViewJobs: React.FC<ViewJobsProps> = ({ job, onClose }) => {
                   <div className="flex items-center text-gray-600 text-sm space-x-3">
                     <FaSackDollar size={20} className="main-text-color" />
                     <span>
-                      ${minSalary} - ${maxSalary}
+                      ${minSalary} - ${maxSalary} /<span className="text-xs">{job?.salaryType}</span>
                     </span>
                   </div>
                 }
