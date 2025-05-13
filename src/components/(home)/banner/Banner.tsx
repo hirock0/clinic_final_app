@@ -21,7 +21,7 @@ const Banner = () => {
 
 
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/70 lg:bg-black/5 z-0"></div>
+      <div className="absolute inset-0 bg-black/75 lg:bg-black/5 z-0"></div>
       <div className="relative z-10 max-w-[1440px] mx-auto w-11/12 text-left">
         <h1
           className="max-w-4xl text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 tracking-wider uppercase text-white lg:text-[#308d89]"

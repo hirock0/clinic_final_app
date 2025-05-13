@@ -103,7 +103,7 @@ export default function LoginPage({ flag }: { flag: string }) {
         {/* Home Button */}
         <Link
           href="/"
-          className="main-text-color hover:underline text-sm font-medium mb-6 inline-block"
+          className="main-text-color hover:underline mb-8 inline-block"
         >
           ← Home
         </Link>
