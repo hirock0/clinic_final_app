@@ -48,12 +48,10 @@ const Nav = () => {
       title: "FOR ORGANIZATIONS",
       href: "/",
       subLinks: [
+        { title: "Post jobs", href: "/hire-talent" },
         { title: "How we can help", href: "/how-we-help" },
         { title: "Book an appointment", href: "/contact" },
-        {
-          title: "Clinical support staffing",
-          href: "/clinical-support-staffing",
-        },
+        { title: "Clinical support staffing", href: "/clinical-support-staffing",},
       ],
     },
     {
@@ -220,7 +218,7 @@ const Nav = () => {
                           <span className="font-medium">For Organization</span>
                         </li>
                       </Link>
-                      <Link href="/admin/login" className="block">
+                      {/* <Link href="/admin/login" className="block">
                         <li className="flex items-center gap-3 px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg transition-all duration-200 group">
                           <div className="accent-text-color transition-transform group-hover:scale-110">
                             <AiOutlineLogin size={20} />
@@ -235,7 +233,7 @@ const Nav = () => {
                           </div>
                           <span className="font-medium">Employee</span>
                         </li>
-                      </Link>
+                      </Link> */}
                     </ul>
                   </div>
                 )}
