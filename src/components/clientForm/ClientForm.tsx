@@ -149,6 +149,9 @@ const facilityData = [
 const shifts = ["Day", "Evening", "Night", "Weekends", "Flexible"];
 
 const ClientForm = ({ job }: any) => {
+
+  console.log(job)
+
   const {
     register,
     handleSubmit,
@@ -173,6 +176,7 @@ const ClientForm = ({ job }: any) => {
       approvedStatus: job?.approvedStatus,
       shiftsNeeded: job?.shiftsNeeded || [],
       staffNeeded: job?.staffNeeded || [],
+      otherStaff: job.otherStaff,
       // additionsal_start
       jobFacilityType: job?.jobFacilityType,
       jobFacilityRole: job?.jobFacilityRole,
@@ -204,7 +208,6 @@ const ClientForm = ({ job }: any) => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-
       if (data?.maxSalary < data?.minSalary) {
         swal({ title: "Max is less than min salary", icon: "warning" });
       } else {
@@ -248,6 +251,7 @@ const ClientForm = ({ job }: any) => {
               "numberOfPositions",
               "startDate",
               "assignmentDuration",
+
             ].map((field) => (
               <Input
                 key={field}
@@ -258,6 +262,7 @@ const ClientForm = ({ job }: any) => {
               />
             ))}
           </div>
+
           <CheckboxGroup
             label="Staff Needed"
             options={staffNeeded}
@@ -265,6 +270,24 @@ const ClientForm = ({ job }: any) => {
             field="staffNeeded"
             defaultValues={job?.staffNeeded}
           />
+          {/* otherStaff */}
+          {staffNeeded.includes("Other") && (
+            // otherStaff Field
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Other Staff Details
+              </label>
+              <input
+                type="text"
+                value={job?.otherStaff}
+                {...register("otherStaff")}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md max-w-[350px]"
+                placeholder="Open to negotiation"
+              />
+            </div>
+          )}
+
+
           <CheckboxGroup
             label="Shifts Needed"
             options={shifts}
