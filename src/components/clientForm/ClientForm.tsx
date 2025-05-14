@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, useWatch } from "react-hook-form";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import Input from "../ui/inputs/Input";
 import { useState } from "react";
 import swal from "sweetalert";
@@ -149,9 +149,6 @@ const facilityData = [
 const shifts = ["Day", "Evening", "Night", "Weekends", "Flexible"];
 
 const ClientForm = ({ job }: any) => {
-
-  console.log(job)
-
   const {
     register,
     handleSubmit,
@@ -185,6 +182,11 @@ const ClientForm = ({ job }: any) => {
       negotiationNote: job?.negotiationNote,
       salaryNegotiable: job.salaryNegotiable,
       salaryType: job?.salaryType,
+      jobSummary: job?.jobSummary,
+      uclOverview: job?.uclOverview,
+      keyResponsibilities: job?.keyResponsibilities || [],
+      qualifications: job?.qualifications || [],
+      benefits: job?.benefits || [],
     },
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -204,6 +206,30 @@ const ClientForm = ({ job }: any) => {
   // Get the matching role options based on selected label
   const selectedJobFacility = facilityData.find((item) => item.label === selectedFacilityLabel);
 
+  const {
+    fields: keyResponsibilitiesFields,
+    append: keyResponsibilitiesAppend,
+    remove: keyResponsibilitiesRemove,
+  } = useFieldArray({
+    control,
+    name: "keyResponsibilities",
+  });
+  const {
+    fields: qualificationsFields,
+    append: qualificationsAppend,
+    remove: qualificationsRemove,
+  } = useFieldArray({
+    control,
+    name: "qualifications",
+  });
+  const {
+    fields: benefitsFields,
+    append: benefitsAppend,
+    remove: benefitsRemove,
+  } = useFieldArray({
+    control,
+    name: "benefits",
+  });
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
@@ -417,6 +443,128 @@ const ClientForm = ({ job }: any) => {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+          <div className="space-y-6">
+            {/* Job Summary */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Job Summary*
+              </label>
+              <textarea
+                {...register("jobSummary")}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md resize-none"
+                placeholder="Write a brief job summary..."
+                rows={4}
+              />
+            </div>
+
+            <div className="flex items-center justify-between gap-6 flex-wrap">
+              {/* Key Responsibilities */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Key Responsibilities*
+                </label>
+                {keyResponsibilitiesFields.map((field, index) => (
+                  <div key={field.id} className="flex items-center mb-2">
+                    <input
+                      {...register(`keyResponsibilities.${index}.value` as const)}
+                      className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
+                      placeholder={`Responsibility ${index + 1}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => keyResponsibilitiesRemove(index)}
+                      className="ml-2 px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white transition"
+                      aria-label="Remove responsibility"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => keyResponsibilitiesAppend({ value: "" })}
+                  className="px-4 py-2 btn2 rounded transition"
+                >
+                  Add Responsibility
+                </button>
+              </div>
+
+              {/* Qualifications */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Qualifications*
+                </label>
+                {qualificationsFields.map((field, index) => (
+                  <div key={field.id} className="flex items-center mb-2">
+                    <input
+                      {...register(`qualifications.${index}.value` as const)}
+                      className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
+                      placeholder={`Qualification ${index + 1}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => qualificationsRemove(index)}
+                      className="ml-2 px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white transition"
+                      aria-label="Remove qualification"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => qualificationsAppend({ value: "" })}
+                  className="px-4 py-2 btn2 rounded transition"
+                >
+                  Add Qualification
+                </button>
+              </div>
+
+              {/* Benefits */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Benefits*
+                </label>
+                {benefitsFields.map((field, index) => (
+                  <div key={field.id} className="flex items-center mb-2">
+                    <input
+                      {...register(`benefits.${index}.value` as const)}
+                      className="flex-grow px-4 py-2 border border-gray-300 rounded-md"
+                      placeholder={`Benefit ${index + 1}`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => benefitsRemove(index)}
+                      className="ml-2 px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white transition"
+                      aria-label="Remove benefit"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => benefitsAppend({ value: "" })}
+                  className="px-4 py-2 btn2 rounded transition"
+                >
+                  Add Benefit
+                </button>
+              </div>
+            </div>
+
+            {/* UCL Overview */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                UCL Overview*
+              </label>
+              <textarea
+                {...register("uclOverview", { required: "UCL Overview is required" })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md resize-none"
+                placeholder="Write an overview of UCL..."
+                rows={4}
+              />
             </div>
           </div>
 
