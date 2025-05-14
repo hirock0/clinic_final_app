@@ -70,7 +70,7 @@ const DashboardNav = ({ flag, navLinks }: { flag: string; navLinks: any }) => {
                 className="-tracking-[1px] text-2xl max-sm:text-base text-center max-sm:leading-4 font-black main-text-color"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
-                UNITED <span className="second-text-color">CARE</span>
+                UNITED <span className="second-text-color">CARE </span>
                 <br className="sm:hidden" />
                 LINKS
               </h1>
