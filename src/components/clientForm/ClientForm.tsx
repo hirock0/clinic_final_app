@@ -282,7 +282,7 @@ const ClientForm = ({ job }: any) => {
                 value={job?.otherStaff}
                 {...register("otherStaff")}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md max-w-[350px]"
-                placeholder="Open to negotiation"
+                placeholder="Please specify the other staff type"
               />
             </div>
           )}
