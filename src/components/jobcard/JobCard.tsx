@@ -113,6 +113,9 @@ const JobCard = ({ data }: any) => {
     dispatch(fetchData());
   }, [dispatch]);
 
+
+  console.log( selectedCity, selectedFacilityType, selectedJobType, selectedRole)
+
   const searcHandler = async () => {
     try {
       const response = await axios.get(`/pages/api/allJobs`);
@@ -123,25 +126,25 @@ const JobCard = ({ data }: any) => {
       const filterData = approvedData?.filter((item: any) => {
         const matchCity =
           selectedCity &&
-          item?.city?.toLowerCase().includes(selectedCity.toLowerCase());
+          item?.address?.toLowerCase().includes(selectedCity.toLowerCase());
 
         const matchFacilityType =
           selectedFacilityType &&
           item?.jobFacilityType
             ?.toLowerCase()
-            .includes(selectedFacilityType);
+            .includes(selectedFacilityType.toLowerCase());
 
         const matchJobType =
           selectedJobType &&
           item?.salaryType
             ?.toLowerCase()
-            .includes(selectedJobType);
+            .includes(selectedJobType.toLowerCase());
 
         const matchRole =
           selectedRole &&
           item?.jobFacilityRole
             ?.toLowerCase()
-            .includes(selectedRole);
+            .includes(selectedRole.toLowerCase());
 
         return matchCity || matchFacilityType || matchJobType || matchRole;
       });
