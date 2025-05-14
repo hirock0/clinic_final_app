@@ -19,9 +19,7 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const pathname = url.pathname.replace(/\/$/, "");
   const search = url.search;
-
   const token = request.cookies.get("token")?.value || "";
-
   const isEmployeePath = pathname.startsWith("/employee");
   const isUserPath = pathname.startsWith("/user");
   const isInstitutionalPath = pathname.startsWith("/institutional");
@@ -105,27 +103,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
-  if (role === "employee" && isPublic(employeePublicPaths)) {
-    return NextResponse.redirect(new URL("/employee/awaiting", request.url));
-  }
-
-  if (
-    role === "approvedEmployee" &&
-    isPublic(employeePublicPaths) &&
-    pathname !== "/employee/dashboard"
-  ) {
-    return NextResponse.redirect(new URL("/employee/dashboard", request.url));
-  }
-
-  if (
-    role === "employee" &&
-    isEmployeePath &&
-    !isPublic(employeePublicPaths) &&
-    pathname !== "/employee/awaiting"
-  ) {
-    return NextResponse.redirect(new URL("/employee/awaiting", request.url));
-  }
-
   if ((role === "institutional" || role === "admin") && isHireTalentPath) {
     return NextResponse.next();
   }
@@ -150,14 +127,6 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (role !== "approvedEmployee" && pathname.startsWith("/employee")) {
-    return NextResponse.redirect(
-      new URL(
-        `/${role === "approvedEmployee" ? "employee" : role}/dashboard`,
-        request.url
-      )
-    );
-  }
   if (role !== "institutional" && pathname.startsWith("/institutional")) {
     return NextResponse.redirect(
       new URL(
@@ -165,6 +134,14 @@ export async function middleware(request: NextRequest) {
         request.url
       )
     );
+  }
+
+  if (isEmployeePath && role === "employee") {
+    return NextResponse.redirect(new URL(`/awaiting`, request.url));
+  }
+
+  if (pathname.startsWith("/awaiting") && role === "approvedEmployee") {
+    return NextResponse.redirect(new URL(`/employee/dashboard`, request.url));
   }
 
   return NextResponse.next();
@@ -178,5 +155,6 @@ export const config = {
     "/hire-talent",
     "/institutional/:path*",
     "/admin/:path*",
+    "/awaiting/:path*",
   ],
 };

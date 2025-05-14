@@ -30,7 +30,7 @@ interface HealthcareJob {
   jobFacilityType: string;
   negotiationNote: string;
   salaryNegotiable: boolean;
-
+  salaryType: string;
 }
 
 interface viewDetails {
@@ -44,6 +44,7 @@ interface viewDetails {
   maxSalary: number;
   negotiationNote: string;
   salaryNegotiable: boolean;
+  salaryType: string;
 }
 
 const JobCard = ({ data }: any) => {
@@ -112,6 +113,9 @@ const JobCard = ({ data }: any) => {
     dispatch(fetchData());
   }, [dispatch]);
 
+
+  console.log( selectedCity, selectedFacilityType, selectedJobType, selectedRole)
+
   const searcHandler = async () => {
     try {
       const response = await axios.get(`/pages/api/allJobs`);
@@ -122,7 +126,7 @@ const JobCard = ({ data }: any) => {
       const filterData = approvedData?.filter((item: any) => {
         const matchCity =
           selectedCity &&
-          item?.city?.toLowerCase().includes(selectedCity.toLowerCase());
+          item?.address?.toLowerCase().includes(selectedCity.toLowerCase());
 
         const matchFacilityType =
           selectedFacilityType &&
@@ -162,6 +166,9 @@ const JobCard = ({ data }: any) => {
   useEffect(() => {
     searcHandler();
   }, [selectedCity, selectedFacilityType, selectedJobType, selectedRole]);
+
+
+  console.log(pageData)
 
   return (
     <div className="space-y-6">
@@ -211,7 +218,7 @@ const JobCard = ({ data }: any) => {
                     <div className="flex items-center text-gray-600 text-sm space-x-2">
                       <FaSackDollar size={18} className="main-text-color" />
                       <span>
-                        ${job?.minSalary} - ${job?.maxSalary}
+                        ${job?.minSalary} - ${job?.maxSalary} /<span className="text-xs">{job?.salaryType}</span>
                       </span>
                     </div>
                   }

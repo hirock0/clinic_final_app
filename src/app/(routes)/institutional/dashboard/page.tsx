@@ -10,6 +10,9 @@ const DashboardPage = async () => {
   const approvedJobs = await allJobs?.filter(
     (item: any) => item?.approvedStatus === true
   );
+  const unApprovedJobs = await allJobs?.filter(
+    (item: any) => item?.approvedStatus === false
+  );
 
   return (
     <div className=" flex flex-col gap-5">
@@ -20,7 +23,7 @@ const DashboardPage = async () => {
           data-tip="Click"
         >
           <ApplicationCard
-            applications={allJobs}
+            applications={unApprovedJobs}
             title="Posted"
             title2="Jobs"
           />

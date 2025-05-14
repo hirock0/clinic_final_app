@@ -11,7 +11,7 @@ const Faqs = () => {
       <div className="space-y-4 w-full second-text-color">
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-semibold uppercase">
+          <div className="collapse-title text-lg font-semibold uppercase">
           1. What types of healthcare professionals do you staff?
           </div>
           <div className="collapse-content">
@@ -22,7 +22,7 @@ const Faqs = () => {
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-semibold uppercase">
+          <div className="collapse-title text-lg font-semibold uppercase">
           2. How fast can you fill an open position?
           </div>
           <div className="collapse-content">
@@ -33,7 +33,7 @@ const Faqs = () => {
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-semibold uppercase">
+          <div className="collapse-title text-lg font-semibold uppercase">
           3. Are your candidates vetted and licensed?
 
           </div>
@@ -45,7 +45,7 @@ const Faqs = () => {
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-semibold uppercase">
+          <div className="collapse-title text-lg font-semibold uppercase">
           4. Do you offer temp, temp-to-hire, or permanent placements?
           </div>
           <div className="collapse-content">
@@ -56,7 +56,7 @@ const Faqs = () => {
         </div>
         <div className="collapse collapse-plus bg-base-300">
           <input type="radio" name="my-accordion-3" />
-          <div className="collapse-title text-xl font-semibold uppercase">
+          <div className="collapse-title text-lg font-semibold uppercase">
           5. What makes your agency different from others?
 
           </div>

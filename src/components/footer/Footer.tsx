@@ -20,7 +20,7 @@ const Footer = () => {
   ) {
     return null;
   }
-  
+
   return (
     <footer className={`bg-gray-50  border-t-1 border-gray-200  text-[#1e1e1e]`}>
       <div className="max-w-[1400px] w-11/12 mx-auto pt-12 md:pt-20 pb-10">
@@ -29,14 +29,15 @@ const Footer = () => {
             <Image src="/logo.png" alt="logo" width={80} height={80}
               className="h-auto w-28 "
             />
-            <p className="md:max-w-[350px] text-base ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet id asperiores consequuntur similique earum.</p>
+            <p className="text-sm text-gray-500 ">Choose United Care Links for dedicated, compassionate, and highly trained caregivers and medical staff you can trust. We prioritize quality care, reliability, and personalized service for every client. With United Care Links, you’re not just hiring help
+              -you’re gaining a partner in care.</p>
           </div>
           <nav className="flex flex-col space-y-3 md:space-y-4">
             <h6 className="font-semibold text-lg main-text-color">Services</h6>
-            <Link href={"/pricing"} className="link link-hover">
+            <Link href={"/hire-talent"} className="link link-hover">
               Hire Talent
             </Link>
-            <Link href={"#"} className="link link-hover">
+            <Link href={"search-jobs"} className="link link-hover">
               Search Jobs
             </Link>
             <Link href={"#"} className="link link-hover">

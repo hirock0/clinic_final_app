@@ -60,7 +60,7 @@ const View = async (props: any) => {
       </div>
 
       {/* Section: Admin Meta Info */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white shadow rounded-lg p-6">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold col-span-full">Admin Meta Info</h2>
         <Info
           label="Posted By (Email)"
@@ -79,7 +79,7 @@ const View = async (props: any) => {
               : "N/A"
           }
         />
-      </div>
+      </div> */}
     </div>
   );
 };

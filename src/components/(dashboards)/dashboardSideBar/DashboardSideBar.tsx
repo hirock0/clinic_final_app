@@ -9,11 +9,11 @@ const DashboardSideBar = ({ navLinks }: { navLinks: any }) => {
             <div className=" flex flex-col overflow-hidden">
               <Link
                 href={item?.href}
-                className="hover:text-indigo-600 transition"
+                className="hover:text-[#308d89] transition"
               >
                 {item?.title}
               </Link>
-              <span className=" -translate-x-[110%] group-hover:translate-x-0 transition-all rounded-full h-0.5 bg-purple-600 w-full"></span>
+              <span className=" -translate-x-[110%] group-hover:translate-x-0 transition-all rounded-full h-0.5 bg-[#308d89] w-full"></span>
             </div>
           </li>
         ))}

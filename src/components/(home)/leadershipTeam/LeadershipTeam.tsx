@@ -35,7 +35,7 @@ const LeadershipTeam = () => {
             <div className="max-w-[1440px] mx-auto w-11/12 flex items-center flex-col lg:flex-row justify-between gap-8">
 
                 <div className="w-full flex flex-col items-start text-start lg:max-w-xl lg:w-1/2">
-                    <Title heading='Our Leadership Team' paragraph='We&apos;re proud to be guided by trusted advisors whose decades of expertise shape our strategy and vision.' />
+                    <Title heading='Our Leadership Team' paragraph='Our leadership team brings expertise, compassion, and dedication to delivering top-tier healthcare staffing and caregiving solutions.' />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full lg:w-1/2">
@@ -48,7 +48,7 @@ const LeadershipTeam = () => {
                                 <Image
                                     src={member.photo}
                                     alt={member.name}
-                                    fill  
+                                    fill
                                     className="object-cover items-start"
                                 />
                             </div>
@@ -56,9 +56,9 @@ const LeadershipTeam = () => {
                             transition-transform duration-300 ease-in-out ${activeIndex === index ? 'translate-y-0' : 'translate-y-full'} 
                             group-hover:translate-y-0
                                 `}>
-                                <h3 className="text-xl font-semibold second-text-color text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
-                                <p className="second-text-color font-medium">{member.title}</p>
-                                <p className="mt-3 text-gray-700">{member.bio}</p>
+                                <h3 className="text-lg font-semibold second-text-color text-shadow-[#1e1e1e] text-shadow-xs">{member.name}</h3>
+                                <p className="second-text-color font-medium text-sm">{member.title}</p>
+                                <p className="mt-2 text-gray-700 text-xs">{member.bio}</p>
                             </div>
                         </div>
                     ))}
