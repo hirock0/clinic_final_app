@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "@/utils/redux/slices/slice";
 export default function AwaitingApproval() {
-  const router = useRouter();
   const dispatch = useDispatch();
-  const pathname = usePathname();
   const { user } = useSelector((state: any) => state?.slices);
 
+  console.log(user)
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
