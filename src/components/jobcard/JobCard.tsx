@@ -129,19 +129,19 @@ const JobCard = ({ data }: any) => {
           selectedFacilityType &&
           item?.jobFacilityType
             ?.toLowerCase()
-            .includes(selectedFacilityType.toLowerCase());
+            .includes(selectedFacilityType);
 
         const matchJobType =
           selectedJobType &&
           item?.salaryType
             ?.toLowerCase()
-            .includes(selectedJobType.toLowerCase());
+            .includes(selectedJobType);
 
         const matchRole =
           selectedRole &&
           item?.jobFacilityRole
             ?.toLowerCase()
-            .includes(selectedRole.toLowerCase());
+            .includes(selectedRole);
 
         return matchCity || matchFacilityType || matchJobType || matchRole;
       });
