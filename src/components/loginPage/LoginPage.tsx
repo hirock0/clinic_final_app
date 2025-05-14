@@ -111,7 +111,7 @@ export default function LoginPage({ flag }: { flag: string }) {
         {/* Heading */}
         <h2 className="text-2xl font-bold text-left mb-6 uppercase">
           {flag === "user" && `LogIn For Job Seeker`}
-          {flag === "institutional" && `LogIn For Organizer`}
+          {flag === "institutional" && `LogIn For Organization`}
           {flag === "admin" && `LogIn For Admin`}
           {flag === "employee" && `LogIn For Employee`}
         </h2>
@@ -183,11 +183,12 @@ export default function LoginPage({ flag }: { flag: string }) {
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="text-center my-4 text-gray-400 text-sm">OR</div>
 
+        {/* Divider */}
         {/* Google Login */}
-        {(flag === "user" || flag === "institutional") && (
+        {flag === "user"  && (
+        <>
+        <div className="text-center my-4 text-gray-400 text-sm">OR</div>
           <button
             onClick={googleLoginHandler}
             className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 hover:bg-gray-100 transition"
@@ -201,6 +202,7 @@ export default function LoginPage({ flag }: { flag: string }) {
               <span className="loading loading-spinner"></span>
             )}
           </button>
+          </>
         )}
 
         {/* Register Link */}
