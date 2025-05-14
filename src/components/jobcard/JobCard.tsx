@@ -45,6 +45,11 @@ interface viewDetails {
   negotiationNote: string;
   salaryNegotiable: boolean;
   salaryType: string;
+  jobSummary: string;
+  uclOverview: string;
+  keyResponsibilities: { value: string }[];
+  qualifications: { value: string }[];
+  benefits: { value: string }[];
 }
 
 const JobCard = ({ data }: any) => {
@@ -114,7 +119,7 @@ const JobCard = ({ data }: any) => {
   }, [dispatch]);
 
 
-  console.log( selectedCity, selectedFacilityType, selectedJobType, selectedRole)
+  console.log(selectedCity, selectedFacilityType, selectedJobType, selectedRole)
 
   const searcHandler = async () => {
     try {
