@@ -57,6 +57,9 @@ export async function middleware(request: NextRequest) {
     if (isHireTalentPath) {
       return redirectWithReturn("/institutional/login");
     }
+    if (pathname.startsWith("/awaiting")) {
+      return redirectWithReturn("/employee/login");
+    }
     return NextResponse.next();
   }
 
@@ -135,12 +138,13 @@ export async function middleware(request: NextRequest) {
       )
     );
   }
-
   if (isEmployeePath && role === "employee") {
     return NextResponse.redirect(new URL(`/awaiting`, request.url));
   }
-
   if (pathname.startsWith("/awaiting") && role === "approvedEmployee") {
+    return NextResponse.redirect(new URL(`/employee/dashboard`, request.url));
+  }
+  if (token && isPublic(employeePublicPaths)) {
     return NextResponse.redirect(new URL(`/employee/dashboard`, request.url));
   }
 
